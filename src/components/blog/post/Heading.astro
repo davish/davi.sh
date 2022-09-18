@@ -1,0 +1,37 @@
+---
+import Info from "./Info.astro";
+
+const { frontmatter, url } = Astro.props;
+---
+
+<div>
+  <h1><a href={url || "#"}>{frontmatter.title}</a></h1>
+  <Info frontmatter={frontmatter} />
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2em;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    margin: 0;
+    margin-bottom: 0.3em;
+    // margin: 0 0 20px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+</style>

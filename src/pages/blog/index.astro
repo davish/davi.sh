@@ -1,0 +1,37 @@
+---
+import Base from "../../layouts/Base.astro";
+import * as post from "./2022/05/renting-in-nyc.md";
+import PostEntry from "../../components/blog/list/PostEntry.astro";
+---
+
+<Base path="blog">
+  <section id="intro">
+    <h1>Thoughts and Writeups</h1>
+    by Davis Haupt
+  </section>
+  <section id="list">
+    <PostEntry {...post} />
+  </section>
+</Base>
+
+<style lang="scss">
+  @import "../../variables.scss";
+  #intro,
+  #list {
+    width: 95%;
+    max-width: 75ch;
+    margin: 1rem 2rem;
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+  }
+  #intro::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2.5em;
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 import Base from "./Base.astro";
-import Info from "../components/post/Info.astro";
-import Tags from "../components/post/Tags.astro";
+import Heading from "../components/blog/post/Heading.astro";
+import Tags from "../components/blog/post/Tags.astro";
 import type { MarkdownLayoutProps } from "astro";
 
 type Props = MarkdownLayoutProps<{
@@ -16,13 +16,11 @@ const basename = file.split("/").pop() || "";
 
 <Base path={"blog/" + basename} title={frontmatter.title}>
   <article>
-    <div id="meta">
-      <h1 id="title"><a href={url || "#"}>{frontmatter.title}</a></h1>
-      <Info frontmatter={frontmatter} />
-    </div>
+    <Heading frontmatter={frontmatter} url={url} />
 
-    <div id="content">
+    <div id="blog-post-content">
       <slot />
+      <!-- <pre>{Astro.props.rawContent()}</pre> -->
     </div>
 
     <Tags tags={frontmatter.tags} />
@@ -35,23 +33,15 @@ const basename = file.split("/").pop() || "";
     width: 95%;
     max-width: 75ch;
     padding: 20px;
-    margin: 1rem 2rem;
-
-    img {
-      max-width: 100%;
-    }
+    // margin: 1rem 2rem;
   }
+</style>
 
-  #meta::after {
-    border-bottom-color: $accent-color;
-    content: "";
-    display: block;
-    width: 5em;
-    border-bottom: 0.125em solid $accent-color;
-    margin-top: 2em;
-  }
-
-  #content {
+<!-- We need global styles here so that the css will
+     apply to the generated markdown content inside the slot. -->
+<style lang="scss" is:global>
+  @import "../variables.scss";
+  #blog-post-content {
     line-height: 1.5rem;
     p {
       font-size: 13pt;
@@ -64,6 +54,7 @@ const basename = file.split("/").pop() || "";
       }
     }
     img {
+      max-width: 100%;
       border-radius: 5px;
     }
     figcaption {
@@ -72,18 +63,6 @@ const basename = file.split("/").pop() || "";
     }
     td {
       vertical-align: top;
-    }
-  }
-
-  #title {
-    font-size: 2.1rem;
-    margin: 0;
-    margin-bottom: 0.3em;
-    // margin: 0 0 20px;
-
-    a {
-      color: $text-color;
-      text-decoration: none;
     }
   }
 </style>

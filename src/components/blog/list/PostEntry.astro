@@ -1,0 +1,89 @@
+---
+import { toReadableString, getSummary } from "../../../utils";
+
+const { url, frontmatter } = Astro.props;
+---
+
+<article>
+  <div class="meta">
+    <h4 class="title">
+      <a href={url}>{frontmatter.title}</a>
+    </h4>
+    <div class="info">
+      <div>{toReadableString(new Date(frontmatter.date))}</div>
+    </div>
+  </div>
+  <section class="summary-content">
+    <p set:html={getSummary(Astro.props as any)}></p>
+  </section>
+  <p class="read-more">
+    <a href={url}>Read More...</a>
+  </p>
+</article>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  h4 {
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 0.3em;
+    // margin: 0 0 20px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .read-more {
+    text-align: right;
+    line-height: 1em;
+  }
+
+  .info {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    line-height: normal;
+    @include dimmed;
+
+    p {
+      margin: 0.8em 0;
+    }
+
+    a:hover {
+      border-bottom: 1px solid white;
+    }
+
+    svg {
+      margin-right: 0.8em;
+    }
+
+    .tag {
+      margin-right: 0.5em;
+
+      &::before {
+        content: "#";
+      }
+    }
+
+    .feather {
+      display: inline-block;
+      vertical-align: -0.125em;
+      width: 1em;
+      height: 1em;
+    }
+  }
+</style>
+
+<style lang="scss" is:global>
+  section.summary-content {
+    p {
+      line-height: 1.5rem;
+    }
+  }
+</style>

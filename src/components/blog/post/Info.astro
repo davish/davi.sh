@@ -1,5 +1,5 @@
 ---
-import { toReadableString } from "../../utils";
+import { toReadableString } from "../../../utils";
 const { frontmatter } = Astro.props;
 ---
 
@@ -27,7 +27,7 @@ const { frontmatter } = Astro.props;
 </div>
 
 <style lang="scss">
-  @import "../../variables.scss";
+  @import "/src/variables.scss";
   #info {
     font-family: "Inter", sans-serif;
     display: flex;
