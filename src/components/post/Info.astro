@@ -1,0 +1,66 @@
+---
+import { toReadableString } from "../../utils";
+const { frontmatter } = Astro.props;
+---
+
+<div id="info">
+  <div>
+    {toReadableString(new Date(frontmatter.date))}
+  </div>
+  <div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="feather feather-clock"
+      ><circle cx="12" cy="12" r="10"></circle><polyline
+        points="12 6 12 12 16 14"></polyline>
+    </svg>
+    TODO minutes
+  </div>
+</div>
+
+<style lang="scss">
+  @import "../../variables.scss";
+  #info {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    line-height: normal;
+    @include dimmed;
+
+    p {
+      margin: 0.8em 0;
+    }
+
+    a:hover {
+      border-bottom: 1px solid white;
+    }
+
+    svg {
+      margin-right: 0.8em;
+    }
+
+    .tag {
+      margin-right: 0.5em;
+
+      &::before {
+        content: "#";
+      }
+    }
+
+    .feather {
+      display: inline-block;
+      vertical-align: -0.125em;
+      width: 1em;
+      height: 1em;
+    }
+  }
+</style>

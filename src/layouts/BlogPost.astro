@@ -1,0 +1,89 @@
+---
+import Base from "./Base.astro";
+import Info from "../components/post/Info.astro";
+import Tags from "../components/post/Tags.astro";
+import type { MarkdownLayoutProps } from "astro";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  date: string;
+  tags?: string[];
+}>;
+
+const { frontmatter, file, url } = Astro.props;
+const basename = file.split("/").pop() || "";
+---
+
+<Base path={"blog/" + basename} title={frontmatter.title}>
+  <article>
+    <div id="meta">
+      <h1 id="title"><a href={url || "#"}>{frontmatter.title}</a></h1>
+      <Info frontmatter={frontmatter} />
+    </div>
+
+    <div id="content">
+      <slot />
+    </div>
+
+    <Tags tags={frontmatter.tags} />
+  </article>
+</Base>
+
+<style lang="scss">
+  @import "../variables.scss";
+  article {
+    width: 95%;
+    max-width: 75ch;
+    padding: 20px;
+    margin: 1rem 2rem;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  #meta::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2em;
+  }
+
+  #content {
+    line-height: 1.5rem;
+    p {
+      font-size: 13pt;
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+    li {
+      p {
+        margin-top: 0;
+      }
+    }
+    img {
+      border-radius: 5px;
+    }
+    figcaption {
+      @include dimmed;
+      text-align: center;
+    }
+    td {
+      vertical-align: top;
+    }
+  }
+
+  #title {
+    font-size: 2.1rem;
+    margin: 0;
+    margin-bottom: 0.3em;
+    // margin: 0 0 20px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+    }
+  }
+</style>

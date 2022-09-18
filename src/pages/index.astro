@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import Links from "../components/Links.astro";
+---
+
+<Base isHome={true}>
+  <section class="hero">
+    <h1>Davis Haupt</h1>
+    <Links />
+    <hr />
+  </section>
+  <section id="bio">
+    <p>
+      <b>Hi there!</b> I'm Davis. I'm really passionate about programming languages,
+      spaceflight and elections.
+    </p>
+    <p>
+      I'm a Software Engineer at <b>MongoDB</b>, and also spend some time
+      working on my own open source projects.
+    </p>
+    <p>
+      I occasionally write about what I'm working on and what's on my mind on my
+      blog. Here's a few of them:
+    </p>
+  </section>
+  <div id="highlights">
+    <b>TODO: Highlights</b>
+  </div>
+</Base>
+
+<style lang="scss">
+  @import "../variables.scss";
+  section {
+    text-align: center;
+    margin: 1rem 2rem;
+    &.hero {
+      font-family: "Inter", sans-serif;
+      text-align: center;
+      min-width: 80%;
+      margin: 0;
+      h1 {
+        font-size: 3rem;
+        font-weight: 400;
+        margin-top: 3.5rem;
+        margin-bottom: 1.3rem;
+      }
+    }
+
+    &#bio {
+      max-width: 50ch;
+      line-height: 1.75rem;
+      font-size: 14pt;
+      text-align: center;
+    }
+  }
+  hr {
+    margin-top: 3rem;
+    color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+  }
+</style>

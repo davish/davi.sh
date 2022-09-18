@@ -1,0 +1,78 @@
+---
+import Nav from "../components/Nav.astro";
+import Links from "../components/Links.astro";
+
+export interface Props {
+  isHome?: boolean;
+  path?: string;
+  title?: string;
+}
+const { isHome = false, path, title } = Astro.props;
+
+const pageTitle = (() => {
+  if (!title) {
+    return "Davis Haupt's Website";
+  } else {
+    return `${title} | Davis Haupt`;
+  }
+})();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Nav path={path} />
+    <div id="main">
+      <slot />
+    </div>
+    {
+      !isHome ? (
+        <footer>
+          <Links />
+        </footer>
+      ) : null
+    }
+
+    <style lang="scss">
+      div#main {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+      footer {
+        padding-bottom: 1rem;
+      }
+    </style>
+
+    <style lang="scss" is:global>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
+      @import "../variables.scss";
+      a {
+        color: $accent-color;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      body {
+        font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+          "Book Antiqua", Georgia, serif;
+        color: $text-color;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

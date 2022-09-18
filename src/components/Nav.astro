@@ -1,0 +1,70 @@
+---
+import Prompt from "./Prompt.astro";
+
+export interface Props {
+  path?: string | undefined;
+}
+const { path } = Astro.props;
+---
+
+<!-- TODO: Make the back button go "up" one level. --><!-- TODO: Make the path on the shell dynamic. -->
+<nav>
+  <a href="/" aria-label="home">
+    <Prompt path={path} />
+  </a>
+  <ul class="links">
+    <li><a href="/blog">Blog</a></li>
+  </ul>
+</nav>
+
+<style lang="scss">
+  @import "../variables.scss";
+  nav {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    justify-content: space-between;
+  }
+  a {
+    text-decoration: none;
+    color: $text-color;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    li {
+      display: inline;
+      padding: 0 1rem;
+    }
+  }
+
+  ul.links > li > a {
+    text-decoration: none;
+    position: relative;
+    color: $accent-color;
+    font-weight: 400;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -0.25rem;
+      left: 0;
+      background-color: $accent-color;
+      visibility: hidden;
+      transition: all 0.2s ease-in-out;
+    }
+
+    &:hover:before {
+      visibility: visible;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+export interface Props {
+  path?: string | undefined;
+}
+const { path = "" } = Astro.props;
+---
+
+<ul aria-hidden="true">
+  <span id="prefix">&gt;</span>
+  <span id="text"> ~/{path}</span>
+  <span id="cursor"></span>
+</ul>
+
+<style lang="scss">
+  @import "../variables.scss";
+  ul {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-display: auto;
+    padding-left: 1rem;
+    // font-family: monospace;
+
+    #prefix {
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 5px;
+    }
+
+    #text {
+      font-size: 1.125rem;
+    }
+
+    #cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1rem;
+      background: $accent-color;
+      margin-left: 5px;
+      margin-top: 1px;
+      border-radius: 1px;
+      animation: prompt 1s infinite;
+      animation-duration: 1.5s;
+    }
+  }
+
+  @keyframes prompt {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

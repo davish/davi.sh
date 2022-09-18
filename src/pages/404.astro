@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base path="404.html">
+  <section class="hero">
+    <h1>Sorry! I can't find that page for you.</h1>
+  </section>
+
+  <section id="bio">
+    Try browsing <a href="/blog">the blog</a> or going <a href="/">home</a>.
+  </section>
+</Base>
+
+<style lang="scss">
+  section {
+    text-align: center;
+    margin: 1rem 2rem;
+    &.hero {
+      font-family: "Inter", sans-serif;
+      text-align: center;
+      min-width: 80%;
+      margin: 0;
+      h1 {
+        font-size: 3rem;
+        font-weight: 400;
+        margin-top: 3.5rem;
+        margin-bottom: 1.3rem;
+      }
+    }
+
+    &#bio {
+      max-width: 50ch;
+      line-height: 1.75rem;
+      font-size: 14pt;
+      text-align: center;
+    }
+  }
+</style>
