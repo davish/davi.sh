@@ -1,7 +1,12 @@
 ---
 import Base from "../../layouts/Base.astro";
-import * as post from "./2022/05/renting-in-nyc.md";
 import PostEntry from "../../components/blog/list/PostEntry.astro";
+
+const posts = (await Astro.glob("../../pages/blog/**/*.md")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).valueOf() -
+    new Date(a.frontmatter.date).valueOf()
+);
 ---
 
 <Base path="blog">
@@ -10,7 +15,8 @@ import PostEntry from "../../components/blog/list/PostEntry.astro";
     by Davis Haupt
   </section>
   <section id="list">
-    <PostEntry {...post} />
+    <!-- TODO: Make this a list of posts -->
+    {posts.map((p) => <PostEntry {...p} />)}
   </section>
 </Base>
 

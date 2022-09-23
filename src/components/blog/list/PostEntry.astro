@@ -1,5 +1,5 @@
 ---
-import { toReadableString, getSummary } from "../../../utils";
+import { toReadableString, getSummary, hasMore } from "../../../utils";
 
 const { url, frontmatter } = Astro.props;
 ---
@@ -16,9 +16,13 @@ const { url, frontmatter } = Astro.props;
   <section class="summary-content">
     <p set:html={getSummary(Astro.props as any)}></p>
   </section>
-  <p class="read-more">
-    <a href={url}>Read More...</a>
-  </p>
+  {
+    hasMore(Astro.props as any) ? (
+      <p class="read-more">
+        <a href={url}>Read More...</a>
+      </p>
+    ) : null
+  }
 </article>
 
 <style lang="scss">
