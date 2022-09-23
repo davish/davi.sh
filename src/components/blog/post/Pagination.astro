@@ -1,0 +1,76 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+
+export interface Props {
+  page: MarkdownLayoutProps<{ title: string }>;
+}
+
+const {
+  page: { file },
+} = Astro.props;
+
+const posts = (await Astro.glob("/src/pages/blog/**/*.md")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).valueOf() -
+    new Date(a.frontmatter.date).valueOf()
+);
+
+const idx = posts.findIndex((p) => p.file === file);
+const prevPost = idx < posts.length - 1 ? posts[idx + 1] : null;
+const nextPost = idx > 0 ? posts[idx - 1] : null;
+---
+
+<div class="pagination">
+  {
+    prevPost && (
+      <a class="pagination-item" href={prevPost.url}>
+        <span class="pagination-label">Previous Post</span>
+        <span class="pagination-title">{prevPost.frontmatter.title}</span>
+      </a>
+    )
+  }
+  {
+    nextPost && (
+      <a class="pagination-item" href={nextPost.url}>
+        <span class="pagination-label">Next Post</span>
+        <span class="pagination-title">{nextPost.frontmatter.title}</span>
+      </a>
+    )
+  }
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  .pagination {
+    display: flex;
+    justify-content: center;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: 0.15s;
+
+      &:hover {
+        background-color: rgba($accent-color, 0.1);
+      }
+    }
+
+    &-label {
+      font-family: "Inter", sans-serif;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      color: #999;
+    }
+    &-title {
+      font-weight: 600;
+      color: $text-color;
+    }
+  }
+  a:hover {
+    text-decoration: none;
+  }
+</style>

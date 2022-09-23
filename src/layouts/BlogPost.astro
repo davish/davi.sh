@@ -3,6 +3,7 @@ import Base from "./Base.astro";
 import Heading from "../components/blog/post/Heading.astro";
 import Tags from "../components/blog/post/Tags.astro";
 import type { MarkdownLayoutProps } from "astro";
+import Pagination from "../components/blog/post/Pagination.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -24,6 +25,7 @@ const basename = file.split("/").pop() || "";
     </div>
 
     <Tags tags={frontmatter.tags} />
+    <Pagination page={Astro.props} />
   </article>
 </Base>
 
