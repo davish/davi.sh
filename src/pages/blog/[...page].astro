@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PostEntry from "../../components/blog/list/PostEntry.astro";
+import Pagination from "../../components/blog/list/Pagination.astro";
 
 // @ts-ignore
 export async function getStaticPaths({ paginate }) {
@@ -9,7 +10,7 @@ export async function getStaticPaths({ paginate }) {
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf()
   );
-  return paginate(posts, { pageSize: 2 });
+  return paginate(posts, { pageSize: 5 });
 }
 
 const { page } = Astro.props;
@@ -24,6 +25,7 @@ const { page } = Astro.props;
     <!-- TODO: Make this a list of posts -->
     {page.data.map((p: any) => <PostEntry {...p} />)}
   </section>
+  <Pagination page={page} />
 </Base>
 
 <style lang="scss">

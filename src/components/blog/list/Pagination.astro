@@ -1,0 +1,165 @@
+---
+import type { Page } from "astro";
+
+export interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+
+// Gross imperative code to generate a pagination bar where there is
+// always one page on either side of the current page, and the min/max is always shown.
+// If there are more pages, then they are just shown as ellipses.
+const NUM_ADJACENT = 1;
+const pages: (number | "...")[] = [];
+pages.push(1);
+if (page.currentPage - NUM_ADJACENT > 2) {
+  pages.push("...");
+}
+let didPushLast = false;
+
+for (
+  let num = page.currentPage - NUM_ADJACENT;
+  num <= page.currentPage + NUM_ADJACENT;
+  num++
+) {
+  if (num > 1 && num <= page.lastPage) {
+    pages.push(num);
+    if (num === page.lastPage) {
+      didPushLast = true;
+    }
+  }
+}
+
+if (page.currentPage + NUM_ADJACENT + 1 < page.lastPage) {
+  pages.push("...");
+}
+if (!didPushLast) {
+  pages.push(page.lastPage);
+}
+---
+
+<ul class="pagination">
+  {
+    page.url.prev && (
+      <li class="page-item prev">
+        <a
+          href={page.url.prev}
+          aria-label="Previous Page"
+          class="page-link"
+          role="button"
+        >
+          &lt;
+        </a>
+      </li>
+    )
+  }
+  {
+    pages.map((pageNum) => (
+      <li class={`page-item ${pageNum === page.currentPage ? "active" : ""}`}>
+        <a
+          href={`/blog/${pageNum === 1 ? "" : pageNum}`}
+          aria-label={`Page ${pageNum}`}
+          class="page-link"
+          role="button"
+        >
+          {pageNum}
+        </a>
+      </li>
+    ))
+  }
+  {
+    page.url.next && (
+      <li class="page-item next">
+        <a
+          href={page.url.next}
+          aria-label="Next Page"
+          class="page-link"
+          role="button"
+        >
+          &gt;
+        </a>
+      </li>
+    )
+  }
+</ul>
+<style lang="scss">
+  @import "/src/variables.scss";
+  ul.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    font-family: Inter, sans-serif;
+
+    li {
+      flex: 1;
+
+      border-width: 1px;
+      border-right-width: 0;
+      border-color: $accent-color;
+      border-style: solid;
+
+      &:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      &:last-child {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-right-width: 1px;
+      }
+      a,
+      span {
+        padding: 0.75em;
+        display: block;
+        width: 100%;
+      }
+      a {
+        color: $accent-color;
+      }
+      span {
+        color: gray;
+      }
+
+      &.active {
+        a {
+          cursor: default;
+          &:hover {
+            text-decoration: none;
+          }
+          color: white;
+        }
+        background-color: $accent-color;
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: 0.15s;
+
+      &:hover {
+        background-color: rgba($accent-color, 0.1);
+      }
+    }
+
+    &-label {
+      font-family: "Inter", sans-serif;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      color: #999;
+    }
+    &-title {
+      font-weight: 600;
+      color: $text-color;
+    }
+  }
+</style>
