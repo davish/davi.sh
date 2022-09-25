@@ -1,1 +1,70 @@
-<p>TODO: Tags</p>
+---
+export interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<span class="tags">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="feather feather-tag meta-icon"
+    ><path
+      d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+    ></path><line x1="7" y1="7" x2="7" y2="7"></line>
+  </svg>
+  {
+    tags.map((t) => (
+      <span class="tag">
+        <a href="#">{t}</a>
+      </span>
+    ))
+  }
+</span>
+<style lang="scss">
+  @import "/src/variables.scss";
+  .tags {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 0.8rem;
+    line-height: normal;
+    @include dimmed;
+
+    p {
+      margin: 0.8em 0;
+    }
+    a {
+      margin-left: -0.25rem;
+      &:hover {
+        border-bottom: 1px solid white;
+      }
+    }
+
+    svg {
+      margin-right: 0.8em;
+    }
+    .feather {
+      display: inline-block;
+      vertical-align: -0.125em;
+      width: 1em;
+      height: 1em;
+    }
+  }
+  .tag {
+    margin-right: 0.5em;
+
+    &::before {
+      content: "#";
+    }
+  }
+</style>

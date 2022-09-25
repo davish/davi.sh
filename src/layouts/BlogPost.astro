@@ -8,7 +8,7 @@ import Pagination from "../components/blog/post/Pagination.astro";
 type Props = MarkdownLayoutProps<{
   title: string;
   date: string;
-  tags?: string[];
+  tags: string[];
 }>;
 
 const { frontmatter, file, url } = Astro.props;
@@ -25,6 +25,7 @@ const basename = file.split("/").pop() || "";
     </div>
 
     <Tags tags={frontmatter.tags} />
+    <hr />
     <Pagination page={Astro.props} />
   </article>
 </Base>
