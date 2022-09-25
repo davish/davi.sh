@@ -15,10 +15,21 @@ const months = [
   "Dec",
 ];
 
-export function toReadableString(d: Date) {
+/**
+ * Converts a date into a readable string.
+ * @param d input Date object.
+ * @returns a readable string.
+ */
+export function toReadableString(d: Date): string {
   return `${months[d.getUTCMonth()]} ${d.getUTCDate()} ${d.getUTCFullYear()}`;
 }
 
+/**
+ * Get the summary from a Markdown file following the Hugo content summary rules:
+ * https://gohugo.io/content-management/summaries/
+ * @param page markdown page from filesystem.
+ * @returns summary section of Markdown
+ */
 export function getSummary<T extends Record<string, any>>(
   page: MarkdownLayoutProps<T>
 ): string {
@@ -32,6 +43,11 @@ export function getSummary<T extends Record<string, any>>(
   }
 }
 
+/**
+ * Returns true if there is more to read in a post than what is contained in the summary.
+ * @param page Markdown page from filesystem.
+ * @returns whether or not the summary is the entire document.
+ */
 export function hasMore<T extends Record<string, any>>(
   page: MarkdownLayoutProps<T>
 ): boolean {
