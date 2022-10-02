@@ -1,9 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
 
-// TODO: List all posts for a given tag
-const tags = Array.from(new Set());
-
 let tagAndCount: [string, number][] = Array.from(
   (await Astro.glob("../../**/*.md"))
     .map((p) => p.frontmatter.tags)
@@ -37,6 +34,7 @@ tagAndCount = tagAndCount.filter((t) => t[1] > 1).sort((a, b) => b[1] - a[1]);
         </tr>
       ))
     }
+
 
 
   </table>
