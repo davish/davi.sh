@@ -20,6 +20,10 @@ tagAndCount = tagAndCount.filter((t) => t[1] > 1).sort((a, b) => b[1] - a[1]);
 ---
 
 <Base path="blog/tags">
+  <p>
+    I wasn't sure the best way to present a list of tags, so here's a list of
+    all tags with more than one article:
+  </p>
   <table>
     <th>Tag</th>
     <th># Articles</th>
@@ -37,5 +41,11 @@ tagAndCount = tagAndCount.filter((t) => t[1] > 1).sort((a, b) => b[1] - a[1]);
 
 
 
+
+    <style lang="scss">
+      p {
+        max-width: 70ch;
+      }
+    </style>
   </table>
 </Base>

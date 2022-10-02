@@ -7,7 +7,9 @@ toc: false
 images:
   - post/images/emacs-screenshot.png
 tags:
-  - untagged
+  - emacs
+  - texteditors
+  - configuration
 description: "How I learned to stop worrying and love the keyboard."
 ---
 
