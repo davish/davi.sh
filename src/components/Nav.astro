@@ -8,7 +8,6 @@ export interface Props {
 const { path, back } = Astro.props;
 ---
 
-<!-- TODO: Make the back button go "up" one level. --><!-- TODO: Make the path on the shell dynamic. -->
 <nav>
   <a href={back || "/"} aria-label={back ? "back" : "home"}>
     <Prompt path={path} />

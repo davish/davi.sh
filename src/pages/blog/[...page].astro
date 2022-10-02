@@ -22,6 +22,7 @@ const { page } = Astro.props;
     by Davis Haupt
   </section>
   <section id="list">
+    <!-- TODO: Make this a list of posts -->
     {page.data.map((p: any) => <PostEntry {...p} />)}
   </section>
   <Pagination page={page} />

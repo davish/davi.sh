@@ -29,7 +29,7 @@ Like I mentioned in [Part Zero]({{< relref "obsidian-zero.md">}}), the first rea
 
 By default, Obsidian doesn't have any real organization for tasks beyond Markdown support for rendering checkboxes and a special [filter in the core Search plugin](https://help.obsidian.md/Plugins/Search#Search+operators). There's a handful of plugins that can help you collect tasks in a more global list, but I chose towards [Obsidian Tasks](https://github.com/schemar/obsidian-tasks) because of its custom query block. In any note, I can add a code block with the special type `tasks` and create an ad-hoc to-do list for tasks that satisfied a given query. Combining a few of these queries, I put together a central "Agenda Note" that contains my entire to-do list, at a glance. This is what it looks like right now:
 
-{{< figure src="/blog/images/obsidian-agenda.png">}}
+![](/blog/images/obsidian-agenda.png)
 
 <details>
 <summary>
@@ -104,7 +104,7 @@ When I'm on my computer or actively using Obsidian on mobile, this works great. 
 
 I've never used Siri Shortcuts before, but [pawalt](https://pawa.lt) shared a shortcut with me that takes text input (or voice input from Siri) and appends it to a file in his vault. Here's my slightly modified version:
 
-{{< figure src="/blog/images/obsidian-shortcut-source.jpg">}}
+![](/blog/images/obsidian-shortcut-source.jpg)
 
 It works beyond perfectly in tandem with Obsidian Tasks, since I can add mobile tasks to the same note and they'll still be collected with everything else in the agenda view. "Everything is a file", so the Obsidian developers didn't need to write any particular integrations with Shortcuts. The shortcut just edits a file on disk, and Obsidian reads the file as it normally would, interoperating seamlessly without even knowing it.
 
@@ -112,7 +112,7 @@ This shortcut inspired me to go one step further. It's a small hastle, but a has
 
 Obsidian has a pretty easy way to create bookmarks and shortcuts to notes from outside of the app through [Obsidian URI support](https://help.obsidian.md/Advanced+topics/Using+obsidian+URI). And using the [Advanced URI plugin](https://github.com/Vinzent03/obsidian-advanced-uri), I can create a bookmark that will always open my Agenda view in preview mode rather than edit mode. I'm sure there's multiple ways to add bookmarks to the homescreen, but I just created a one-action Shortcut to open `obsidian://advanced-uri?filename=Agenda&viewmode=preview`, and iOS and Obsidian handle the rest. I have my two new shortcuts on my homescreen, and they look and work almost as seamlessly as if they were native apps.
 
-{{< figure src="/blog/images/obsidian-shortcuts.jpg" >}}
+![](/blog/images/obsidian-shortcuts.jpg)
 
 These shortcuts were a real "holy shit" moment for me as I was building out my personal workflows. I certainly didn't expect iOS, which is notoriously difficult to customize, to be able to support these kinds of custom actions and integrations with Obsidian. It's opened my eyes to what Siri Shortcuts can do. iOS doesn't let me edit the system's crontab and set a Python script to run every four hours. However, Shortcuts _does_ let me create a "Personal Automation" to run a shortcut that I write every weekday at 8am, or every time I enter or leave a geofenced area. I'll certainly be thinking more about what I can do with Shortcuts going forward.
 
