@@ -6,8 +6,9 @@ export interface Props {
   isHome?: boolean;
   path?: string;
   title?: string;
+  back?: string;
 }
-const { isHome = false, path, title } = Astro.props;
+const { isHome = false, path, title, back } = Astro.props;
 
 const pageTitle = (() => {
   if (!title) {
@@ -28,7 +29,7 @@ const pageTitle = (() => {
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Nav path={path} />
+    <Nav path={path} back={back} />
     <div id="main">
       <slot />
     </div>
@@ -77,6 +78,7 @@ const pageTitle = (() => {
       hr {
         color: rgba(0, 0, 0, 0.2);
         border-style: solid;
+        margin: 1rem 0;
       }
     </style>
   </body>

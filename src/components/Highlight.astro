@@ -1,0 +1,49 @@
+---
+import type { MarkdownInstance } from "astro";
+
+export interface Props {
+  post: MarkdownInstance<Record<string, any>>;
+}
+const { post } = Astro.props;
+---
+
+<li>
+  <a href={post.url}>
+    <span class="article">{post.frontmatter.title}</span>
+    <div>{post.frontmatter.description}</div>
+  </a>
+</li>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  li {
+    a {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      width: 100%;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: 0.15s;
+
+      &:hover {
+        background-color: rgba($accent-color, 0.1);
+        text-decoration: none;
+      }
+
+      div {
+        font-family: "Inter", sans-serif;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        color: #999;
+      }
+      span {
+        font-weight: 600;
+        color: $text-color;
+      }
+    }
+  }
+</style>

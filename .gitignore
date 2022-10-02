@@ -21,3 +21,4 @@ pnpm-debug.log*
 
 # editor config
 .vscode/
+.obsidian

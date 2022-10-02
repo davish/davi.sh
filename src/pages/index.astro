@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Links from "../components/Links.astro";
+import Highlights from "../components/Highlights.astro";
 ---
 
 <Base isHome={true}>
@@ -24,7 +25,7 @@ import Links from "../components/Links.astro";
     </p>
   </section>
   <div id="highlights">
-    <b>TODO: Highlights</b>
+    <Highlights />
   </div>
 </Base>
 
@@ -52,7 +53,10 @@ import Links from "../components/Links.astro";
       text-align: center;
     }
   }
+  div#highlights {
+    max-width: 90%;
+  }
   hr {
-    margin-top: 3rem;
+    margin-top: 3rem !important;
   }
 </style>

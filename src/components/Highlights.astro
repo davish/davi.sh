@@ -1,0 +1,51 @@
+---
+import Highlight from "./Highlight.astro";
+
+let highlights = (await Astro.glob("/src/pages/blog/**/*.md"))
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  )
+  .filter((p) => p.frontmatter.highlight);
+
+const numHighlights = Math.floor(highlights.length / 2) * 2;
+highlights = highlights.slice(0, numHighlights);
+
+const firstCol = highlights.slice(0, numHighlights / 2);
+const secondCol = highlights.slice(numHighlights / 2);
+---
+
+<div>
+  <ul>
+    {firstCol.map((p) => <Highlight post={p} />)}
+  </ul>
+  <ul>
+    {secondCol.map((p) => <Highlight post={p} />)}
+  </ul>
+</div>
+<style lang="scss">
+  @import "/src/variables.scss";
+  div {
+    display: flex;
+    min-width: 40%;
+    // max-width: 80%;
+    justify-content: space-around;
+    @media #{$media-size-phone} {
+      flex-direction: column;
+    }
+    ul {
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      width: 50%;
+      @media #{$media-size-phone} {
+        padding-inline-start: 0;
+        padding-top: 0;
+        width: 100%;
+        margin-block: 0;
+      }
+    }
+  }
+</style>

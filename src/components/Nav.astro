@@ -2,14 +2,15 @@
 import Prompt from "./Prompt.astro";
 
 export interface Props {
-  path?: string | undefined;
+  path: string | undefined;
+  back?: string | undefined;
 }
-const { path } = Astro.props;
+const { path, back } = Astro.props;
 ---
 
 <!-- TODO: Make the back button go "up" one level. --><!-- TODO: Make the path on the shell dynamic. -->
 <nav>
-  <a href="/" aria-label="home">
+  <a href={back || "/"} aria-label={back ? "back" : "home"}>
     <Prompt path={path} />
   </a>
   <ul class="links">

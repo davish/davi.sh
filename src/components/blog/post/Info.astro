@@ -1,6 +1,20 @@
 ---
+import type { MarkdownLayoutProps } from "astro";
 import { toReadableString } from "../../../utils";
-const { frontmatter } = Astro.props;
+import readingTime from "reading-time";
+
+type Props = MarkdownLayoutProps<{ date: string }>;
+
+const { frontmatter, compiledContent } = Astro.props;
+
+// Strip out all code blocks and HTML tags from the
+// compiledContent to get just the words for the reading time.
+const html = compiledContent();
+const codeRegex = /<pre class=(.|\n)*?<\/pre>/gm;
+html.replaceAll(codeRegex, "");
+const tagRegex = /(<([^>]+)>)/gi;
+html.replaceAll(tagRegex, "");
+const articleTime = Math.round(readingTime(html).minutes);
 ---
 
 <div id="info">
@@ -22,7 +36,7 @@ const { frontmatter } = Astro.props;
       ><circle cx="12" cy="12" r="10"></circle><polyline
         points="12 6 12 12 16 14"></polyline>
     </svg>
-    TODO minutes
+    {articleTime} minute{articleTime !== 1 ? "s" : ""}
   </div>
 </div>
 

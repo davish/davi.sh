@@ -11,7 +11,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.2.6"
+    "astro": "^1.2.6",
+    "reading-time": "^1.5.0"
   },
   "devDependencies": {
     "sass": "^1.54.9"

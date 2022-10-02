@@ -15,9 +15,9 @@ const { frontmatter, file, url } = Astro.props;
 const basename = file.split("/").pop() || "";
 ---
 
-<Base path={"blog/" + basename} title={frontmatter.title}>
+<Base path={"blog/" + basename} title={frontmatter.title} back="/blog">
   <article>
-    <Heading frontmatter={frontmatter} url={url} />
+    <Heading {...Astro.props} url={url} />
 
     <div id="blog-post-content">
       <slot />
@@ -66,6 +66,37 @@ const basename = file.split("/").pop() || "";
     }
     td {
       vertical-align: top;
+    }
+  }
+  code {
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    font-display: auto;
+    font-feature-settings: normal;
+    background: $background-color;
+    padding: 1px 6px;
+    margin: 0 2px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+  }
+  pre {
+    background: #212020;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    line-height: 1.25;
+    overflow: auto;
+
+    @media #{$media-size-phone} {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    code {
+      background: none !important;
+      color: #ccc;
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
     }
   }
 </style>
