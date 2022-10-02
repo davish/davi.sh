@@ -9,7 +9,11 @@ const { page } = Astro.props;
 
 // Gross imperative code to generate a pagination bar where there is
 // always one page on either side of the current page, and the min/max is always shown.
-// If there are more pages, then they are just shown as ellipses.
+// If there are more pages, then they are just shown as ellipses. Examples:
+
+// 1 2 3 4 5
+// 1 . 4 5 6 . 10
+
 const NUM_ADJACENT = 1;
 const pages: (number | "...")[] = [];
 pages.push(1);
