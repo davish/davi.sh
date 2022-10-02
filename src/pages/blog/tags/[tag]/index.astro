@@ -1,0 +1,57 @@
+---
+import PostEntry from "../../../../components/blog/list/PostEntry.astro";
+import Base from "../../../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const tags = Array.from(
+    new Set(
+      (await Astro.glob("../../**/*.md"))
+        .map((p) => p.frontmatter.tags)
+        .filter((a) => a)
+        .flatMap((a) => a)
+    )
+  );
+  return tags.map((t) => ({ params: { tag: t } }));
+}
+
+const { tag } = Astro.params;
+
+const posts = (await Astro.glob("../../../**/*.md"))
+  .filter((p) => p.frontmatter.tags.includes(tag))
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
+---
+
+<Base path={`blog/tags/${tag}`} back="/blog/tags">
+  <section id="intro">
+    <h1>Articles for #{tag}</h1>
+  </section>
+  <section id="list">
+    {posts.map((p: any) => <PostEntry {...p} />)}
+  </section>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  #intro,
+  #list {
+    width: 95%;
+    max-width: 75ch;
+    margin: 1rem 2rem;
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+  }
+  #intro::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2.5em;
+  }
+</style>
