@@ -6,28 +6,17 @@ import Meta from "../components/Meta.astro";
 export interface Props {
   isHome?: boolean;
   path?: string;
-  title?: string;
+  title: string;
   back?: string;
   description: string | null;
 }
 const { hideFooter = false, path, title, back, description } = Astro.props;
-
-const pageTitle = (() => {
-  if (!title) {
-    return "Davis Haupt's Website";
-  } else {
-    return `${title} | Davis Haupt`;
-  }
-})();
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <Meta
-      title={pageTitle}
-      description={description || "Davis Haupt's Website"}
-    />
+    <Meta title={title} description={description || "Davis Haupt's Website"} />
   </head>
   <body>
     <Nav path={path} back={back} />

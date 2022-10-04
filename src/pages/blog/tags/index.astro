@@ -19,7 +19,11 @@ let tagAndCount: [string, number][] = Array.from(
 tagAndCount = tagAndCount.filter((t) => t[1] > 1).sort((a, b) => b[1] - a[1]);
 ---
 
-<Base path="blog/tags" description={"Tags for Davis Haupt's blog"}>
+<Base
+  path="blog/tags"
+  title={"Tags | Davis Haupt"}
+  description={"Tags for Davis Haupt's blog"}
+>
   <p>
     I wasn't sure the best way to present a list of tags, so here's a list of
     all tags with more than one article:
