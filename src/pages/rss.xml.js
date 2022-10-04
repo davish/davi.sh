@@ -17,6 +17,7 @@ export const get = () => {
     // simple example: generate items for every md file in /src/pages
     // see "Generating items" section for required frontmatter and advanced use cases
     items: posts
+      .filter((p) => !p.frontmatter.draft)
       .sort(
         (a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
       )

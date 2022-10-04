@@ -2,6 +2,7 @@
 import Highlight from "./Highlight.astro";
 
 let highlights = (await Astro.glob("/src/pages/blog/**/*.md"))
+  .filter((p) => !p.frontmatter.draft)
   .sort(
     (a, b) =>
       new Date(b.frontmatter.date).valueOf() -

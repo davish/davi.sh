@@ -5,11 +5,13 @@ import Pagination from "../../components/blog/list/Pagination.astro";
 
 // @ts-ignore
 export async function getStaticPaths({ paginate }) {
-  const posts = (await Astro.glob("../../pages/blog/**/*.md")).sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+  const posts = (await Astro.glob("../../pages/blog/**/*.md"))
+    .sort(
+      (a, b) =>
+        new Date(b.frontmatter.date).valueOf() -
+        new Date(a.frontmatter.date).valueOf()
+    )
+    .filter((p) => !p.frontmatter.draft);
   return paginate(posts, { pageSize: 5 });
 }
 

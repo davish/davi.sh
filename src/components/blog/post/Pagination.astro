@@ -9,11 +9,13 @@ const {
   page: { file },
 } = Astro.props;
 
-const posts = (await Astro.glob("/src/pages/blog/**/*.md")).sort(
-  (a, b) =>
-    new Date(b.frontmatter.date).valueOf() -
-    new Date(a.frontmatter.date).valueOf()
-);
+const posts = (await Astro.glob("/src/pages/blog/**/*.md"))
+  .filter((p) => !p.frontmatter.draft)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
 
 const idx = posts.findIndex((p) => p.file === file);
 const prevPost = idx < posts.length - 1 ? posts[idx + 1] : null;
