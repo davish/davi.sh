@@ -1,14 +1,16 @@
 ---
 import Nav from "../components/Nav.astro";
 import Links from "../components/Links.astro";
+import Meta from "../components/Meta.astro";
 
 export interface Props {
   isHome?: boolean;
   path?: string;
   title?: string;
   back?: string;
+  description: string | null;
 }
-const { isHome = false, path, title, back } = Astro.props;
+const { hideFooter = false, path, title, back, description } = Astro.props;
 
 const pageTitle = (() => {
   if (!title) {
@@ -22,11 +24,10 @@ const pageTitle = (() => {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <Meta
+      title={pageTitle}
+      description={description || "Davis Haupt's Website"}
+    />
   </head>
   <body>
     <Nav path={path} back={back} />
@@ -34,7 +35,7 @@ const pageTitle = (() => {
       <slot />
     </div>
     {
-      !isHome ? (
+      !hideFooter ? (
         <footer>
           <Links />
         </footer>

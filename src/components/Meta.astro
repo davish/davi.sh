@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+const currentUrl = Astro.request.url;
+
+// Metadata code Copyright (c) 2022 Bryce Wray under the MIT license:
+// https://github.com/brycewray/astro-site/blob/main/src/components/Head.astro
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="sitemap" href="/rss.xml" />
+
+<!-- Primary Meta Tags -->
+<title>{title + " | Davis Haupt"}</title>
+<meta name="title" content={title + " | Davis Haupt"} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title + " | Davis Haupt"} />
+<meta property="og:description" content={description} />
+
+<link rel="canonical" href={currentUrl} />
+
+<!-- Twitter -->
+<meta name="twitter:site" content="@davishaupt" />
+<meta name="twitter:creator" content="@davishaupt" />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:url" content={currentUrl} />
+<meta property="twitter:title" content={title} />

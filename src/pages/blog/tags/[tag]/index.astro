@@ -25,7 +25,11 @@ const posts = (await Astro.glob("../../../**/*.md"))
   );
 ---
 
-<Base path={`blog/tags/${tag}`} back="/blog/tags">
+<Base
+  path={`blog/tags/${tag}`}
+  back="/blog/tags"
+  description={`#${tag} on Davis Haupt's blog`}
+>
   <section id="intro">
     <h1>Articles for #{tag}</h1>
   </section>
