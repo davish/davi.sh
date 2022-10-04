@@ -32,6 +32,7 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
     }
 
     <style lang="scss">
+      @import "/src/variables.scss";
       div#main {
         flex-grow: 1;
         display: flex;
@@ -39,6 +40,9 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         align-items: center;
         padding: 1rem;
         margin: 1rem 2rem;
+        @media #{$media-size-phone} {
+          margin: 1rem 0rem;
+        }
       }
       footer {
         padding-bottom: 1rem;

@@ -41,6 +41,7 @@ $ poetry run django-admin startproject <project> .
 ```
 
 ## 1. Add the Dockerfile
+
 Create a file called `Dockerfile` in the project's base directory:
 
 ```docker
