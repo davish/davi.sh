@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Switching to Emacs"
 date: 2020-03-31T17:58:32-04:00
 draft: false

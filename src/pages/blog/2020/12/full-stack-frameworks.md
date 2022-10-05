@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Hotwiring the Web: What does Basecamp's New Magic bring to the table?"
 date: 2020-12-22T19:38:55-04:00
 description: A quick survey of the state of web development in 2020, and a dive into some very new developments.

@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "At Home"
 date: 2020-03-17T22:11:32-04:00
 draft: false

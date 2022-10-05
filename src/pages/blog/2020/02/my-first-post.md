@@ -1,12 +1,10 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "My First Post"
 date: 2020-02-27T22:23:37-05:00
 draft: false
 toc: false
 images:
-tags:
-  - helloworld
+tags: [meta]
 description: "Hello, world!"
 ---
 

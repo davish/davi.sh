@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Digital Mindfulness"
 date: 2022-01-04T17:19:42-05:00
 draft: false

@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Task Management in Obsidian"
 date: 2022-01-22T20:20:05-05:00
 draft: false

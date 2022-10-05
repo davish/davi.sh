@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Renting in New York City"
 date: 2022-05-08
 draft: false

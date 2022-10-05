@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Deploy a Django app with fly.io"
 date: 2022-10-04
 draft: false

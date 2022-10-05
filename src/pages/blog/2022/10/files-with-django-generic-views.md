@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Upload files to Django class-based generic views"
 date: 2022-09-30
 draft: true

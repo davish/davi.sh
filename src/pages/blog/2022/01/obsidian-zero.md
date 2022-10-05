@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Thinking with Obsidian"
 date: 2022-01-20T23:00:34-05:00
 draft: false

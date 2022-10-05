@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "PiClock: Waking Up to the Unix Philosophy"
 date: 2021-05-20
 tags:

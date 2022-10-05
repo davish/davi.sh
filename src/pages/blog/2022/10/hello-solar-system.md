@@ -1,5 +1,4 @@
 ---
-layout: "/src/layouts/BlogPost.astro"
 title: "Hello, Solar System!"
 date: 2022-10-03
 draft: false
