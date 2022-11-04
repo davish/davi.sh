@@ -22,5 +22,9 @@ jobs.sort(
 );
 ---
 
-<h2>{title}</h2>
-{jobs.map((job) => <Job job={job} />)}
+<li>
+  <strong>{title}</strong>
+  <ul>
+    {jobs.map((job) => <Job job={job} />)}
+  </ul>
+</li>

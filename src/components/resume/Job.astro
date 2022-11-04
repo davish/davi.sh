@@ -1,5 +1,6 @@
 ---
 import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+import { toDuration, toMonthYear } from "src/utils";
 
 export interface Props {
   job: MarkdownInstance<{
@@ -12,6 +13,10 @@ export interface Props {
 }
 
 const { job } = Astro.props;
+const startDate = new Date(job.frontmatter.start);
+const endDate = job.frontmatter.end ? new Date(job.frontmatter.end) : null;
 ---
 
-<pre>{JSON.stringify(job, null, 2)}</pre>
+<li>
+  {job.frontmatter.title}: {toDuration(startDate, endDate)}
+</li>

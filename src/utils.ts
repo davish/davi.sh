@@ -24,6 +24,22 @@ export function toReadableString(d: Date): string {
   return `${months[d.getUTCMonth()]} ${d.getUTCDate()} ${d.getUTCFullYear()}`;
 }
 
+export function toMonthYear(d: Date): string {
+  return `${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+}
+
+export function toDuration(start: Date, end: Date | null): string {
+  if (!end) {
+    return `${toMonthYear(start)} to Present`;
+  }
+  if (start.getFullYear() == end.getFullYear()) {
+    return `${months[start.getUTCMonth()]} to ${
+      months[end.getUTCMonth()]
+    } ${start.getUTCFullYear()}`;
+  }
+  return `${toMonthYear(start)} to ${toMonthYear(end)}`;
+}
+
 /**
  * Get the summary from a Markdown file following the Hugo content summary rules:
  * https://gohugo.io/content-management/summaries/
