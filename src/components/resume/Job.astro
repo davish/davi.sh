@@ -1,15 +1,10 @@
 ---
 import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
 import { toDuration, toMonthYear } from "src/utils";
+import type { JobInfo } from "./types";
 
 export interface Props {
-  job: MarkdownInstance<{
-    company: string;
-    location: string;
-    title: string;
-    start: string;
-    end: string;
-  }>;
+  job: MarkdownInstance<JobInfo>;
 }
 
 const { job } = Astro.props;
@@ -18,5 +13,42 @@ const endDate = job.frontmatter.end ? new Date(job.frontmatter.end) : null;
 ---
 
 <li>
-  {job.frontmatter.title}: {toDuration(startDate, endDate)}
+  <span class="title">{job.frontmatter.title}</span>
+  <div class="details">
+    {toDuration(startDate, endDate)}
+  </div>
+  {
+    job.frontmatter.showDetails && (
+      <div class="resume-job-content">
+        <job.Content />
+      </div>
+    )
+  }
 </li>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  li {
+    list-style: none;
+    max-width: 70ch;
+  }
+  .details {
+    @include dimmed;
+  }
+  .title {
+    font-size: 1.05rem;
+  }
+</style>
+
+<style lang="scss" is:global>
+  @import "/src/variables.scss";
+  .resume-job-content {
+    p {
+      margin: 0;
+    }
+    margin-bottom: 0.5rem;
+    ul {
+      list-style-type: disc;
+    }
+  }
+</style>

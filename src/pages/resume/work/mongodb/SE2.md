@@ -4,6 +4,7 @@ location: New York, NY
 title: Software Engineer 2
 start: 2021-08-26
 end: null
+showDetails: true
 ---
 
 Software Engineer on Query Optimization.

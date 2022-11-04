@@ -30,14 +30,14 @@ export function toMonthYear(d: Date): string {
 
 export function toDuration(start: Date, end: Date | null): string {
   if (!end) {
-    return `${toMonthYear(start)} to Present`;
+    return `${toMonthYear(start)} – Present`;
   }
   if (start.getFullYear() == end.getFullYear()) {
-    return `${months[start.getUTCMonth()]} to ${
+    return `${months[start.getUTCMonth()]} – ${
       months[end.getUTCMonth()]
     } ${start.getUTCFullYear()}`;
   }
-  return `${toMonthYear(start)} to ${toMonthYear(end)}`;
+  return `${toMonthYear(start)} – ${toMonthYear(end)}`;
 }
 
 /**

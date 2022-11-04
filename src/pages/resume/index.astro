@@ -2,23 +2,16 @@
 import Base from "../../layouts/Base.astro";
 import Group from "src/components/resume/Group.astro";
 import type { MarkdownInstance } from "astro";
+import type { JobInfo } from "src/components/resume/types";
 
 const stripUrl = (url: string) => url.replace("/resume/work/", "");
 const getGroup = (url: string) => stripUrl(url).split("/")[0];
 
-type JobFile = {
-  company: string;
-  location: string;
-  title: string;
-  start: string;
-  end: string;
-};
-
-const workHistory = await Astro.glob<JobFile>(
+const workHistory = await Astro.glob<JobInfo>(
   "../../pages/resume/work/**/*.md"
 );
 
-let workHistoryByCompany: Record<string, [MarkdownInstance<JobFile>]> = {};
+let workHistoryByCompany: Record<string, [MarkdownInstance<JobInfo>]> = {};
 
 workHistory.forEach((v) => {
   const group = getGroup(stripUrl(v.url || "")) || "";
@@ -32,7 +25,7 @@ workHistory.forEach((v) => {
 
 const groups = Object.entries(workHistoryByCompany);
 
-const lastEndDate = (f: MarkdownInstance<JobFile>[]) =>
+const lastEndDate = (f: MarkdownInstance<JobInfo>[]) =>
   f
     .map((j) => j.frontmatter.end)
     .map((e) => (e ? new Date(e) : new Date(8640000000000000)))
@@ -48,3 +41,10 @@ groups.sort(
     {groups.map(([place, jobs]) => <Group title={place} jobs={jobs} />)}
   </ul>
 </Base>
+
+<style lang="scss">
+  ul {
+    @import "/src/variables.scss";
+    @include sans-serif;
+  }
+</style>

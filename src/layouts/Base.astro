@@ -61,8 +61,7 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
       }
 
       body {
-        font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
-          "Book Antiqua", Georgia, serif;
+        @include serif;
         color: $text-color;
         display: flex;
         flex-direction: column;
