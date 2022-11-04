@@ -1,0 +1,17 @@
+---
+import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+
+export interface Props {
+  job: MarkdownInstance<{
+    company: string;
+    location: string;
+    title: string;
+    start: string;
+    end: string;
+  }>;
+}
+
+const { job } = Astro.props;
+---
+
+<pre>{JSON.stringify(job, null, 2)}</pre>

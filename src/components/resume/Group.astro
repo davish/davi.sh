@@ -1,0 +1,26 @@
+---
+import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+import Job from "./Job.astro";
+
+export interface Props {
+  title: string;
+  jobs: MarkdownInstance<{
+    company: string;
+    location: string;
+    title: string;
+    start: string;
+    end: string;
+  }>[];
+}
+
+const { title, jobs } = Astro.props;
+
+jobs.sort(
+  (a, b) =>
+    new Date(b.frontmatter.start).getTime() -
+    new Date(a.frontmatter.start).getTime()
+);
+---
+
+<h2>{title}</h2>
+{jobs.map((job) => <Job job={job} />)}

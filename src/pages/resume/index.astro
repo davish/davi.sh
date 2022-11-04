@@ -1,0 +1,49 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostEntry from "../../components/blog/list/PostEntry.astro";
+import Pagination from "../../components/blog/list/Pagination.astro";
+import Group from "src/components/resume/Group.astro";
+import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+
+const stripUrl = (url: string) => url.replace("/resume/work/", "");
+const getGroup = (url: string) => stripUrl(url).split("/")[0];
+
+type JobFile = {
+  company: string;
+  location: string;
+  title: string;
+  start: string;
+  end: string;
+};
+
+const workHistory = await Astro.glob<JobFile>(
+  "../../pages/resume/work/**/*.md"
+);
+
+let workHistoryByCompany: Record<string, [MarkdownInstance<JobFile>]> = {};
+
+workHistory.forEach((v) => {
+  const group = getGroup(stripUrl(v.url || "")) || "";
+  const l = workHistoryByCompany[group];
+  if (l) {
+    l.push(v);
+  } else {
+    workHistoryByCompany[group] = [v];
+  }
+});
+
+const groups = Object.entries(workHistoryByCompany);
+groups.sort(([_1, a], [_2, b]) => {
+  const lastEndDate = (f: MarkdownInstance<JobFile>[]) =>
+    f
+      .map((j) => j.frontmatter.end)
+      .map((e) => (e ? new Date(e) : new Date(8640000000000000)))
+      .sort((a, b) => b.getDate() - a.getDate())[0] || new Date(0);
+
+  return lastEndDate(b).getTime() - lastEndDate(a).getTime();
+});
+---
+
+<Base path="resume" title="Resume" description={"Resume"}>
+  {groups.map(([place, jobs]) => <Group title={place} jobs={jobs} />)}
+</Base>
