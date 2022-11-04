@@ -1,4 +1,4 @@
-import type { MarkdownLayoutProps } from "astro";
+import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
 
 const months = [
   "Jan",
@@ -47,7 +47,7 @@ export function toDuration(start: Date, end: Date | null): string {
  * @returns summary section of Markdown
  */
 export function getSummary<T extends Record<string, any>>(
-  page: MarkdownLayoutProps<T>
+  page: MarkdownInstance<T>
 ): string {
   const html = page.compiledContent();
   const moreSplit = html.split("<!--more-->");
@@ -65,7 +65,7 @@ export function getSummary<T extends Record<string, any>>(
  * @returns whether or not the summary is the entire document.
  */
 export function hasMore<T extends Record<string, any>>(
-  page: MarkdownLayoutProps<T>
+  page: MarkdownInstance<T>
 ): boolean {
   const text = page.compiledContent();
   return getSummary(page).length != text.length;
