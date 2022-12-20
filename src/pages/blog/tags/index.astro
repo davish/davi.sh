@@ -3,8 +3,8 @@ import Base from "../../../layouts/Base.astro";
 
 let tagAndCount: [string, number][] = Array.from(
   (await Astro.glob("../../**/*.md"))
+    .filter((p) => !p.frontmatter?.draft)
     .map((p) => p.frontmatter.tags)
-    .filter((a) => a)
     .flatMap((a) => a)
     .reduce((acc: Map<string, number>, t: string) => {
       const count = acc.get(t);
