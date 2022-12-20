@@ -1,5 +1,5 @@
 ---
-title: "Improving My Writing Skills One Python Script at a Time"
+title: "Improving My Writing Style One Python Script at a Time"
 date: 2022-12-20
 draft: false
 tags: ["python", "airplane-articles"]
