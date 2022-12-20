@@ -8,9 +8,11 @@ description: ""
 
 One of my pet peeves about my natural writing style is how I lean into complex sentences divided by commas. Left unchecked, my prose starts looking like it might be ChatGPT's attempt at writing a blog post in the style of s-expressions. I thought it would be neat to try and write some code to help me proofread for this specific issue and improve my posts.
 
+So much of my Python experience is from writing apps with Django that I forgot how quick and easy it is to whip up a small script that does some text processing with nothing but the standard library. As much as I appreciate static types and exhaustiveness checking in larger programs, being able to ignore edge cases that I know don't appear in the specific input I'm concerned with is a relief for scripts like this.
+
 <!--more-->
 
-The first script I'm writing looks for sequences of multiple sentences that have too many commas in them. If there are more than three commas in two adjacent sentences, I need to reword something. Here's its output on one of my first blogposts, [_Switching to Emacs_](https://davi.sh/blog/2020/03/switching-to-emacs/):
+The [first script I wrote](https://github.com/davish/prose-nits/blob/main/sequential_runons.py) looks for sequences of multiple sentences that have too many commas in them. If there are more than three commas in two adjacent sentences, I need to reword something. Here's its output on one of my first blogposts, [_Switching to Emacs_](https://davi.sh/blog/2020/03/switching-to-emacs/):
 
 ```
 ***
@@ -36,7 +38,5 @@ I enabled a few more Doom modules, like a terminal emulator (`term`) and a file 
 ```
 
 Since these windows are all processed in order, I can see without any extra processing that there's actually two sequences of three sentences with 7 and 6 commas respectively.
-
-So much of my Python experience is from writing apps with Django that I forgot how quick and easy it is to whip up a small script that does some text processing with nothing but the standard library. As much as I appreciate static types and exhaustiveness checking in larger programs, being able to ignore edge cases that I know don't appear in the specific input I'm concerned with is a relief for scripts like this.
 
 As you might expect, I ran this post through the script before publishing. It had no notes! I'm improving already.
