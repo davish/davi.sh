@@ -6,8 +6,6 @@ tags: ["python", "airplane-articles"]
 description: ""
 ---
 
-%%(Two blog posts in a day?? Can you tell I'm on a long plane flight right now?)%%
-
 One of my pet peeves about my natural writing style is how I lean into complex sentences divided by commas. Left unchecked, my prose starts looking like it might be ChatGPT's attempt at writing a blog post in the style s-expressions. I thought it would be neat to try and write some code to help me proofread for this specific issue and improve my posts.
 
 <!--more-->
