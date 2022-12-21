@@ -1,5 +1,5 @@
 ---
-title: "Adventures with Mocking Obsidian's Markdown Parser"
+title: "Mocking Obsidian's Markdown Parser"
 date: 2022-12-20T12:00
 draft: false
 tags: ["obsidian", "typescript", "testing", "webdev", "obsidian-full-calendar", "airplane-articles"]
