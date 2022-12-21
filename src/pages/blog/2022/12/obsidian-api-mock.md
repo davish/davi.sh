@@ -6,7 +6,7 @@ tags: ["obsidian", "typescript", "testing", "webdev", "obsidian-full-calendar", 
 description: "Who writes tests for their test code?"
 ---
 
-I've been working on a plugin for Obsidian called [Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) on-and-off for the past 10 months or so. For most of that time the plugin has had zero unit tests, but I finally got around to changing that. Testing can be cumbersome – especially writing test mocks. I ended up pretty happy the little DSL I wrote for constructing mock file metadata that I wanted to share.
+I've been working on a plugin for Obsidian called [Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) on-and-off for the past 10 months or so. For most of that time the plugin has had no unit tests, and I finally got around to adding some test coverage during a big refactor.
 
 Tests are easiest when code doesn't have side effects since filesystems and network calls often aren't available in the environment the tests are running in. Obsidian's core code is closed-source and can only be run from inside the Electron app, so plugin developers who want test coverage aren't left with many options but to test their plugins completely outside of Obsidian. Unfortunately for me, my plugin is mostly a pile of glue sitting between [FullCalendar](https://fullcalendar.io) as the view layer and the Obsidian filesystem APIs for persistence. I would need to mock out the relevant APIs from Obsidian if I wanted to have any meaningful test coverage of my own code. 
 
