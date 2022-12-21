@@ -1,16 +1,18 @@
 ---
-title: "Adventures with Mocking the Obsidian API"
-date: 2022-12-19
-draft: true
+title: "Adventures with Mocking Obsidian's Markdown Parser"
+date: 2022-12-20T12:00
+draft: false
 tags: ["obsidian", "typescript", "testing", "webdev", "obsidian-full-calendar", "airplane-articles"]
 description: "Who writes tests for their test code?"
 ---
 
-While I haven't yet found a way to write about it on this blog, I've been working on a plugin for Obsidian called [Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) on-and-off for the past 10 months or so. For most of that time the plugin has had zero unit tests. I finally got around to changing that. Testing can be boring – especially writing test mocks. I ended up pretty happy with the mock for the Obsidian file and metadata APIs and its corresponding test suite that I put together and I wanted to write about how I ended up here.
+I've been working on a plugin for Obsidian called [Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) on-and-off for the past 10 months or so. For most of that time the plugin has had zero unit tests, but I finally got around to changing that. Testing can be cumbersome – especially writing test mocks. I ended up pretty happy the little DSL I wrote for constructing mock file metadata that I wanted to share.
 
-Tests are easiest when code doesn't have side effects since filesystems and network calls often aren't available in the environment the tests are running in. Obsidian's core code is closed-source and can only be run from inside the Electron app, so plugin developers who want test coverage aren't left with many options but to test their plugins completely outside of Obsidian. Unfortunately for me, my plugin is mostly a pile of glue sitting between [FullCalendar](https://fullcalendar.io) as the view layer and the Obsidian filesystem APIs for persistence. I realized I would need to mock out the relevant APIs from Obsidian if I wanted to have any meaningful test coverage of my code. 
+Tests are easiest when code doesn't have side effects since filesystems and network calls often aren't available in the environment the tests are running in. Obsidian's core code is closed-source and can only be run from inside the Electron app, so plugin developers who want test coverage aren't left with many options but to test their plugins completely outside of Obsidian. Unfortunately for me, my plugin is mostly a pile of glue sitting between [FullCalendar](https://fullcalendar.io) as the view layer and the Obsidian filesystem APIs for persistence. I would need to mock out the relevant APIs from Obsidian if I wanted to have any meaningful test coverage of my own code. 
 
-Many plugins take different approaches to testing, but there isn't any comprehensive mock Obsidian API for use in a testing environment that I could reach for, so I went ahead writing my own!
+There isn't yet any comprehensive mock Obsidian API for use in a testing environment that I could reach for, so I went ahead writing my own!
+
+<!--more-->
 
 ## Taking Stock
 
@@ -21,12 +23,11 @@ There are two Obsidian APIs that I make heavy use of:
 	- Position and task status of lists and list items
 	- Position and text of Markdown headings
 
-
 ## First Thoughts
 
 Mocking out relevant parts of the `Vault` API isn't that bad, but keeping a mock MetadataCache that was in sync with file contents felt like it was going to be a big pain. Every item in a cache entry records its location in its file, consisting of line/column information as well as the character offset. Writing cache entries by hand would require recording the position of every single heading and list item within the file – a single character change would have a cascading effect on the whole cache entry.
 
-My first thought to avoid this was just to write a simplified metadata parser for testing purposes. My mock API would just take in file contents and would parse out the metadata itself. I wasn't particularly in the mood to write a Markdown parser just for unit tests. A library like Remark (TODO: link) might have made this pretty easy, but that'll be a rabbit hole for another day.
+My first thought to avoid this was just to write a simplified metadata parser for testing purposes. My mock API would just take in file contents and would parse out the metadata itself. I wasn't particularly in the mood to write a Markdown parser just for unit tests. A library like [`mdast`](https://github.com/syntax-tree/mdast) might have made this easier, but that can be a rabbit hole for another day.
 
 ## The `FileBuilder`
 
@@ -165,12 +166,12 @@ and a second line!
 ## Testing the test code
 I'm never sure of what the best practice is for testing code that you've written for the purpose of testing, but this case I'd constructed a complex enough API and written enough code that I decided to see how deep this rabbit hole goes.
 
-The main thing I wanted to avoid was manually writing out the output that I was expecting. Writing out the metadata format by hand was what I wanted to avoid in the first place, and I didn't want to track down small typos in my transcription of the Markdown documents.  I came up with a testing strategy that minimized the amount of typing I had to do for each of the output formats, allowing me to add a lot of test cases with minimal effort.
+The main thing I wanted to avoid was manually writing out the output that I was expecting. Constructing metadata by hand was what I wanted to avoid in the first place, and I didn't want to track down small typos in my transcription of the Markdown documents.  I came up with a testing strategy that minimized the amount of typing I had to do for each of the output formats, allowing me to add a lot of test cases with minimal effort.
 
 ### Text output
-Jest comes with built-in snapshot testing functionality (TODO: LINK) that allows test authors to simply inspect the test output "by eye" after the test is run. On subsequent runs, the result is compared to the accepted output to make sure there isn't any regression.
+Jest comes with built-in [snapshot testing functionality](https://jestjs.io/docs/snapshot-testing) that allows test authors to simply visually validate the test output after the test is run the first time. On subsequent runs, the result is compared to the accepted output to make sure there isn't any regression.
 
-We get the option of using separate snapshot files or keeping the snapshots inline. I opted for inline snapshots since the output wasn't particularly long for any given test. Here's an example of what the inline snapshot assertion looks like:
+We get the option of using separate snapshot files or [keeping the snapshots inline](https://jestjs.io/docs/snapshot-testing#inline-snapshots). I opted for inline snapshots since the output isn't particularly long for any given test. Here's an example of what the inline snapshot assertion looks like after it's accepted:
 
 ```ts
 const [contents, metadata] = new FileBuilder()
@@ -218,4 +219,4 @@ this.addCommand({
 
 Adding an assertion for metadata to each test only took a copy-paste and five or so keypresses!
 
-The code for this is still on an in-progress branch in Obsidian Full Calendar, but I think it would be generally usable for other plugins, so I might split it out into a separate package. 
+The code for this is still on an [in-progress branch](https://github.com/davish/obsidian-full-calendar/tree/feature/cache/src/test_helpers) in Obsidian Full Calendar, but I think it would be generally usable for other plugins, so I might split it out into a separate package in the future.
