@@ -9,11 +9,11 @@ const { frontmatter, compiledContent } = Astro.props;
 
 // Strip out all code blocks and HTML tags from the
 // compiledContent to get just the words for the reading time.
-const html = compiledContent();
-const codeRegex = /<pre class=(.|\n)*?<\/pre>/gm;
-html.replaceAll(codeRegex, "");
+const codeRegex = /<pre\b[^<]*(?:(?!<\/pre>)<[^<]*)*<\/pre>/gi;
 const tagRegex = /(<([^>]+)>)/gi;
-html.replaceAll(tagRegex, "");
+const html = compiledContent()
+  .replaceAll(codeRegex, "")
+  .replaceAll(tagRegex, "");
 const articleTime = Math.round(readingTime(html).minutes);
 ---
 
