@@ -6,9 +6,11 @@ const { path = "" } = Astro.props;
 ---
 
 <ul aria-hidden="true">
-  <span id="prefix">&gt;</span>
-  <span id="text"> ~/{path}</span>
-  <span id="cursor"></span>
+  <span id="container">
+    <span id="prefix">&gt;</span>
+    <span id="text"> ~/{path}</span>
+    <span id="cursor"></span>
+  </span>
 </ul>
 
 <style lang="scss">
@@ -39,10 +41,12 @@ const { path = "" } = Astro.props;
       height: 1rem;
       background: $accent-color;
       margin-left: 5px;
-      margin-top: 1px;
       border-radius: 1px;
       animation: prompt 1s infinite;
       animation-duration: 1.5s;
+
+      position: relative;
+      top: 1px;
     }
   }
 
