@@ -24,7 +24,7 @@ External Tools:
 
 ## Agenda View
 
-Like I mentioned in [Part Zero]({{< relref "obsidian-zero.md">}}), the first real productivity workflow that clicked for me was [Org Mode's agenda system](https://orgmode.org/manual/Agenda-Views.html). My tasks could stay in the context of the notes and project that spawned them in the first place, but could be collected together into a global to-do list on command by calling up the agenda buffer. I've tried to replicate this quite closely in Obsidian.
+Like I mentioned in [Part Zero](https://davi.sh/blog/2022/01/obsidian-zero/), the first real productivity workflow that clicked for me was [Org Mode's agenda system](https://orgmode.org/manual/Agenda-Views.html). My tasks could stay in the context of the notes and project that spawned them in the first place, but could be collected together into a global to-do list on command by calling up the agenda buffer. I've tried to replicate this quite closely in Obsidian.
 
 By default, Obsidian doesn't have any real organization for tasks beyond Markdown support for rendering checkboxes and a special [filter in the core Search plugin](https://help.obsidian.md/Plugins/Search#Search+operators). There's a handful of plugins that can help you collect tasks in a more global list, but I chose towards [Obsidian Tasks](https://github.com/schemar/obsidian-tasks) because of its custom query block. In any note, I can add a code block with the special type `tasks` and create an ad-hoc to-do list for tasks that satisfied a given query. Combining a few of these queries, I put together a central "Agenda Note" that contains my entire to-do list, at a glance. This is what it looks like right now:
 
