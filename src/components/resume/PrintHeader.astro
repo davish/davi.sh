@@ -1,17 +1,23 @@
-<div id="print-only">
+<div id="print-header">
   <h1>Davis Haupt</h1>
   <div id="links">
-    <a href="mailto:me@davishaupt.com">me@davishaupt.com</a>| <a
+    <a href="mailto:me@davishaupt.com">contact@davishaupt.com</a> | <a
       href="https://github.com/davish">github.com/davish</a
-    > | <a href="linkedin.com/in/davishaupt/">linkedin.com/in/davishaupt/</a>
+    > | <a href="https://linkedin.com/in/davishaupt/"
+      >linkedin.com/in/davishaupt/</a
+    >
   </div>
 </div>
 
 <style lang="scss">
-  #print-only {
+  #print-header {
     display: none;
     @media print {
       display: block;
     }
+    font-family: "Inter", sans-serif;
+  }
+  h1 {
+    margin: 0;
   }
 </style>

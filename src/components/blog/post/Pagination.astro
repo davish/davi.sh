@@ -46,6 +46,9 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   .pagination {
     display: flex;
     justify-content: center;
+    @media print {
+      display: none;
+    }
 
     &-item {
       display: flex;

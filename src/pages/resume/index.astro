@@ -9,8 +9,8 @@ import Section from "src/components/resume/Section.astro";
 <Base path="resume" title="Resume" description={"Resume"}>
   <div id="resume">
     <PrintHeader />
-    <Section name="Education"><Education /></Section>
     <Section name="Experience"><WorkHistory /></Section>
+    <Section name="Education"><Education /></Section>
   </div>
 </Base>
 
@@ -19,6 +19,15 @@ import Section from "src/components/resume/Section.astro";
     max-width: 80ch;
     @media print {
       max-width: 100%;
+    }
+  }
+</style>
+<style is:global lang="scss">
+  @media print {
+    #resume {
+      a {
+        color: blue;
+      }
     }
   }
 </style>
