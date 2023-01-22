@@ -23,6 +23,9 @@ const { path, back } = Astro.props;
     @include sans-serif;
     display: flex;
     justify-content: space-between;
+    @media print {
+      display: none;
+    }
   }
   a {
     text-decoration: none;

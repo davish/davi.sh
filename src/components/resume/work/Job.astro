@@ -17,20 +17,19 @@ const endDate = job.frontmatter.end ? new Date(job.frontmatter.end) : null;
   <div class="details">
     {toDuration(startDate, endDate)}
   </div>
-  {
-    job.frontmatter.showDetails && (
-      <div class="resume-job-content">
-        <job.Content />
-      </div>
-    )
-  }
+  <div
+    class={`resume-job-content ${
+      job.frontmatter.showDetails ? "showPrint" : "hidePrint"
+    }`}
+  >
+    <job.Content />
+  </div>
 </li>
 
 <style lang="scss">
   @import "/src/variables.scss";
   li {
     list-style: none;
-    max-width: 80ch;
     margin-bottom: 0.25rem;
   }
   .details {
@@ -50,6 +49,13 @@ const endDate = job.frontmatter.end ? new Date(job.frontmatter.end) : null;
     margin-bottom: 0.5rem;
     ul {
       list-style-type: disc;
+      padding-top: 0.25rem;
+      padding-inline-start: 1.5rem;
+    }
+    @media print {
+      &.hidePrint {
+        display: none;
+      }
     }
   }
 </style>

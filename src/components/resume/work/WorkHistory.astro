@@ -1,0 +1,53 @@
+---
+import type { MarkdownInstance } from "astro";
+
+import Group from "./Group.astro";
+import type { JobInfo } from "./types";
+
+const stripUrl = (url: string) => url.replace("/resume/work/", "");
+const getGroup = (url: string) => stripUrl(url).split("/")[0];
+
+const workHistory = await Astro.glob<JobInfo>("/src/pages/resume/work/**/*.md");
+
+let workHistoryByCompany: Record<string, [MarkdownInstance<JobInfo>]> = {};
+
+workHistory.forEach((v) => {
+  const group = getGroup(stripUrl(v.url || "")) || "";
+  const l = workHistoryByCompany[group];
+  if (l) {
+    l.push(v);
+  } else {
+    workHistoryByCompany[group] = [v];
+  }
+});
+
+const groups = Object.entries(workHistoryByCompany);
+
+const lastEndDate = (f: MarkdownInstance<JobInfo>[]) =>
+  f
+    .map((j) => j.frontmatter.end)
+    .map((e) => (e ? new Date(e) : new Date(8640000000000000)))
+    .sort((a, b) => b.getTime() - a.getTime())[0] || new Date(0);
+
+groups.sort(
+  ([, a], [, b]) => lastEndDate(b).getTime() - lastEndDate(a).getTime()
+);
+---
+
+<ul>
+  {groups.map(([place, jobs]) => <Group title={place} jobs={jobs} />)}
+</ul>
+
+<style lang="scss">
+  ul {
+    @import "/src/variables.scss";
+    @include sans-serif;
+    font-size: 0.8em;
+    padding-inline-start: 0;
+    @media print {
+      width: 100%;
+      padding: 0;
+    }
+    margin-block-start: 0;
+  }
+</style>

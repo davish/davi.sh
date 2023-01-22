@@ -1,0 +1,36 @@
+---
+import type { MarkdownInstance } from "astro";
+import { toMonthYear } from "src/utils";
+import type { DegreeType } from "./types";
+
+export interface Props {
+  page: MarkdownInstance<DegreeType>;
+}
+const {
+  page: {
+    frontmatter: { degree, field, institution, graduation, gpa, hide },
+    compiledContent,
+  },
+} = Astro.props;
+
+const gradDate = new Date(graduation);
+---
+
+<div class="education">
+  <strong>{institution}</strong> / {degree} in {field} / {toMonthYear(gradDate)}
+  <br />
+  <span class="gpa">GPA: {gpa}</span>
+  <div set:html={compiledContent()}></div>
+</div>
+
+<style lang="scss">
+  .gpa {
+    color: gray;
+  }
+</style>
+
+<style is:global lang="scss">
+  .education p {
+    margin: 0;
+  }
+</style>
