@@ -3,7 +3,7 @@ title: "Configuring VSCode as a Keyboard-Centric IDE"
 date: 2023-01-24
 draft: false
 tags: ["vscode", "emacs", "texteditors", "configuration"]
-description: "Un-bundling text editing"
+description: "Un-bundling my text editing"
 ---
 
 One of my first posts on this blog in 2020 was about [my experience switching from VSCode to Emacs](https://davi.sh/blog/2020/03/switching-to-emacs/) for all of my text/code editing work. I still agree with all of the benefits to Emacs I wrote about back then, and [my posts on Obsidian](https://davi.sh/blog/2022/01/obsidian-zero/) show my respect for `org-mode` as a format and the ecosystem around it – especially `org-agenda`. However, as you might have noticed when the file extension on my posts switched from `.org` back to `.md`, I've moved on from Emacs for now. But I'm happy with how I've moved my good habits back to VSCode. Spending time on config gave me more confidence in my ability to configure software I use to my liking, and make software work for me rather than make me work for the software.
@@ -12,10 +12,12 @@ At work, I'm always editing code while SSH'd into a remote machine. [TRAMP](http
 
 While I love the smoothness of the VSCode UI, I'm not a fan of how easy it is fall back on the mouse while navigating around the editor. My favorite part of the [Doom Emacs](https://github.com/doomemacs/doomemacs) distribution was the keybindings: it made me feel like I was playing chords on the piano when splitting panes and navigating around. While I'd configured Emacs to look and feel like VSCode in my original Emacs post, I ultimately got rid of the project explorer and visual tabs to embrace more Emacs-y buffer and project management. I found myself reaching for the mouse way more often when I moved back to VSCode, putting myself at risk for RSI and generally interrupting my flow. So I set out to make my VSCode configuration as close to my Doom Emacs setup as possible. There were only a handful of changes I needed to make:
 
-- [VSpaceCode + WhichKey](https://vspacecode.github.io) plugins approximate the chords/leader bindings that Doom borrowed from [Spacemacs](https://www.spacemacs.org) really well. I've remapped a few bindings that were different in Doom, and I've added a few more as well.
-- I disabled visual [Tabs](https://code.visualstudio.com/docs/getstarted/userinterface#_tabs). I use `<leader>-,` is what surfaces my most recently used "[editors](https://code.visualstudio.com/docs/getstarted/userinterface#_open-editors)" – VSCode's analog to buffers that normally map on to tabs in the UI.
-	- This can be accomplished by adding `"workbench.editor.showTabs": false` to your `settings.json` file.
-- I disabled the [Activity Bar](https://code.visualstudio.com/docs/getstarted/userinterface#_activity-bar). I can pull up sidebar Views like `File Explorer` and `Find in Files` with a shortcut, and dismiss them with cmd-B.
+- Installed VSCode's [Vim plugin](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim). I've used vim keybindings all over the place for almost four years at this point.
+- Installed [VSpaceCode + WhichKey](https://vspacecode.github.io). Together, these plugins replicate the chords/leader bindings that Doom borrowed from [Spacemacs](https://www.spacemacs.org) really well. I've [remapped a few bindings](https://vspacecode.github.io/docs/menu-customization#incrementally) that were different in Doom and added a few more as well.
+- Disabled [Tabs](https://code.visualstudio.com/docs/getstarted/userinterface#_tabs). Tabs are a visual abstraction that are hard to use effectively without reaching for the mouse. I got used to Emacs's buffer management, where I can fuzzy-search for recently opened files in a reverse-chronological list. VSCode's analog to buffers are called [Editors](https://code.visualstudio.com/docs/getstarted/userinterface#_open-editors) and are normally mapped on to Tabs; after disabling Tabs I can still navigate open Editors with the command "View: Show Editors in Active Group By Most Recently Used", which I've mapped to `<leader> ,` with VSpaceCode.
+	- I removed tabs by adding `"workbench.editor.showTabs": false` to my `settings.json` file.
+	- The command ID for "Show Editors in Active Group" is `workbench.action.showEditorsInActiveGroup`.
+- Disabled the [Activity Bar](https://code.visualstudio.com/docs/getstarted/userinterface#_activity-bar). I can pull up sidebar Views like `File Explorer` and `Find in Files` with a shortcut, and dismiss them with cmd-B.
 	- Add `"workbench.activityBar.visible": false` to your `settings.json`.
 
 The fact that VSCode can do all this is a testament to its extensability and the power of a more limited but still deep [plugin API](https://code.visualstudio.com/api). A `settings.json` file is no match for `init.el` when it comes to expressiveness, but I've still been able to mold VSCode into an editor that I feel at home using.
