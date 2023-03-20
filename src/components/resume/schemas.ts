@@ -22,6 +22,6 @@ export type ProjectType = {
   tags?: string[];
   description: string;
   date: string;
-  hide?: boolean;
+  draft?: boolean;
   details?: boolean;
 };

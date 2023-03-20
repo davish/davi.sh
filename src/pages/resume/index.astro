@@ -36,6 +36,8 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
     flex-direction: row;
     justify-content: space-between;
     @media print {
+      // TODO: toggle this depending on how much content
+      // is on the printed resume.
       // flex-direction: column;
     }
 
@@ -52,7 +54,7 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
       flex: 2;
     }
     .spacer {
-      flex: 0.1;
+      flex: 0.05;
     }
   }
 </style>
