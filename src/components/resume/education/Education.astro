@@ -1,0 +1,30 @@
+---
+import Degree from "./Degree.astro";
+import type { DegreeType } from "../schemas";
+
+const degrees = (
+  await Astro.glob<DegreeType>("/src/pages/resume/education/**/*.md")
+)
+  .filter((d) => !d.frontmatter.hide)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.graduation).getTime() -
+      new Date(a.frontmatter.graduation).getTime()
+  );
+---
+
+<div>
+  {degrees.map((d) => <Degree page={d} />)}
+</div>
+
+<style lang="scss">
+  div {
+    @import "/src/variables.scss";
+    @include sans-serif;
+    font-size: 0.8em;
+    @media print {
+      width: 100%;
+      padding: 0;
+    }
+  }
+</style>

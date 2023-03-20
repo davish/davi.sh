@@ -1,0 +1,24 @@
+---
+export type Props = {
+  name: string;
+};
+
+const { name } = Astro.props;
+---
+
+<div>
+  <h2 id="name">{name}</h2>
+  <hr />
+  <div><slot /></div>
+</div>
+
+<style lang="scss">
+  h2 {
+    margin-block-end: 0;
+    font-family: "Inter", sans-serif;
+  }
+  hr {
+    margin-top: 0.2rem;
+    margin-bottom: 0.75rem;
+  }
+</style>

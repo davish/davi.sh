@@ -10,3 +10,12 @@ $media-size-tablet: "(max-width: 900px)";
 @mixin dimmed {
   opacity: 0.6;
 }
+
+@mixin serif {
+  font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+    "Book Antiqua", Georgia, serif;
+}
+
+@mixin sans-serif {
+  font-family: "Inter", sans-serif;
+}

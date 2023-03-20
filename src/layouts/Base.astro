@@ -43,6 +43,10 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         @media #{$media-size-phone} {
           margin: 1rem 0rem;
         }
+        @media print {
+          padding: 0;
+          margin: 0;
+        }
       }
       footer {
         padding-bottom: 1rem;
@@ -55,19 +59,24 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
       a {
         color: $accent-color;
         text-decoration: none;
+        @media print {
+          text-decoration: underline;
+        }
         &:hover {
           text-decoration: underline;
         }
       }
 
       body {
-        font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
-          "Book Antiqua", Georgia, serif;
+        @include serif;
         color: $text-color;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
         margin: 0;
+        @media print {
+          font-size: 0.8rem;
+        }
       }
       hr {
         color: rgba(0, 0, 0, 0.2);

@@ -1,0 +1,63 @@
+---
+import Base from "./Base.astro";
+import type { MarkdownLayoutProps } from "astro";
+import type { ProjectType } from "src/components/resume/schemas";
+import PostContent from "src/components/blog/post/PostContent.astro";
+import HighlightList from "src/components/HighlightList.astro";
+
+type Props = MarkdownLayoutProps<ProjectType>;
+
+const { frontmatter, file, url } = Astro.props;
+const basename = file.split("/").pop() || "";
+
+const tags = frontmatter.tags || [];
+const posts = (
+  await Astro.glob<{ draft?: boolean; tags?: string[]; date: string }>(
+    "../pages/blog/**/*.md"
+  )
+)
+  .filter((p) => !p.frontmatter?.draft)
+  .filter((p) => tags.some((t) => p.frontmatter.tags?.includes(t)))
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
+---
+
+<Base
+  path={"resume/projects/" + basename}
+  back="/resume"
+  title={frontmatter.name}
+  description={frontmatter.description}
+>
+  <article>
+    <h1>{frontmatter.name}</h1>
+    <PostContent>
+      <slot />
+    </PostContent>
+
+    {
+      posts.length > 0 ? (
+        <>
+          <h2>Related blog posts</h2>
+          <HighlightList highlights={posts} />
+        </>
+      ) : null
+    }
+  </article>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  article {
+    width: 95%;
+    max-width: 75ch;
+    padding: 20px;
+    @media print {
+      width: 100%;
+      max-width: 100%;
+    }
+    // margin: 1rem 2rem;
+  }
+</style>

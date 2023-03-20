@@ -1,0 +1,78 @@
+---
+import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+import Job from "./Job.astro";
+import type { JobInfo } from "../schemas";
+
+export interface Props {
+  title: string;
+  jobs: MarkdownInstance<JobInfo>[];
+}
+
+const { title, jobs } = Astro.props;
+
+jobs.sort(
+  (a, b) =>
+    new Date(b.frontmatter.start).getTime() -
+    new Date(a.frontmatter.start).getTime()
+);
+
+const {
+  company,
+  location = "Remote",
+  logo = null,
+} = jobs[0]?.frontmatter || {};
+---
+
+<li class="group">
+  <span class="info">
+    <strong>{company}</strong>
+    <span class="location">• {location}</span>
+  </span>
+  <ul>
+    {
+      jobs.map((job) => (
+        <li class="job">
+          <Job job={job} />
+        </li>
+      ))
+    }
+  </ul>
+</li>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  li.group {
+    list-style: none;
+    margin-bottom: 0.5rem;
+  }
+  li.job {
+    margin-bottom: 0.25rem;
+    list-style: none;
+
+    // TODO: linkedin-style timelines
+    // list-style: disc;
+    // margin-left: 1rem;
+    // position: relative;
+    // &:before {
+    //   content: "";
+    //   position: absolute;
+    //   left: -10.5px; /* adjust manually */
+    //   top: 17px;
+    //   border-left: 2px solid grey;
+    //   height: 95%;
+    //   width: 1px;
+    // }
+    // &:last-child:before {
+    //   border-left: 0;
+    // }
+  }
+  .info {
+    font-size: 1.2em;
+  }
+  .location {
+    @include dimmed;
+  }
+  ul {
+    padding-inline-start: 0;
+  }
+</style>

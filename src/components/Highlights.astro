@@ -1,5 +1,6 @@
 ---
 import Highlight from "./Highlight.astro";
+import HighlightList from "./HighlightList.astro";
 
 let highlights = (await Astro.glob("/src/pages/blog/**/*.md"))
   .filter((p) => !p.frontmatter.draft)
@@ -18,12 +19,8 @@ const secondCol = highlights.slice(numHighlights / 2);
 ---
 
 <div>
-  <ul>
-    {firstCol.map((p) => <Highlight post={p} />)}
-  </ul>
-  <ul>
-    {secondCol.map((p) => <Highlight post={p} />)}
-  </ul>
+  <HighlightList highlights={firstCol} />
+  <HighlightList highlights={secondCol} />
 </div>
 <style lang="scss">
   @import "/src/variables.scss";
@@ -34,19 +31,6 @@ const secondCol = highlights.slice(numHighlights / 2);
     justify-content: space-around;
     @media #{$media-size-phone} {
       flex-direction: column;
-    }
-    ul {
-      padding-top: 0;
-      display: flex;
-      flex-direction: column;
-      list-style: none;
-      width: 50%;
-      @media #{$media-size-phone} {
-        padding-inline-start: 0;
-        padding-top: 0;
-        width: 100%;
-        margin-block: 0;
-      }
     }
   }
 </style>
