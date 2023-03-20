@@ -1,0 +1,31 @@
+---
+import type { MarkdownInstance } from "astro";
+import type { ProjectType } from "../schemas";
+
+export type Props = {
+  page: MarkdownInstance<ProjectType>;
+};
+
+const {
+  page: {
+    frontmatter: { name, description },
+    url,
+  },
+} = Astro.props;
+---
+
+<div>
+  <a href={url}>{name}</a> – {description}
+</div>
+
+<style lang="scss">
+  div {
+    @import "/src/variables.scss";
+    @include sans-serif;
+    font-size: 0.8em;
+
+    a {
+      font-weight: 600;
+    }
+  }
+</style>

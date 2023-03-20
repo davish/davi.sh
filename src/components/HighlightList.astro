@@ -1,0 +1,31 @@
+---
+import type { MarkdownInstance } from "astro";
+import Highlight from "./Highlight.astro";
+
+export type Props = {
+  highlights: MarkdownInstance<Record<string, any>>[];
+};
+
+const { highlights } = Astro.props;
+---
+
+<ul>
+  {highlights.map((p) => <Highlight post={p} />)}
+</ul>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  ul {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 50%;
+    @media #{$media-size-phone} {
+      padding-inline-start: 0;
+      padding-top: 0;
+      width: 100%;
+      margin-block: 0;
+    }
+  }
+</style>

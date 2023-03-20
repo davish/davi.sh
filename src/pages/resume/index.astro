@@ -4,21 +4,55 @@ import WorkHistory from "src/components/resume/work/WorkHistory.astro";
 import PrintHeader from "src/components/resume/PrintHeader.astro";
 import Education from "src/components/resume/education/Education.astro";
 import Section from "src/components/resume/Section.astro";
+import ProjectList from "src/components/resume/projects/ProjectList.astro";
 ---
 
 <Base path="resume" title="Resume" description={"Resume"}>
   <div id="resume">
     <PrintHeader />
-    <Section name="Experience"><WorkHistory /></Section>
-    <Section name="Education"><Education /></Section>
+    <div class="columns">
+      <div class="main">
+        <Section name="Work Experience"><WorkHistory /></Section>
+      </div>
+      <div class="spacer"></div>
+      <div class="sidebar">
+        <Section name="Education"><Education /></Section>
+        <Section name="Projects"><ProjectList /></Section>
+      </div>
+    </div>
   </div>
 </Base>
 
 <style lang="scss">
+  @import "/src/variables.scss";
   #resume {
-    max-width: 80ch;
+    max-width: 120ch;
     @media print {
       max-width: 100%;
+    }
+  }
+  .columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @media print {
+      // flex-direction: column;
+    }
+
+    @media #{$media-size-phone} {
+      @media screen {
+        flex-direction: column;
+      }
+    }
+
+    .sidebar {
+      flex: 1;
+    }
+    .main {
+      flex: 2;
+    }
+    .spacer {
+      flex: 0.1;
     }
   }
 </style>

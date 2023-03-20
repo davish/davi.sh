@@ -54,8 +54,9 @@ export function getSummary<T extends Record<string, any>>(
   if (moreSplit.length > 1) {
     return moreSplit[0] || "";
   } else {
-    const firstPara = html.indexOf("</p>");
-    return html.slice(0, firstPara + 4);
+    const closingPTag = "</p>";
+    const firstParagraph = html.indexOf(closingPTag);
+    return html.slice(0, firstParagraph + closingPTag.length);
   }
 }
 

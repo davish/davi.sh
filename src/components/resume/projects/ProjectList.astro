@@ -1,0 +1,16 @@
+---
+import Project from "./Project.astro";
+import type { ProjectType } from "../schemas";
+
+const projects = (
+  await Astro.glob<ProjectType>("/src/pages/resume/projects/**/*.md")
+)
+  .filter((d) => !d.frontmatter.hide)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime()
+  );
+---
+
+{projects.map((p) => <Project page={p} />)}

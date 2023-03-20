@@ -3,7 +3,7 @@ company: MongoDB
 location: New York, NY
 title: Software Engineer 2
 start: 2021-08-26
-end: null
+end: 2023-03-01
 showDetails: true
 ---
 

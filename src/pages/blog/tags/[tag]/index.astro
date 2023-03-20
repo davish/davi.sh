@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 
-const posts = (await Astro.glob("../../../**/*.md"))
+const posts = (await Astro.glob("../../**/*.md"))
   .filter((p) => !p.frontmatter?.draft)
   .filter((p) => p.frontmatter.tags?.includes(tag))
   .sort(

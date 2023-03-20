@@ -2,7 +2,7 @@
 import type { MarkdownInstance } from "astro";
 
 import Group from "./Group.astro";
-import type { JobInfo } from "./types";
+import type { JobInfo } from "../schemas";
 
 const stripUrl = (url: string) => url.replace("/resume/work/", "");
 const getGroup = (url: string) => stripUrl(url).split("/")[0];

@@ -4,6 +4,7 @@ import Heading from "../components/blog/post/Heading.astro";
 import Tags from "../components/blog/post/Tags.astro";
 import type { MarkdownLayoutProps } from "astro";
 import Pagination from "../components/blog/post/Pagination.astro";
+import PostContent from "src/components/blog/post/PostContent.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;
@@ -24,12 +25,9 @@ const basename = file.split("/").pop() || "";
 >
   <article>
     <Heading {...Astro.props} url={url} />
-
-    <div id="blog-post-content">
+    <PostContent>
       <slot />
-      <!-- <pre>{Astro.props.rawContent()}</pre> -->
-    </div>
-
+    </PostContent>
     <Tags tags={frontmatter.tags} />
     <hr />
     <Pagination page={Astro.props} />
@@ -37,7 +35,7 @@ const basename = file.split("/").pop() || "";
 </Base>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "/src/variables.scss";
   article {
     width: 95%;
     max-width: 75ch;
@@ -52,62 +50,3 @@ const basename = file.split("/").pop() || "";
 
 <!-- We need global styles here so that the css will
      apply to the generated markdown content inside the slot. -->
-<style lang="scss" is:global>
-  @import "../variables.scss";
-  #blog-post-content {
-    line-height: 1.5rem;
-    p {
-      font-size: 13pt;
-      margin-top: 1.5rem;
-      margin-bottom: 0;
-    }
-    li {
-      font-size: 13pt;
-      p {
-        margin-top: 0;
-      }
-    }
-    img {
-      max-width: 100%;
-      border-radius: 5px;
-    }
-    figcaption {
-      @include dimmed;
-      text-align: center;
-    }
-    td {
-      vertical-align: top;
-    }
-  }
-  code {
-    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
-    font-display: auto;
-    font-feature-settings: normal;
-    background: $background-color;
-    padding: 1px 6px;
-    margin: 0 2px;
-    border-radius: 5px;
-    font-size: 0.95rem;
-  }
-  pre {
-    background: #212020;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    line-height: 1.25;
-    overflow: auto;
-
-    @media #{$media-size-phone} {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-
-    code {
-      background: none !important;
-      color: #ccc;
-      margin: 0;
-      padding: 0;
-      font-size: inherit;
-    }
-  }
-</style>

@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 
 const pathToLayout = {
   "/blog": "BlogPost",
+  "/resume/projects": "Project",
 };
 
 // Simple remark plugin that adds layouts to markdown files based on their path.
@@ -12,9 +13,11 @@ function defaultLayoutPlugin() {
       const relativePath = file.path
         .replace(file.cwd, "")
         .replace("/src/pages", "");
-      const key = "/" + relativePath.split("/")[1];
-      if (pathToLayout[key]) {
-        file.data.astro.frontmatter.layout = `@layouts/${pathToLayout[key]}.astro`;
+      const key = relativePath.split("/").join("/");
+      for (const [path, layout] of Object.entries(pathToLayout)) {
+        if (key.startsWith(path)) {
+          file.data.astro.frontmatter.layout = `@layouts/${layout}.astro`;
+        }
       }
     }
   };

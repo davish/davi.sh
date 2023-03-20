@@ -1,6 +1,6 @@
 ---
 import Degree from "./Degree.astro";
-import type { DegreeType } from "./types";
+import type { DegreeType } from "../schemas";
 
 const degrees = (
   await Astro.glob<DegreeType>("/src/pages/resume/education/**/*.md")
