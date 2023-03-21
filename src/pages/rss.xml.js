@@ -6,16 +6,9 @@ export const get = () => {
   });
   const posts = Object.values(postImportResult);
   return rss({
-    // `<title>` field in output xml
     title: "Davis Haupt's Blog",
-    // `<description>` field in output xml
     description: "Thoughts and writeups from Davis Haupt.",
-    // base URL for RSS <item> links
-    // SITE will use "site" from your project's astro.config.
-    site: import.meta.env.SITE,
-    // list of `<item>`s in output xml
-    // simple example: generate items for every md file in /src/pages
-    // see "Generating items" section for required frontmatter and advanced use cases
+    site: import.meta.env.SITE + "blog",
     items: posts
       .filter((p) => !p.frontmatter.draft)
       .sort(
