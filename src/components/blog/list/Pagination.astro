@@ -59,18 +59,26 @@ if (!didPushLast) {
     )
   }
   {
-    pages.map((pageNum) => (
-      <li class={`page-item ${pageNum === page.currentPage ? "active" : ""}`}>
-        <a
-          href={`/blog/${pageNum === 1 ? "" : pageNum}`}
-          aria-label={`Page ${pageNum}`}
-          class="page-link"
-          role="button"
-        >
-          {pageNum}
-        </a>
-      </li>
-    ))
+    pages.map((pageNum) =>
+      pageNum !== "..." ? (
+        <li class={`page-item ${pageNum === page.currentPage ? "active" : ""}`}>
+          <a
+            href={`/blog/${pageNum === 1 ? "" : pageNum}`}
+            aria-label={`Page ${pageNum}`}
+            class="page-link"
+            role="button"
+          >
+            {pageNum}
+          </a>
+        </li>
+      ) : (
+        <li class="page-item dots">
+          <span>
+            <div class="dots">...</div>
+          </span>
+        </li>
+      )
+    )
   }
   {
     page.url.next && (
@@ -117,6 +125,10 @@ if (!didPushLast) {
         padding: 0.75em;
         display: block;
         width: 100%;
+      }
+      .dots {
+        cursor: default;
+        display: inline-block;
       }
       a {
         color: $accent-color;
