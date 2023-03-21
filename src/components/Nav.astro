@@ -9,7 +9,7 @@ const { path, back } = Astro.props;
 ---
 
 <nav>
-  <a href={back || "/"} aria-label={back ? "back" : "home"}>
+  <a class="prompt" href={back || "/"} aria-label={back ? "back" : "home"}>
     <Prompt path={path} />
   </a>
   <ul class="links">
@@ -27,7 +27,7 @@ const { path, back } = Astro.props;
       display: none;
     }
   }
-  a {
+  a.prompt {
     text-decoration: none;
     color: $text-color;
     &:hover {

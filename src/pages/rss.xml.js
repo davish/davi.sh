@@ -24,7 +24,7 @@ export const get = () => {
       .map((post) => ({
         link: post.url,
         title: post.frontmatter.title,
-        date: post.frontmatter.date,
+        pubDate: post.frontmatter.date,
         description: post.compiledContent(),
       })),
     // (optional) inject custom xml
