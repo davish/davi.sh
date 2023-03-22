@@ -22,3 +22,6 @@ pnpm-debug.log*
 # editor config
 .vscode/
 .obsidian
+
+# astro
+.astro/

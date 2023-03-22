@@ -1,17 +1,22 @@
 ---
 import type { MarkdownInstance } from "astro";
+import type { CollectionEntry } from "astro:content";
 import { toMonthYear } from "src/utils";
 import type { DegreeType } from "../schemas";
+import { renderMarkdown } from "@astrojs/markdown-remark";
 
 export interface Props {
-  page: MarkdownInstance<DegreeType>;
+  entry: CollectionEntry<"education">;
 }
 const {
-  page: {
-    frontmatter: { degree, field, institution, graduation, gpa, hide },
-    compiledContent,
+  entry: {
+    data: { degree, field, institution, graduation, gpa, hide },
+    body,
   },
 } = Astro.props;
+
+const markdownResult = await renderMarkdown(body, {});
+const content = markdownResult.vfile.value;
 
 const gradDate = new Date(graduation);
 ---
@@ -20,7 +25,7 @@ const gradDate = new Date(graduation);
   <strong>{institution}</strong> / {degree} in {field} / {toMonthYear(gradDate)}
   <br />
   <span class="gpa">GPA: {gpa}</span>
-  <div set:html={compiledContent()}></div>
+  <div set:html={content}></div>
 </div>
 
 <style lang="scss">

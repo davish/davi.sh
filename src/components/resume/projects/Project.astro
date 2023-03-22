@@ -1,21 +1,20 @@
 ---
-import type { MarkdownInstance } from "astro";
-import type { ProjectType } from "../schemas";
+import type { CollectionEntry } from "astro:content";
 
 export type Props = {
-  page: MarkdownInstance<ProjectType>;
+  entry: CollectionEntry<"projects">;
 };
 
 const {
-  page: {
-    frontmatter: { name, description },
-    url,
+  entry: {
+    data: { name, description },
+    slug,
   },
 } = Astro.props;
 ---
 
 <div>
-  <a href={url}>{name}</a> – {description}
+  <a href={`projects/${slug}`}>{name}</a> – {description}
 </div>
 
 <style lang="scss">

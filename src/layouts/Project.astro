@@ -4,11 +4,11 @@ import type { MarkdownLayoutProps } from "astro";
 import type { ProjectType } from "src/components/resume/schemas";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import HighlightList from "src/components/HighlightList.astro";
+import type { CollectionEntry } from "astro:content";
 
-type Props = MarkdownLayoutProps<ProjectType>;
+type Props = CollectionEntry<"projects">;
 
-const { frontmatter, file, url } = Astro.props;
-const basename = file.split("/").pop() || "";
+const { data: frontmatter, id, render } = Astro.props;
 
 const tags = frontmatter.tags || [];
 const posts = (
@@ -23,10 +23,12 @@ const posts = (
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf()
   );
+
+const { Content } = await render();
 ---
 
 <Base
-  path={"resume/projects/" + basename}
+  path={"resume/projects/" + id}
   back="/resume"
   title={frontmatter.name}
   description={frontmatter.description}
@@ -34,7 +36,7 @@ const posts = (
   <article>
     <h1>{frontmatter.name}</h1>
     <PostContent>
-      <slot />
+      <Content />
     </PostContent>
 
     {

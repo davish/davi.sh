@@ -2,42 +2,37 @@
 import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
 import Job from "./Job.astro";
 import type { JobInfo } from "../schemas";
+import type { CollectionEntry } from "astro:content";
 
 export interface Props {
   title: string;
-  jobs: MarkdownInstance<JobInfo>[];
+  jobs: CollectionEntry<"work">[];
 }
 
 const { title, jobs } = Astro.props;
 
 jobs.sort(
-  (a, b) =>
-    new Date(b.frontmatter.start).getTime() -
-    new Date(a.frontmatter.start).getTime()
+  (a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime()
 );
-
-const {
-  company,
-  location = "Remote",
-  logo = null,
-} = jobs[0]?.frontmatter || {};
 ---
 
-<li class="group">
-  <span class="info">
-    <strong>{company}</strong>
-    <span class="location">• {location}</span>
-  </span>
-  <ul>
-    {
-      jobs.map((job) => (
-        <li class="job">
-          <Job job={job} />
-        </li>
-      ))
-    }
-  </ul>
-</li>
+{
+  jobs[0] ? (
+    <li class="group">
+      <span class="info">
+        <strong>{jobs[0].data.company}</strong>
+        <span class="location">• {jobs[0].data.location}</span>
+      </span>
+      <ul>
+        {jobs.map((job) => (
+          <li class="job">
+            <Job job={job} />
+          </li>
+        ))}
+      </ul>
+    </li>
+  ) : null
+}
 
 <style lang="scss">
   @import "/src/variables.scss";

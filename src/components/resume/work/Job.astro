@@ -1,27 +1,29 @@
 ---
 import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+import type { CollectionEntry } from "astro:content";
 import { toDuration, toMonthYear } from "src/utils";
 import type { JobInfo } from "../schemas";
 
 export interface Props {
-  job: MarkdownInstance<JobInfo>;
+  job: CollectionEntry<"work">;
 }
 
 const { job } = Astro.props;
-const startDate = new Date(job.frontmatter.start);
-const endDate = job.frontmatter.end ? new Date(job.frontmatter.end) : null;
+const startDate = new Date(job.data.start);
+const endDate = job.data.end ? new Date(job.data.end) : null;
+const { Content } = await job.render();
 ---
 
-<span class="title">{job.frontmatter.title}</span>
+<span class="title">{job.data.title}</span>
 <div class="details">
   {toDuration(startDate, endDate)}
 </div>
 <div
   class={`resume-job-content ${
-    job.frontmatter.showDetails ? "showPrint" : "hidePrint"
+    job.data.showDetails ? "showPrint" : "hidePrint"
   }`}
 >
-  <job.Content />
+  <Content />
 </div>
 
 <style lang="scss">

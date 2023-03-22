@@ -1,20 +1,18 @@
 ---
 import Degree from "./Degree.astro";
-import type { DegreeType } from "../schemas";
+import { getCollection } from "astro:content";
 
-const degrees = (
-  await Astro.glob<DegreeType>("/src/pages/resume/education/**/*.md")
-)
-  .filter((d) => !d.frontmatter.hide)
+const degrees = (await getCollection("education"))
+  .filter((d) => !d.data.hide)
   .sort(
     (a, b) =>
-      new Date(b.frontmatter.graduation).getTime() -
-      new Date(a.frontmatter.graduation).getTime()
+      new Date(b.data.graduation).getTime() -
+      new Date(a.data.graduation).getTime()
   );
 ---
 
 <div>
-  {degrees.map((d) => <Degree page={d} />)}
+  {degrees.map((d) => <Degree entry={d} />)}
 </div>
 
 <style lang="scss">
