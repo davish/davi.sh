@@ -1,18 +1,17 @@
 ---
-import type { MarkdownInstance } from "astro";
+import { CollectionEntry, getCollection } from "astro:content";
 
 import Group from "./Group.astro";
-import type { JobInfo } from "../schemas";
 
 const stripUrl = (url: string) => url.replace("/resume/work/", "");
 const getGroup = (url: string) => stripUrl(url).split("/")[0];
 
-const workHistory = await Astro.glob<JobInfo>("/src/pages/resume/work/**/*.md");
+const workHistory = await getCollection("work");
 
-let workHistoryByCompany: Record<string, [MarkdownInstance<JobInfo>]> = {};
+let workHistoryByCompany: Record<string, CollectionEntry<"work">[]> = {};
 
 workHistory.forEach((v) => {
-  const group = getGroup(stripUrl(v.url || "")) || "";
+  const group = getGroup(stripUrl(v.id || "")) || "";
   const l = workHistoryByCompany[group];
   if (l) {
     l.push(v);
@@ -23,9 +22,9 @@ workHistory.forEach((v) => {
 
 const groups = Object.entries(workHistoryByCompany);
 
-const lastEndDate = (f: MarkdownInstance<JobInfo>[]) =>
+const lastEndDate = (f: CollectionEntry<"work">[]) =>
   f
-    .map((j) => j.frontmatter.end)
+    .map((j) => j.data.end)
     .map((e) => (e ? new Date(e) : new Date(8640000000000000)))
     .sort((a, b) => b.getTime() - a.getTime())[0] || new Date(0);
 
