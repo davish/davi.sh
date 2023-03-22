@@ -40,8 +40,19 @@ const ProjectCollection = defineCollection({
   }),
 });
 
+const BlogPostCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    date: partialDate(),
+    draft: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
   projects: ProjectCollection,
+  blog: BlogPostCollection,
 };

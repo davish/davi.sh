@@ -2,18 +2,17 @@
 import Base from "../../layouts/Base.astro";
 import PostEntry from "../../components/blog/list/PostEntry.astro";
 import Pagination from "../../components/blog/list/Pagination.astro";
+import { CollectionEntry, getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
 
-// @ts-ignore
-export async function getStaticPaths({ paginate }) {
-  const posts = (await Astro.glob("../../pages/blog/**/*.md"))
-    .sort(
-      (a, b) =>
-        new Date(b.frontmatter.date).valueOf() -
-        new Date(a.frontmatter.date).valueOf()
-    )
-    .filter((p) => !p.frontmatter.draft);
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
   return paginate(posts, { pageSize: 5 });
-}
+};
+
+type Props = { page: Page<CollectionEntry<"blog">> };
 
 const { page } = Astro.props;
 ---
@@ -24,7 +23,7 @@ const { page } = Astro.props;
     by Davis Haupt
   </section>
   <section id="list">
-    {page.data.map((p: any) => <PostEntry {...p} />)}
+    {page.data.map((p) => <PostEntry {...p} />)}
   </section>
   <Pagination page={page} />
 </Base>

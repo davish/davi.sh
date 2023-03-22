@@ -1,23 +1,36 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import { toReadableString, getSummary, hasMore } from "../../../utils";
+import { renderMarkdown } from "@astrojs/markdown-remark";
 
-const { url, frontmatter } = Astro.props;
+export type Props = CollectionEntry<"blog">;
+
+const {
+  slug,
+  data: { title, date },
+  body,
+} = Astro.props;
+
+const url = slug;
+
+const markdownResult = await renderMarkdown(body, {});
+const content = markdownResult.vfile.value.toString();
 ---
 
 <article>
   <div class="meta">
     <h4 class="title">
-      <a href={url}>{frontmatter.title}</a>
+      <a href={url}>{title}</a>
     </h4>
     <div class="info">
-      <div>{toReadableString(new Date(frontmatter.date))}</div>
+      <div>{toReadableString(date)}</div>
     </div>
   </div>
   <section class="summary-content">
-    <p set:html={getSummary(Astro.props as any)}></p>
+    <p set:html={getSummary(content)}></p>
   </section>
   {
-    hasMore(Astro.props as any) ? (
+    hasMore(content) ? (
       <p class="read-more">
         <a href={url}>Read More...</a>
       </p>
@@ -85,6 +98,7 @@ const { url, frontmatter } = Astro.props;
 </style>
 
 <style lang="scss" is:global>
+  @import "/src/variables.scss";
   section.summary-content {
     p {
       line-height: 1.5rem;
@@ -92,6 +106,16 @@ const { url, frontmatter } = Astro.props;
     li {
       line-height: 1.5rem;
       font-size: 13pt;
+    }
+    code {
+      font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+      font-display: auto;
+      font-feature-settings: normal;
+      background: $background-color;
+      padding: 1px 6px;
+      margin: 0 2px;
+      border-radius: 5px;
+      font-size: 0.95rem;
     }
   }
 </style>

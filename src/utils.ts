@@ -46,10 +46,7 @@ export function toDuration(start: Date, end: Date | null): string {
  * @param page markdown page from filesystem.
  * @returns summary section of Markdown
  */
-export function getSummary<T extends Record<string, any>>(
-  page: MarkdownInstance<T>
-): string {
-  const html = page.compiledContent();
+export function getSummary(html: string): string {
   const moreSplit = html.split("<!--more-->");
   if (moreSplit.length > 1) {
     return moreSplit[0] || "";
@@ -65,9 +62,6 @@ export function getSummary<T extends Record<string, any>>(
  * @param page Markdown page from filesystem.
  * @returns whether or not the summary is the entire document.
  */
-export function hasMore<T extends Record<string, any>>(
-  page: MarkdownInstance<T>
-): boolean {
-  const text = page.compiledContent();
-  return getSummary(page).length != text.length;
+export function hasMore(html: string): boolean {
+  return getSummary(html).length != html.length;
 }
