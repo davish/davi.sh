@@ -1,23 +1,18 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getBlogPosts, getUrlForCollectionEntry } from "src/content/config";
 
 export interface Props {
-  page: MarkdownLayoutProps<{ title: string }>;
+  entry: CollectionEntry<"blog">;
 }
 
 const {
-  page: { file },
+  entry: { id },
 } = Astro.props;
 
-const posts = (await Astro.glob("/src/pages/blog/**/*.md"))
-  .filter((p) => !p.frontmatter.draft)
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+const posts = await getBlogPosts();
 
-const idx = posts.findIndex((p) => p.file === file);
+const idx = posts.findIndex((p) => p.id === id);
 const prevPost = idx < posts.length - 1 ? posts[idx + 1] : null;
 const nextPost = idx > 0 ? posts[idx - 1] : null;
 ---
@@ -25,17 +20,23 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
 <div class="pagination">
   {
     prevPost && (
-      <a class="pagination-item" href={prevPost.url}>
+      <a
+        class="pagination-item"
+        href={getUrlForCollectionEntry("blog", prevPost.slug)}
+      >
         <span class="pagination-label">Previous Post</span>
-        <span class="pagination-title">{prevPost.frontmatter.title}</span>
+        <span class="pagination-title">{prevPost.data.title}</span>
       </a>
     )
   }
   {
     nextPost && (
-      <a class="pagination-item" href={nextPost.url}>
+      <a
+        class="pagination-item"
+        href={getUrlForCollectionEntry("blog", nextPost.slug)}
+      >
         <span class="pagination-label">Next Post</span>
-        <span class="pagination-title">{nextPost.frontmatter.title}</span>
+        <span class="pagination-title">{nextPost.data.title}</span>
       </a>
     )
   }

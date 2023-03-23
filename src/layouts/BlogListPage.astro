@@ -1,0 +1,44 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Pagination from "src/components/blog/list/Pagination.astro";
+import PostEntry from "src/components/blog/list/PostEntry.astro";
+import Base from "./Base.astro";
+
+type Props = { page: Page<CollectionEntry<"blog">> };
+
+const { page } = Astro.props;
+---
+
+<Base path="blog" title="Blog" description={"Davis Haupt's Blog"}>
+  <section id="intro">
+    <h1>Thoughts and Writeups</h1>
+    by Davis Haupt
+  </section>
+  <section id="list">
+    {page.data.map((p) => <PostEntry {...p} />)}
+  </section>
+  <Pagination page={page} />
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  #intro,
+  #list {
+    width: 95%;
+    max-width: 75ch;
+    margin: 1rem 2rem;
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+  }
+  #intro::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2.5em;
+  }
+</style>

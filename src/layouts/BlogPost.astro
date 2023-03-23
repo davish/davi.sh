@@ -2,35 +2,32 @@
 import Base from "./Base.astro";
 import Heading from "../components/blog/post/Heading.astro";
 import Tags from "../components/blog/post/Tags.astro";
-import type { MarkdownLayoutProps } from "astro";
 import Pagination from "../components/blog/post/Pagination.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
+import type { CollectionEntry } from "astro:content";
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-  date: string;
-  tags: string[];
-  description: string;
-}>;
+type Props = CollectionEntry<"blog">;
 
-const { frontmatter, file, url } = Astro.props;
-const basename = file.split("/").pop() || "";
+const { data: frontmatter, id, slug, render } = Astro.props;
+const basename = id.split("/").pop() || "";
+
+const { Content } = await render();
 ---
 
 <Base
   path={"blog/" + basename}
   back="/blog"
   title={frontmatter.title}
-  description={frontmatter.description}
+  description={frontmatter.description || ""}
 >
   <article>
-    <Heading {...Astro.props} url={url} />
+    <Heading {...Astro.props} />
     <PostContent>
-      <slot />
+      <Content />
     </PostContent>
     <Tags tags={frontmatter.tags} />
     <hr />
-    <Pagination page={Astro.props} />
+    <Pagination entry={Astro.props} />
   </article>
 </Base>
 

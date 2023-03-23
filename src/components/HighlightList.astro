@@ -1,9 +1,9 @@
 ---
-import type { MarkdownInstance } from "astro";
+import type { CollectionEntry } from "astro:content";
 import Highlight from "./Highlight.astro";
 
 export type Props = {
-  highlights: MarkdownInstance<Record<string, any>>[];
+  highlights: CollectionEntry<"blog">[];
 };
 
 const { highlights } = Astro.props;

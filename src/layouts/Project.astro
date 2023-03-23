@@ -1,10 +1,8 @@
 ---
 import Base from "./Base.astro";
-import type { MarkdownLayoutProps } from "astro";
-import type { ProjectType } from "src/components/resume/schemas";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import HighlightList from "src/components/HighlightList.astro";
-import type { CollectionEntry } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 
 type Props = CollectionEntry<"projects">;
 
@@ -12,17 +10,11 @@ const { data: frontmatter, id, render } = Astro.props;
 
 const tags = frontmatter.tags || [];
 const posts = (
-  await Astro.glob<{ draft?: boolean; tags?: string[]; date: string }>(
-    "../pages/blog/**/*.md"
+  await getCollection(
+    "blog",
+    (p) => !p.data.draft && tags.some((t) => p.data.tags?.includes(t))
   )
-)
-  .filter((p) => !p.frontmatter?.draft)
-  .filter((p) => tags.some((t) => p.frontmatter.tags?.includes(t)))
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const { Content } = await render();
 ---

@@ -1,51 +1,33 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PostEntry from "../../components/blog/list/PostEntry.astro";
-import Pagination from "../../components/blog/list/Pagination.astro";
-import { CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
+import BlogListPage from "@layouts/BlogListPage.astro";
+import BlogPost from "@layouts/BlogPost.astro";
+import { getBlogPosts } from "src/content/config";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-  );
-  return paginate(posts, { pageSize: 5 });
+  const posts = await getBlogPosts();
+  return paginate(posts, { pageSize: 5 })
+    .map(({ params, props }) => ({ params, props: { ...props, type: "list" } }))
+    .concat(
+      posts.map((entry) => ({
+        params: { page: entry.slug },
+        props: { entry, type: "single" },
+      }))
+    );
 };
 
-type Props = { page: Page<CollectionEntry<"blog">> };
+type Props =
+  | { page: Page<CollectionEntry<"blog">>; type: "list" }
+  | { entry: CollectionEntry<"blog">; type: "single" };
 
-const { page } = Astro.props;
+const props = Astro.props;
 ---
 
-<Base path="blog" title="Blog" description={"Davis Haupt's Blog"}>
-  <section id="intro">
-    <h1>Thoughts and Writeups</h1>
-    by Davis Haupt
-  </section>
-  <section id="list">
-    {page.data.map((p) => <PostEntry {...p} />)}
-  </section>
-  <Pagination page={page} />
-</Base>
-
-<style lang="scss">
-  @import "../../variables.scss";
-  #intro,
-  #list {
-    width: 95%;
-    max-width: 75ch;
-    margin: 1rem 2rem;
-  }
-
-  h1 {
-    font-family: "Inter", sans-serif;
-  }
-  #intro::after {
-    border-bottom-color: $accent-color;
-    content: "";
-    display: block;
-    width: 5em;
-    border-bottom: 0.125em solid $accent-color;
-    margin-top: 2.5em;
-  }
-</style>
+{
+  props.type === "list" ? (
+    <BlogListPage page={props.page} />
+  ) : (
+    <BlogPost {...props.entry} />
+  )
+}

@@ -1,4 +1,9 @@
-import type { MarkdownInstance, MarkdownLayoutProps } from "astro";
+import { renderMarkdown as astroRenderMd } from "@astrojs/markdown-remark";
+
+export async function renderMarkdown(markdown: string): Promise<string> {
+  const markdownResult = await astroRenderMd(markdown, {});
+  return markdownResult.vfile.value.toString();
+}
 
 const months = [
   "Jan",

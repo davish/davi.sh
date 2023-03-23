@@ -1,4 +1,9 @@
-import { z, defineCollection } from "astro:content";
+import {
+  z,
+  defineCollection,
+  getCollection,
+  CollectionEntry,
+} from "astro:content";
 
 const partialDate = () =>
   z
@@ -47,6 +52,7 @@ const BlogPostCollection = defineCollection({
     date: partialDate(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
+    highlight: z.boolean().default(false),
   }),
 });
 
@@ -56,3 +62,20 @@ export const collections = {
   projects: ProjectCollection,
   blog: BlogPostCollection,
 };
+
+const urls = {
+  blog: "/blog/",
+};
+
+export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
+  (urls[t] || "/") + slug;
+
+export async function getBlogPosts(
+  pred?: (e: CollectionEntry<"blog">) => boolean
+) {
+  const posts = await getCollection(
+    "blog",
+    (p) => !p.data.draft && (!pred || pred(p))
+  );
+  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}

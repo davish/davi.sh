@@ -1,7 +1,12 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { toReadableString, getSummary, hasMore } from "../../../utils";
-import { renderMarkdown } from "@astrojs/markdown-remark";
+import {
+  toReadableString,
+  getSummary,
+  hasMore,
+  renderMarkdown,
+} from "../../../utils";
+import { getUrlForCollectionEntry } from "src/content/config";
 
 export type Props = CollectionEntry<"blog">;
 
@@ -11,10 +16,9 @@ const {
   body,
 } = Astro.props;
 
-const url = slug;
+const url = getUrlForCollectionEntry("blog", slug);
 
-const markdownResult = await renderMarkdown(body, {});
-const content = markdownResult.vfile.value.toString();
+const content = await renderMarkdown(body);
 ---
 
 <article>
