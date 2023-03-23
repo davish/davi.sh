@@ -1,20 +1,18 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { toMonthYear } from "src/utils";
-import { renderMarkdown } from "@astrojs/markdown-remark";
+import { renderMarkdown, toMonthYear } from "src/utils";
 
 export interface Props {
   entry: CollectionEntry<"education">;
 }
 const {
   entry: {
-    data: { degree, field, institution, graduation, gpa, hide },
+    data: { degree, field, institution, graduation, gpa },
     body,
   },
 } = Astro.props;
 
-const markdownResult = await renderMarkdown(body, {});
-const content = markdownResult.vfile.value;
+const content = renderMarkdown(body);
 
 const gradDate = new Date(graduation);
 ---

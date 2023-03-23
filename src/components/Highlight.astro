@@ -1,16 +1,17 @@
 ---
-import type { MarkdownInstance } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getUrlForCollectionEntry } from "src/content/config";
 
 export interface Props {
-  post: MarkdownInstance<Record<string, any>>;
+  post: CollectionEntry<"blog">;
 }
 const { post } = Astro.props;
 ---
 
 <li>
-  <a href={post.url}>
-    <span class="article">{post.frontmatter.title}</span>
-    <div>{post.frontmatter.description}</div>
+  <a href={getUrlForCollectionEntry("blog", post.slug)}>
+    <span class="article">{post.data.title}</span>
+    <div>{post.data.description || ""}</div>
   </a>
 </li>
 

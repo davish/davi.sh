@@ -1,14 +1,17 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getUrlForCollectionEntry } from "src/content/config";
 import Info from "./Info.astro";
 
-type Props = MarkdownLayoutProps<{ title: string; date: string }>;
+type Props = CollectionEntry<"blog">;
 
-const { frontmatter, url } = Astro.props;
+const { data: frontmatter, slug } = Astro.props;
+
+const url = getUrlForCollectionEntry("blog", slug);
 ---
 
 <div>
-  <h1><a href={url || "#"}>{frontmatter.title}</a></h1>
+  <h1><a href={url}>{frontmatter.title}</a></h1>
   <Info {...Astro.props} />
 </div>
 

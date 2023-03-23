@@ -1,29 +1,24 @@
 ---
+import { getCollection } from "astro:content";
+import { getBlogPosts } from "src/content/config";
 import PostEntry from "../../../../components/blog/list/PostEntry.astro";
 import Base from "../../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
   const tags = Array.from(
-    new Set(
-      (await Astro.glob("../../**/*.md"))
-        .filter((p) => !p.frontmatter?.draft)
-        .map((p) => p.frontmatter.tags)
-        .flatMap((a) => a)
-    )
+    new Set((await getBlogPosts()).flatMap((p) => p.data.tags))
   );
   return tags.map((t) => ({ params: { tag: t } }));
 }
 
 const { tag } = Astro.params;
 
-const posts = (await Astro.glob("../../**/*.md"))
-  .filter((p) => !p.frontmatter?.draft)
-  .filter((p) => p.frontmatter.tags?.includes(tag))
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+const posts = (
+  await getCollection(
+    "blog",
+    (p) => !p.data.draft && tag && p.data.tags.includes(tag)
+  )
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Base

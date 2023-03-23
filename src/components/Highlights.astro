@@ -1,15 +1,8 @@
 ---
-import Highlight from "./Highlight.astro";
+import { getBlogPosts } from "src/content/config";
 import HighlightList from "./HighlightList.astro";
 
-let highlights = (await Astro.glob("/src/pages/blog/**/*.md"))
-  .filter((p) => !p.frontmatter.draft)
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  )
-  .filter((p) => p.frontmatter.highlight);
+let highlights = await getBlogPosts((p) => p.data.highlight);
 
 const numHighlights = Math.floor(highlights.length / 2) * 2;
 highlights = highlights.slice(0, numHighlights);

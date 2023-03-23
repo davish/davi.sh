@@ -1,19 +1,18 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
-import { toReadableString } from "../../../utils";
+import { renderMarkdown, toReadableString } from "../../../utils";
 import readingTime from "reading-time";
+import type { CollectionEntry } from "astro:content";
 
-type Props = MarkdownLayoutProps<{ date: string }>;
+type Props = CollectionEntry<"blog">;
 
-const { frontmatter, compiledContent } = Astro.props;
+const { data: frontmatter, body } = Astro.props;
 
 // Strip out all code blocks and HTML tags from the
 // compiledContent to get just the words for the reading time.
 const codeRegex = /<pre\b[^<]*(?:(?!<\/pre>)<[^<]*)*<\/pre>/gi;
 const tagRegex = /(<([^>]+)>)/gi;
-const html = compiledContent()
-  .replaceAll(codeRegex, "")
-  .replaceAll(tagRegex, "");
+const content = await renderMarkdown(body);
+const html = content.replaceAll(codeRegex, "").replaceAll(tagRegex, "");
 const articleTime = Math.round(readingTime(html).minutes);
 ---
 
