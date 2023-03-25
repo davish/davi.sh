@@ -7,27 +7,12 @@ import { getBlogPosts } from "src/content/config";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getBlogPosts();
-  return paginate(posts, { pageSize: 5 })
-    .map(({ params, props }) => ({ params, props: { ...props, type: "list" } }))
-    .concat(
-      posts.map((entry) => ({
-        params: { page: entry.slug },
-        props: { entry, type: "single" },
-      }))
-    );
+  return paginate(posts, { pageSize: 5 });
 };
 
-type Props =
-  | { page: Page<CollectionEntry<"blog">>; type: "list" }
-  | { entry: CollectionEntry<"blog">; type: "single" };
+type Props = { page: Page<CollectionEntry<"blog">> };
 
 const props = Astro.props;
 ---
 
-{
-  props.type === "list" ? (
-    <BlogListPage page={props.page} />
-  ) : (
-    <BlogPost {...props.entry} />
-  )
-}
+<BlogListPage page={props.page} />
