@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getUrlForCollectionEntry } from "src/content/config";
 
 export type Props = {
   entry: CollectionEntry<"projects">;
@@ -14,7 +15,9 @@ const {
 ---
 
 <div>
-  <a href={`projects/${slug}`}>{name}</a> – {description}
+  <a href={getUrlForCollectionEntry("projects", slug)}>{name}</a> – {
+    description
+  }
 </div>
 
 <style lang="scss">

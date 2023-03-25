@@ -65,6 +65,7 @@ export const collections = {
 
 const urls = {
   blog: "/blog/",
+  projects: "/projects/",
 };
 
 export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
