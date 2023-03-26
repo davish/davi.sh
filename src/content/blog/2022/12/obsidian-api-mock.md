@@ -1,6 +1,6 @@
 ---
 title: "Mocking Obsidian's Markdown Parser"
-date: 2022-12-20T12:00
+date: 2022-12-20
 draft: false
 tags:
   [

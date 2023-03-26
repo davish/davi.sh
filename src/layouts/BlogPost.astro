@@ -5,6 +5,7 @@ import Tags from "../components/blog/post/Tags.astro";
 import Pagination from "../components/blog/post/Pagination.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import type { CollectionEntry } from "astro:content";
+import Article from "src/components/Article.astro";
 
 type Props = CollectionEntry<"blog">;
 
@@ -20,7 +21,7 @@ const { Content } = await render();
   title={frontmatter.title}
   description={frontmatter.description || ""}
 >
-  <article>
+  <Article>
     <Heading {...Astro.props} />
     <PostContent>
       <Content />
@@ -28,22 +29,5 @@ const { Content } = await render();
     <Tags tags={frontmatter.tags} />
     <hr />
     <Pagination entry={Astro.props} />
-  </article>
+  </Article>
 </Base>
-
-<style lang="scss">
-  @import "/src/variables.scss";
-  article {
-    width: 95%;
-    max-width: 75ch;
-    padding: 20px;
-    @media print {
-      width: 100%;
-      max-width: 100%;
-    }
-    // margin: 1rem 2rem;
-  }
-</style>
-
-<!-- We need global styles here so that the css will
-     apply to the generated markdown content inside the slot. -->

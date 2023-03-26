@@ -3,6 +3,7 @@ import Base from "./Base.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import HighlightList from "src/components/HighlightList.astro";
 import { CollectionEntry, getCollection } from "astro:content";
+import Article from "src/components/Article.astro";
 
 type Props = CollectionEntry<"projects">;
 
@@ -25,7 +26,7 @@ const { Content } = await render();
   title={frontmatter.name}
   description={frontmatter.description}
 >
-  <article>
+  <Article>
     <h1>{frontmatter.name}</h1>
     <PostContent>
       <Content />
@@ -39,19 +40,5 @@ const { Content } = await render();
         </>
       ) : null
     }
-  </article>
+  </Article>
 </Base>
-
-<style lang="scss">
-  @import "/src/variables.scss";
-  article {
-    width: 95%;
-    max-width: 75ch;
-    padding: 20px;
-    @media print {
-      width: 100%;
-      max-width: 100%;
-    }
-    // margin: 1rem 2rem;
-  }
-</style>

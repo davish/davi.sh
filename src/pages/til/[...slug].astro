@@ -1,0 +1,64 @@
+---
+import Base from "@layouts/Base.astro";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Article from "src/components/Article.astro";
+import PostContent from "src/components/blog/post/PostContent.astro";
+import { getSnippets } from "src/content/config";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const snippets = await getSnippets();
+  return snippets.map((snippet) => ({
+    params: { slug: snippet.slug },
+    props: { entry: snippet },
+  }));
+};
+
+export type Props = { entry: CollectionEntry<"snippets"> };
+
+const {
+  entry: {
+    slug,
+    data: { title, description },
+    render,
+  },
+} = Astro.props;
+
+const { Content } = await render();
+---
+
+<Base path={"til/" + slug} back="/til" title={title} description={description}>
+  <Article>
+    <div class="container">
+      <h4>TIL</h4>
+      <h1>{title}</h1>
+      <PostContent>
+        <Content />
+      </PostContent>
+    </div>
+  </Article>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h4 {
+    @include sans-serif;
+    color: $accent-color;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    @include sans-serif;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 3rem;
+  }
+</style>

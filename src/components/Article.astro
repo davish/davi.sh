@@ -1,0 +1,17 @@
+<article>
+  <slot />
+</article>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  article {
+    width: 95%;
+    max-width: 75ch;
+    padding: 20px;
+    @media print {
+      width: 100%;
+      max-width: 100%;
+    }
+    // margin: 1rem 2rem;
+  }
+</style>

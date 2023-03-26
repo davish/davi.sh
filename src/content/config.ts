@@ -56,20 +56,36 @@ const BlogPostCollection = defineCollection({
   }),
 });
 
+const SnippetCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    published: partialDate(),
+    modified: partialDate().optional(),
+    tag: z.string(),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
   projects: ProjectCollection,
   blog: BlogPostCollection,
+  snippets: SnippetCollection,
 };
 
-const urls = {
+type UrlMap = Partial<{
+  [key in keyof typeof collections]: string;
+}>;
+
+const urls: UrlMap = {
   blog: "/blog/",
   projects: "/projects/",
+  snippets: "/til/",
 };
 
 export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
-  (urls[t] || "/") + slug;
+  urls[t] + slug;
 
 export async function getBlogPosts(
   pred?: (e: CollectionEntry<"blog">) => boolean
@@ -79,4 +95,13 @@ export async function getBlogPosts(
     (p) => !p.data.draft && (!pred || pred(p))
   );
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+export async function getSnippets(
+  pred?: (e: CollectionEntry<"snippets">) => boolean
+) {
+  const snippets = await getCollection("snippets", (s) => !pred || pred(s));
+  const date = (e: CollectionEntry<"snippets">) =>
+    e.data.modified || e.data.published;
+  return snippets.sort((a, b) => date(b).valueOf() - date(a).valueOf());
 }
