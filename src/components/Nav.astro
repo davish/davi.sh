@@ -13,6 +13,7 @@ const { path, back } = Astro.props;
     <Prompt path={path} />
   </a>
   <ul class="links">
+    <li><a href="/til">TIL</a></li>
     <li><a href="/blog">Blog</a></li>
   </ul>
 </nav>
@@ -25,6 +26,9 @@ const { path, back } = Astro.props;
     justify-content: space-between;
     @media print {
       display: none;
+    }
+    @media #{$media-size-phone} {
+      font-size: 0.9rem;
     }
   }
   a.prompt {

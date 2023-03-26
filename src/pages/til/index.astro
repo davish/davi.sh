@@ -1,0 +1,49 @@
+---
+import Base from "@layouts/Base.astro";
+import SnippetTable from "src/components/snippets/SnippetTable.astro";
+import { getSnippets } from "src/content/config";
+
+const snippets = await getSnippets();
+---
+
+<Base
+  path={"til/"}
+  back="/"
+  title={"TIL"}
+  description={"Short, hard-won snippets to help every last DenverCoder9 on the web."}
+>
+  <div>
+    <h1>TILs</h1>
+    <h2>
+      Short, hard-won snippets to help every last <a
+        href="https://xkcd.com/979/"
+      >
+        DenverCoder9
+      </a> on the web.
+    </h2>
+    <SnippetTable entries={snippets} />
+  </div>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  div {
+    max-width: 95vw;
+  }
+
+  h1,
+  h2 {
+    @include sans-serif;
+    width: 100%;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
+  h2 {
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+</style>
