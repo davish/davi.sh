@@ -33,6 +33,10 @@ const { path = "" } = Astro.props;
 
     #text {
       font-size: 1.125rem;
+
+      @media #{$media-size-phone} {
+        font-size: 0.9rem;
+      }
     }
 
     #cursor {
@@ -47,6 +51,11 @@ const { path = "" } = Astro.props;
 
       position: relative;
       top: 1px;
+
+      @media #{$media-size-phone} {
+        height: 0.9rem;
+        top: 2px;
+      }
     }
   }
 

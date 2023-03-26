@@ -27,6 +27,9 @@ const { path, back } = Astro.props;
     @media print {
       display: none;
     }
+    @media #{$media-size-phone} {
+      font-size: 0.9rem;
+    }
   }
   a.prompt {
     text-decoration: none;

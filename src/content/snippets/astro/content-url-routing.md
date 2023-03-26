@@ -1,5 +1,5 @@
 ---
-title: "getUrlForCollectionEntry()"
+title: "getUrl()"
 published: 2023-03-26
 tag: "Astro"
 description: "URL routing for content collections"
@@ -26,10 +26,10 @@ const urls: UrlMap = {
   coll3: "/path/to/coll3/",
 };
 
-export const getUrlForCollectionEntry = (collName: keyof typeof urls, slug: string) =>
+export const getUrl = (collName: keyof typeof urls, slug: string) =>
   urls[collName] + slug;
 ```
 
-In your Astro components, you can then call `getUrlForCollectionEntry("collName", slug)` to get the URL.
+In your Astro components, you can then call `getUrl("collName", slug)` to get the URL.
 
 While it's just a bit of string concatenation, the added type safety can make a big difference in a larger project. Even on this website, I've found the autocomplete for the collection name to be very helpful.

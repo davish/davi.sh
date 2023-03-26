@@ -29,19 +29,20 @@ const { Content } = await render();
 
 <Base path={"til/" + slug} back="/til" title={title} description={description}>
   <Article>
-    <div class="container">
+    <section>
       <h4>TIL</h4>
       <h1>{title}</h1>
-      <PostContent>
-        <Content />
-      </PostContent>
-    </div>
+    </section>
+
+    <PostContent>
+      <Content />
+    </PostContent>
   </Article>
 </Base>
 
 <style lang="scss">
   @import "/src/variables.scss";
-  div.container {
+  section {
     display: flex;
     flex-direction: column;
     align-items: center;
