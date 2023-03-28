@@ -5,9 +5,12 @@ tag: "Django"
 description: "Specify a different viewset serializer for lists"
 ---
 
-I often want to include related nested objects in my Django REST Framework viewsets for CRUD operations, but don't want those related objects cluttering up the list view. To accomplish this, you can return a serializer from `get_serializer_class()` that doesn't include the nested relation when the ViewSet action is `list`. I ended up doing this on a bunch of viewsets, so I factored the logic out into a separate mixin:
+I often want to include [related nested objects](https://www.django-rest-framework.org/api-guide/relations/#nested-relationships) in my [Django REST Framework `ModelViewSet`s](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset) for CRUD operations, but don't want those related objects cluttering up the list view. To accomplish this, you can return a serializer from `get_serializer_class()` that doesn't include the nested relation when the ViewSet action is `list`. I ended up doing this on a bunch of viewsets, so I factored the logic out into a separate mixin:
 
 ```python
+from typing import Union
+from rest_framework import viewsets
+
 class ListSerializerMixin(object):  
     list_serializer_class = None  
   
