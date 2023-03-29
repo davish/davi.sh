@@ -1,7 +1,6 @@
 ---
 title: "Asking the Right Questions"
 date: 2023-03-29T16:49:08Z
-draft: true
 tags: ["ai", "chatgpt", "django"]
 description: "AIs are as useful as the questions you know how to ask."
 ---
