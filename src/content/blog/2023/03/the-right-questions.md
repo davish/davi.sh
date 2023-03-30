@@ -1,5 +1,5 @@
 ---
-title: "Asking the Right Questions"
+title: "Asking the Right Questions to ChatGPT"
 date: 2023-03-29T16:49:08Z
 tags: ["ai", "chatgpt", "django"]
 description: "AIs are as useful as the questions you know how to ask."
@@ -7,7 +7,7 @@ description: "AIs are as useful as the questions you know how to ask."
 
 *This is my generative AI take. I'm sure there are many like it, but this one is mine[.](https://www.usmcu.edu/Research/Marine-Corps-History-Division/Frequently-Requested-Topics/Marines-Rifle-Creed/)*
 
-When it comes to trends I'm almost always on the far side of [Moore's Chasm](https://en.wikipedia.org/wiki/Crossing_the_Chasm). I signed up for Snapchat a year after all of my friends, and joined Instagram two years after everyone else. So it was only appropriate that it took weeks after the internet was set on fire for me to see the value applications of Large Language Models (LLMs) like [ChatGPT](https://openai.com/blog/chatgpt) and [GitHub Copilot](https://github.com/features/copilot) bring to programming. But now that I've given it a real shot, it's clear to me that if you have enough knowledge to ask specific tactical questions about a well-defined technology, framework or library, ChatGPT can be a huge force multiplier.
+When it comes to trends I'm almost always on the far side of [Moore's Chasm](https://en.wikipedia.org/wiki/Crossing_the_Chasm). I signed up for Snapchat a year after all of my friends, and joined Instagram two years after everyone else. So it was only appropriate that it took weeks after the internet was set on fire for me to see the value applications of Large Language Models like [ChatGPT](https://openai.com/blog/chatgpt) and [GitHub Copilot](https://github.com/features/copilot) bring to programming. But now that I've given it a real shot, it's clear to me that if you have enough knowledge to ask specific tactical questions about a well-defined technology, framework or library, ChatGPT can be a huge force multiplier.
 
 <!--more-->
 
@@ -28,4 +28,4 @@ I see two main components that led ChatGPT to being a great copilot on this Djan
 1. Django and DRF are old, stable, and popular. I'm sure that tons of blog posts, StackOverflow answers, and books on the framework made it in to GPT-3's training corpus.
 2. My own knowledge enabled me to ask precise questions that were within the bound of possibility. I've worked for years with Django. Even though I'd forgotten many of the specifics, I still knew the general vocabulary of the framework and what it was capable of. I stayed away from asking for ChatGPT's opinion or asking high-level design or architecture questions. Based on my other experience with ChatGPT, I suspect that those kinds of questions are where the model is more likely to hallucinate.
 
-For now, at least, LLMs are most useful when the prompter has sufficient domain knowledge to form precise questions. I don't think the robots are here for *all* our jobs, just yet. But this is a fast-moving field: we'll see what happens in the next 5 years – or even 5 months.
+For now, at least, LLMs are most useful when the prompter has sufficient domain knowledge to form precise questions. I don't think the robots are here for *all* our jobs just yet. But this is a fast-moving field: we'll see what happens in the next 5 years – or even 5 months.
