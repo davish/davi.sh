@@ -27,7 +27,12 @@ const {
 const { Content } = await render();
 ---
 
-<Base path={"til/" + slug} back="/til" title={title} description={description}>
+<Base
+  path={"til/" + slug}
+  back="/til"
+  title={`${title}: ${description}`}
+  description={description}
+>
   <Article>
     <section>
       <h4>TIL</h4>

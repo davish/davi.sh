@@ -20,7 +20,7 @@ export const get = async () => {
   const renderedSnippets = await Promise.all(
     snippets.map(async (snippet) => ({
       link: getUrlForCollectionEntry("snippets", snippet.slug),
-      title: `[TIL] ${snippet.data.title}`,
+      title: `[TIL] ${snippet.data.title}: ${snippet.data.description}`,
       pubDate: snippet.data.published,
       description: await renderMarkdown(snippet.body),
     }))
