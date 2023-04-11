@@ -3,6 +3,7 @@ title: "Asking the Right Questions to ChatGPT"
 date: 2023-03-30T14:26:43Z
 tags: ["ai", "chatgpt", "django"]
 description: "AIs are as useful as the questions you know how to ask."
+draft: true
 ---
 
 *This is my generative AI take. I'm sure there are many like it, but this one is mine[.](https://www.usmcu.edu/Research/Marine-Corps-History-Division/Frequently-Requested-Topics/Marines-Rifle-Creed/)*
