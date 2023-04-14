@@ -24,7 +24,7 @@ const {
   },
 } = Astro.props;
 
-const { Content } = await render();
+const { Content, remarkPluginFrontmatter } = await render();
 ---
 
 <Base
@@ -33,7 +33,7 @@ const { Content } = await render();
   title={`${title}: ${description}`}
   description={description}
 >
-  <Article>
+  <Article hasFootnotes={remarkPluginFrontmatter.hasFootnotes}>
     <section>
       <h4>TIL</h4>
       <h1>{title}</h1>
