@@ -1,4 +1,11 @@
-<article>
+---
+export type Props = {
+  hasFootnotes: boolean;
+};
+const { hasFootnotes } = Astro.props;
+---
+
+<article class={hasFootnotes ? "hasFootnotes" : ""}>
   <slot />
 </article>
 
@@ -8,6 +15,12 @@
     width: 95%;
     max-width: 75ch;
     padding: 20px;
+    &.hasFootnotes {
+      @media #{$media-size-desktop} {
+        margin-left: -40ch;
+      }
+    }
+
     @media print {
       width: 100%;
       max-width: 100%;

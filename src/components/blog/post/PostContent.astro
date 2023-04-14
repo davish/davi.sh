@@ -1,12 +1,17 @@
-<div id="blog-post-content">
-  <slot />
+<div id="blog-post-container">
+  <div id="blog-post-content">
+    <slot />
+  </div>
 </div>
+
 <!-- We need global styles here so that the css will
      apply to the generated markdown content inside the slot. -->
 <style lang="scss" is:global>
   @import "/src/variables.scss";
   #blog-post-content {
+    display: inline-block;
     line-height: 1.5rem;
+    max-width: 100%;
     p {
       font-size: 13pt;
       margin-top: 1.5rem;

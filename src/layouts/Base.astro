@@ -77,12 +77,15 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         @media print {
           font-size: 0.8rem;
         }
+
+        counter-reset: sidenote-counter; // tufte-css
       }
       hr {
         color: rgba(0, 0, 0, 0.2);
         border-style: solid;
         margin: 1rem 0;
       }
+      @import "src/tufte.scss";
     </style>
   </body>
 </html>

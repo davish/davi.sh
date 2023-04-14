@@ -12,7 +12,8 @@ type Props = CollectionEntry<"blog">;
 const { data: frontmatter, id, slug, render } = Astro.props;
 const basename = id.split("/").pop() || "";
 
-const { Content } = await render();
+const { Content, remarkPluginFrontmatter } = await render();
+const hasFootnotes: boolean = remarkPluginFrontmatter.hasFootnotes;
 ---
 
 <Base
@@ -21,7 +22,7 @@ const { Content } = await render();
   title={frontmatter.title}
   description={frontmatter.description || ""}
 >
-  <Article>
+  <Article hasFootnotes={hasFootnotes}>
     <Heading {...Astro.props} />
     <PostContent>
       <Content />
