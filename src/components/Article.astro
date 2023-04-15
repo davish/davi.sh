@@ -1,11 +1,4 @@
----
-export type Props = {
-  hasFootnotes: boolean;
-};
-const { hasFootnotes } = Astro.props;
----
-
-<article class={hasFootnotes ? "hasFootnotes" : ""}>
+<article>
   <slot />
 </article>
 

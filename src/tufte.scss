@@ -28,6 +28,12 @@ SOFTWARE.
 */
 .sidenote,
 .marginnote {
+  display: none;
+}
+
+.margin-toggle:checked + .sidenote,
+.margin-toggle:checked + .marginnote {
+  display: block;
   float: right;
   clear: right;
   margin-right: -60%;
@@ -42,6 +48,11 @@ SOFTWARE.
   code {
     font-size: 1rem;
   }
+}
+
+label.margin-toggle {
+  color: $accent-color;
+  cursor: pointer;
 }
 
 .sidenote-number {
@@ -90,11 +101,6 @@ label.margin-toggle:not(.sidenote-number) {
 @media #{$media-size-tablet} {
   label.margin-toggle:not(.sidenote-number) {
     display: inline;
-  }
-
-  label.margin-toggle {
-    color: $accent-color;
-    cursor: pointer;
   }
 
   .sidenote,

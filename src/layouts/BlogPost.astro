@@ -22,7 +22,7 @@ const hasFootnotes: boolean = remarkPluginFrontmatter.hasFootnotes;
   title={frontmatter.title}
   description={frontmatter.description || ""}
 >
-  <Article hasFootnotes={hasFootnotes}>
+  <Article>
     <Heading {...Astro.props} />
     <PostContent>
       <Content />
