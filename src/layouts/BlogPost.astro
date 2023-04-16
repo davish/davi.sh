@@ -12,8 +12,7 @@ type Props = CollectionEntry<"blog">;
 const { data: frontmatter, id, slug, render } = Astro.props;
 const basename = id.split("/").pop() || "";
 
-const { Content, remarkPluginFrontmatter } = await render();
-const hasFootnotes: boolean = remarkPluginFrontmatter.hasFootnotes;
+const { Content } = await render();
 ---
 
 <Base
