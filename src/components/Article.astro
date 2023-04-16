@@ -21,3 +21,44 @@
     // margin: 1rem 2rem;
   }
 </style>
+
+<script>
+  function toggleClass(elt: HTMLElement, cls: string) {
+    if (elt.classList.contains(cls)) {
+      elt.classList.remove(cls);
+    } else {
+      elt.classList.add(cls);
+    }
+  }
+
+  function getParent(elt: HTMLElement, name: string) {
+    let parent = elt.parentElement;
+    while (parent && parent.nodeName !== name) {
+      parent = parent.parentElement;
+    }
+    return parent;
+  }
+
+  const footnoteToggles: NodeListOf<HTMLInputElement> =
+    document.querySelectorAll("input.margin-toggle");
+
+  footnoteToggles.forEach((elt) =>
+    elt.addEventListener("change", (e) => {
+      if (e.target instanceof HTMLInputElement) {
+        const article = getParent(e.target, "ARTICLE");
+        if (article) {
+          toggleClass(article, "hasFootnotes");
+        }
+
+        const checked = e.target?.checked;
+        if (window.innerWidth < 1020) {
+          return;
+        }
+
+        footnoteToggles.forEach((toggle) => {
+          toggle.checked = checked;
+        });
+      }
+    })
+  );
+</script>

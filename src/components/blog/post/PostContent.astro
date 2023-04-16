@@ -1,7 +1,5 @@
-<div id="blog-post-container">
-  <div id="blog-post-content">
-    <slot />
-  </div>
+<div id="blog-post-content">
+  <slot />
 </div>
 
 <!-- We need global styles here so that the css will
@@ -9,9 +7,7 @@
 <style lang="scss" is:global>
   @import "/src/variables.scss";
   #blog-post-content {
-    display: inline-block;
     line-height: 1.5rem;
-    max-width: 100%;
     p {
       font-size: 13pt;
       margin-top: 1.5rem;
@@ -67,43 +63,3 @@
     }
   }
 </style>
-
-<script>
-  function toggleClass(elt: HTMLElement, cls: string) {
-    if (elt.classList.contains(cls)) {
-      elt.classList.remove(cls);
-    } else {
-      elt.classList.add(cls);
-    }
-  }
-
-  function getParent(elt: HTMLElement, name: string) {
-    let parent = elt.parentElement;
-    while (parent && parent.nodeName !== name) {
-      parent = parent.parentElement;
-    }
-    return parent;
-  }
-
-  const footnoteToggles: NodeListOf<HTMLInputElement> =
-    document.querySelectorAll("input.margin-toggle");
-
-  footnoteToggles.forEach((elt) =>
-    elt.addEventListener("change", (e) => {
-      if (e.target instanceof HTMLInputElement) {
-        const article = getParent(e.target, "ARTICLE");
-        if (article) {
-          toggleClass(article, "hasFootnotes");
-        }
-
-        if (window.innerWidth < 1020) {
-          return;
-        }
-        const checked = e.target?.checked;
-        footnoteToggles.forEach((toggle) => {
-          toggle.checked = checked;
-        });
-      }
-    })
-  );
-</script>
