@@ -23,6 +23,9 @@
 </style>
 
 <script>
+  // Toggle all sidenotes and content slide to the left when
+  // one of the superscripts are clicked.
+
   function toggleClass(elt: HTMLElement, cls: string) {
     if (elt.classList.contains(cls)) {
       elt.classList.remove(cls);
@@ -54,7 +57,8 @@
         if (window.innerWidth < 1020) {
           return;
         }
-
+        // If sidenotes are displayed to the side of the content,
+        // toggle all checkmarks at the same time.
         footnoteToggles.forEach((toggle) => {
           toggle.checked = checked;
         });
