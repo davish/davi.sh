@@ -66,12 +66,19 @@ const SnippetCollection = defineCollection({
   }),
 });
 
+const ResumeSidebarCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
   projects: ProjectCollection,
   blog: BlogPostCollection,
   snippets: SnippetCollection,
+  "resume-sidebar": ResumeSidebarCollection,
 };
 
 type UrlMap = Partial<{

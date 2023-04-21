@@ -9,10 +9,11 @@ const { name } = Astro.props;
 <div>
   <h2 id="name">{name}</h2>
   <hr />
-  <div><slot /></div>
+  <div class="section-content"><slot /></div>
 </div>
 
 <style lang="scss">
+  @import "src/variables.scss";
   h2 {
     margin-block-end: 0;
     font-family: "Inter", sans-serif;
@@ -20,5 +21,13 @@ const { name } = Astro.props;
   hr {
     margin-top: 0.2rem;
     margin-bottom: 0.75rem;
+  }
+
+  div.section-content {
+    @include sans-serif;
+    font-size: 0.8rem;
+    @media print {
+      font-size: 0.7rem;
+    }
   }
 </style>

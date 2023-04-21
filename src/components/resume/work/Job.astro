@@ -37,6 +37,13 @@ const { Content } = await job.render();
 
 <style lang="scss" is:global>
   @import "/src/variables.scss";
+
+  span.title,
+  div.details {
+    @media print {
+      font-size: 0.75rem;
+    }
+  }
   .resume-job-content {
     p {
       margin: 0;
@@ -51,6 +58,7 @@ const { Content } = await job.render();
       &.hidePrint {
         display: none;
       }
+      font-size: 0.7rem;
     }
   }
 </style>

@@ -5,6 +5,22 @@ import PrintHeader from "src/components/resume/PrintHeader.astro";
 import Education from "src/components/resume/education/Education.astro";
 import Section from "src/components/resume/Section.astro";
 import ProjectList from "src/components/resume/projects/ProjectList.astro";
+import { getCollection } from "astro:content";
+import type { AstroComponentFactory } from "astro/dist/runtime/server";
+
+const sections = await Promise.all(
+  (
+    await getCollection("resume-sidebar")
+  ).map(
+    async ({
+      data: { title },
+      render,
+    }): Promise<[string, AstroComponentFactory]> => [
+      title,
+      (await render()).Content,
+    ]
+  )
+);
 ---
 
 <Base path="resume" title="Resume" description={"Resume"}>
@@ -18,6 +34,13 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
       <div class="sidebar">
         <Section name="Education"><Education /></Section>
         <Section name="Projects"><ProjectList /></Section>
+        {
+          sections.map(([title, Content]) => (
+            <Section name={title}>
+              <Content />
+            </Section>
+          ))
+        }
       </div>
     </div>
   </div>
