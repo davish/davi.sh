@@ -4,6 +4,7 @@ location: Atlanta, GA
 title: Software Engineering Intern
 start: 2018-05-28
 end: 2018-08-02
+skills: [Go, Elasticsearch]
 ---
 
 Member of the Catalog team, the part of Square’s Commerce Platform which is responsible for managing sellers’ item catalogs and inventory.

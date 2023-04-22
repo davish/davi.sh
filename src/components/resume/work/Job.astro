@@ -6,21 +6,20 @@ export interface Props {
   job: CollectionEntry<"work">;
 }
 
-const { job } = Astro.props;
-const startDate = new Date(job.data.start);
-const endDate = job.data.end ? new Date(job.data.end) : null;
-const { Content } = await job.render();
+const {
+  job: {
+    render,
+    data: { start, end, skills, title, showDetails },
+  },
+} = Astro.props;
+const { Content } = await render();
 ---
 
-<span class="title">{job.data.title}</span>
+<span class="title">{title}</span>
 <div class="details">
-  {toDuration(startDate, endDate)}
+  {toDuration(start, end)}
 </div>
-<div
-  class={`resume-job-content ${
-    job.data.showDetails ? "showPrint" : "hidePrint"
-  }`}
->
+<div class={`resume-job-content ${showDetails ? "showPrint" : "hidePrint"}`}>
   <Content />
 </div>
 

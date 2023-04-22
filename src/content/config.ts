@@ -20,6 +20,7 @@ const JobCollection = defineCollection({
     start: partialDate(),
     end: partialDate().or(z.null()),
     showDetails: z.boolean().optional(),
+    skills: z.array(z.string()).default([]),
   }),
 });
 
