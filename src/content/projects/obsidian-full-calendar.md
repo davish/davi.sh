@@ -1,14 +1,14 @@
 ---
 name: Obsidian Full Calendar
 tags: [obsidian-full-calendar, obsidian]
-description: Plugin for the PKM tool Obsidian with over 50,000 users.
+description: Plugin for the PKM tool Obsidian with over 70,000 users.
 date: 2022-02
 details: true
 ---
 
 ### Summary
 
-Obsidian Full Calendar integrates the [FullCalendar](https://fullcalendar.io) library with [Obsidian](https://obsidian.md) so that Obsidian users can manage their events and tasks from inside Obsidian. It's most popular event management plugin in the Obsidian ecosystem, with over 50,000 users. Its development takes place on [GitHub](https://github.com/davish/obsidian-full-calendar).
+[Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) integrates the [FullCalendar](https://fullcalendar.io) library with [Obsidian](https://obsidian.md) so that Obsidian users can manage their events and tasks from inside Obsidian. It's most popular event management plugin in the Obsidian ecosystem, with over 50,000 users. Its development takes place on GitHub.
 
 ### Motivation
 
