@@ -17,6 +17,9 @@ $media-size-desktop: "(min-width: 1020px)";
 @mixin serif {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
     "Book Antiqua", Georgia, serif;
+  @media print {
+    font-family: serif;
+  }
 }
 
 @mixin sans-serif {
