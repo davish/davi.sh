@@ -4,7 +4,7 @@ location: Boston, MA
 title: Software Development Engineering Intern
 start: 2020-05-14
 end: 2020-08-14
-showDetails: true
+print: true
 skills: [Kotlin, React]
 ---
 

@@ -9,7 +9,7 @@ export interface Props {
 const {
   job: {
     render,
-    data: { start, end, skills, title, showDetails },
+    data: { start, end, skills, title, print },
   },
 } = Astro.props;
 const { Content } = await render();
@@ -19,7 +19,7 @@ const { Content } = await render();
 <div class="details">
   {toDuration(start, end)}
 </div>
-<div class={`resume-job-content ${showDetails ? "showPrint" : "hidePrint"}`}>
+<div class={`resume-job-content ${print ? "showPrint" : "hidePrint"}`}>
   <Content />
 </div>
 
@@ -28,6 +28,9 @@ const { Content } = await render();
 
   .details {
     @include dimmed;
+    @media print {
+      display: inline-block;
+    }
   }
   .title {
     font-size: 1.1em;

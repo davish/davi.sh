@@ -4,7 +4,7 @@ location: Philadelphia, PA
 title: Teaching Assistant, CIS 188
 start: 2020-11-01
 end: 2021-05-01
-showDetails: true
+print: true
 skills: [Kubernetes, Docker]
 ---
 

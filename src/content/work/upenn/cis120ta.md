@@ -4,7 +4,7 @@ location: Philadelphia, PA
 title: Teaching Assistant, CIS 120
 start: 2018-01-01
 end: 2020-05-01
-showDetails: true
+print: true
 skills: [OCaml, Java]
 ---
 
