@@ -21,4 +21,7 @@ $media-size-desktop: "(min-width: 1020px)";
 
 @mixin sans-serif {
   font-family: "Inter", sans-serif;
+  @media print {
+    font-family: sans-serif;
+  }
 }

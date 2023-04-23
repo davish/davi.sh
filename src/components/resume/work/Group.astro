@@ -44,9 +44,15 @@ jobs.sort(
   li.group {
     list-style: none;
     margin-bottom: 0.5rem;
+    @media print {
+      margin-bottom: 0.5em;
+    }
   }
   li.job {
     margin-bottom: 0.25rem;
+    @media print {
+      margin-bottom: 0.5em;
+    }
     list-style: none;
 
     // TODO: linkedin-style timelines
