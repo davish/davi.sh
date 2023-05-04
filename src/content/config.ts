@@ -66,12 +66,19 @@ const SnippetCollection = defineCollection({
   }),
 });
 
+const SlideCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
   projects: ProjectCollection,
   blog: BlogPostCollection,
   snippets: SnippetCollection,
+  slides: SlideCollection,
 };
 
 type UrlMap = Partial<{

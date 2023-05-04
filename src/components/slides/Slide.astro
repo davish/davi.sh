@@ -1,0 +1,28 @@
+---
+const { type, title } = Astro.props;
+---
+
+<div class="slide">
+  {type}
+  <h2>{title}</h2>
+  <slot />
+</div>
+
+<style lang="scss">
+  div.slide {
+    height: 270px;
+    width: 480px;
+    border: 1px black solid;
+    margin: auto;
+  }
+</style>
+
+<style lang="scss" is:global>
+  .slide {
+    img {
+      max-width: 100%;
+      max-height: 200px;
+      margin: auto;
+    }
+  }
+</style>

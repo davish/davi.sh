@@ -1,0 +1,39 @@
+---
+import Base from "@layouts/Base.astro";
+import type { GetStaticPaths } from "astro";
+import { CollectionEntry, getCollection } from "astro:content";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slides = await getCollection("slides");
+  return slides.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+export type Props = { entry: CollectionEntry<"slides"> };
+const {
+  entry: {
+    slug,
+    data: { title },
+    render,
+  },
+} = Astro.props;
+
+const { Content } = await render();
+---
+
+<Base title={title} path={`/slides/${slug}`} description={title}>
+  <div>
+    <Content />
+  </div>
+</Base>
+
+<style lang="scss">
+  div {
+    max-width: 80ch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>
