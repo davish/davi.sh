@@ -8,7 +8,7 @@ draft: false
 
 Pablo Picasso is one of the most famous modern artists of the 20th century. While many of his paintings border on the abstract, his artistic skill didn't spontaneously emerge. When he was young, he sharpened his craft on more realistic and traditional paintings. Novelty and creativity are important parts of great art. Just as necessary to making anything great is the technical skill to take an thought and represent it precisely in the real world. Even abstract expressionists could paint unbelieveably realistic landscapes if they felt the need.
 
-![](/public/blog/images/picasso_guernica.jpg)
+![Guernica by Pablo Picasso](/public/blog/images/picasso_guernica.jpg)
 **Guernica* by Pablo Picasso, 1937*
 
 ![Science and Charity by Picasso](/public/blog/images/picasso_science-and-charity.jpg)
