@@ -1,3 +1,151 @@
 ---
 title: "CIS188 Guest Lecture: Databases"
 ---
+
+This is a slide deck on databases!
+
+{% slide type="title" title="Distributed Databases"%}
+{% /slide %}
+
+{% slide type="section-title" title="Hey there!"%}
+- SEAS '21
+- First student to take CIS188
+  - Winter break 2020-2021
+  - TA Spring 2021
+- Interests
+	- Programming Languages
+	- Spaceflight
+	- Watch repair
+ 
+TODO: My CIS188 TA bio
+{% /slide %}
+
+{% slide type="section-title" title="Hey there!" %}
+- Since August @ MongoDB
+	- Rotated on
+		- SQL Engines
+		- Sharding
+	- Ended up on Query Optimization
+ 
+TODO: My CIS188 TA bio
+{% /slide %}
+
+I've been at MongoDB since August. In that time, I've rotated on the SQL engines team, working on a SQL-to-MongoDB compiler for compatibility with existing SQL tooling. I ended up on the Query Optimization team, which is building out a new query optimization engine for the MongoDB query language.
+
+{% slide title="Agenda"%}
+- 00: What is a Database?
+	- CIS450 in 5 minutes.
+- 01: Data Models & Query Patterns
+	- Comparing Postgres & MongoDB.
+- 02: Distributed Databases
+	- Database architecture and scalability.
+- 03: Where Next?
+	- The direction the industry is moving in.
+{% /slide %}
+The topic of this lecture is "Distributed Databases," but I'm not assuming anyone here's taken CIS450 (I never took it myself), so we'll start off closer to the beginning of the story.
+
+
+{% slide type="point" title="What is a database?" %}
+> An organized collection of structured, queryable information (paraphrased from Oracle.com)
+{% /slide %}
+
+A filesystem might contain tons of structured JSON files, but filesystems don't have the capacity to query for data by anything except for filepath (which is basically an ID). Being able to store information AND get it back out again are key components of a database.
+
+{% slide title="Examples" %}
+- MySQL
+	- Relational SQL
+- Apache Cassandra
+	- Column-oriented and distributed
+- Redis
+	- In-memory datastore & cache layer
+{% /slide %}
+
+You've used Redis throughout this class. Its homepage describes it as an "in-memory data store" that can be used "as a database, cache, streaming engine and message broker"
+
+{% slide title="Structured Query Language" %}
+- Developed at IBM for System R in 1974
+- Declarative
+- Relational Lingua Franca
+{% /slide %}
+Since the 1980s, the dominant database management systems have followed the relational model and over time have standardized on the Structured Query Language, which goes by its acronym SQL (pronounced like the word "sequel"). SQL was designed to be declarative to make it easy for database administrators to access data without worrying about the underlying execution plan. We'll see some examples of SQL in the next few slides.
+
+Relational DBs are also called SQL databases, since today, the query language and the relational model often go hand-in-hand. These terms will be used interchangeably throughout the talk.
+
+{% slide title="The SQL Standard" %}
+![xkcd standards](https://imgs.xkcd.com/comics/standards.png)
+{% /slide %}
+SQL's been standardized since the late 80s, but at that point it had already been defined by its implementations for about a decade. Even though SQL:2016 added native support for JSON, Postgres and other databases built in their own support with their own syntax beforehand. That's even before considering the procedural extensions built on top.
+
+SQL-92 is the last, truly standard SQL specification that has come out.
+
+
+{% slide title="PostgreSQL" %}
+The most popular database that isn't owned & operated by EvilCorp
+{% /slide %}
+For this talk, we'll be focusing on Postgres's flavor of SQL for simplicity's sake, since it's one of the most popular databases among developers.
+
+{% slide title="!SQL" %}
+Because developers love to be contrarian.
+{% /slide %}
+All SQL databases use the same query language and data model and can be directly compared to each other. 
+
+By comparison, NoSQL encompasses the universe of everything else that’s out there. It’s an incredibly broad label that can refer to any database system that doesn't use SQL as its query language. 
+
+This generally maps on to the concept of "non-relational" databases, but even this is extremely broad, covering everything from column stores like Cassandra, to key/value stores like Redis, and document databases like MongoDB and Fauna.
+
+{% slide title="Our Comparison Today" %}
+MongoDB + Postgres
+{% /slide %}
+All of these databases are optimized for different use cases, but for the sake of time and all of our sanities today, we'll be focusing on MongoDB, a document database, and its query language, MQL. The smaller but still broad category of document database also includes RedisJSON, Couchbase, Fauna, and Amazon DocumentDB, to name a few.
+
+SQL is standard enough that even though I'm showing Postgres queries, the queries may very well run unmodified on a bunch of other SQL databases.
+
+Document databases don't share any query language, so all the Mongo queries will be pretty specific to Mongo.
+
+{% slide title="Databases: What are they good for?" %}
+- **C**reate
+- **R**etrieve
+- **U**pdate
+- **D**elete
+{% /slide %}
+Almost every application that uses a database handles four basic operations commonly called the CRUD operations: Create, Retrieve, Update, and Delete. Some apps are "read heavy" while others are "write heavy". The rates at which different operations are performed is one of the main things that can inform the choice of database and data model.
+
+{% slide title="A data modeling case study" %}
+### "Cornell Course Cart" (C3)
+Users can:
+- View review for a given course
+- Add courses to a cart
+{% /slide %}
+No matter what kind of database you use, you'll have to design a data model for your application. This is a description of the information you're storing in your database, and how different pieces of information are related to each other. Throughout this talk, we'll use the example of a completely hypothetical course review system I'll call the Cornell Course Cart, or C3. 
+
+Users of this site can perform two actions:
+1. View reviews for courses.
+2. Add courses to their course cart.
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}
+
+{% slide title="" %}
+
+{% /slide %}

@@ -100,6 +100,12 @@ const ReadingCollection = defineCollection({
   }),
 });
 
+const SlideCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
@@ -109,6 +115,7 @@ export const collections = {
   shorts: ShortCollection,
   weekly: WeeklyCollection,
   reading: ReadingCollection,
+  slides: SlideCollection,
 };
 
 type UrlMap = Partial<{
