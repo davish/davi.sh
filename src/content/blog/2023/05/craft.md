@@ -1,12 +1,12 @@
 ---
 title: "Honing Your Craft"
 date: 2023-05-05T10:18:55Z
-tags: [resolutions, art]
+tags: [resolutions]
 description: "In order to put the best work out there, it's important to take time to sharpen your tools."
 draft: false
 ---
 
-Pablo Picasso is one of the most famous modern artists of the 20th century. While many of his paintings border on the abstract, his artistic skill didn't spontaneously emerge, but was sharpened on more realistic and traditional paintings. Novelty and creativity are important parts of great art. Just as necessary to making anything great, though, is the technical ability to take a thought and represent it as brushstrokes in the real world -- even abstract expressionists could paint unbelieveably realistic landscapes if they felt the need. I'm certainly no artist, but the lesson here applies more broadly. Practicing technical skills on their own is an important part of creating worthwhile things.
+Pablo Picasso was one of the most famous modern artists of the 20th century. While many of his paintings border on the abstract, his artistic skill didn't spontaneously emerge, but was sharpened on more realistic and traditional paintings. Novelty and creativity are important parts of great art. Just as necessary to making anything great, though, is the technical ability to take a thought and represent it as brushstrokes in the real world -- even abstract expressionists could paint unbelieveably realistic landscapes if they felt the need. I'm certainly no artist, but the lesson here applies more broadly. Practicing technical skills on their own is an important part of creating worthwhile things.
 
 ![Science and Charity by Picasso. The caption follows in the next line of text.](/blog/images/picasso_science-and-charity.jpg)
 **Science and Charity* by Pablo Picasso, 1897 (age 16)*
