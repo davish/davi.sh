@@ -6,7 +6,7 @@ description: "In order to put the best work out there, it's important to take ti
 draft: false
 ---
 
-Pablo Picasso was one of the most famous modern artists of the 20th century. While many of his paintings border on the abstract, his artistic skill didn't spontaneously emerge: it was sharpened on more realistic and traditional paintings. Novelty and creativity are important parts of great art. Just as necessary to making anything great is the technical ability to take a thought and represent it as brushstrokes in the real world -- even abstract expressionists could paint unbelieveably realistic landscapes if they felt the need. 
+Pablo Picasso was one of the most famous modern artists of the 20th century. While many of his paintings border on the abstract, his artistic skill didn't spontaneously emerge: it was sharpened on more realistic and traditional paintings. Novelty and creativity are important parts of great art. Just as necessary to making anything great is the technical ability to take a thought and represent it in the real world -- even abstract expressionists could paint unbelieveably realistic landscapes if they felt the need. 
 
 I'm certainly no artist, but the lesson here applies more broadly. Practicing technical skills on their own is an important part of the creative process.
 
