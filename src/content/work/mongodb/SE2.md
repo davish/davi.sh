@@ -5,7 +5,7 @@ title: Software Engineer 2
 start: 2021-08-26
 end: 2023-03-01
 print: true
-skills: [C++, Cryptography, Project Management]
+skills: [C++, Cryptography, Project Management, Database Internals]
 ---
 
 Software Engineer on Query Optimization.
