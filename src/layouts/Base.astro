@@ -76,6 +76,8 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         margin: 0;
         @media print {
           font-size: 0.8rem;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
         }
 
         counter-reset: sidenote-counter; // tufte-css

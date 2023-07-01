@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # astro
 .astro/
+
+src/content/blog/images

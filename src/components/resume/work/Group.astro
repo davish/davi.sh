@@ -9,6 +9,8 @@ export interface Props {
 
 const { title, jobs } = Astro.props;
 
+const skills = [...new Set(jobs.flatMap(({ data: { skills } }) => skills))];
+
 jobs.sort(
   (a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime()
 );
@@ -21,6 +23,11 @@ jobs.sort(
         <strong>{jobs[0].data.company}</strong>
         <span class="location">• {jobs[0].data.location}</span>
       </span>
+      <div class="skills">
+        {skills.map((s) => (
+          <span class="skill">{s}</span>
+        ))}
+      </div>
       <ul>
         {jobs.map((job) => (
           <li class="job">
@@ -37,9 +44,15 @@ jobs.sort(
   li.group {
     list-style: none;
     margin-bottom: 0.5rem;
+    @media print {
+      margin-bottom: 0.5em;
+    }
   }
   li.job {
     margin-bottom: 0.25rem;
+    @media print {
+      margin-bottom: 0.5em;
+    }
     list-style: none;
 
     // TODO: linkedin-style timelines
@@ -67,5 +80,18 @@ jobs.sort(
   }
   ul {
     padding-inline-start: 0;
+  }
+  span.skill {
+    background-color: $background-color-solid;
+    border-radius: 3px;
+    // color: black;
+    padding: 0px 5px;
+    font-size: 0.9em;
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+  div.skills {
+    margin: 0.15rem 0;
   }
 </style>
