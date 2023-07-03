@@ -5,42 +5,20 @@ title: "CIS188 Guest Lecture: Databases"
 This is a slide deck on databases!
 
 {% slide type="title" title="Distributed Databases"%}
-{% /slide %}
-
-{% slide type="section-title" title="Hey there!"%}
-- SEAS '21
-- First student to take CIS188
-  - Winter break 2020-2021
-  - TA Spring 2021
-- Interests
-	- Programming Languages
-	- Spaceflight
-	- Watch repair
- 
-TODO: My CIS188 TA bio
-{% /slide %}
-
-{% slide type="section-title" title="Hey there!" %}
-- Since August @ MongoDB
-	- Rotated on
-		- SQL Engines
-		- Sharding
-	- Ended up on Query Optimization
- 
-TODO: My CIS188 TA bio
+By Davis Haupt
 {% /slide %}
 
 I've been at MongoDB since August. In that time, I've rotated on the SQL engines team, working on a SQL-to-MongoDB compiler for compatibility with existing SQL tooling. I ended up on the Query Optimization team, which is building out a new query optimization engine for the MongoDB query language.
 
 {% slide title="Agenda"%}
-- 00: What is a Database?
-	- CIS450 in 5 minutes.
-- 01: Data Models & Query Patterns
-	- Comparing Postgres & MongoDB.
-- 02: Distributed Databases
-	- Database architecture and scalability.
-- 03: Where Next?
-	- The direction the industry is moving in.
+### 00: What is a Database?
+CIS450 in 5 minutes.
+### 01: Data Models & Query Patterns
+Comparing Postgres & MongoDB.
+### 02: Distributed Databases
+Database architecture and scalability.
+### 03: Where Next?
+The direction the industry is moving in.
 {% /slide %}
 The topic of this lecture is "Distributed Databases," but I'm not assuming anyone here's taken CIS450 (I never took it myself), so we'll start off closer to the beginning of the story.
 
@@ -122,25 +100,65 @@ Users of this site can perform two actions:
 1. View reviews for courses.
 2. Add courses to their course cart.
 
-{% slide title="" %}
+{% slide title="Data modeling: relationships" %}
+
+### One-to-one
+A user has one cart.
+
+### One-to-many
+A course can have multiple sections, but each section belongs to one course.
+
+### Many-to-many
+
+A user's cart can contain many courses, and a course can be in many different users' carts.
 
 {% /slide %}
 
-{% slide title="" %}
+In any data model, there's three fundamental types of relationship among different pieces of data. On this slide, you can see each relationship type along with an example from the C3 application.
+
+
+{% slide title="Storing data in SQL" %}
+- Data is stored in **tables**
+- Each entry is a **row**, and every attribute is a **column**
+- Each table has a _fixed_ set of columns known as its **schema**.
+Data is modeled primarily through the _relationships_ between tables.
 
 {% /slide %}
 
-{% slide title="" %}
+Like its name suggests, relational databases put the relations between tables front-and-center.
+
+{% slide title="Building a relational schema" %}
+
+TODO: SQL tables
 
 {% /slide %}
 
-{% slide title="" %}
+Since tables are flat and must have a fixed set of columns, complex applications build up their data model from many tables that have relationships (called foreign keys) between them. With C3, this is what our schema would look like.
+If I want to find out which class a student registered for instead of CIS189, I can follow the section_id field to the corresponding row on the SECTIONS table, and then follow that row's course_id to the COURSES table, where I'll find the name and number for the course.
+
+A key property you'll notice of this database schema is that there's no duplicated data anywhere. The only place you can find a course's title is in the COURSE table. The only place to find which professors teach a class is in each SECTION table.
+
+This is a sign that the database is properly normalized. Eliminating data redundancy makes managing and updating data much easier, since any piece of information only needs to be updated in one row, in one table. compared to a duplicated or denormalized data model. It's the recommended way to store data in a relational database when starting out.
+
+{% slide title="Storing data in MongoDB" %}
+- Data stored in ***collections***.
+- Each entry is a ***document***, and every attribute is a ***field***.
+- Every document in a collection _can_ have a ***flexible schema***.
+- Like JSON, documents can contain ***nested fields*** and ***arrays of subobjects***, which are the natural way to express most relationships in the document model.
+{% /slide %}
+
+{% slide title="Building a non-relational schema" %}
 
 {% /slide %}
 
-{% slide title="" %}
+You can see here that one-to-many relationships, which required foreign keys in the relational schema, are expressed naturally as nested sub-documents within an array.
 
-{% /slide %}
+These documents can be easily serialized as JSON hand handled by any client programming language that has a JSON parser.
+
+What is expressed a bit more awkwardly, though, is the course cart. What would happen if a course changed its number, or title?
+
+The user<->course relationship is a many-to-many relationship, and the way I've decided to represent the cart has resulted in some data duplication. This makes it fast and easy to access both a user's cart and a course's info, but it requires updating the information in two places if it ever changes. This is called denormalization, and it's a natural pattern in non-relational databases.
+
 
 {% slide title="" %}
 
