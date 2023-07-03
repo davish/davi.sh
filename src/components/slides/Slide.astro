@@ -1,28 +1,93 @@
 ---
-const { type, title } = Astro.props;
+import Default from "./Default.astro";
+import Title from "./Title.astro";
+
+export type Props = {
+  title: string;
+  type: "title" | undefined;
+};
+
+const props = Astro.props;
+const { type } = Astro.props;
 ---
 
 <div class="slide">
-  {type}
-  <h2>{title}</h2>
-  <slot />
+  {
+    type === "title" ? (
+      <Title {...props}>
+        <slot />
+      </Title>
+    ) : (
+      <Default {...props}>
+        <slot />{" "}
+      </Default>
+    )
+  }
 </div>
 
+<script>
+  const resizeSlides = () => {
+    const container = document.querySelector(
+      ".slide-container"
+    ) as HTMLDivElement;
+
+    const slides = document.querySelectorAll(
+      ".slide"
+    ) as NodeListOf<HTMLDivElement>; // get all slides
+
+    const scaleSlide = (slide: HTMLDivElement, scale: number) => {
+      // The following sets the width and height according to scale
+      slide.style.width = 480 * scale + "px";
+      slide.style.height = 270 * scale + "px";
+    };
+
+    slides.forEach((slide) => scaleSlide(slide, 1));
+    const parentWidth = container.offsetWidth; // get the width of the container
+    slides.forEach(function (slide) {
+      scaleSlide(slide, parentWidth / 480);
+    });
+  };
+  resizeSlides();
+  addEventListener("resize", resizeSlides);
+</script>
+
 <style lang="scss">
-  div.slide {
+  .slide {
     height: 270px;
     width: 480px;
-    border: 1px black solid;
+    border: 1px #999 solid;
     margin: auto;
+
+    font-family: "Inter";
+
+    display: flex;
   }
 </style>
 
 <style lang="scss" is:global>
   .slide {
-    img {
-      max-width: 100%;
-      max-height: 200px;
-      margin: auto;
+    &-content {
+      img {
+        max-width: 95%;
+        max-height: 200px;
+        margin: auto;
+      }
+
+      p:has(> img) {
+        text-align: center;
+      }
+
+      h3 {
+        margin-block-start: 0.5rem;
+        margin-block-end: 0;
+      }
+      p {
+        margin: 0;
+      }
+      ul,
+      ol {
+        padding-left: 15px;
+      }
     }
   }
 </style>

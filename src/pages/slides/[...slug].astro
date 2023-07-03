@@ -23,8 +23,8 @@ const {
 const { Content } = await render();
 ---
 
-<Base title={title} path={`/slides/${slug}`} description={title}>
-  <div>
+<Base title={title} path={`slides/${slug}`} description={title}>
+  <div class="slide-container">
     <Content />
   </div>
 </Base>
