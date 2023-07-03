@@ -54,37 +54,6 @@ const { type } = Astro.props;
   addEventListener("resize", resizeSlides);
 </script>
 
-<script>
-  const slides = document.querySelectorAll(
-    ".slide"
-  ) as NodeListOf<HTMLDivElement>; // get all slides
-
-  function present(index: number) {
-    const hide = (elt: HTMLElement | null) => {
-      if (elt) {
-        elt.style.display = "none";
-      }
-    };
-    hide(document.querySelector("nav"));
-    hide(document.querySelector("#main"));
-    hide(document.querySelector("footer"));
-
-    document.querySelectorAll("div.present").forEach((d) => d.remove());
-    const presentDiv = document.createElement("div");
-
-    presentDiv.addEventListener("click", () => {
-      console.log("next slide", index + 1);
-      present(index + 1);
-    });
-
-    presentDiv.className = "present";
-    const slide = slides[index];
-    if (slide) presentDiv.appendChild(slide);
-    document.body.appendChild(presentDiv);
-  }
-  // @ts-ignore
-  window.present = present;
-</script>
 <style lang="scss">
   .slide {
     height: 270px;
@@ -133,3 +102,93 @@ const { type } = Astro.props;
     z-index: 999;
   }
 </style>
+
+<script>
+  const presentationState: {
+    slideIndex: number;
+    speakerNotesWindow: Window | null;
+  } = {
+    slideIndex: -1,
+    speakerNotesWindow: null,
+  };
+
+  // @ts-ignore
+  window.presentationState = presentationState;
+  const slides = document.querySelectorAll(
+    ".slide"
+  ) as NodeListOf<HTMLDivElement>;
+  const hide = (elt: HTMLElement | null) => {
+    if (elt) {
+      elt.style.display = "none";
+    }
+  };
+  const show = (elt: HTMLElement | null) => {
+    if (elt) {
+      elt.style.display = "";
+    }
+  };
+  const handleKeyDown = (e: KeyboardEvent) => {
+    console.log(e.code);
+    if (e.code === "ArrowRight") {
+      present(presentationState.slideIndex + 1);
+    } else if (e.code === "Space" || e.code === "ArrowLeft") {
+      present(presentationState.slideIndex - 1);
+    } else if (e.code === "Escape") {
+      present(-1);
+    }
+  };
+  function present(index: number | undefined) {
+    if (index === undefined) {
+      index = presentationState.slideIndex;
+    }
+
+    document.querySelectorAll("div.present").forEach((d) => d.remove());
+
+    if (index < 0) {
+      console.log("reset page");
+      show(document.querySelector("nav"));
+      show(document.querySelector("#main"));
+      show(document.querySelector("footer"));
+      window.removeEventListener("keydown", handleKeyDown);
+      return;
+    }
+    if (presentationState.slideIndex < 0) {
+      hide(document.querySelector("nav"));
+      hide(document.querySelector("#main"));
+      hide(document.querySelector("footer"));
+      window.addEventListener("keydown", handleKeyDown);
+      presentationState.speakerNotesWindow = window.open(
+        undefined,
+        "Slide",
+        "popup"
+      );
+    }
+    presentationState.slideIndex = index;
+
+    const presentDiv = document.createElement("div");
+
+    presentDiv.className = "present";
+    const slide = slides[index];
+
+    if (slide) {
+      const text = [];
+      let current = slide.nextElementSibling;
+      while (current && current.tagName !== "DIV") {
+        text.push(current);
+        current = current.nextElementSibling;
+      }
+      console.log(text);
+      if (presentationState.speakerNotesWindow) {
+        presentationState.speakerNotesWindow.document.body.innerHTML = "";
+      }
+      text.forEach((t) => {
+        presentationState.speakerNotesWindow?.document.body.appendChild(t);
+      });
+      presentDiv.appendChild(slide.cloneNode(true));
+    }
+
+    document.body.appendChild(presentDiv);
+  }
+  // @ts-ignore
+  window.present = present;
+</script>
