@@ -27,6 +27,9 @@ const { type } = Astro.props;
 
 <script>
   const resizeSlides = () => {
+    if (document.querySelector("div.present")) {
+      return;
+    }
     const container = document.querySelector(
       ".slide-container"
     ) as HTMLDivElement;
@@ -35,22 +38,53 @@ const { type } = Astro.props;
       ".slide"
     ) as NodeListOf<HTMLDivElement>; // get all slides
 
-    const scaleSlide = (slide: HTMLDivElement, scale: number) => {
-      // The following sets the width and height according to scale
-      slide.style.width = 480 * scale + "px";
-      slide.style.height = 270 * scale + "px";
-    };
+    const scaleSlides = (scale: number) =>
+      slides.forEach((slide) => {
+        // The following sets the width and height according to scale
+        slide.style.width = 480 * scale + "px";
+        slide.style.height = 270 * scale + "px";
+      });
 
-    slides.forEach((slide) => scaleSlide(slide, 1));
+    scaleSlides(1);
     const parentWidth = container.offsetWidth; // get the width of the container
-    slides.forEach(function (slide) {
-      scaleSlide(slide, parentWidth / 480);
-    });
+    scaleSlides(parentWidth / 480);
   };
+
   resizeSlides();
   addEventListener("resize", resizeSlides);
 </script>
 
+<script>
+  const slides = document.querySelectorAll(
+    ".slide"
+  ) as NodeListOf<HTMLDivElement>; // get all slides
+
+  function present(index: number) {
+    const hide = (elt: HTMLElement | null) => {
+      if (elt) {
+        elt.style.display = "none";
+      }
+    };
+    hide(document.querySelector("nav"));
+    hide(document.querySelector("#main"));
+    hide(document.querySelector("footer"));
+
+    document.querySelectorAll("div.present").forEach((d) => d.remove());
+    const presentDiv = document.createElement("div");
+
+    presentDiv.addEventListener("click", () => {
+      console.log("next slide", index + 1);
+      present(index + 1);
+    });
+
+    presentDiv.className = "present";
+    const slide = slides[index];
+    if (slide) presentDiv.appendChild(slide);
+    document.body.appendChild(presentDiv);
+  }
+  // @ts-ignore
+  window.present = present;
+</script>
 <style lang="scss">
   .slide {
     height: 270px;
@@ -89,5 +123,13 @@ const { type } = Astro.props;
         padding-left: 15px;
       }
     }
+  }
+  .present .slide {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
   }
 </style>
