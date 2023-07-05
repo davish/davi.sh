@@ -98,6 +98,9 @@ const { Content } = await render();
       show(document.querySelector("footer"));
       window.removeEventListener("keydown", handleKeyDown);
       presentationState.speakerNotesWindow?.close();
+      document.querySelector("div.present")?.remove();
+      presentationState.slideIndex = -1;
+      presentationState.speakerNotesWindow = null;
       return;
     }
     if (presentationState.slideIndex < 0) {
@@ -138,8 +141,8 @@ const { Content } = await render();
         );
       });
       const slideToAdd = slide.cloneNode(true) as HTMLDivElement;
-      slideToAdd.style.width = "";
-      slideToAdd.style.height = "";
+      // @ts-ignore
+      slideToAdd.style = {};
 
       const parentWidth = window.document.body.offsetWidth;
       console.log(parentWidth);
