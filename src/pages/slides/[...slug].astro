@@ -2,6 +2,7 @@
 import Base from "@layouts/Base.astro";
 import type { GetStaticPaths } from "astro";
 import { CollectionEntry, getCollection } from "astro:content";
+import { getUrlForCollectionEntry } from "src/content/config";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slides = await getCollection("slides");
@@ -20,23 +21,56 @@ const {
   },
 } = Astro.props;
 
+const url = getUrlForCollectionEntry("slides", slug);
 const { Content } = await render();
 ---
 
 <Base title={title} path={`slides/${slug}`} description={title}>
-  <h1>{title}</h1>
-  <subtitle><a href="#" onclick="present(0);">Presenter Mode</a></subtitle>
   <div class="slide-container">
+    <div class="heading">
+      <h1><a href="url">{title}</a></h1>
+      <div>
+        <button onclick="present(0);">Click here</button> to enter presenter mode.
+      </div>
+    </div>
     <Content />
   </div>
 </Base>
 
 <style lang="scss">
-  div {
+  @import "/src/variables.scss";
+  div.slide-container {
     max-width: 80ch;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  div.heading::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2em;
+  }
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: 2.1rem;
+    margin: 0;
+    margin-bottom: 0.3em;
+    // margin: 0 0 20px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 </style>
 
