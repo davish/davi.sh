@@ -90,6 +90,7 @@ const urls: UrlMap = {
   blog: "/blog/",
   projects: "/projects/",
   snippets: "/til/",
+  slides: "/slides/",
 };
 
 export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
