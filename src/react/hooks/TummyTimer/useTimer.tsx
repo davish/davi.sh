@@ -1,4 +1,12 @@
-import { useState, FunctionComponentElement, useEffect, useRef } from "react";
+import {
+  useState,
+  FunctionComponentElement,
+  useEffect,
+  useRef,
+  Ref,
+  MutableRefObject,
+} from "react";
+import { Synth } from "tone";
 
 export type StartTimerFunc = (seconds?: number) => void;
 export type StopTimerFunc = () => number;
@@ -17,7 +25,8 @@ const Timer = ({ timeRemaining: time }: { timeRemaining: number }) => {
 
 export default function useTimer(
   seconds: number,
-  done: () => void
+  done: () => void,
+  synthRef: MutableRefObject<Synth | null>
 ): [TimerComponent, StartTimerFunc, StopTimerFunc] {
   // time in milliseconds.
   const [time, setTime] = useState(seconds * 1000);
@@ -50,7 +59,22 @@ export default function useTimer(
       const updateTimer = () => {
         const elapsedTime = Date.now() - startTime;
         setTime((prevTime) => {
-          return Math.max(0, prevTime - elapsedTime);
+          const newTime = prevTime - elapsedTime;
+          if (Math.floor(newTime / 1000) !== Math.floor(prevTime / 1000)) {
+            console.log(newTime);
+            if (newTime < 4000 && newTime > 1000) {
+              if (!synthRef.current) {
+                synthRef.current = new Synth().toDestination();
+              }
+              synthRef.current.triggerAttackRelease("C4", "8n");
+            } else if (newTime <= 1000 && newTime > 0) {
+              if (!synthRef.current) {
+                synthRef.current = new Synth().toDestination();
+              }
+              synthRef.current.triggerAttackRelease("C5", "8n");
+            }
+          }
+          return Math.max(0, newTime);
         });
         if (time > 0) {
           animationFrameRef.current = requestAnimationFrame(updateTimer);

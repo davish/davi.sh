@@ -1,24 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useTimer, { TimerResult } from "src/react/hooks/TummyTimer/useTimer";
+import type * as Tone from "tone";
 
 const NUM_TIMERS = 5;
-const SECONDS_PER_TIMER = 120;
+const SECONDS_PER_TIMER = 5;
 const COLORS = ["#e85e48", "orange", "yellow", "#23c823", "#2c86d4"];
 
 const TummyTimer = () => {
   const [activeTimer, setActiveTimer] = useState(0);
+  const synthRef = useRef<Tone.Synth | null>(null);
 
   const timers: TimerResult[] = [];
   for (let i = 0; i < NUM_TIMERS; i++) {
     timers.push(
-      useTimer(SECONDS_PER_TIMER, () => {
-        console.log(`Timer #${i + 1} is done!`);
-        if (i < NUM_TIMERS) {
-          setActiveTimer((t) => t + 1);
-        } else {
-          console.log("All timers are done!");
-        }
-      })
+      useTimer(
+        SECONDS_PER_TIMER,
+        () => {
+          console.log(`Timer #${i + 1} is done!`);
+          if (i < NUM_TIMERS) {
+            setActiveTimer((t) => t + 1);
+          } else {
+            console.log("All timers are done!");
+          }
+        },
+        synthRef
+      )
     );
   }
 
@@ -60,9 +66,14 @@ const TummyTimer = () => {
       </div>
 
       <div className="timer-controls">
-        <button onClick={() => start()}>Start</button>
+        <button
+          onClick={() => {
+            start();
+          }}
+        >
+          Start
+        </button>
         <button onClick={() => stop()}>Stop!</button>
-        <button onClick={() => start(SECONDS_PER_TIMER)}>Reset</button>
       </div>
     </div>
   );
