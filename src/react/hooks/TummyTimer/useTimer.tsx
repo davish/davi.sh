@@ -6,7 +6,7 @@ import {
   Ref,
   MutableRefObject,
 } from "react";
-import { Synth } from "tone";
+import type * as Tone from "tone";
 
 export type StartTimerFunc = (seconds?: number) => void;
 export type StopTimerFunc = () => number;
@@ -26,7 +26,7 @@ const Timer = ({ timeRemaining: time }: { timeRemaining: number }) => {
 export default function useTimer(
   seconds: number,
   done: () => void,
-  synthRef: MutableRefObject<Synth | null>
+  synthRef: MutableRefObject<Tone.Synth | null>
 ): [TimerComponent, StartTimerFunc, StopTimerFunc] {
   // time in milliseconds.
   const [time, setTime] = useState(seconds * 1000);
