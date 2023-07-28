@@ -3,10 +3,9 @@ import {
   FunctionComponentElement,
   useEffect,
   useRef,
-  Ref,
   MutableRefObject,
 } from "react";
-import type * as Tone from "tone";
+import * as Tone from "tone";
 
 export type StartTimerFunc = (seconds?: number) => void;
 export type StopTimerFunc = () => number;
@@ -64,7 +63,7 @@ export default function useTimer(
             console.log(newTime);
             if (newTime < 4000 && newTime > 1000) {
               if (!synthRef.current) {
-                synthRef.current = new Synth().toDestination();
+                synthRef.current = new Tone.Synth().toDestination();
               }
               synthRef.current.triggerAttackRelease("C4", "8n");
             } else if (newTime <= 1000 && newTime > 0) {

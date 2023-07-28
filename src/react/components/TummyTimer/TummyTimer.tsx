@@ -3,7 +3,7 @@ import useTimer, { TimerResult } from "src/react/hooks/TummyTimer/useTimer";
 import type * as Tone from "tone";
 
 const NUM_TIMERS = 5;
-const SECONDS_PER_TIMER = 5;
+const SECONDS_PER_TIMER = 120;
 const COLORS = ["#e85e48", "orange", "yellow", "#23c823", "#2c86d4"];
 
 const TummyTimer = () => {
