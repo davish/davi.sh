@@ -1,6 +1,8 @@
 ---
 import Default from "./Default.astro";
 import Title from "./Title.astro";
+import Point from "./Point.astro";
+import Top from "./Top.astro";
 
 export type Props = {
   title: string;
@@ -17,6 +19,14 @@ const { type } = Astro.props;
       <Title {...props}>
         <slot />
       </Title>
+    ) : type === "point" ? (
+      <Point {...props}>
+        <slot />
+      </Point>
+    ) : type === "top" ? (
+      <Top {...props}>
+        <slot />
+      </Top>
     ) : (
       <Default {...props}>
         <slot />{" "}
@@ -40,14 +50,16 @@ const { type } = Astro.props;
 
     const scaleSlides = (scale: number) =>
       slides.forEach((slide) => {
-        // The following sets the width and height according to scale
-        // slide.style.width = 480 * scale + "px";
         slide.style.scale = scale + "";
         const compensatedMargin =
           (slide.getBoundingClientRect().height - 270) / 2;
         const margin = `calc(${compensatedMargin}px + 1rem)`;
         slide.style.marginTop = margin;
         slide.style.marginBottom = margin;
+        if (slide?.nextElementSibling?.classList.contains("slide")) {
+          slide.style.marginBottom = margin;
+          slide.style.marginBottom = `calc(${compensatedMargin * 2}px + 1rem)`;
+        }
       });
 
     scaleSlides(1);
