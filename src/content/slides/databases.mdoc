@@ -160,10 +160,263 @@ What is expressed a bit more awkwardly, though, is the course cart. What would h
 The user<->course relationship is a many-to-many relationship, and the way I've decided to represent the cart has resulted in some data duplication. This makes it fast and easy to access both a user's cart and a course's info, but it requires updating the information in two places if it ever changes. This is called denormalization, and it's a natural pattern in non-relational databases.
 
 
-{% slide title="" %}
+{% slide title="Querying Postgres" %}
+#### Key Takeaway: JOINs
+```js
+select *
+from COURSES
+  inner join SECTIONS on 
+    SECTIONS.course_id = COURSES.id
+  inner join REVIEWS on 
+	SECTIONS.review_id = REVIEWS.id
+where
+   COURSES.department = “CIS”
+   and COURSES.course_code = “188”
+```
+{% /slide %}
+
+{% slide title="Querying MongoDB" %}
+```js
+db.courses.find({
+	department: "CIS", 
+	course_number: "188"
+});
+```
+{% /slide %}
+
+{% slide title="Querying MongoDB" %}
+
+```js
+db.courses.find({
+	department: "CIS",
+	section.number: "005"
+});
+```
 
 {% /slide %}
 
-{% slide title="" %}
+{% slide title="Updating Postgres" %}
 
+```sql
+begin;
+update SECTIONS set professor = "Campbell Phalen"
+  inner join COURSES on 
+    SECTIONS.course_id = COURSES.id
+  where COURSES.department = "CIS"
+    and COURSES.course_number = "188"
+    and SECTIONS.professor = "Armaan Tobaccowalla"
+update SECTIONS set professor = "Rohan Gupta"
+  inner join COURSES on 
+    SECTIONS.course_id = COURSES.id
+  where COURSES.department = "CIS"
+    and COURSES.course_number = "188"
+    and SECTIONS.professor = "Peyton Walters"
+commit;
+```
+
+{% /slide %}
+
+{% slide title="Updating MongoDB" %}
+```js
+db.courses.updateOne(
+  {department: "CIS", course_code: "188"},
+  {$set: {
+    "sections.$[peyton].professor": "Rohan Gupta",
+    "sections.$[armaan].professor": "Campbell Phalen"
+  }},
+  {arrayFilters: [
+    {"peyton": {
+      "sections.professor": "Peyton Walters"
+	}},
+    {"armaan": {
+	"sections.professor": "Armaan Tobaccowalla"
+	}},
+  ]}
+);
+```
+{% /slide %}
+
+{% slide title="Data normalization for data entry" %}
+- Any piece of information will only exist in one place.
+- Applications need to be able to operate over entire
+logical entities that are made up from multiple tables.
+- Joins help with reading, transactions with writing.
+{% /slide %}
+
+{% slide title="Data denormalization for data access" %}
+- Information is duplicated in multiple places so it can be read with other data it is commonly accessed with.
+- Application must update information in all places on writes.
+- At the largest scales, virtually all data schemas are denormalized. Joins are too expensive on huge tables.
+{% /slide %}
+
+{% slide title="These days, all the top databases are multi-model." type="point"%}
+
+{% /slide %}
+
+{% slide title="Semi-structured Data in Postgres" %}
+```sql
+SELECT jdoc->'department', jdoc->'course_code'
+    FROM api WHERE jdoc @> '{"department": "CIS"}';
+```
+{% /slide %}
+
+{% slide title="Joins and Transactions in MongoDB" %}
+```js
+db.users.aggregate([
+    {$match: {name: "Campbell Phalen"}},
+    {$unwind: "$cart.courses"},
+    {$lookup: {
+      from "courses",
+      let:  {department: "$department",
+             course_number: "$course_number"},
+        pipeline: [
+            {$match: {
+                department: "$$department",
+                course_number: "$$course_number"}
+}] }}
+])
+```
+{% /slide %}
+
+{% slide title="Recap!" %}
+### SQL Databases
+Data is most naturally stored in normalized, de-duplicated flat tables, regardless of access pattern.
+
+### MongoDB
+Data is most naturally stored how objects are accessed by applications.
+{% /slide %}
+
+{% slide title="Recap!" %}
+### SQL Databases
+Rely more heavily on joins to ***read normalized data*** into a usable form by the application.
+
+### MongoDB
+Can de-emphasize joins and ***write denormalized data*** how it will eventually be used.
+{% /slide %}
+
+{% slide title="The secret ingredients in the Web Scale sauce" %}
+### High Availability
+### Horizontal Scaling
+{% /slide %}
+
+{% slide title="High Availability" %}
+## Replication
+- Store copies of data on multiple nodes in case of node failure
+- All queries to the replica set can be answered by a single node
+- Low-latency reads with replicas in different regions
+{% /slide %}
+
+{% slide title="Horizontal Scaling" %}
+## Sharding
+- Split data among multiple nodes to increase throughput & storage capacity.
+- Queries may need to touch multiple nodes to get a full answer.
+- Low-latency reads and writes with shards in different regions (data locality).
+{% /slide %}
+
+{% slide title="A note on application-level scaling" %}
+- Facebook was sharding their MySQL fleet as early as 2005.
+- The goal of all databases is to push shared operational complexity down the stack away from the application
+{% /slide %}
+
+{% slide title="A short history of distributed databases" %}
+- 2007: Amazon Dynamo Paper
+- 2009: MongoDB 1.0 Released
+- 2012: Spanner Paper
+- 2016: Vitess 2.0 adds cross-shard joins on top of MySQL
+- 2017: CockroachDB 1.0 Released
+- 2017: Postgres adds native logical replication
+{% /slide %}
+
+{% slide title="A short history of distributed databases" %}
+- 2007: Amazon Dynamo Paper (NoSQL)
+- 2009: MongoDB 1.0 Released (NoSQL)
+- 2012: Spanner Paper (SQL-ish)
+- 2016: Vitess 2.0 adds cross-shard joins on top of MySQL (SQL)
+- 2017: CockroachDB 1.0 Released (SQL)
+- 2017: Postgres adds native logical replication (SQL)
+{% /slide %}
+
+{% slide title="What’s hard about distributed SQL?" %}
+- Joins
+- Transactions
+{% /slide %}
+
+{% slide title="What’s hard about distributed SQL?" %}
+It’s easier to scale/shard denormalized datasets, whether it happens inside or outside of the database.
+{% /slide %}
+
+{% slide title="NewSQL" %}
+- Cloud Spanner
+- CockroachDB
+- Vitess (PlanetScale)
+- YugabyteDB
+- NuoDB
+- VoltDB
+{% /slide %}
+
+{% slide title="Where are we going from here?" type="title" %}
+
+To the ~~moon~~ cloud
+
+{% /slide %}
+
+{% slide title="Tuning, operating, indexing, and managing databases is hard" %}
+## Database Administrator
+A whole profession specializing in DBMS management.
+{% /slide %}
+
+{% slide title="Managed Services" %}
+- Amazon RDS Dedicated (2009)
+- DynamoDB (2012)
+- MongoDB Atlas Dedicated (2016)
+- CockroachDB Dedicated (2019)
+- PlanetScale (2021)
+{% /slide %}
+
+{% slide title="You’re still renting virtual hardware" %}
+
+{% /slide %}
+
+{% slide title="The Cloud is a leaky abstraction." type="point" %}
+
+{% /slide %}
+
+{% slide title="Amazon DynamoDB" %}
+### Cloud-only
+No self-hostable version
+
+### Distributed
+Data is partitioned & replicated
+
+### Auto-scaling
+
+### Pay for usage
+Not compute resources
+{% /slide %}
+
+{% slide title="Serverless billing model" %}
+### Cloud-only
+No self-hostable version
+
+### Distributed
+Data is partitioned & replicated
+
+### Auto-scaling
+
+### Pay for usage
+Not compute resources
+{% /slide %}
+
+{% slide title="Serverless Offerings" %}
+- DynamoDB (2012)
+- Firebase (2012)
+- Fauna (2017)
+- MongoDB (Beta 2021)
+- CockroachDB (Beta 2021)
+- PlanetScale (2021)
+{% /slide %}
+
+{% slide title="Thanks!" type="title" %}
+### Questions?
+davis@davishaupt.com
 {% /slide %}
