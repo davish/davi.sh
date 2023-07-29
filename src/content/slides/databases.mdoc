@@ -2,7 +2,10 @@
 title: "CIS188 Guest Lecture: Databases"
 ---
 
-This is a slide deck on databases!
+In May of 2022 I gave a guest lecture on databases to [CIS 188: DevOps](https://cis1880.org/), a course that I was a TA for in college. It was a great experience to lead a class again and answer questions on databases and life after college. When I gave the presentation I was working on Query Optimization at MongoDB, and I refer to that at points throughout the deck.
+
+---
+
 
 {% slide type="title" title="Distributed Databases"%}
 By Davis Haupt
@@ -23,8 +26,8 @@ The direction the industry is moving in.
 The topic of this lecture is "Distributed Databases," but I'm not assuming anyone here's taken CIS450 (I never took it myself), so we'll start off closer to the beginning of the story.
 
 
-{% slide type="point" title="What is a database?" %}
-> An organized collection of structured, queryable information (paraphrased from Oracle.com)
+{% slide type="top" title="What is a database?" %}
+> An organized collection of structured, queryable information *(paraphrased from Oracle.com)*
 {% /slide %}
 
 A filesystem might contain tons of structured JSON files, but filesystems don't have the capacity to query for data by anything except for filepath (which is basically an ID). Being able to store information AND get it back out again are key components of a database.
@@ -175,6 +178,10 @@ where
 ```
 {% /slide %}
 
+Here you can see the declarative nature of SQL. Rather than writing for loops where we build up our result set, we declare what fields we want returned to us, and that we will need to join together the COURSE, SECTION and REVIEW tables to retrieve the information we need. JOINs are the critical operation in relational databases. They allow us to construct the logical objects that our application requires without having to pull each table into our application and do the equivalent of a join manually there.
+
+Making the JOIN operation as efficient as possible is an extremely large component of SQL query optimization and database theory. Even so, JOINs remain expensive, and when applications reach a certain scale they will begin to denormalize their data in order to reduce the number of JOINs and be able to process more read queries per second.
+
 {% slide title="Querying MongoDB" %}
 ```js
 db.courses.find({
@@ -183,6 +190,8 @@ db.courses.find({
 });
 ```
 {% /slide %}
+
+With embedded documents, no JOINs necessary here! This MongoDB query will pull out all documents where the department and course number match.
 
 {% slide title="Querying MongoDB" %}
 
@@ -195,17 +204,22 @@ db.courses.find({
 
 {% /slide %}
 
+Mongo's query language lets you query nested documents very easily. This implicit array traversal is super useful for users, but it's something that's become pretty thorny for us to define precisely on the optimization team. It’s a bit like a join in SQL, and it has some similar optimization issues.
+
 {% slide title="Updating Postgres" %}
 
 ```sql
 begin;
-update SECTIONS set professor = "Campbell Phalen"
+update SECTIONS 
+  set professor = "Campbell Phalen"
   inner join COURSES on 
     SECTIONS.course_id = COURSES.id
   where COURSES.department = "CIS"
     and COURSES.course_number = "188"
-    and SECTIONS.professor = "Armaan Tobaccowalla"
-update SECTIONS set professor = "Rohan Gupta"
+    and SECTIONS.professor 
+      = "Armaan Tobaccowalla"
+update SECTIONS 
+  set professor = "Rohan Gupta"
   inner join COURSES on 
     SECTIONS.course_id = COURSES.id
   where COURSES.department = "CIS"
@@ -216,49 +230,70 @@ commit;
 
 {% /slide %}
 
+Now let’s see how to update our courses. Armaan and Peyton are, unfortunately, graduating this year, and we want to update our database to reflect some new professors.
+
+Notice here that our two updates are wrapped in a begin...commit block. This is a transaction. Transactions bundle multiple operations into a single all-or-nothing operation. If something goes wrong during either of these updates, the database will be rolled back to the state before either of these operations. After a transaction is committed or aborted, we'll never have a situation where Campbell is teaching two sections and Peyton is teaching another one.
+
 {% slide title="Updating MongoDB" %}
 ```js
 db.courses.updateOne(
   {department: "CIS", course_code: "188"},
   {$set: {
-    "sections.$[peyton].professor": "Rohan Gupta",
-    "sections.$[armaan].professor": "Campbell Phalen"
+    "sections.$[peyton].professor": 
+      "Rohan Gupta",
+    "sections.$[armaan].professor": 
+      "Campbell Phalen"
   }},
-  {arrayFilters: [
-    {"peyton": {
-      "sections.professor": "Peyton Walters"
-	}},
-    {"armaan": {
-	"sections.professor": "Armaan Tobaccowalla"
-	}},
+  {arrayFilters: [ {"peyton": {
+      "sections.professor": 
+        "Peyton Walters"
+    }},
+    {"armaan": { "sections.professor": 
+	  "Armaan Tobaccowalla"
+    }},
   ]}
 );
 ```
 {% /slide %}
 
-{% slide title="Data normalization for data entry" %}
+You can see that there wasn't any need for a transaction here, since all of the sections live in the same document, and MongoDB's storage engine enforces atomicity of operations on single documents.
+
+{% slide title="Data normalization for data entry" type="top" %}
 - Any piece of information will only exist in one place.
 - Applications need to be able to operate over entire
 logical entities that are made up from multiple tables.
 - Joins help with reading, transactions with writing.
 {% /slide %}
 
-{% slide title="Data denormalization for data access" %}
+The big benefit of normalization in SQL databases is that whenever a piece of information needs to be updated, it only needs to be updated in a single place. When information is changing frequently, this is a really helpful property. For those who subscribe to the "Don't Repeat Yourself" principle, normalization feels really natural. But it's not the whole story.
+
+{% slide title="Data denormalization for data access" type="top" %}
 - Information is duplicated in multiple places so it can be read with other data it is commonly accessed with.
 - Application must update information in all places on writes.
 - At the largest scales, virtually all data schemas are denormalized. Joins are too expensive on huge tables.
 {% /slide %}
 
-{% slide title="These days, all the top databases are multi-model." type="point"%}
+If you need to optimize for lots of reads, then data denormalization is the way to go.
 
+{% slide title="These days, all the top databases are multi-model." type="point"%}
+It’s about which way you’re “with the grain”.
 {% /slide %}
+
+Fortunately for you all, I'm not here to shill for my employer. Each of these systems has its benefits and downsides depending on the kind of application you're building and the kind of data you're looking to handle.
+
+These days, all the top databases are multi-model. It's a question of going with the grain and against the grain in whatever system you choose.
 
 {% slide title="Semi-structured Data in Postgres" %}
 ```sql
-SELECT jdoc->'department', jdoc->'course_code'
-    FROM api WHERE jdoc @> '{"department": "CIS"}';
+SELECT 
+  jdoc->'department', 
+  jdoc->'course_code'
+FROM api 
+WHERE jdoc @> '{"department": "CIS"}';
 ```
 {% /slide %}
+
+Since 2014, Postgres has supported the jsonb column type, that can hold unstructured and semi-structured JSON data in regular SQL tables.
 
 {% slide title="Joins and Transactions in MongoDB" %}
 ```js
@@ -267,16 +302,22 @@ db.users.aggregate([
     {$unwind: "$cart.courses"},
     {$lookup: {
       from "courses",
-      let:  {department: "$department",
-             course_number: "$course_number"},
-        pipeline: [
-            {$match: {
-                department: "$$department",
-                course_number: "$$course_number"}
+      let:  {
+        department: "$department",
+        course_number: "$course_number"
+      },
+      pipeline: [
+        {$match: {
+          department: "$$department",
+          course_number: "$$course_number"
+        }
 }] }}
 ])
 ```
 {% /slide %}
+I'm not here to shill for my company, but a big misconception about MongoDB is that it can't support JOINs or transactions like a relational database can. It in fact can support these use cases and operations. While the document model makes one-to-many and one-to-one relationships trivial to express and work with, most applications will have some many-to-many relationships that will either require full denormalization or some cross-collection operations to work well. We can see an example with our user's cart. In order to show all the details of courses in the cart, we need to join the user and course collections.
+
+It all comes back to data access patterns and how much you're comfortable going against the grain of your chosen technology. If we can determine that people will be viewing individual sections more often than they'll be viewing their carts, this more expensive operation for getting a user's cart would be acceptable. If people are viewing their carts a lot, we could consider denormalizing the data, and updating course data in the course collection and in each user's cart.
 
 {% slide title="Recap!" %}
 ### SQL Databases
@@ -285,7 +326,6 @@ Data is most naturally stored in normalized, de-duplicated flat tables, regardle
 ### MongoDB
 Data is most naturally stored how objects are accessed by applications.
 {% /slide %}
-
 {% slide title="Recap!" %}
 ### SQL Databases
 Rely more heavily on joins to ***read normalized data*** into a usable form by the application.
@@ -293,18 +333,31 @@ Rely more heavily on joins to ***read normalized data*** into a usable form by t
 ### MongoDB
 Can de-emphasize joins and ***write denormalized data*** how it will eventually be used.
 {% /slide %}
+  
+{% slide title="Distributed Databases" type="title" %}
+*That was a lot of Dev, and not much Ops*
+{% /slide %}
+
+What does all of this stuff have to do with DevOps and CIS188? A big theme of this class has been all about scaling up applications to run on the cloud while working huge numbers of requests. We've seen all the issues we've encountered when scaling stateless applications, and how technologies like Docker and Kubernetes can make our lives easier. Does any of this apply to stateful databases?
 
 {% slide title="The secret ingredients in the Web Scale sauce" %}
 ### High Availability
 ### Horizontal Scaling
 {% /slide %}
 
+When we're talking web-scale, we generally are talking about two different properties that we want our system to have. If you've been taking notes this semester, these will sound familiar.
+ 
 {% slide title="High Availability" %}
 ## Replication
 - Store copies of data on multiple nodes in case of node failure
 - All queries to the replica set can be answered by a single node
 - Low-latency reads with replicas in different regions
 {% /slide %}
+If one node running our database goes down, our application should not also go down. This is accomplished via data replication. We need to replicate our data to multiple nodes so that a single node failure won't result in data loss.
+
+Traditionally, databases were replicated but not necessarily highly available -- they would require a manual failover operation to a different primary database. These days, with the advent of the Raft consensus algorithm, failovers can be virtually entirely automated and take place in seconds.
+
+Replicated databases can be placed in different geographical regions to enable low-latency reads from many different locations.
 
 {% slide title="Horizontal Scaling" %}
 ## Sharding
@@ -312,6 +365,12 @@ Can de-emphasize joins and ***write denormalized data*** how it will eventually 
 - Queries may need to touch multiple nodes to get a full answer.
 - Low-latency reads and writes with shards in different regions (data locality).
 {% /slide %}
+
+As our application gets more and more users, our database should be able to store more data than can fit in a single hard drive bank and handle higher and higher read and write throughputs by adding more nodes that applications can read and write from concurrently. This is generally called data sharding.
+
+Traditionally, horizontal scaling was also handled at the application layer, with the application having some kind of routing table that routed requests to a specific database that had no knowledge of other shards. This meant that there was no way to join information across multiple shards within the database, though, and adding more shards to a database can be extremely costly and time-consuming.
+
+Shards can be placed in different geographic locations for low-latency reads and writes that can remain in the same region.
 
 {% slide title="A note on application-level scaling" %}
 - Facebook was sharding their MySQL fleet as early as 2005.
@@ -327,6 +386,8 @@ Can de-emphasize joins and ***write denormalized data*** how it will eventually 
 - 2017: Postgres adds native logical replication
 {% /slide %}
 
+Notice anything with the dates of these releases?
+
 {% slide title="A short history of distributed databases" %}
 - 2007: Amazon Dynamo Paper (NoSQL)
 - 2009: MongoDB 1.0 Released (NoSQL)
@@ -336,14 +397,26 @@ Can de-emphasize joins and ***write denormalized data*** how it will eventually 
 - 2017: Postgres adds native logical replication (SQL)
 {% /slide %}
 
+You can see pretty clearly that Distributed SQL didn’t really come onto the stage until a good 5 or so years after distributed NoSQL.
+
+Now what does SQL and NoSQL have to do with distributed databases? There's a lot of pros and cons when it comes to data modeling and what kind of database you want to use, but for most of the past decade, if you wanted to use a distributed database, your only options were NoSQL databases like Amazon DynamoDB, Apache Cassandra and MongoDB. Why is that the case?
+
 {% slide title="What’s hard about distributed SQL?" %}
 - Joins
 - Transactions
 {% /slide %}
 
+Like we talked about above, JOINs and transactions are much more critical to the use of SQL databases than they are to non-relational DBs. Both of these operations are very tricky to implement on only a single node. 
+
+Trying to reason about data that could live on separate nodes is exponentially more complex than even that.
+
 {% slide title="What’s hard about distributed SQL?" %}
 It’s easier to scale/shard denormalized datasets, whether it happens inside or outside of the database.
 {% /slide %}
+
+Non-relational DBs, on the other hand, don't have to worry about tables living on different nodes as much. Queries tend to be simpler since denormalized data schemas are optimized to store data how it is accessed.
+
+It's a lot easier to locate a single document that represents a course, with all its associated sections and reviews co-located together on one node, than it is to join together three or four different tables split across however many nodes as a user has shards.
 
 {% slide title="NewSQL" %}
 - Cloud Spanner
@@ -354,16 +427,28 @@ It’s easier to scale/shard denormalized datasets, whether it happens inside or
 - VoltDB
 {% /slide %}
 
+Distributed SQL is a lot more difficult, but the theory and algorithms necessary were worked out over the past decade, and there's now some really cool options available:
+
+Cloud Spanner (technically NoSQL since it uses a different query language, but it is relational)
+Vitess (an orchestration layer on top of MySQL)
+CockroachDB (Postgres-compatible SQL built in Go)
+
 {% slide title="Where are we going from here?" type="title" %}
 
 To the ~~moon~~ cloud
 
 {% /slide %}
 
+You can see how even setting up a single set of replicas requires a Kubernetes operator to do automatically. Once you bring in multiple shards in multiple regions, handling networking across a database cluster becomes a really difficult problem.
+
+How can we as developers avoid dealing with this complexity? Like other applications, we can move our databases into the cloud and have cloud providers and database vendors manage our deployments for us.
+
 {% slide title="Tuning, operating, indexing, and managing databases is hard" %}
 ## Database Administrator
 A whole profession specializing in DBMS management.
 {% /slide %}
+
+On top of all of the complexity of distributed databases, operating any database in production, even on a single node, is extremely difficult. There’s the entire profession of Database Administrator that works on managing databases in production.
 
 {% slide title="Managed Services" %}
 - Amazon RDS Dedicated (2009)
@@ -373,13 +458,23 @@ A whole profession specializing in DBMS management.
 - PlanetScale (2021)
 {% /slide %}
 
+Just like application deployment, databases have been moving to the Cloud in order to reduce complexity for developers for the past decade. You can see a few fully managed services in this list here.
+
+Many cloud providers offer managed database services directly, but differently from Kubernetes offerings and other managed services, many database vendors offer their own managed services that build on top of existing public clouds built by AWS, Google and Microsoft. These services, like EnterpriseDB for Postgres, MongoDB Atlas, Cockroach Cloud and Elastic Cloud, claim to have more expertise in operating databases that they were in charge of in developing.
+
 {% slide title="You’re still renting virtual hardware" %}
 
 {% /slide %}
 
+These services as they exist today do leave something to be desired, though. Here’s the MongoDB Atlas dedicated pricing page. You can see there’s still tons of knobs to turn, mostly related to VM sizing. How much RAM, how much storage, how many virtual CPU cores. Even though we’re not physically handling server racks and RAID arrays and CAT6 network cables, we still have to think about our compute resources in these discrete virtual machines that are sold by the cloud providers.
+
+You can see there’s some options for auto-scaling, but it’s not a smooth process. Clusters are scaled up and down between these discrete sizes. The Cloud lets us provision new machines with a snap, but we still have to think about those machines, for the most part.
+
 {% slide title="The Cloud is a leaky abstraction." type="point" %}
 
 {% /slide %}
+
+What I’m really trying to say is many cloud offerings are a leaky abstraction. As developers, we ultimately want to run our application and not worry about what hardware it’s running on. But for lots of Cloud products today, especially databases, this isn’t the case. Companies still employ database administrators to adjust settings in the database to tune performance for each company’s specific workloads.
 
 {% slide title="Amazon DynamoDB" %}
 ### Cloud-only
@@ -394,6 +489,12 @@ Data is partitioned & replicated
 Not compute resources
 {% /slide %}
 
+Amazon DynamoDB is, in my opinion a big exception to this. It was built as a distributed system from day 1, unlike traditional SQL databases. It’s not even possible to self-host it on non-AWS hardware. It can scale up and down based on how many reads and writes are being sent to it.
+
+But most importantly, you don’t generally pay for compute resources like vCPUs or RAM on DynamoDB. Instead, you pay directly for usage: how many times you read your data and how many writes you send to the database. Anyone who’s taken NETS212 in this room has probably been burned by this in an AWS bill before. 
+
+This is a big improvement over renting virtual hardware that might sit idle because it can’t scale up and down fast enough to meet the precise demand of an application. AWS is now responsible for all the tuning and scaling of individual database nodes, which you, as a user of DynamoDB, aren’t even aware of.
+
 {% slide title="Serverless billing model" %}
 ### Cloud-only
 No self-hostable version
@@ -407,6 +508,10 @@ Data is partitioned & replicated
 Not compute resources
 {% /slide %}
 
+The DynamoDB model is, fundamentally, a serverless model. You never have to think about the logical or physical nodes that your database is actually running on. 
+
+When companies talk about Serverless products, they’re taking advantage of a buzzword, but at the end of the day, the shared thread among different serverless products is the billing model: paying for usage rather than discrete compute resources
+
 {% slide title="Serverless Offerings" %}
 - DynamoDB (2012)
 - Firebase (2012)
@@ -415,6 +520,10 @@ Not compute resources
 - CockroachDB (Beta 2021)
 - PlanetScale (2021)
 {% /slide %}
+
+Here’s another timeline showing a progression of Serverless offerings by some of the databases we’ve discussed today. You can see that while DynamoDB and Firebase have been around since 2012, the space is really starting to heat up in recent years. We’ll see how these products mature over the next year or two, but in my opinion, this is the next step for distributed databases to take.
+
+Applications used to have to shard any data without relying on a database to handle that complexity. Now we have distributed databases that can take care of a ton of distributed systems problems, but lots of operational complexity still remains even when we can use managed cloud services. Ultimately, the industry seems to be moving towards a model where all that complexity is abstracted away from the developer, and a database can be accessed and managed just as easily as a third-party API.
 
 {% slide title="Thanks!" type="title" %}
 ### Questions?
