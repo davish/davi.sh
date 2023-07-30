@@ -3,9 +3,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@layouts/*": ["./src/layouts/*"]
+      "@layouts/*": [
+        "./src/layouts/*"
+      ]
     },
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
