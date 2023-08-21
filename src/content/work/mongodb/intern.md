@@ -4,6 +4,7 @@ location: New York, NY
 title: Software Engineering Intern
 start: 2019-05-28
 end: 2019-08-02
+print: false
 ---
 
 Intern on the Query team, which designs and maintains the implementation of the MongoDB Query Language, including query planning and optimization and the aggregation framework.

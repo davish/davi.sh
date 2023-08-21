@@ -1,7 +1,7 @@
 ---
 name: Obsidian Full Calendar
 tags: [obsidian-full-calendar, obsidian]
-description: Plugin for the PKM tool Obsidian with over 70,000 users.
+description: Plugin for the PKM tool Obsidian with over 100,000 users.
 date: 2022-02
 details: true
 ---
