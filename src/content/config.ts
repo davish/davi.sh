@@ -67,12 +67,23 @@ const SnippetCollection = defineCollection({
   }),
 });
 
+const ShortCollection = defineCollection({
+  schema: z.object({
+    date: partialDate(),
+    tags: z.array(z.string()).default([]),
+    url: z.string().url().optional(),
+    via: z.string().url().optional(),
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
   projects: ProjectCollection,
   blog: BlogPostCollection,
   snippets: SnippetCollection,
+  shorts: ShortCollection,
 };
 
 type UrlMap = Partial<{

@@ -1,0 +1,37 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Base from "./Base.astro";
+import Post from "src/components/shorts/Post.astro";
+
+type Props = { page: Page<CollectionEntry<"shorts">> };
+
+const { page } = Astro.props;
+---
+
+<Base path="µ" title="🐦 microblog" description="µblog">
+  <section id="intro">
+    <h1>The µ-blog</h1>
+    <h2>Collecting interesting links and commentary from around the Web.</h2>
+  </section>
+  <section id="feed">
+    {page.data.map((p) => <Post content={p} />)}
+  </section>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  #intro {
+    h1 {
+      @include serif;
+      margin-bottom: 0;
+    }
+    h2 {
+      @include sans-serif;
+      font-weight: 400;
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
