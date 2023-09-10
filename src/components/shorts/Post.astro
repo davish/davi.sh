@@ -12,11 +12,19 @@ const {
   },
 } = Astro.props;
 
+const [pack, name] = (() => {
+  if (!url) {
+    return ["ph", "scroll"];
+  }
+
+  return ["tabler", "link"];
+})();
+
 const { Content } = await render();
 ---
 
 <div class="card">
-  <div class="icon"><Icon pack="fe" name="coffee" /></div>
+  <div class="icon"><Icon pack={pack} name={name} /></div>
   <div class="body">
     <div class="info">
       <span class="title">{url ? <a href={url}>{title}</a> : title}</span>
@@ -30,36 +38,52 @@ const { Content } = await render();
       •
       <span class="date">{toReadableString(date)}</span>
     </div>
-    <div class="content"><Content /></div>
+    <div class="short-content"><Content /></div>
   </div>
+</div>
 
-  <style lang="scss">
-    @import "/src/variables.scss";
+<style lang="scss">
+  @import "/src/variables.scss";
 
-    .card {
-      @include sans-serif;
-      border-width: 1px;
-      border-color: black;
-      border-style: solid;
+  .card {
+    @include sans-serif;
+    border-width: 1px;
+    border-color: $background-color-solid;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 0.75rem;
 
-      max-width: 60ch;
-      display: flex;
+    max-width: 60ch;
+    display: flex;
+
+    transition: 0.15s;
+    &:hover {
+      background-color: $background-color;
     }
+  }
 
-    .body {
-      display: flex;
-      flex-direction: column;
-    }
-
+  .body {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.75rem;
     .info {
       margin-top: 10px;
+      .title {
+        font-weight: 800;
+      }
       .date {
         @include dimmed;
       }
     }
+  }
 
-    [astro-icon] {
-      width: 40px;
-    }
-  </style>
-</div>
+  [astro-icon] {
+    width: 40px;
+  }
+</style>
+
+<style lang="scss" is:global>
+  .short-content p {
+    margin-block-start: 0.5rem;
+  }
+</style>
