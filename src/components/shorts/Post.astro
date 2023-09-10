@@ -2,6 +2,10 @@
 import type { CollectionEntry } from "astro:content";
 import { toReadableString } from "src/utils";
 import Icon from "astro-icon";
+import {
+  getUrlForCollectionEntry,
+  makePathForShortPost,
+} from "src/content/config";
 
 type Props = { content: CollectionEntry<"shorts"> };
 
@@ -9,6 +13,7 @@ const {
   content: {
     data: { title, url, via, date },
     render,
+    slug,
   },
 } = Astro.props;
 
@@ -24,7 +29,11 @@ const { Content } = await render();
 ---
 
 <div class="card">
-  <div class="icon"><Icon pack={pack} name={name} /></div>
+  <div class="icon">
+    <a href={getUrlForCollectionEntry("shorts", makePathForShortPost(slug))}
+      ><Icon pack={pack} name={name} /></a
+    >
+  </div>
   <div class="body">
     <div class="info">
       <span class="title">{url ? <a href={url}>{title}</a> : title}</span>

@@ -94,6 +94,27 @@ const urls: UrlMap = {
   blog: "/blog/",
   projects: "/projects/",
   snippets: "/til/",
+  shorts: "/µ/",
+};
+
+export type ShortParam = {
+  year: string;
+  month: string;
+  day: string;
+  post: string;
+};
+export const splitShortSlug = (slug: string): ShortParam => {
+  const parts = slug.split("-");
+  if (parts.length !== 4) {
+    throw new Error("short post slug must have 4 parts.");
+  }
+  const [year, month, day, post] = parts as [string, string, string, string];
+  return { year, month, day, post };
+};
+
+export const makePathForShortPost = (slug: string): string => {
+  const { year, month, day, post } = splitShortSlug(slug);
+  return `${year}/${month}/${day}/${post}`;
 };
 
 export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
