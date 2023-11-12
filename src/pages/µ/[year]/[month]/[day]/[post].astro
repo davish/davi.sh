@@ -29,5 +29,15 @@ const {
   title={data.title}
   description={data.title}
 >
-  <Post content={Astro.props.entry} />
+  <div class="spacer"></div>
+  <div class="main">
+    <Post content={Astro.props.entry} />
+  </div>
+  <div class="spacer"></div>
 </Base>
+
+<style lang="scss">
+  div.spacer {
+    flex: 1;
+  }
+</style>

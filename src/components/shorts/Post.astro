@@ -47,7 +47,9 @@ const { Content } = await render();
       •
       <span class="date">{toReadableString(date)}</span>
     </div>
-    <div class="short-content"><Content /></div>
+    <div class="short-content">
+      <p><Content /></p>
+    </div>
   </div>
 </div>
 
@@ -88,6 +90,7 @@ const { Content } = await render();
 
   [astro-icon] {
     width: 40px;
+    color: $util-color;
   }
 </style>
 

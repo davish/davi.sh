@@ -15,7 +15,13 @@ const { page } = Astro.props;
     <h2>Collecting interesting links and commentary from around the Web.</h2>
   </section>
   <section id="feed">
-    {page.data.map((p) => <Post content={p} />)}
+    {
+      page.data.map((p) => (
+        <div class="post">
+          <Post content={p} />
+        </div>
+      ))
+    }
   </section>
 </Base>
 
@@ -32,6 +38,12 @@ const { page } = Astro.props;
       font-size: 1.2rem;
       margin-top: 0.5rem;
       margin-bottom: 2rem;
+    }
+  }
+
+  #feed {
+    .post {
+      margin-bottom: 0.5rem;
     }
   }
 </style>
