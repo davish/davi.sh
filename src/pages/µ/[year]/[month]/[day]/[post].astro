@@ -1,0 +1,43 @@
+---
+import Base from "@layouts/Base.astro";
+import type { GetStaticPaths } from "astro";
+import { CollectionEntry, getCollection } from "astro:content";
+import { splitShortSlug, makePathForShortPost } from "src/content/config";
+import Post from "src/components/shorts/Post.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const shorts = (await getCollection("shorts")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+
+  return shorts.map((entry) => ({
+    params: splitShortSlug(entry.slug),
+    props: { entry },
+  }));
+};
+
+type Props = { entry: CollectionEntry<"shorts"> };
+
+const {
+  entry: { data, slug },
+} = Astro.props;
+---
+
+<Base
+  path={`µ/${splitShortSlug(slug).post}`}
+  back="/µ"
+  title={data.title}
+  description={data.title}
+>
+  <div class="spacer"></div>
+  <div class="main">
+    <Post content={Astro.props.entry} />
+  </div>
+  <div class="spacer"></div>
+</Base>
+
+<style lang="scss">
+  div.spacer {
+    flex: 1;
+  }
+</style>

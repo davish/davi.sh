@@ -1,0 +1,101 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { toReadableString } from "src/utils";
+import Icon from "astro-icon";
+import {
+  getUrlForCollectionEntry,
+  makePathForShortPost,
+} from "src/content/config";
+
+type Props = { content: CollectionEntry<"shorts"> };
+
+const {
+  content: {
+    data: { title, url, via, date },
+    render,
+    slug,
+  },
+} = Astro.props;
+
+const [pack, name] = (() => {
+  if (!url) {
+    return ["ph", "scroll"];
+  }
+
+  return ["tabler", "link"];
+})();
+
+const { Content } = await render();
+---
+
+<div class="card">
+  <div class="icon">
+    <a href={getUrlForCollectionEntry("shorts", makePathForShortPost(slug))}
+      ><Icon pack={pack} name={name} /></a
+    >
+  </div>
+  <div class="body">
+    <div class="info">
+      <span class="title">{url ? <a href={url}>{title}</a> : title}</span>
+      {
+        via ? (
+          <span class="via">
+            <a href={via}>via</a>
+          </span>
+        ) : null
+      }
+      •
+      <span class="date">{toReadableString(date)}</span>
+    </div>
+    <div class="short-content">
+      <p><Content /></p>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .card {
+    @include sans-serif;
+    border-width: 1px;
+    border-color: $background-color-solid;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 0.75rem;
+
+    max-width: 60ch;
+    display: flex;
+
+    transition: 0.15s;
+    &:hover {
+      background-color: $background-color;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.75rem;
+    .info {
+      margin-top: 10px;
+      .title {
+        font-weight: 800;
+      }
+      .date {
+        @include dimmed;
+      }
+    }
+  }
+
+  [astro-icon] {
+    width: 40px;
+    color: $util-color;
+  }
+</style>
+
+<style lang="scss" is:global>
+  .short-content p {
+    margin-block-start: 0.5rem;
+  }
+</style>

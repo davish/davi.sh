@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import Shorts from "@layouts/Shorts.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const shorts = (await getCollection("shorts")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  return paginate(shorts, { pageSize: 5 });
+};
+
+type Props = { page: Page<CollectionEntry<"shorts">> };
+
+const props = Astro.props;
+---
+
+<Shorts page={props.page} />

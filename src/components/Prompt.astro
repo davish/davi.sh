@@ -8,7 +8,16 @@ const { path = "" } = Astro.props;
 <ul aria-hidden="true">
   <span id="container">
     <span id="prefix">&gt;</span>
-    <span id="text"> ~/{path}</span>
+    {
+      path !== "µ" ? (
+        <span id="text"> ~/{path}</span>
+      ) : (
+        <span id="text">
+          ~/<span class="mu">{path}</span>
+        </span>
+      )
+    }
+
     <span id="cursor"></span>
   </span>
 </ul>
@@ -36,6 +45,10 @@ const { path = "" } = Astro.props;
 
       @media #{$media-size-phone} {
         font-size: 0.9rem;
+      }
+
+      .mu {
+        @include serif;
       }
     }
 

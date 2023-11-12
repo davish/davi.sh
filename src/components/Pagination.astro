@@ -14,11 +14,12 @@ const { page } = Astro.props;
 // 1 2 3 4 5
 // 1 . 4 5 6 . 10
 
+const SPACER = "...";
 const NUM_ADJACENT = 1;
-const pages: (number | "...")[] = [];
+const pages: (number | typeof SPACER)[] = [];
 pages.push(1);
 if (page.currentPage - NUM_ADJACENT > 2) {
-  pages.push("...");
+  pages.push(SPACER);
 }
 let didPushLast = false;
 
@@ -36,7 +37,7 @@ for (
 }
 
 if (page.currentPage + NUM_ADJACENT + 1 < page.lastPage) {
-  pages.push("...");
+  pages.push(SPACER);
 }
 if (!didPushLast) {
   pages.push(page.lastPage);
@@ -60,7 +61,7 @@ if (!didPushLast) {
   }
   {
     pages.map((pageNum) =>
-      pageNum !== "..." ? (
+      pageNum !== SPACER ? (
         <li class={`page-item ${pageNum === page.currentPage ? "active" : ""}`}>
           <a
             href={`/blog/${pageNum === 1 ? "" : pageNum}`}
