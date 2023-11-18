@@ -178,4 +178,10 @@ The example code can be found [in the `home-manager` docs](https://nix-community
 }
 ```
 
-And there you have it! You can now run `darwin-rebuild switch --flake ~/.config/nix` to rebuild all your configuration. Another useful link is the list of [nix-darwin configuration options](https://daiderd.com/nix-darwin/manual/index.html). I believe this is the best place to go for information on what can be configured with `nix-darwin`.
+And there you have it! You can install nix-darwin with:
+
+```bash
+nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake ~/.config/nix
+```
+
+You can now run `darwin-rebuild switch --flake ~/.config/nix` to rebuild all your configuration whenever you make a change. Another useful link is the list of [nix-darwin configuration options](https://daiderd.com/nix-darwin/manual/index.html). I believe this is the best place to go for information on what can be configured with `nix-darwin`.
