@@ -62,6 +62,8 @@ The default flake puts the configuration inline to the flake.nix. I decided to c
 }
 ```
 
+You should remember to change your username and home directory to match.
+
 2. Modify `flake.nix` to work with `home-manager`.
 The example code can be found [in the `home-manager` docs](https://nix-community.github.io/home-manager/index.html#sec-flakes-nix-darwin-module). In case that link breaks, here it is:
 
