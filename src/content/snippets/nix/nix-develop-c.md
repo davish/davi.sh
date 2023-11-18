@@ -1,5 +1,5 @@
 ---
-title: `nix develop -c`
+title: nix develop -c $SHELL
 published: 2023-11-18
 category: Nix
 description: "Run zsh with 'nix develop'"
