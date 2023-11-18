@@ -63,7 +63,7 @@ const SnippetCollection = defineCollection({
     description: z.string(),
     published: partialDate(),
     modified: partialDate().optional(),
-    tag: z.string(),
+    category: z.string(),
   }),
 });
 

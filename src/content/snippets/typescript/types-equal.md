@@ -1,7 +1,7 @@
 ---
 title: "typesEqual"
 published: 2023-04-06
-tag: "Typescript"
+category: "Typescript"
 description: "Ask the Typescript compiler how two types are different"
 ---
 ```ts

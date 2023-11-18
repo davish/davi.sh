@@ -1,7 +1,7 @@
 ---
 title: "getUrl()"
 published: 2023-03-26
-tag: "Astro"
+category: "Astro"
 description: "URL routing for content collections"
 ---
 

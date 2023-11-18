@@ -1,7 +1,7 @@
 ---
 title: "form_valid() overload"
 published: 2023-03-25
-tag: "Django"
+category: "Django"
 description: "Handle uploads with class-based generic views"
 ---
 

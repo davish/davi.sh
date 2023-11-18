@@ -1,7 +1,7 @@
 ---
 title: "ListSerializerMixin"
 published: 2023-03-28
-tag: "Django"
+category: "Django"
 description: "Specify a different viewset serializer for lists"
 ---
 

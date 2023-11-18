@@ -1,7 +1,7 @@
 ---
 title: "freeport"
 published: 2023-04-22T09:54:46Z
-tag: "Bash"
+category: "Bash"
 description: "Kill a process that's hogging a port on MacOS"
 ---
 

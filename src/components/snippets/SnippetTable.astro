@@ -19,13 +19,13 @@ const { entries } = Astro.props;
   <tbody>
     {
       entries.map(
-        ({ slug, data: { title, description, published, modified, tag } }) => (
+        ({ slug, data: { title, description, published, modified, category } }) => (
           <tr>
             <td>
               <a href={getUrlForCollectionEntry("snippets", slug)}>{title}</a>
             </td>
             <td class="description">{description}</td>
-            <td>{tag}</td>
+            <td>{category}</td>
             <td>{toMonthYear(modified || published)}</td>
           </tr>
         )

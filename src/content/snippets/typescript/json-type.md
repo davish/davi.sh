@@ -1,7 +1,7 @@
 ---
 title: "Json"
 published: 2023-04-09T09:45:16Z
-tag: "Typescript"
+category: "Typescript"
 description: "Typescript type for the JSON spec"
 ---
 
