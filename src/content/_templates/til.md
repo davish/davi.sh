@@ -1,6 +1,6 @@
 ---
 title: "{{VALUE:Title}}"
 published: {{DATE}}
-tag: "{{VALUE:Tag}}"
+category: "{{VALUE:Tag}}"
 description: ""
 ---
