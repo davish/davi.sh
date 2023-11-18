@@ -59,12 +59,6 @@ The default flake puts the configuration inline to the flake.nix. I decided to c
         name = "davish";
         home = "/Users/davish";
     };
-
-    homebrew.enable = true;
-    homebrew.casks = [
-        "visual-studio-code"
-    ];
-    homebrew.brews = [];
 }
 ```
 
