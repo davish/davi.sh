@@ -2,16 +2,15 @@
 title: Setting up Nix on macOS
 published: 2023-11-17
 category: Nix
-description: Setting up a new Mac with Nix.
+description: nix-darwin and home-manager
 ---
-
 I recently got a new computer and am spending some time actually digging into Nix for managing dependencies. My main issue the last time I tried using Nix was how tough it was for me to wade through the documentation, so I was determined to try a different path this time. I started off with the very opinionated [Zero to Nix](https://zero-to-nix.com/start/install) tutorial series, which I thought was a great introduction.
 
 After learning about Nix and Flakes, and getting my website building locally with a nix-powered development environment courtesy of the guidance in [Part 6](https://zero-to-nix.com/start/init-flake), the next step was to see what else I could do. I'd heard of two different tools, [`home-manager`](https://github.com/nix-community/home-manager) and [`nix-darwin`](https://github.com/LnL7/nix-darwin). I started off setting up `home-manager`, but I was confused on how I should be installing graphical applications like VS Code, and system utilities like Karabiner Elements. It turned out `nix-darwin` was the answer there.
 
 To paraphrase a [Reddit thread I found](https://www.reddit.com/r/NixOS/comments/jznwne/effectively_combining_homemanager_and_nixdarwin/), `nix-darwin` manages system-level programs and configuration, while `home-manager` manages user configuration. You can actually get `nix-darwin` to call into `home-manager` as part of its own configuration to use both at the same time. This is described in the [`home-manager` reference docs](https://nix-community.github.io/home-manager/index.html#sec-install-nix-darwin-module), but like many Nix resources, it's not very simple for a beginner to figure out how to actually put this snippet to use in their own configuration.
 
-Before following these instructions, you should follow the Zero to Nix guide or install Nix on your system in some other way.
+Before following these instructions, you should follow the [Zero to Nix](https://zero-to-nix.com/start/install) guide or install Nix on your system in some other way.
 
 I'm going to lay out the basic steps that I followed below while sharing each configuration file.
 
@@ -185,3 +184,4 @@ nix run nix-darwin --experimental-feature nix-command --experimental-feature fla
 ```
 
 You can now run `darwin-rebuild switch --flake ~/.config/nix` to rebuild all your configuration whenever you make a change. Another useful link is the list of [nix-darwin configuration options](https://daiderd.com/nix-darwin/manual/index.html). I believe this is the best place to go for information on what can be configured with `nix-darwin`.
+

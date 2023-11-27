@@ -28,3 +28,4 @@ pnpm-debug.log*
 
 src/content/blog/images
 src/content/blog/_drafts
+src/content/**/_*
