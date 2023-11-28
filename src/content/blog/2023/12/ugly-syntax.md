@@ -15,8 +15,6 @@ There's countless descriptions of monads on the software-engineer-by-day-indie-b
 
 [^1]: For the PL geeks reading, functions that take callbacks have a function signature that matches the monadic bind operation when you squint at it.
 
-TODO indent code with spaces
-
 ```js
 function resizeFiles(source, widths) {
   fs.readdir(source, function (err, files) {
@@ -49,7 +47,6 @@ function resizeFiles(source, widths) {
 
 Everyone hates callbacks. So ECMAScript 2015 came up with [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), a standard library solution that reduced indentation on chained asynchronous operations:
 
-TODO: fix this example
 ```js
 function resizeFiles(source, widths) {
   return fs.readdir(source).then(files => Promise.all(
