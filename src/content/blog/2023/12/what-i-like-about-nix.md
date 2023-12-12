@@ -8,7 +8,7 @@ draft: false
 ---
 I got a new computer recently and decided to take the plunge setting it up with Nix[^1].  [I wrote up a snippet](https://davi.sh/til/nix/nix-macos-setup/) on how I set everything up and you can find my whole configuration [on GitHub](https://github.com/davish/setup). I've only scratched the surface of what Nix can do – In this post I wanted to focus on my subjective impression of Nix so far and why I feel I've been enjoying it.
 
-[^1]: Nix isn't the easiest thing to introduce since it can refer to a few different distinct components or the whole ecosystem. I find [the conceptual documentation on Zero to Nix](https://zero-to-nix.com/concepts/nix) to be more approachable than the official docs.
+[^1]: Nix isn't the easiest thing to introduce since it can refer to a few different distinct components or the whole ecosystem. In case you haven't heard of Nix before or just want to learn more, I find [the conceptual documentation on Zero to Nix](https://zero-to-nix.com/concepts/nix) to be more approachable than the official docs.
 ## Long-term and shared memory
 No need to worry about remembering what switch you flipped in settings six months ago after reading an OSXDaily.com post, or what command you ran in a shell at 3am the morning you unboxed your new computer. Any change you've made to, for example, [hide the dock by default](https://github.com/davish/setup/blob/main/darwin/default.nix#L46) or allow for repeating keys in [VSCode and other editors](https://github.com/davish/setup/blob/main/darwin/default.nix#L48-L49) is there for later review.
 
