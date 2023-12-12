@@ -1,3 +1,6 @@
+---
+import "remark-callouts/styles.css";
+---
 <div id="blog-post-content">
   <slot />
 </div>
@@ -65,5 +68,22 @@
       padding: 0;
       font-size: inherit;
     }
+  }
+  blockquote.callout {
+    border-radius:10px;
+    margin: 0;
+    width: 100%;
+    .callout-title {
+      @include sans-serif;
+      border-radius: 10px 10px 0 0 ;
+    }
+    .callout-content {
+      p {
+        margin-top: 0 !important; 
+        font-size: .95rem !important;
+        line-height: 1.1;
+      }
+    }
+
   }
 </style>
