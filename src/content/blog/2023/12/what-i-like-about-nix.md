@@ -1,6 +1,6 @@
 ---
 title: What I Like About Nix
-date: 2023-12-11T12:00:00
+date: 2023-12-12T12:00:00
 tags:
   - nix
 description: Tell me I'm the only one
