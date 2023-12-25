@@ -6,3 +6,4 @@ This is my website. There are many like it, but this one's mine. I've pulled bit
 - [Edward Tufte via Dave Liepmann](https://edwardtufte.github.io/tufte-css/)
 - [Josh Comeau's Snippets](https://www.joshwcomeau.com/snippets/)
 - [Simon Willison's TIL site](https://til.simonwillison.net)
+- [Arne Bahlo's personal site](https://arne.me)
