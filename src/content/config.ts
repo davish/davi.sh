@@ -2,8 +2,8 @@ import {
   z,
   defineCollection,
   getCollection,
-  CollectionEntry,
 } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 const partialDate = () =>
   z
@@ -77,6 +77,13 @@ const ShortCollection = defineCollection({
   }),
 });
 
+const WeeklyCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    date: partialDate(),
+  })
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
@@ -84,6 +91,7 @@ export const collections = {
   blog: BlogPostCollection,
   snippets: SnippetCollection,
   shorts: ShortCollection,
+  weekly: WeeklyCollection,
 };
 
 type UrlMap = Partial<{
@@ -95,6 +103,7 @@ const urls: UrlMap = {
   projects: "/projects/",
   snippets: "/til/",
   shorts: "/µ/",
+  weekly: "/weekly/"
 };
 
 export type ShortParam = {
@@ -137,4 +146,11 @@ export async function getSnippets(
   const date = (e: CollectionEntry<"snippets">) =>
     e.data.modified || e.data.published;
   return snippets.sort((a, b) => date(b).valueOf() - date(a).valueOf());
+}
+
+export async function getWeeklies(
+  pred?: (e: CollectionEntry<"weekly">) => boolean
+) {
+  const snippets = await getCollection("weekly", (s) => !pred || pred(s));
+  return snippets.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
