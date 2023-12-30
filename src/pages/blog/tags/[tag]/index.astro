@@ -6,7 +6,7 @@ import Base from "../../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
   const tags = Array.from(
-    new Set((await getBlogPosts()).flatMap((p) => p.data.tags))
+    new Set((await getBlogPosts()).flatMap((p) => p.data.tags)),
   );
   return tags.map((t) => ({ params: { tag: t } }));
 }
@@ -16,7 +16,7 @@ const { tag } = Astro.params;
 const posts = (
   await getCollection(
     "blog",
-    (p) => !p.data.draft && tag && p.data.tags.includes(tag)
+    (p) => !p.data.draft && tag && p.data.tags.includes(tag),
   )
 ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
@@ -31,7 +31,7 @@ const posts = (
     <h1>Articles for #{tag}</h1>
   </section>
   <section id="list">
-    {posts.map((p: any) => <PostEntry {...p} />)}
+    {posts.map((p: any) => <PostEntry post={p} collection="blog" />)}
   </section>
 </Base>
 
