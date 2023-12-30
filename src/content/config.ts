@@ -2,8 +2,8 @@ import {
   z,
   defineCollection,
   getCollection,
-  CollectionEntry,
 } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 const partialDate = () =>
   z
