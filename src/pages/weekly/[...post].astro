@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getWeeklies } from "src/content/config";
+import Base from "@layouts/Base.astro";
+import Article from "src/components/Article.astro";
+import PostContent from "src/components/blog/post/PostContent.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const posts = await getWeeklies();
+    return posts.map((entry) => ({
+        params: { post: entry.slug },
+        props: { entry },
+    }));
+};
+
+type Props = { entry: CollectionEntry<"weekly"> };
+
+const {
+    entry: { data: frontmatter, id, render },
+} = Astro.props;
+
+const basename = id.split("/").pop() || "";
+
+const { Content } = await render();
+---
+
+<Base
+    path={"weekly/" + basename}
+    back="/weekly"
+    title={frontmatter.title}
+    description={`Weeky links for ${frontmatter.date.toLocaleDateString()}`}
+>
+    <Article>
+        <PostContent>
+            <Content />
+        </PostContent>
+    </Article>
+</Base>

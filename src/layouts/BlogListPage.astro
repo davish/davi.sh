@@ -1,22 +1,28 @@
 ---
 import type { Page } from "astro";
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry, ContentCollectionKey } from "astro:content";
 import Pagination from "src/components/Pagination.astro";
 import PostEntry from "src/components/blog/list/PostEntry.astro";
 import Base from "./Base.astro";
 
-type Props = { page: Page<CollectionEntry<"blog">> };
+type Props = {
+  page: Page<CollectionEntry<"blog">>;
+  path: string;
+  title: string;
+  description: string;
+  collection: "blog" | "weekly";
+};
 
-const { page } = Astro.props;
+const { page, path, title, description, collection } = Astro.props;
 ---
 
-<Base path="blog" title="Blog" description={"Davis Haupt's Blog"}>
+<Base path={path} title={title} description={description}>
   <section id="intro">
-    <h1>Thoughts and Writeups</h1>
-    by Davis Haupt
+    <slot />
   </section>
+
   <section id="list">
-    {page.data.map((p) => <PostEntry {...p} />)}
+    {page.data.map((p) => <PostEntry post={p} collection={collection} />)}
   </section>
   <Pagination page={page} />
 </Base>

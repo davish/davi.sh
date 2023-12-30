@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import {
   toReadableString,
   getSummary,
@@ -8,15 +7,25 @@ import {
 } from "../../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 
-export type Props = CollectionEntry<"blog">;
+export type Props = {
+  post: {
+    slug: string;
+    body: string;
+    data: { title: string; date: Date };
+  };
+  collection: "blog" | "weekly";
+};
 
 const {
-  slug,
-  data: { title, date },
-  body,
+  post: {
+    slug,
+    data: { title, date },
+    body,
+  },
+  collection,
 } = Astro.props;
 
-const url = getUrlForCollectionEntry("blog", slug);
+const url = getUrlForCollectionEntry(collection, slug);
 
 const content = await renderMarkdown(body);
 ---
@@ -31,7 +40,7 @@ const content = await renderMarkdown(body);
     </div>
   </div>
   <section class="summary-content">
-    <p set:html={getSummary(content)}></p>
+    <p set:html={getSummary(content)} />
   </section>
   {
     hasMore(content) ? (
@@ -112,7 +121,12 @@ const content = await renderMarkdown(body);
       font-size: 13pt;
     }
     code {
-      font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+      font-family:
+        Consolas,
+        Monaco,
+        Andale Mono,
+        Ubuntu Mono,
+        monospace;
       font-display: auto;
       font-feature-settings: normal;
       background: $background-color;
