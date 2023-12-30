@@ -1,8 +1,6 @@
 import { defineConfig } from "astro/config";
 import remarkSidenotes from "@tufte-markdown/remark-sidenotes";
 
-import react from "@astrojs/react";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://davi.sh/",
@@ -14,5 +12,5 @@ export default defineConfig({
       theme: "solarized-light",
     },
   },
-  integrations: [react()],
+  integrations: [],
 });
