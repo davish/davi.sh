@@ -9,7 +9,14 @@ const partialDate = () =>
   z
     .string()
     .or(z.date())
-    .transform((arg) => new Date(arg));
+    .transform((arg) => {
+      const date = new Date(arg)
+      if (date.getHours() === 0 && date.getMinutes() === 0) {
+        // Set time to 5PM UTC if not time is set
+        date.setUTCHours(17, 0, 0, 0);
+      }
+      return date;
+    });
 
 const JobCollection = defineCollection({
   schema: z.object({
@@ -49,8 +56,8 @@ const ProjectCollection = defineCollection({
 const BlogPostCollection = defineCollection({
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
     date: partialDate(),
+    description: z.string().optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     highlight: z.boolean().default(false),
