@@ -1,5 +1,5 @@
 ---
-title: Package management with nix-darwin on macOS
+title: Package management on macOS with nix-darwin
 date: 2024-02-01
 tags: [ nix, nix-on-mac ]
 description: Nix on macOS from Scratch, Part One
