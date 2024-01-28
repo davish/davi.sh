@@ -5,6 +5,7 @@ import { getWeeklies } from "src/content/config";
 import Base from "@layouts/Base.astro";
 import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
+import Subscribe from "src/components/Subscribe.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = await getWeeklies();
@@ -34,6 +35,18 @@ const { Content } = await render();
     <Article>
         <PostContent>
             <Content />
+            
         </PostContent>
+        <div class="center">
+            <Subscribe>
+                Liked this post? Get future weekly posts in your inbox!
+            </Subscribe>
+        </div>
     </Article>
 </Base>
+<style lang="scss">
+    div.center {
+        display: flex;
+        justify-content: center;
+    }
+</style>
