@@ -37,7 +37,7 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: baseline;
         padding: 1rem;
         margin: 1rem 2rem;
         @media #{$media-size-phone} {
@@ -82,7 +82,6 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
           print-color-adjust: exact !important;
         }
 
-        counter-reset: sidenote-counter; // tufte-css
       }
       hr {
         color: rgba(0, 0, 0, 0.2);
