@@ -8,15 +8,15 @@ draft: false
 
 [I think Nix is really cool](https://davi.sh/blog/2023/12/what-i-like-about-nix/). It's most often
 associated with NixOS, but `nix-darwin` makes it easy to declaratively manage macOS machines. Even
-if you'll still relying on Homebrew for package management, I think Nix provides the best way to
-store your Homebrew configuration. 
+if you'll still relying on Homebrew for package management and never touch nixpkgs, I'd say that Nix
+with `nix-darwin` provides the best way to manage packages and system configuration on macOS.
 
 Unfortunately, the resources for getting started can be difficult to find and apply to different
 use-cases. Inspired by [Arne Bahlo's Emacs from Scratch
 series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
-guide to help folks get started with Nix on macOS.
+guide to help folks get started with Nix on macOS, step by step.
 
-Throughout this series we'll build up a Nix configuration piece-by-piece. By the end of Part 1,
+Throughout this series we'll build up a Nix configuration. By the end of Part 1,
 you'll have Nix installed on your system and be able to declaratively install system-level packages
 from either Nixpkgs or Homebrew.
 
