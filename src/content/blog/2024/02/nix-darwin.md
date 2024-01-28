@@ -238,3 +238,5 @@ config your own!
 If you'd like to see the full file that we've built up over the course of this post, you can find it
 [here](https://raw.githubusercontent.com/davish/nix-on-mac/part-1/flake.nix).
 
+Until next time!
+
