@@ -23,8 +23,11 @@ const { page, path, title, description, collection } = Astro.props;
 
   <section id="list">
     {page.data.map((p) => <PostEntry post={p} collection={collection} />)}
+    <div class="pagination">
+      <Pagination page={page} />
+    </div>
   </section>
-  <Pagination page={page} />
+  
 </Base>
 
 <style lang="scss">
@@ -46,5 +49,10 @@ const { page, path, title, description, collection } = Astro.props;
     width: 5em;
     border-bottom: 0.125em solid $accent-color;
     margin-top: 2.5em;
+  }
+  div.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 </style>

@@ -26,34 +26,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+body {
+  counter-reset: sidenote-counter;
+}
 .sidenote,
 .marginnote {
   display: none;
 }
 
+@media #{$media-size-desktop} {
 .margin-toggle:checked + .sidenote,
-.margin-toggle:checked + .marginnote {
-  display: block;
-  float: right;
-  clear: right;
-  margin-right: -60%;
-  width: 50%;
-  margin-top: 0.3rem;
-  margin-bottom: 0;
-  font-size: 0.9rem;
-  line-height: 1.3;
-  vertical-align: baseline;
-  position: relative;
+.margin-toggle:not(checked) + .sidenote,
+.margin-toggle:checked + .marginnote,
+.margin-toggle:not(checked) + .marginnote {
+    display: block;
+    float: right;
+    clear: right;
+    margin-right: -55%;
+    width: 50%;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    vertical-align: baseline;
+    position: relative;
 
-  code {
-    font-size: 1rem;
+    code {
+      font-size: 1rem;
+    }
+  }
+
+  .margin-toggle {
+    color: $text-color;
+    cursor: auto;
   }
 }
 
-label.margin-toggle {
-  color: $accent-color;
-  cursor: pointer;
-}
+
 
 .sidenote-number {
   counter-increment: sidenote-counter;
@@ -119,4 +129,8 @@ label.margin-toggle:not(.sidenote-number) {
     vertical-align: baseline;
     position: relative;
   }
+  label.margin-toggle {
+    color: $accent-color;
+    cursor: pointer;
+  } 
 }

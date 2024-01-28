@@ -5,7 +5,8 @@ import Highlights from "../components/Highlights.astro";
 ---
 
 <Base hideFooter={true} title={"Davis Haupt's Website"} description={""}>
-  <section class="hero">
+  <div class="center">
+<section class="hero">
     <h1>Davis Haupt</h1>
     <Links />
     <hr />
@@ -26,6 +27,8 @@ import Highlights from "../components/Highlights.astro";
   <div id="highlights">
     <Highlights />
   </div>
+  </div>
+  
 </Base>
 
 <style lang="scss">
@@ -55,6 +58,13 @@ import Highlights from "../components/Highlights.astro";
   div#highlights {
     max-width: 100ch;
     width: 90%;
+  }
+  div.center {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   hr {
     margin-top: 3rem !important;
