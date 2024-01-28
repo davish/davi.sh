@@ -8,30 +8,36 @@ draft: false
 
 [I think Nix is really cool](https://davi.sh/blog/2023/12/what-i-like-about-nix/). It's most often
 associated with NixOS, but `nix-darwin` makes it easy to declaratively manage macOS machines. Even
-if you're still relying on Homebrew for package management, I think Nix provides a great level of
-declarative abstraction over Homebrew configuration. Unfortunately, the resources for getting
-started can be difficult to find and apply to different use-cases. Inspired by [Arne Bahlo's Emacs
-from Scratch series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to
-create a guide to help folks get started with Nix on macOS.
+if you'll still relying on Homebrew for package management, I think Nix provides the best way to
+store your Homebrew configuration. 
+
+Unfortunately, the resources for getting started can be difficult to find and apply to different
+use-cases. Inspired by [Arne Bahlo's Emacs from Scratch
+series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
+guide to help folks get started with Nix on macOS.
 
 Throughout this series we'll build up a Nix configuration piece-by-piece. By the end of Part 1,
 you'll have Nix installed on your system and be able to declaratively install system-level packages
 from either Nixpkgs or Homebrew.
 
+<!--more-->
+
 ## Installing Nix
-I recommend using the Determinate Systems Nix installer. They have a [command-line
-utility](https://github.com/DeterminateSystems/nix-installer) and also recently came out with a
-[graphical installer](https://determinate.systems/posts/graphical-nix-installer) if you prefer that.
+I recommend using the [Determinate
+Systems](https://determinate.systems/posts/graphical-nix-installer) Nix installer. They have a
+[command-line utility](https://github.com/DeterminateSystems/nix-installer) and also recently came
+out with a [graphical installer](https://determinate.systems/posts/graphical-nix-installer) if you
+prefer that.
 
 ## Setting up `nix-darwin`
-[`nix-darwin`](https://github.com/LnL7/nix-darwin) is a Nix library that exposes tons of
-configuration options for macOS. 
+[`nix-darwin`](https://github.com/LnL7/nix-darwin) is a Nix library that exposes lots of
+configuration options for macOS.
 
 Nix is a programming language, and Nix configurations are programs.  All programs need an
 entrypoint, we'll be using a flake[^1] to provide the entrypoint to our configuration.
 
 [^1]: Since this series will focus on system configuration rather than development environments,
-    we'll only be creating this one flake and won't cover them in-depth. If want to read more about
+    we'll only be creating this one flake and won't cover flakes in-depth. If want to read more about
     flakes, feel free to check out [Julia Evans's blog post on
     flakes](https://jvns.ca/blog/2023/11/11/notes-on-nix-flakes/) and the [Zero to Nix wiki
     page](https://zero-to-nix.com/concepts/flakes).
@@ -229,4 +235,6 @@ future installments of this series, but in case you're curious, the you can expl
 [configuration options](https://daiderd.com/nix-darwin/manual/index.html) and start making your
 config your own!
 
+If you'd like to see the full file that we've built up over the course of this post, you can find it
+[here](https://raw.githubusercontent.com/davish/nix-on-mac/part-1/flake.nix).
 
