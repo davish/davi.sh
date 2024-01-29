@@ -9,14 +9,19 @@ export interface Props {
   title: string;
   back?: string;
   description: string | null;
+  rss?: string | undefined;
 }
-const { hideFooter = false, path, title, back, description } = Astro.props;
+const { hideFooter = false, path, title, back, description, rss } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Meta title={title} description={description || "Davis Haupt's Website"} />
+    <Meta
+      title={title}
+      description={description || "Davis Haupt's Website"}
+      rss={rss}
+    />
   </head>
   <body>
     <Nav path={path} back={back} />

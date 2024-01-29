@@ -31,11 +31,11 @@ const { Content } = await render();
     back="/weekly"
     title={frontmatter.title}
     description={`Weeky links for ${frontmatter.date.toLocaleDateString()}`}
+    rss="/newsletter.xml"
 >
     <Article>
         <PostContent>
             <Content />
-            
         </PostContent>
         <div class="center">
             <Subscribe>
