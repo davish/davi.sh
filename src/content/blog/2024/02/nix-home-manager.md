@@ -187,6 +187,10 @@ programs.git = {
 };
 ```
 
+## Installing packages with `home-manager` vs `nix-darwin`
+TODO: Write this section before publishing! tl;dr is you should prefer home-manager because it is
+cross-platform. Anything mac-specific should stay in nix-darwin config.
+
 
 ## Conclusion
 

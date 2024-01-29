@@ -8,21 +8,21 @@ draft: false
 
 [I think Nix is really cool](https://davi.sh/blog/2023/12/what-i-like-about-nix/). Nix the package
 manager and functional configuration language is most often associated with NixOS the Linux distro,
-but `nix-darwin` makes almost as easy to declaratively manage macOS machines as it is with
-NixOS. Even if you'll still relying on Homebrew for package management and never touch nixpkgs, I'd
-say that Nix with `nix-darwin` provides the best way to manage packages and system configuration on
-macOS.
+but `nix-darwin` makes it almost as easy to declaratively configure macOS as it is to configure
+NixOS installations. Even if you'll still relying on Homebrew for package management and never touch
+nixpkgs, I'd say that Nix with `nix-darwin` provides the best way to manage packages and system
+configuration on macOS.
 
-Unfortunately, the resources for getting started can be difficult to find and apply to different
-use-cases. Inspired by [Arne Bahlo's Emacs from Scratch
-series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
-guide to help folks get started with Nix on macOS from scratch, step by step.
+Unfortunately, the resources for getting started and integrating different parts of the Nix
+ecosystem can be difficult to find and apply to different use-cases. Inspired by [Arne Bahlo's Emacs
+from Scratch series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to
+create a guide to help folks get started with Nix on macOS from scratch, step by step.
 
 Throughout this series we'll build up a declarative system configuration with Nix where you can
-manage anything from your shell script aliases to what VSCode extensions you have installed and
-running daemons daemons with launchd. We'll build up to this incrementally. By the end of Part 1,
-you'll have Nix installed on your system and be able to declaratively install system-level packages
-from either Nixpkgs or Homebrew.
+manage anything from your shell aliases to what VSCode extensions you have installed and running
+daemons daemons with launchd. We'll build up to this incrementally: by the end of this post, you'll
+have Nix installed on your system and be able to declaratively install system-level packages from
+either Nixpkgs or Homebrew.
 
 <!--more-->
 
@@ -111,10 +111,9 @@ that the flake lives at `~/.config/nix/flake.nix`.
 One of the stranger footguns when using Nix flakes is that all files referenced by a flake must be
 checked into source control. This means that you'll need to have `git` installed before we set up
 our Nix environment[^2]. Files just need to be staged to be accessible by Nix flakes, not committed,
-so `git add` is sufficient for now. You'll likely want to back your config up to a remote git
-repository eventually in order to sync your config to other machines, anyway.
+so `git add` is sufficient until you want to back up your config to a remote repository.
 
-[^2]: If you're on a brand new machine, the first time you run `git` in the terminal, you should be
+[^2]: If you're on a brand new machine, the first time you run `git` in the terminal you should be
     promped to install Xcode Command Line Tools, which includes `git`.
 
 ```bash
@@ -132,6 +131,8 @@ $ nix run nix-darwin --extra-experimental-features nix-command --extra-experimen
 Nix may error out if there are files that already exist at paths that Nix is trying to replace. Feel
 free to either `rm` these or `mv` them to a backup location, and then re-run the line above.
 
+`nix-darwin` requires `sudo`, and so you'll be prompted for your password.
+
 Once the command succeeds, open up a new terminal window to pick up the new zsh environment, and
 confirm that `darwin-rebuild` is installed on your path:
 
@@ -147,8 +148,8 @@ darwin-rebuild [--help] {edit | switch | activate | build | check | changelog}
                [--no-update-lock-file] [--refresh] ...
 ```
 
-Congrats on setting up `nix-darwin`! Our configuration is active, but it doesn't do much yet. Let's
-change that.
+Congrats on setting up `nix-darwin`! Our configuration is active, but it do anything useful
+yet. Let's change that.
 
 ## Installing your first Nix package
 It's time to install our first package from the nixpkgs repository. Update the list of 
@@ -160,11 +161,11 @@ environment.systemPackages = [ pkgs.neofetch pkgs.vim ];
 
 Here, we're setting the attribute `environment.systemPackages` to a
 [list](https://nixos.org/manual/nix/stable/language/values#list). It's important to point out that
-lists in Nix are space-separated, rather than comma-separated like many other languages.
+lists in Nix are space-separated, rather than comma-separated like most other languages.
 
-To rebuild our Nix config, we don't have to use the super long `nix run` command from above. 
-`nix-darwin` has added the `darwin-rebuild` command to our `PATH`, so from now on, we just need
-to run:
+To rebuild our Nix config, we don't have to use the super long `nix run` command from above anymore.
+`nix-darwin` has added the `darwin-rebuild` command to our `PATH`. From now on, we just need to
+run:
 
 ```bash
 $ darwin-rebuild switch --flake ~/.config/nix
@@ -197,7 +198,7 @@ Now we're really cooking! Feel free to check out [nixpkgs search](https://search
 to find other packages you may want to install.
 
 ## Installing from Homebrew
-Nixpkgs has a lot of programs, but some programs are only available from
+Nixpkgs is expansive, but some programs are only available from
 [Homebrew](https://brew.sh/). `nix-darwin` provides what I think is the best interface for Homebrew
 formulae, casks, and even Mac App Store apps. Let's add this right under
 `environment.systemPackages`:
@@ -231,9 +232,9 @@ $ cowsay "homebrew and nix can be best friends"
 If you're a Mac where you've been using Homebrew for a while, you can run `brew list` and `brew list
 --cask` to list your installed formulae and casks. Once you've added every package you want to carry
 over to the correspondings lists in your Nix config, uncomment `onActivation.cleanup =
-"uninstall"`. Your homebrew config in `nix-darwin` will now be *declarative*: only the packages
-specified in your `flake.nix` will be installed, and if you ever remove a package from the lists
-here, it will be uninstalled the next time you reload with `darwin-rebuild switch`.
+"uninstall"`. Your homebrew config in `nix-darwin` is now *declarative*: only the packages specified
+in your `flake.nix` will be installed, and if you ever remove a package from the lists here it will
+be uninstalled the next time you reload with `darwin-rebuild switch`.
 
 ## Additional configuration
 
@@ -252,9 +253,9 @@ in
 # ...
 ```
 
-All of `nix-darwin`'s options are worth exploring -- we'll go more in-depth into some of them in
-future installments of this series, but in case you're curious, the you can explore all the
-[configuration options](https://daiderd.com/nix-darwin/manual/index.html) and start making your
+All of `nix-darwin`'s configuration options are worth exploring -- we'll go more in-depth into some
+of them in future installments of this series, but in case you're curious, the you can explore all
+the [configuration options](https://daiderd.com/nix-darwin/manual/index.html) and start making your
 config your own!
 
 If you'd like to see the full file that we've built up over the course of this post, you can find it
