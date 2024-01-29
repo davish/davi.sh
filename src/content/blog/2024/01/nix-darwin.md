@@ -14,15 +14,17 @@ nixpkgs, I'd say that Nix with `nix-darwin` provides the best way to manage pack
 configuration on macOS.
 
 Unfortunately, the resources for getting started and integrating different parts of the Nix
-ecosystem can be difficult to find and apply to different use-cases. Inspired by [Arne Bahlo's Emacs
-from Scratch series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to
-create a guide to help folks get started with Nix on macOS from scratch, step by step.
+ecosystem can be difficult to find and apply to specific use-cases. When I started out I would often
+use GitHub's code search to trawl through other people's configs and try different snippets until I
+found what actually worked. Inspired by [Arne Bahlo's Emacs from Scratch
+series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
+guide to help folks get started with Nix on macOS from scratch, step by step.
 
 Throughout this series we'll build up a declarative system configuration with Nix where you can
-manage anything from your shell aliases to what VSCode extensions you have installed and running
-daemons daemons with launchd. We'll build up to this incrementally: by the end of this post, you'll
-have Nix installed on your system and be able to declaratively install system-level packages from
-either Nixpkgs or Homebrew.
+manage anything from your shell aliases to what VSCode extensions you have installed to running
+daemons with launchd. We'll build up to this incrementally: by the end of this post, you'll have Nix
+installed on your system and be able to declaratively install system-level packages from either
+Nixpkgs or Homebrew.
 
 <!--more-->
 
@@ -41,13 +43,13 @@ Nix is a programming language, and Nix configurations are programs.  All program
 entrypoint, we'll be using a flake[^1] to provide the entrypoint to our configuration.
 
 [^1]: Since this series will focus on system configuration rather than development environments,
-    we'll only be creating this one flake and won't cover flakes in-depth. If want to read more about
-    flakes, feel free to check out [Julia Evans's blog post on
+    we'll only be creating this one flake and won't cover flakes in-depth. If want to read more
+    about flakes, feel free to check out [Julia Evans's blog post on
     flakes](https://jvns.ca/blog/2023/11/11/notes-on-nix-flakes/) and the [Zero to Nix wiki
     page](https://zero-to-nix.com/concepts/flakes).
     
 
-Here is our minimal flake that calls `nix-darwin`. Make sure to replace `$USER` with your username
+Below is our minimal flake that calls `nix-darwin`. Make sure to replace `$USER` with your username
 and `$HOSTNAME` with your system's hostname.
 
 You can place this flake in any directory you'd like. For the purposes of this series, we'll assume
@@ -148,7 +150,7 @@ darwin-rebuild [--help] {edit | switch | activate | build | check | changelog}
                [--no-update-lock-file] [--refresh] ...
 ```
 
-Congrats on setting up `nix-darwin`! Our configuration is active, but it do anything useful
+Congrats on setting up `nix-darwin`! Our configuration is active, but it doesn't do anything useful
 yet. Let's change that.
 
 ## Installing your first Nix package
@@ -161,11 +163,12 @@ environment.systemPackages = [ pkgs.neofetch pkgs.vim ];
 
 Here, we're setting the attribute `environment.systemPackages` to a
 [list](https://nixos.org/manual/nix/stable/language/values#list). It's important to point out that
-lists in Nix are space-separated, rather than comma-separated like most other languages.
+lists in Nix are space-separated, rather than comma-separated like most other languages. `pkgs`
+refers to `nixpkgs`, the standard repository for finding packages to be installed with Nix.
 
-To rebuild our Nix config, we don't have to use the super long `nix run` command from above anymore.
-`nix-darwin` has added the `darwin-rebuild` command to our `PATH`. From now on, we just need to
-run:
+To rebuild our Nix config, we don't have to use the super long `nix run` command from above anymore
+since `nix-darwin` added the `darwin-rebuild` command to our `PATH`. From now on, we just need
+to run:
 
 ```bash
 $ darwin-rebuild switch --flake ~/.config/nix
@@ -197,11 +200,16 @@ $ neofetch
 Now we're really cooking! Feel free to check out [nixpkgs search](https://search.nixos.org/packages)
 to find other packages you may want to install.
 
-## Installing from Homebrew
+## Installing packages from Homebrew
 Nixpkgs is expansive, but some programs are only available from
 [Homebrew](https://brew.sh/). `nix-darwin` provides what I think is the best interface for Homebrew
-formulae, casks, and even Mac App Store apps. Let's add this right under
+formulae, casks, and even Mac App Store apps[^3]. Let's add this right under
 `environment.systemPackages`:
+
+[^3]: While we won't be installing any App Store apps in this post, you can check out the
+    description in the [nix-darwin
+    documentation](https://daiderd.com/nix-darwin/manual/index.html#opt-homebrew.masApps) for more
+    information.
 
 ```nix
 homebrew = {
@@ -229,9 +237,9 @@ $ cowsay "homebrew and nix can be best friends"
                 ||     ||
 ```
 
-If you're a Mac where you've been using Homebrew for a while, you can run `brew list` and `brew list
+If you're on a Mac where you've been using Homebrew for a while, you can run `brew list` and `brew list
 --cask` to list your installed formulae and casks. Once you've added every package you want to carry
-over to the correspondings lists in your Nix config, uncomment `onActivation.cleanup =
+over to the corresponding lists in your Nix config, uncomment `onActivation.cleanup =
 "uninstall"`. Your homebrew config in `nix-darwin` is now *declarative*: only the packages specified
 in your `flake.nix` will be installed, and if you ever remove a package from the lists here it will
 be uninstalled the next time you reload with `darwin-rebuild switch`.
@@ -262,4 +270,5 @@ If you'd like to see the full file that we've built up over the course of this p
 [here](https://raw.githubusercontent.com/davish/nix-on-mac/part-1/flake.nix).
 
 Until next time!
+
 

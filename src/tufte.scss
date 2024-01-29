@@ -30,16 +30,18 @@ SOFTWARE.
 body {
   counter-reset: sidenote-counter;
 }
+
 .sidenote,
 .marginnote {
   display: none;
 }
 
 @media #{$media-size-desktop} {
-.margin-toggle:checked + .sidenote,
-.margin-toggle:not(checked) + .sidenote,
-.margin-toggle:checked + .marginnote,
-.margin-toggle:not(checked) + .marginnote {
+
+  .margin-toggle:checked+.sidenote,
+  .margin-toggle:not(checked)+.sidenote,
+  .margin-toggle:checked+.marginnote,
+  .margin-toggle:not(checked)+.marginnote {
     display: block;
     float: right;
     clear: right;
@@ -102,12 +104,14 @@ input.margin-toggle {
 
 label.sidenote-number {
   display: inline-block;
-  max-height: 2rem; /* should be less than or equal to paragraph line-height */
+  max-height: 2rem;
+  /* should be less than or equal to paragraph line-height */
 }
 
 label.margin-toggle:not(.sidenote-number) {
   display: none;
 }
+
 @media #{$media-size-tablet} {
   label.margin-toggle:not(.sidenote-number) {
     display: inline;
@@ -118,8 +122,8 @@ label.margin-toggle:not(.sidenote-number) {
     display: none;
   }
 
-  .margin-toggle:checked + .sidenote,
-  .margin-toggle:checked + .marginnote {
+  .margin-toggle:checked+.sidenote,
+  .margin-toggle:checked+.marginnote {
     display: block;
     float: left;
     left: 1rem;
@@ -129,8 +133,24 @@ label.margin-toggle:not(.sidenote-number) {
     vertical-align: baseline;
     position: relative;
   }
+
   label.margin-toggle {
     color: $accent-color;
     cursor: pointer;
-  } 
+  }
+}
+
+@media print {
+
+  .margin-toggle+.sidenote,
+  .margin-toggle+.marginnote {
+    display: block;
+    float: left;
+    left: 1rem;
+    clear: both;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    vertical-align: baseline;
+    position: relative;
+  }
 }

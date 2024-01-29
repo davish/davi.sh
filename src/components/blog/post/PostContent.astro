@@ -36,7 +36,12 @@
     }
   }
   code {
-    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    font-family:
+      Consolas,
+      Monaco,
+      Andale Mono,
+      Ubuntu Mono,
+      monospace;
     font-display: auto;
     font-feature-settings: normal;
     background: $background-color;
@@ -54,6 +59,10 @@
     overflow: auto;
 
     @media #{$media-size-phone} {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    @media print {
       white-space: pre-wrap;
       word-wrap: break-word;
     }
