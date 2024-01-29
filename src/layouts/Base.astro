@@ -13,7 +13,7 @@ export interface Props {
 const { hideFooter = false, path, title, back, description } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <Meta title={title} description={description || "Davis Haupt's Website"} />
@@ -42,6 +42,7 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
         margin: 1rem 2rem;
         @media #{$media-size-phone} {
           margin: 1rem 0rem;
+          align-items: center;
         }
         @media print {
           padding: 0;
@@ -69,7 +70,7 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
 
       body {
         @include serif;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         // background-color: #f4f0ec;
         color: $text-color;
         display: flex;
@@ -81,7 +82,6 @@ const { hideFooter = false, path, title, back, description } = Astro.props;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
         }
-
       }
       hr {
         color: rgba(0, 0, 0, 0.2);
