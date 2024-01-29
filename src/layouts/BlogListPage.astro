@@ -25,7 +25,7 @@ const rss = collection === "weekly" ? "/newsletter.xml" : undefined;
   <section id="list">
     {page.data.map((p) => <PostEntry post={p} collection={collection} />)}
     <div class="pagination">
-      <Pagination page={page} />
+      <Pagination page={page} base={collection} />
     </div>
   </section>
 </Base>
