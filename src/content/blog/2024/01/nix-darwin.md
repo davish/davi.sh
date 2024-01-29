@@ -84,7 +84,7 @@ that the flake lives at `~/.config/nix/flake.nix`.
         system.stateVersion = 4;
         
         # The platform the configuration will be used on.
-        # If you're on an older system, replace with "x86_64-darwin"
+        # If you're on an Intel system, replace with "x86_64-darwin"
         nixpkgs.hostPlatform = "aarch64-darwin"; 
         
         # Declare the user that will be running `nix-darwin`.
@@ -116,7 +116,7 @@ our Nix environment[^2]. Files just need to be staged to be accessible by Nix fl
 so `git add` is sufficient until you want to back up your config to a remote repository.
 
 [^2]: If you're on a brand new machine, the first time you run `git` in the terminal you should be
-    promped to install Xcode Command Line Tools, which includes `git`.
+    prompted to install Xcode Command Line Tools, which includes `git`.
 
 ```bash
 $ cd ~/.config/nix
@@ -124,16 +124,15 @@ $ git init
 $ git add flake.nix
 ```
 
-Once all this is set up, we can run `nix-darwin` and to activate our configuration:
+Once all this is set up, we can run `nix-darwin` to activate our configuration:
 
 ```bash
 $ nix run nix-darwin --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake ~/.config/nix
 ```
 
 Nix may error out if there are files that already exist at paths that Nix is trying to replace. Feel
-free to either `rm` these or `mv` them to a backup location, and then re-run the line above.
-
-`nix-darwin` requires `sudo`, and so you'll be prompted for your password.
+free to either `rm` these or `mv` them to a backup location, and then re-run the line
+above. `nix-darwin` requires `sudo`, so you'll be prompted for your password.
 
 Once the command succeeds, open up a new terminal window to pick up the new zsh environment and
 confirm that `darwin-rebuild` is installed on your path:
