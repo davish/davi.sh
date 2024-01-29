@@ -14,8 +14,8 @@ nixpkgs, I'd say that Nix with `nix-darwin` provides the best way to manage pack
 configuration on macOS.
 
 Unfortunately, the resources for getting started and integrating different parts of the Nix
-ecosystem can be difficult to find and apply to specific use-cases. When I started out I would often
-use GitHub's code search to trawl through other people's configs and try different snippets until I
+ecosystem are not particularly approachable for beginners. When I started out I would often use
+GitHub's code search to trawl through other people's configs and try different snippets until I
 found what actually worked. Inspired by [Arne Bahlo's Emacs from Scratch
 series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
 guide to help folks get started with Nix on macOS from scratch, step by step.
@@ -135,7 +135,7 @@ free to either `rm` these or `mv` them to a backup location, and then re-run the
 
 `nix-darwin` requires `sudo`, and so you'll be prompted for your password.
 
-Once the command succeeds, open up a new terminal window to pick up the new zsh environment, and
+Once the command succeeds, open up a new terminal window to pick up the new zsh environment and
 confirm that `darwin-rebuild` is installed on your path:
 
 ```bash
@@ -163,8 +163,14 @@ environment.systemPackages = [ pkgs.neofetch pkgs.vim ];
 
 Here, we're setting the attribute `environment.systemPackages` to a
 [list](https://nixos.org/manual/nix/stable/language/values#list). It's important to point out that
-lists in Nix are space-separated, rather than comma-separated like most other languages. `pkgs`
-refers to `nixpkgs`, the standard repository for finding packages to be installed with Nix.
+**lists in Nix are space-separated** rather than comma-separated like most other languages. `pkgs`
+refers to `nixpkgs`, the standard repository for finding packages to be installed with Nix[^4].
+
+[^4]: While it's not necessary to fully understand this right now, the `configuration` value that
+    we're defining is a [Nix module](https://nixos.wiki/wiki/NixOS_modules). The
+    `nix-darwin.lib.darwinSystem` function that we call at the bottom of the file is responsible for
+    passing `nixpkgs` through to `configuration` with the name `pkgs`. We'll dive deeper into Nix
+    modules in a later post.
 
 To rebuild our Nix config, we don't have to use the super long `nix run` command from above anymore
 since `nix-darwin` added the `darwin-rebuild` command to our `PATH`. From now on, we just need
@@ -270,5 +276,4 @@ If you'd like to see the full file that we've built up over the course of this p
 [here](https://raw.githubusercontent.com/davish/nix-on-mac/part-1/flake.nix).
 
 Until next time!
-
 
