@@ -14,9 +14,10 @@ type Props = {
 };
 
 const { page, path, title, description, collection } = Astro.props;
+const rss = collection === "weekly" ? "/newsletter.xml" : undefined;
 ---
 
-<Base path={path} title={title} description={description}>
+<Base path={path} title={title} description={description} rss={rss}>
   <section id="intro">
     <slot />
   </section>
@@ -27,7 +28,6 @@ const { page, path, title, description, collection } = Astro.props;
       <Pagination page={page} />
     </div>
   </section>
-  
 </Base>
 
 <style lang="scss">

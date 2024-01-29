@@ -2,8 +2,9 @@
 export interface Props {
   title: string;
   description: string;
+  rss: string | undefined;
 }
-const { title, description } = Astro.props;
+const { title, description, rss = "/rss.xml" } = Astro.props;
 
 const currentUrl = Astro.request.url;
 
@@ -18,8 +19,8 @@ const currentUrl = Astro.request.url;
 <link
   rel="alternate"
   type="application/rss+xml"
-  title="RSS Feed for davi.sh"
-  href="/rss.xml"
+  title=`RSS Feed for ${title} on davi.sh`
+  href={rss}
 />
 <link rel="sitemap" href="/rss.xml" />
 

@@ -1,0 +1,15 @@
+---
+import PostContent from "src/components/blog/post/PostContent.astro";
+import Article from "src/components/Article.astro";
+import Base from "./Base.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Base title={frontmatter.title} description={frontmatter.description || ""}>
+    <Article>
+        <PostContent>
+            <slot />
+        </PostContent>
+    </Article>
+</Base>
