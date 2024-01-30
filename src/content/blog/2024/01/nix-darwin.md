@@ -20,7 +20,7 @@ found what actually worked. Inspired by [Arne Bahlo's Emacs from Scratch
 series](https://arne.me/articles/emacs-from-scratch-part-one-foundations), I wanted to create a
 guide to help folks get started with Nix on macOS from scratch, step by step.
 
-Throughout this series we'll build up a declarative system configuration with Nix where you can
+Throughout this series we'll create a declarative system configuration with Nix where you can
 manage anything from your shell aliases to what VSCode extensions you have installed to running
 daemons with launchd. We'll build up to this incrementally: by the end of this post, you'll have Nix
 installed on your system and be able to declaratively install system-level packages from either
@@ -112,8 +112,8 @@ that the flake lives at `~/.config/nix/flake.nix`.
 ## Activating our `nix-darwin` config
 One of the stranger footguns when using Nix flakes is that all files referenced by a flake must be
 checked into source control. This means that you'll need to have `git` installed before we set up
-our Nix environment[^2]. Files just need to be staged to be accessible by Nix flakes, not committed,
-so `git add` is sufficient until you want to back up your config to a remote repository.
+our Nix environment[^2]. Files just need to be staged to be accessible, not committed, so `git add`
+is sufficient until you want to back up your config to a remote repository.
 
 [^2]: If you're on a brand new machine, the first time you run `git` in the terminal you should be
     prompted to install Xcode Command Line Tools, which includes `git`.
@@ -130,9 +130,9 @@ Once all this is set up, we can run `nix-darwin` to activate our configuration:
 $ nix run nix-darwin --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake ~/.config/nix
 ```
 
-Nix may error out if there are files that already exist at paths that Nix is trying to replace. Feel
-free to either `rm` these or `mv` them to a backup location, and then re-run the line
-above. `nix-darwin` requires `sudo`, so you'll be prompted for your password.
+`nix-darwin` requires `sudo`, so you'll be prompted for your password. Nix may error out if there
+are files that already exist at paths that it's trying to replace. Feel free to either `rm` these or
+`mv` them to a backup location, and then re-run the line above.
 
 Once the command succeeds, open up a new terminal window to pick up the new zsh environment and
 confirm that `darwin-rebuild` is installed on your path:
@@ -162,14 +162,16 @@ environment.systemPackages = [ pkgs.neofetch pkgs.vim ];
 
 Here, we're setting the attribute `environment.systemPackages` to a
 [list](https://nixos.org/manual/nix/stable/language/values#list). It's important to point out that
-**lists in Nix are space-separated** rather than comma-separated like most other languages. `pkgs`
-refers to `nixpkgs`, the standard repository for finding packages to be installed with Nix[^4].
+**lists in Nix are space-separated** rather than comma-separated like most other languages. 
+
+`pkgs` refers to `nixpkgs`, the standard repository for finding packages to be installed with
+Nix[^4]. Both `neofetch` and `vim` are **_derivations_** within nixpkgs.
 
 [^4]: While it's not necessary to fully understand this right now, the `configuration` value that
     we're defining is a [Nix module](https://nixos.wiki/wiki/NixOS_modules). The
-    `nix-darwin.lib.darwinSystem` function that we call at the bottom of the file is responsible for
-    passing `nixpkgs` through to `configuration` with the name `pkgs`. We'll dive deeper into Nix
-    modules in a later post.
+    `nix-darwin.lib.darwinSystem` function that's called at the bottom of the file is responsible
+    for passing `nixpkgs` through to `configuration` with the name `pkgs`. We'll dive deeper into
+    Nix modules in a later post.
 
 To rebuild our Nix config, we don't have to use the super long `nix run` command from above anymore
 since `nix-darwin` added the `darwin-rebuild` command to our `PATH`. From now on, we just need
@@ -182,7 +184,7 @@ $ darwin-rebuild switch --flake ~/.config/nix
 Once this runs successfully, we now have a new command in our `PATH`:
 
 ```bash
-$ neofetch
+$ neofetch -L
                     c.'
                  ,xNMM.
                .OMMMMo
@@ -202,11 +204,14 @@ $ neofetch
        "cooc*"    "*coo'"
 ```
 
-Now we're really cooking! Feel free to check out [nixpkgs search](https://search.nixos.org/packages)
-to find other packages you may want to install.
+Now we're really cooking! 
+
+## Searching Nixpkgs
+Check out [nixpkgs search](https://search.nixos.org/packages) to find other packages you might want
+to install.
 
 ## Installing packages from Homebrew
-Nixpkgs is expansive, but some programs are only available from
+Nixpkgs is expansive, but some programs are still only available from
 [Homebrew](https://brew.sh/). `nix-darwin` provides what I think is the best interface for Homebrew
 formulae, casks, and even Mac App Store apps[^3]. Let's add this right under
 `environment.systemPackages`:
@@ -249,6 +254,11 @@ over to the corresponding lists in your Nix config, uncomment `onActivation.clea
 in your `flake.nix` will be installed, and if you ever remove a package from the lists here it will
 be uninstalled the next time you reload with `darwin-rebuild switch`.
 
+## Nixpkgs vs Homebrew
+While `nix-darwin` makes it easy to install packages with Homebrew, I'd recommend trying to find the
+corresponding derivations within Nixpkgs when possible rather than relying solely on Homebrew
+formulae. As the series goes on we'll see how native Nix derivations are easier work with in Nix.
+
 ## Additional configuration
 
 You've probably gotten tired of entering your password everytime you reload your config. Luckily,
@@ -273,6 +283,10 @@ config your own!
 
 If you'd like to see the full file that we've built up over the course of this post, you can find it
 [here](https://raw.githubusercontent.com/davish/nix-on-mac/part-1/flake.nix).
+
+Now that we have a handle on our system configuration, in the next post we'll set up
+[`home-manager`](https://github.com/nix-community/home-manager) and use it manage dotfiles and other
+program configuration.
 
 Until next time!
 
