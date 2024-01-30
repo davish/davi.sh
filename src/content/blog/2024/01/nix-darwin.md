@@ -30,7 +30,7 @@ Nixpkgs or Homebrew.
 
 ## Installing Nix
 I recommend using the [Determinate
-Systems](https://determinate.systems/posts/graphical-nix-installer) Nix installer. They have a
+Systems](https://determinate.systems/) Nix installer. They have a
 [command-line utility](https://github.com/DeterminateSystems/nix-installer) and also recently came
 out with a [graphical installer](https://determinate.systems/posts/graphical-nix-installer) if you'd
 prefer that.

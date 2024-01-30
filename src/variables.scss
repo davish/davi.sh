@@ -8,8 +8,8 @@ $background-color: rgba(27, 31, 35, 0.05);
 $background-color-solid: rgba(27, 31, 35, 0.15);
 
 $media-size-phone: "(max-width: 684px)";
-$media-size-tablet: "(max-width: 1020px)";
-$media-size-desktop: "(min-width: 1020px)";
+$media-size-tablet: "(max-width: 1300px)";
+$media-size-desktop: "(min-width: 1300px)";
 
 @mixin dimmed {
   opacity: 0.6;
@@ -18,6 +18,7 @@ $media-size-desktop: "(min-width: 1020px)";
 @mixin serif {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
     "Book Antiqua", Georgia, serif;
+
   @media print {
     font-family: serif;
   }
@@ -25,6 +26,7 @@ $media-size-desktop: "(min-width: 1020px)";
 
 @mixin sans-serif {
   font-family: "Inter", sans-serif;
+
   @media print {
     font-family: sans-serif;
   }

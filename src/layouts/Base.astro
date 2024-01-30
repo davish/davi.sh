@@ -26,7 +26,9 @@ const { hideFooter = false, path, title, back, description, rss } = Astro.props;
   <body>
     <Nav path={path} back={back} />
     <div id="main">
-      <slot />
+      <div id="main-content">
+        <slot />
+      </div>
     </div>
     {
       !hideFooter ? (
@@ -42,7 +44,8 @@ const { hideFooter = false, path, title, back, description, rss } = Astro.props;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        align-items: baseline;
+        align-items: center;
+        // max-width: 960px;
         padding: 1rem;
         margin: 1rem 2rem;
         @media #{$media-size-phone} {
