@@ -26,9 +26,7 @@ const { hideFooter = false, path, title, back, description, rss } = Astro.props;
   <body>
     <Nav path={path} back={back} />
     <div id="main">
-      <div id="main-content">
-        <slot />
-      </div>
+      <slot />
     </div>
     {
       !hideFooter ? (
