@@ -1,8 +1,8 @@
-import { renderMarkdown as astroRenderMd } from "@astrojs/markdown-remark";
+import { createMarkdownProcessor  } from "@astrojs/markdown-remark";
 
 export async function renderMarkdown(markdown: string): Promise<string> {
-  const markdownResult = await astroRenderMd(markdown, {});
-  return markdownResult.vfile.value.toString();
+  const markdownResult = await (await createMarkdownProcessor()).render(markdown, {});
+  return markdownResult.code;
 }
 
 const months = [
