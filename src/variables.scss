@@ -8,8 +8,9 @@ $background-color: rgba(27, 31, 35, 0.05);
 $background-color-solid: rgba(27, 31, 35, 0.15);
 
 $media-size-phone: "(max-width: 684px)";
-$media-size-tablet: "(max-width: 1300px)";
-$media-size-desktop: "(min-width: 1300px)";
+$media-size-tablet: "(max-width: 999px)";
+$media-size-desktop: "(min-width: 1000px)";
+$media-size-small-desktop: "(min-width: 1020px) and (max-width: 1300px)";
 
 @mixin dimmed {
   opacity: 0.6;

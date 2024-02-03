@@ -38,15 +38,27 @@ body {
 
 @media #{$media-size-desktop} {
 
-  .margin-toggle:checked+.sidenote,
-  .margin-toggle:not(checked)+.sidenote,
-  .margin-toggle:checked+.marginnote,
-  .margin-toggle:not(checked)+.marginnote {
+  .margin-toggle+.sidenote,
+  .margin-toggle+.marginnote {
     display: block;
     float: right;
     clear: right;
-    margin-right: -55%;
-    width: 50%;
+
+    
+    // @media #{$media-size-desktop} {
+    //   margin-right: -55%;
+    //   width: 50%;
+    // }
+
+    // @media #{$media-size-small-desktop} {
+    //   margin-right: -35%;
+    //   width: 30%;
+    // }
+
+    --sidenote-width: calc((100vw - 100% - 5.5rem)/2);
+    margin-right: calc(-1 * (1em + var(--sidenote-width)));
+    width: var(--sidenote-width);
+    
     margin-top: 0.3rem;
     margin-bottom: 0;
     font-size: 0.9rem;
@@ -55,7 +67,7 @@ body {
     position: relative;
 
     code {
-      font-size: .82rem;
+      font-size: .78rem;
     }
   }
 
