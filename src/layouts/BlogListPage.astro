@@ -1,12 +1,12 @@
 ---
 import type { Page } from "astro";
-import type { CollectionEntry, ContentCollectionKey } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import Pagination from "src/components/Pagination.astro";
 import PostEntry from "src/components/blog/list/PostEntry.astro";
 import Base from "./Base.astro";
 
 type Props = {
-  page: Page<CollectionEntry<"blog">>;
+  page: Page<CollectionEntry<"blog">> | Page<CollectionEntry<"weekly">>;
   path: string;
   title: string;
   description: string;
