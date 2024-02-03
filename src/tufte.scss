@@ -45,17 +45,16 @@ body {
     clear: right;
 
     
-    // @media #{$media-size-desktop} {
-    //   margin-right: -55%;
-    //   width: 50%;
-    // }
+    @media #{$media-size-desktop} {
+      // padding-right:2rem;
+      --sidenote-padding: 10rem;
+    }
 
-    // @media #{$media-size-small-desktop} {
-    //   margin-right: -35%;
-    //   width: 30%;
-    // }
+    @media #{$media-size-small-desktop} {
+      --sidenote-padding: 2rem;
+    }
 
-    --sidenote-width: calc((100vw - 100% - 5.5rem)/2);
+    --sidenote-width: calc((100vw - 100% - 4rem - var(--sidenote-padding))/2);
     margin-right: calc(-1 * (1em + var(--sidenote-width)));
     width: var(--sidenote-width);
     
