@@ -10,7 +10,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   return paginate(posts, { pageSize: 4 });
 };
 
-type Props = { page: Page<CollectionEntry<"blog">> };
+type Props = { page: Page<CollectionEntry<"weekly">> };
 
 const props = Astro.props;
 ---

@@ -3,7 +3,6 @@ import {
   getBlogPosts,
   getSnippets,
   getUrlForCollectionEntry,
-  getWeeklies,
 } from "src/content/config";
 import { renderMarkdown } from "src/utils";
 
