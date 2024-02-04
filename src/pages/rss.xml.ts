@@ -6,7 +6,7 @@ import {
 } from "src/content/config";
 import { renderMarkdown } from "src/utils";
 
-export const get = async () => {
+export const GET = async function get() {
   const posts = await getBlogPosts();
   const snippets = await getSnippets();
   const renderedPosts = await Promise.all(
@@ -28,11 +28,12 @@ export const get = async () => {
   const items = renderedPosts
     .concat(renderedSnippets)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
-  return rss({
+  const { body } = await rss({
     title: "Davis Haupt's Blog",
     description: "Thoughts and writeups from Davis Haupt.",
     site: import.meta.env.SITE + "blog",
     items,
     customData: `<language>en-us</language>`,
   });
+  return new Response(body, { headers: { "Content-Type": "text/xml" } });
 };
