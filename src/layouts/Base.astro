@@ -10,8 +10,9 @@ export interface Props {
   back?: string;
   description: string | null;
   rss?: string | undefined;
+  card?: boolean | undefined
 }
-const { hideFooter = false, path, title, back, description, rss } = Astro.props;
+const { hideFooter = false, path, title, back, description, rss, card } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,6 +22,7 @@ const { hideFooter = false, path, title, back, description, rss } = Astro.props;
       title={title}
       description={description || "Davis Haupt's Website"}
       rss={rss}
+      card={card || false}
     />
   </head>
   <body>

@@ -32,6 +32,7 @@ const { Content } = await render();
     title={frontmatter.title}
     description={`Weeky links for ${frontmatter.date.toLocaleDateString()}`}
     rss="/newsletter.xml"
+    card={true}
 >
     <Article>
         <PostContent>

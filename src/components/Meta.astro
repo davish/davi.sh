@@ -3,8 +3,9 @@ export interface Props {
   title: string;
   description: string;
   rss: string | undefined;
+  card: boolean
 }
-const { title, description, rss = "/rss.xml" } = Astro.props;
+const { title, description, rss = "/rss.xml", card } = Astro.props;
 
 const currentUrl = Astro.request.url;
 
@@ -40,7 +41,12 @@ const currentUrl = Astro.request.url;
 <!-- Twitter -->
 <meta name="twitter:site" content="@davishaupt" />
 <meta name="twitter:creator" content="@davishaupt" />
-<meta property="twitter:card" content="summary" />
+<meta property="twitter:card" content={card ? "summary_large_image" : "summary"} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:url" content={currentUrl} />
 <meta property="twitter:title" content={title + " | Davis Haupt"} />
+
+{card ? <>
+  <meta property="og:image" content={`${currentUrl}/card.png`} />
+  <meta property="twitter:image" content={`${currentUrl}/card.png`} />
+  </> : null}
