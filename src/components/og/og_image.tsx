@@ -1,6 +1,7 @@
 import satori from "satori";
 import fs from "node:fs/promises";
 import { toReadableString } from "src/utils";
+import sharp from "sharp";
 
 // Design inspiration from Jacob Kaplan-Moss: https://jacobian.org
 
@@ -125,7 +126,7 @@ const OGImage = ({ title, subtitle, date, path, tags = [] }: ImageProps) => (
   </div>
 );
 
-export default async (props: ImageProps) =>
+export const makeOpenGraphImage = async (props: ImageProps) =>
   await satori(<OGImage {...props}></OGImage>, {
     width: 1200,
     height: 630,
@@ -144,3 +145,13 @@ export default async (props: ImageProps) =>
       },
     ],
   });
+
+export const previewImage = async (props: ImageProps) => {
+  const svg = await makeOpenGraphImage(props);
+  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+  return new Response(png, {
+    headers: {
+      "Content-Type": "image/png",
+    },
+  });
+};

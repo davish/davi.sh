@@ -1,6 +1,6 @@
 import sharp from "sharp";
 import type { APIRoute } from "astro";
-import make_svg from "../../../components/og_image";
+import { previewImage } from "../../../components/og/og_image";
 import { getEntryBySlug } from "astro:content";
 import { getBlogPosts, getSnippets, getWeeklies } from "src/content/config";
 
@@ -43,7 +43,7 @@ export const GET: APIRoute = async function get({ params, request }) {
   }
   let root = post.collection === "snippets" ? "til" : post.collection;
   const path = `${root}/${post.id}`;
-  const svg = await make_svg(
+  return await previewImage(
     post.collection === "blog"
       ? {
           title: post.data.title,
@@ -68,12 +68,4 @@ export const GET: APIRoute = async function get({ params, request }) {
             }
           : ({} as never)
   );
-
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
-
-  return new Response(png, {
-    headers: {
-      "Content-Type": "image/png",
-    },
-  });
 };
