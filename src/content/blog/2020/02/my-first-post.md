@@ -5,7 +5,6 @@ draft: false
 toc: false
 images:
 tags: [meta]
-description: "Hello, world!"
 ---
 
 Hello, world! I just bought a domain name today ([davi.sh](https://davi.sh)) and am setting up the site.

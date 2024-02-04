@@ -3,7 +3,6 @@ title: "Thinking with Obsidian"
 date: 2022-01-20T23:00:34-05:00
 draft: false
 tags: [obsidian, workflow, series]
-description: "Why Obsidian works for me."
 ---
 
 This is the first part of an in-progress series on the [Obsidian knowledge base](https://obsidian.md). You can find all the articles with the <a href='/tags/obsidian'>obsidian tag</a>.

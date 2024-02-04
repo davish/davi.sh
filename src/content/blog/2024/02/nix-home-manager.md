@@ -1,8 +1,7 @@
 ---
 title: Managing dotfiles with Nix on macOS
 date: 2024-02-08
-tags: [ nix, nix-on-mac ]
-description: Nix on macOS from Scratch, Part Two
+tags: [nix, nix-on-mac]
 draft: true
 ---
 
@@ -20,6 +19,7 @@ In this post, we'll install `home-manager`, and use it to set up configuration f
 `git`.
 
 ## Install `home-manager`
+
 `home-manager` will be another input to our flake. In our `inputs` attribute, add `home-manager`
 under `nix-darwin` in your `flake.nix`:
 
@@ -43,14 +43,14 @@ under `nix-darwin` in your `flake.nix`:
 We will then add the minimal home-manager config as another module under `configuration`:
 
 ```nix
-# ... 
+# ...
     outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager }:
     let
         configuration = {pkgs, ... }: {
             # ... nix-darwin configuration remains unchanged here
         };
         homeconfig = {pkgs, ...}: {
-            # this is internal compatibility configuration for home-manager, 
+            # this is internal compatibility configuration for home-manager,
             # don't change this!
             home.stateVersion = "23.05";
             # Let home-manager install and manage itself.
@@ -65,7 +65,7 @@ We will then add the minimal home-manager config as another module under `config
     in
     {
     darwinConfigurations."$HOSTNAME" = nix-darwin.lib.darwinSystem {
-        modules = [ 
+        modules = [
             configuration
             home-manager.darwinModules.home-manager  {
                 home-manager.useGlobalPkgs = true;
@@ -88,6 +88,7 @@ minimal config doesn't do anything yet. Let's change that.
 ## Manage `.vimrc`
 
 Let's manage our first dotfile! First, we'll create a new file in our repository:
+
 ```bash
 $ cd ~/.config/nix
 $ echo "set number" > vim_configuration
@@ -112,11 +113,13 @@ I'd like to pause here for now to explain a few subtleties in the Nix languages 
 has introduced us to.
 
 ### Paths
+
 In most languages, paths are represented as strings. In Nix, [Paths are first class primitive
 values](https://nixos.org/manual/nix/stable/language/values#type-path). You'll run into type errors
 if you try passing strings where paths are expected.
 
 ### Setting attributes in Nix
+
 [Attribute sets](https://nixos.org/manual/nix/stable/language/values#attribute-set) are probably the
 most ubiquitious datatype in Nix. They're the Nix equivalent of dictionaries in other languages. Something that's pretty unique to nix is that nested attributes are supported with some clever syntactic sugar. Desugaring our vim dotfile line above, we would get:
 
@@ -151,6 +154,7 @@ documentation](https://nix-community.github.io/home-manager/options.xhtml#opt-ho
 defails.
 
 ## Configure `zsh`
+
 You're probably getting tired of typing out or copy-pasting `darwin-rebuild switch --flake
 ~/.config/nix` all the time. Let's change that by adding a zsh alias! We could create a
 `zsh_configuration` file and use `home.file.".zshrc"` to symlink it to the right spot. Instead,
@@ -170,10 +174,12 @@ After running `darwin-rebuild switch --flake ~/.config/nix` for the last time, y
 just run `switch` from now on.
 
 When `programs.zsh.enable` is `true`, `home-manager` will use this attribute set to generate a
-`.zshrc` for you. 
+`.zshrc` for you.
 
 # Configure `git`
-There's some common git  While we're here, let's add another stanza for configuring `git`. Make sure to fill out 
+
+There's some common git While we're here, let's add another stanza for configuring `git`. Make sure to fill out
+
 ```nix
 programs.git = {
     enable = true;
@@ -188,9 +194,9 @@ programs.git = {
 ```
 
 ## Installing packages with `home-manager` vs `nix-darwin`
+
 TODO: Write this section before publishing! tl;dr is you should prefer home-manager because it is
 cross-platform. Anything mac-specific should stay in nix-darwin config.
-
 
 ## Conclusion
 

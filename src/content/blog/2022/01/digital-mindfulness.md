@@ -3,7 +3,6 @@ title: "Digital Mindfulness"
 date: 2022-01-04T17:19:42-05:00
 draft: false
 tags: [mindfulness, reflection, covid19, resolutions]
-description: "I'm not normally one for new year's resolutions, but this year I'm trying to be more mindful and intentional about how I use digital technology and the Internet."
 highlight: true
 ---
 

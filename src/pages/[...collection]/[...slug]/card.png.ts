@@ -47,7 +47,6 @@ export const GET: APIRoute = async function get({ params, request }) {
     post.collection === "blog"
       ? {
           title: post.data.title,
-          subtitle: post.data.description || null,
           date: post.data.date,
           path,
           tags: post.data.tags,
@@ -55,14 +54,12 @@ export const GET: APIRoute = async function get({ params, request }) {
       : post.collection === "weekly"
         ? {
             title: post.data.title,
-            subtitle: null,
             date: post.data.date,
             path,
           }
         : post.collection === "snippets"
           ? {
               title: post.data.description,
-              subtitle: post.data.title,
               date: post.data.modified || post.data.published,
               path,
             }

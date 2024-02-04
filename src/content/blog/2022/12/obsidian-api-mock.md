@@ -12,7 +12,6 @@ tags:
     "airplane-articles",
   ]
 highlight: true
-description: "Testing test code and writing DSLs."
 ---
 
 I've been working on a plugin for Obsidian called [Obsidian Full Calendar](https://github.com/davish/obsidian-full-calendar) on-and-off for the past 10 months or so. For most of that time the plugin has had no unit tests, and I finally got around to adding some test coverage during a big refactor.

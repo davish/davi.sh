@@ -3,7 +3,6 @@ title: "Task Management in Obsidian"
 date: 2022-01-22T20:20:05-05:00
 draft: false
 tags: [obsidian, series, workflow, task-management]
-description: "A walkthrough of how I manage my day-to-day tasks in Obsidian."
 highlight: true
 ---
 

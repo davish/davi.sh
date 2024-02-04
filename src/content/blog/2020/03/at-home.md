@@ -6,7 +6,6 @@ toc: false
 images:
 tags:
   - covid19
-description: "Moving home (and online)."
 ---
 
 Last Wednesday, Penn [extended Spring Break by a week and moved classes

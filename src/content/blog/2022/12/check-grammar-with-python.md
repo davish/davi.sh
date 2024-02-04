@@ -3,7 +3,6 @@ title: "Improving My Writing Style One Python Script at a Time"
 date: 2022-12-20
 draft: false
 tags: ["python", "airplane-articles"]
-description: ""
 ---
 
 One of my pet peeves about my natural writing style is how I lean into complex sentences divided by commas. Left unchecked, my prose starts looking like it might be ChatGPT's attempt at writing a blog post in the style of s-expressions. I thought it would be neat to try and write some code to help me proofread for this specific issue and improve my posts.

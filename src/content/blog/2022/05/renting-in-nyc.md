@@ -3,7 +3,6 @@ title: "Renting in New York City"
 date: 2022-05-08
 draft: false
 tags: [nyc, advice, realestate]
-description: "Some friends asked me for advice on how to find an apartment in NYC, and I didn't realize at first how many opinions I have on the whole process."
 highlight: true
 ---
 

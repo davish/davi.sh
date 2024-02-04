@@ -10,13 +10,12 @@ const backgroundColor = "rgba(27, 31, 35, 0.10)";
 
 type ImageProps = {
   title: string;
-  subtitle: string | null;
   date: Date;
   path: string;
   tags?: string[];
 };
 
-const OGImage = ({ title, subtitle, date, path, tags = [] }: ImageProps) => (
+const OGImage = ({ title, date, path, tags = [] }: ImageProps) => (
   <div
     style={{
       height: "100%",

@@ -2,7 +2,6 @@
 title: "Asking the Right Questions to ChatGPT"
 date: 2023-03-30T14:26:43Z
 tags: ["ai", "chatgpt", "django"]
-description: "AIs are as useful as the questions you know how to ask."
 draft: false
 ---
 

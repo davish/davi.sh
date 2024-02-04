@@ -1,7 +1,6 @@
 ---
 title: Top Classes in Undergrad
 date: 2021-04-10
-description: A look back at what I've learned in the classroom.
 tags:
   - upenn
   - lists

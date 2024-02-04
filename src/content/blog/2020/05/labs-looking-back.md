@@ -6,7 +6,6 @@ tags:
   - upenn
   - college
   - pennlabs
-description: My record of personal learnings from a year as director of Penn Labs.
 ---
 
 I just finished writing [a year-in-review blog

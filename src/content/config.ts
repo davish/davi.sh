@@ -1,8 +1,4 @@
-import {
-  z,
-  defineCollection,
-  getCollection,
-} from "astro:content";
+import { z, defineCollection, getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 const partialDate = () =>
@@ -10,7 +6,7 @@ const partialDate = () =>
     .string()
     .or(z.date())
     .transform((arg) => {
-      const date = new Date(arg)
+      const date = new Date(arg);
       if (date.getHours() === 0 && date.getMinutes() === 0) {
         // Set time to 5PM UTC if not time is set
         date.setUTCHours(17, 0, 0, 0);
@@ -57,7 +53,6 @@ const BlogPostCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     date: partialDate(),
-    description: z.string().optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     highlight: z.boolean().default(false),
@@ -88,7 +83,7 @@ const WeeklyCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     date: partialDate(),
-  })
+  }),
 });
 
 export const collections = {
@@ -110,7 +105,7 @@ const urls: UrlMap = {
   projects: "/projects/",
   snippets: "/til/",
   shorts: "/µ/",
-  weekly: "/weekly/"
+  weekly: "/weekly/",
 };
 
 export type ShortParam = {

@@ -11,7 +11,6 @@ const { post } = Astro.props;
 <li>
   <a href={getUrlForCollectionEntry("blog", post.slug)}>
     <span class="article">{post.data.title}</span>
-    <div>{post.data.description || ""}</div>
   </a>
 </li>
 

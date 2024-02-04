@@ -6,7 +6,6 @@ tags:
   - electronics
   - unix
   - 3dprinting
-description: A foray into electronics, Unix and embedded computing.
 ---
 
 I built a clock! [It runs Linux](https://github.com/davish/pi-clock).

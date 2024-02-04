@@ -9,7 +9,6 @@ tags:
   - emacs
   - texteditors
   - configuration
-description: "How I learned to stop worrying and love the keyboard."
 ---
 
 My personal editor journey has been kind of strange. I started off using Sublime

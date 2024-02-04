@@ -1,12 +1,11 @@
 ---
 title: Configuring VSCode with Nix
 date: 2024-02-15
-tags: [ nix, vscode, nix-on-mac ]
-description: Nix on macOS, Part Three
+tags: [nix, vscode, nix-on-mac]
 draft: true
 ---
 
-Welcome back to *Nix on macOS*! In the previous installment we set up `home-manager` and used it to
+Welcome back to _Nix on macOS_! In the previous installment we set up `home-manager` and used it to
 configure `vim`, `git` and `zsh`. All three of these programs use pretty straightforward text-based
 configuration. In Part Three, we'll tackle a much more complex beast: defining VSCode
 configuration 100% declaratively. It seems like it should be difficult, but `home-manager` makes it
@@ -27,7 +26,7 @@ block:
 ```
 let
     configuration = {pkgs, ...}: {
-        # ... 
+        # ...
         nixpkgs.config.allowUnfree = true;
         # ...
         };

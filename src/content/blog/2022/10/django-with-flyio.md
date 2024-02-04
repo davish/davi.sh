@@ -3,7 +3,6 @@ title: "Deploy a Django app with fly.io"
 date: 2022-10-04
 draft: false
 tags: ["webdev", "django", "fly.io", "devops"]
-description: "A step-by-step guide."
 ---
 
 I started a new project a few days ago built with Django. [Heroku is killing their free tier](https://techcrunch.com/2022/08/25/heroku-announces-plans-to-eliminate-free-plans-blaming-fraud-and-abuse/), and I've read that [Fly.io is the cool new thing](https://xeiaso.net/blog/fly.io-heroku-replacement), so I decided to try it out.

@@ -2,7 +2,6 @@
 title: "Honing Your Craft"
 date: 2023-05-21T09:53:48Z
 tags: [resolutions]
-description: "In order to put the best work out there, it's important to take time to sharpen your tools."
 draft: false
 ---
 
@@ -12,9 +11,9 @@ I'm certainly no artist, but the lesson here applies more broadly: practicing te
 
 <!--more-->
 
-![Science and Charity by Picasso. The caption follows in the next line of text.](/blog/images/picasso_science-and-charity.jpg) *_Science and Charity_ by Pablo Picasso, 1897 (age 16)*
+![Science and Charity by Picasso. The caption follows in the next line of text.](/blog/images/picasso_science-and-charity.jpg) _*Science and Charity* by Pablo Picasso, 1897 (age 16)_
 
-![Guernica by Pablo Picasso. The caption follows in the next line of text.](/blog/images/picasso_guernica.jpg) *_Guernica_ by Pablo Picasso, 1937 (age 56).*
+![Guernica by Pablo Picasso. The caption follows in the next line of text.](/blog/images/picasso_guernica.jpg) _*Guernica* by Pablo Picasso, 1937 (age 56)._
 
 I've got more than a few ideas for open-source projects and apps that I'd like to implement. I also have more than a few languages, frameworks and technologies that I'm itching to learn how to use. For a long time I've taken to heart the advice that the best way to learn a new programming language or framework is to build a larger-scale project with it that you're excited about. What I'm realizing, though, is that [innovation tokens](https://mcfunley.com/choose-boring-technology) apply just as much to side projects where you're looking to grow and learn as they do for production applications. The more mental energy spent designing a UI and triaging bug reports, the less energy there is for diving deep into a new language, investigating performance bottlenecks and learning other tools.
 
