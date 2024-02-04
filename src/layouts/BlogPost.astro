@@ -20,6 +20,7 @@ const { Content } = await render();
   back="/blog"
   title={frontmatter.title}
   description={frontmatter.description || ""}
+  card={true}
 >
   <Article>
     <Heading {...Astro.props} />
