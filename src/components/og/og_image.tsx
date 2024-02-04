@@ -126,6 +126,11 @@ const OGImage = ({ title, subtitle, date, path, tags = [] }: ImageProps) => (
   </div>
 );
 
+const Inter = {
+  400: await fs.readFile("./public/fonts/inter-latin-400-normal.ttf"),
+  600: await fs.readFile("./public/fonts/inter-latin-600-normal.ttf"),
+};
+
 export const makeOpenGraphImage = async (props: ImageProps) =>
   await satori(<OGImage {...props}></OGImage>, {
     width: 1200,
@@ -133,13 +138,13 @@ export const makeOpenGraphImage = async (props: ImageProps) =>
     fonts: [
       {
         name: "Inter",
-        data: await fs.readFile("./public/fonts/inter-latin-400-normal.ttf"),
+        data: Inter[400],
         weight: 400,
         style: "normal",
       },
       {
         name: "Inter",
-        data: await fs.readFile("./public/fonts/inter-latin-600-normal.ttf"),
+        data: Inter[600],
         weight: 600,
         style: "normal",
       },
