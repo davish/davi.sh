@@ -1,7 +1,7 @@
 ---
 import Nav from "../components/Nav.astro";
 import Links from "../components/Links.astro";
-import Meta from "../components/Meta.astro";
+import Barebones from "./Barebones.astro";
 
 export interface Props {
   hideFooter?: boolean;
@@ -10,93 +10,53 @@ export interface Props {
   back?: string;
   description: string | null;
   rss?: string | undefined;
-  card?: boolean | undefined
+  card?: boolean | undefined;
 }
-const { hideFooter = false, path, title, back, description, rss, card } = Astro.props;
+const {
+  hideFooter = false,
+  path,
+  title,
+  back,
+  description,
+  rss,
+  card,
+} = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Meta
-      title={title}
-      description={description || "Davis Haupt's Website"}
-      rss={rss}
-      card={card || false}
-    />
-  </head>
-  <body>
-    <Nav path={path} back={back} />
-    <div id="main">
-      <slot />
-    </div>
-    {
-      !hideFooter ? (
-        <footer>
-          <Links />
-        </footer>
-      ) : null
-    }
+<Barebones title={title} description={description} rss={rss} card={card}>
+  <Nav path={path} back={back} />
+  <div id="main">
+    <slot />
+  </div>
+  {
+    !hideFooter ? (
+      <footer>
+        <Links />
+      </footer>
+    ) : null
+  }
 
-    <style lang="scss">
-      @import "/src/variables.scss";
-      div#main {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
+  <style lang="scss">
+    @import "/src/variables.scss";
+    div#main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // max-width: 960px;
+      padding: 1rem;
+      margin: 1rem 2rem;
+      @media #{$media-size-phone} {
+        margin: 1rem 0rem;
         align-items: center;
-        // max-width: 960px;
-        padding: 1rem;
-        margin: 1rem 2rem;
-        @media #{$media-size-phone} {
-          margin: 1rem 0rem;
-          align-items: center;
-        }
-        @media print {
-          padding: 0;
-          margin: 0;
-        }
       }
-      footer {
-        padding-bottom: 1rem;
-      }
-    </style>
-
-    <style lang="scss" is:global>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
-      @import "../variables.scss";
-      a {
-        color: $accent-color;
-        text-decoration: none;
-        @media print {
-          text-decoration: underline;
-        }
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      body {
-        @include serif;
-        background-color: #ffffff;
-        // background-color: #f4f0ec;
-        color: $text-color;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+      @media print {
+        padding: 0;
         margin: 0;
-        @media print {
-          font-size: 0.8rem;
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-        }
       }
-      hr {
-        color: rgba(0, 0, 0, 0.2);
-        border-style: solid;
-        margin: 1rem 0;
-      }
-      @import "src/tufte.scss";
-    </style>
-  </body>
-</html>
+    }
+    footer {
+      padding-bottom: 1rem;
+    }
+  </style>
+</Barebones>
