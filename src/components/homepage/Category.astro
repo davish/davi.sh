@@ -1,0 +1,36 @@
+---
+import File from "./File.astro";
+type Props = {
+  title: string;
+  href: string;
+  posts: { title: string; href: string; date: Date }[];
+};
+
+const { title, href, posts } = Astro.props;
+---
+
+<h2><a href={href}>{title}</a></h2>
+<ul>
+  {
+    posts.map(({ title, href, date }) => (
+      <li>
+        <File title={title} href={href} date={date} />
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  @import "src/variables.scss";
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    li {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>
