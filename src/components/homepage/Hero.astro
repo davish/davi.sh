@@ -1,10 +1,12 @@
 ---
 import * as Intro from "src/intro.md";
+import Links from "../Links.astro";
 ---
 
 <section>
   <div class="container">
-    <h1 class="name">Davis Haupt</h1>
+    <h1>Davis Haupt</h1>
+    <Links color="white" align="left" />
     <div class="bio">
       <Intro.Content />
     </div>
@@ -23,32 +25,38 @@ import * as Intro from "src/intro.md";
     border-width: 0 0 12px;
     border-color: $accent-color-hover;
     border-style: solid;
-    .container {
-      margin: 5rem auto;
-      @media #{$media-size-phone} {
-        margin: 5rem 1rem;
+  }
+  .container {
+    margin: 5rem auto;
+    @media #{$media-size-phone} {
+      margin: 5rem 1rem;
+    }
+    max-width: 600px;
+  }
+  h1 {
+    display: inline-block;
+    color: $accent-color;
+    background-color: white;
+    font-size: 2rem;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-left: -1rem;
+  }
+  .bio {
+    line-height: 1.75rem;
+    font-size: 14pt;
+    margin: auto;
+    color: white;
+    max-width: 100ch;
+    & :global(a) {
+      color: white;
+      text-decoration: underline;
+      @media print {
+        text-decoration: underline;
       }
-      max-width: 600px;
-      .name {
-        color: white;
-      }
-      .bio {
-        line-height: 1.75rem;
-        font-size: 14pt;
-        margin: auto;
-        color: white;
-        max-width: 100ch;
-        & :global(a) {
-          color: white;
-          text-decoration: underline;
-          @media print {
-            text-decoration: underline;
-          }
-        }
-        & :global(p) {
-          margin: 0;
-        }
-      }
+    }
+    & :global(p) {
+      margin: 0;
     }
   }
 </style>
