@@ -1,70 +1,133 @@
 ---
-import Base from "../layouts/Base.astro";
-import Links from "../components/Links.astro";
+import Barebones from "@layouts/Barebones.astro";
+import * as Intro from "../intro.md";
+import Prompt from "src/components/Prompt.astro";
+import Listing from "src/components/homepage/Listing.astro";
+import Center from "src/components/Center.astro";
+import {
+  getBlogPosts,
+  getSnippets,
+  getUrlForCollectionEntry,
+  getWeeklies,
+} from "src/content/config";
+
+const NUM_POSTS = 3;
+
+const blogs = (await getBlogPosts((p) => p.data.highlight))
+  .map(({ data: { title, date }, slug }) => ({
+    title,
+    date,
+    href: getUrlForCollectionEntry("blog", slug),
+  }))
+  .slice(0, NUM_POSTS);
+
+const weeklies = (await getWeeklies())
+  .map(({ data: { title, date }, slug }) => ({
+    title,
+    date,
+    href: getUrlForCollectionEntry("weekly", slug),
+  }))
+  .slice(0, NUM_POSTS);
+
+const tils = (await getSnippets())
+  .map(({ data: { title, published, modified }, slug }) => ({
+    title,
+    date: modified || published,
+    href: getUrlForCollectionEntry("snippets", slug),
+  }))
+  .slice(0, NUM_POSTS);
 ---
 
-<Base hideFooter={true} title={"Davis Haupt's Website"} description={""}>
-  <section class="hero">
-    <h1>Davis Haupt</h1>
-    <Links />
-    <hr />
-  </section>
-  <section id="bio">
-    <p>
-      <b>Hi there!</b> I'm Davis. I'm really passionate about programming languages,
-      software systems and elections.
-    </p>
-    <p>
-      I'm a Software Engineer by trade, and also spend some time working on my
-      own open source projects.
-    </p>
-    <p>
-      I write long-form posts on <a href="/blog">my blog</a> 
-      and also curate a <a href="/weekly">weekly newsletter</a>.
-    </p>
-    
-  </section>
-  <!-- <div id="highlights">
-    <Highlights />
-  </div> -->
-</Base>
+<Barebones title="Davis Haupt">
+  <div class="page">
+    <div class="hero">
+      <div class="hero-container">
+        <h1 class="name">Davis Haupt</h1>
+        <div class="bio">
+          <Intro.Content />
+        </div>
+      </div>
+    </div>
+    <div class="fold">
+      <div class="prompt">
+        <Prompt path=" ls" />
+      </div>
+      <div class="listing-container">
+        <ul class="listings">
+          <Listing title="newsletter/" href="/weekly" posts={weeklies} />
+          <Listing title="long_form/" href="/blog" posts={blogs} />
+          <Listing title="til/" href="/til" posts={tils} />
+        </ul>
+      </div>
+    </div>
+  </div>
+</Barebones>
 
 <style lang="scss">
-  @import "../variables.scss";
-  section {
-    text-align: center;
-    margin: 1rem 2rem;
-    &.hero {
-      font-family: "Inter", sans-serif;
-      text-align: center;
-      min-width: 80%;
-      margin: 0;
-      h1 {
-        font-size: 3rem;
-        font-weight: 400;
-        margin-bottom: 1.3rem;
-      }
-    }
-
-    &#bio {
-      max-width: 50ch;
-      line-height: 1.75rem;
-      font-size: 14pt;
-      text-align: center;
-    }
+  @import "src/variables.scss";
+  ul.listings {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    font-family: monospace;
   }
-  div#highlights {
-    max-width: 100ch;
-    width: 90%;
-  }
-  div.center {
+  div.page {
     width: 100%;
-    flex-grow: 1;
+  }
+  div.hero {
+    @include sans-serif;
+
+    background: $accent-color;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    border-width: 0 0 12px;
+    border-color: $accent-color-hover;
+    border-style: solid;
+    &-container {
+      margin: 5rem auto;
+      @media #{$media-size-phone} {
+        margin: 5rem 1rem;
+      }
+      max-width: 600px;
+      .name {
+        color: white;
+      }
+      .bio {
+        line-height: 1.75rem;
+        font-size: 14pt;
+        margin: auto;
+        color: white;
+        max-width: 100ch;
+      }
+    }
   }
-  hr {
-    margin-top: 3rem !important;
+  div.prompt {
+    @include sans-serif;
+    max-width: 600px;
+    margin: auto;
+  }
+  div.fold {
+    max-width: 1000px;
+    margin: auto;
+  }
+  div.listing-container {
+    max-width: 600px;
+    margin: auto;
+  }
+</style>
+<style lang="scss" is:global>
+  @import "src/variables.scss";
+  div.bio {
+    a {
+      color: white;
+      text-decoration: underline;
+      @media print {
+        text-decoration: underline;
+      }
+    }
+    p {
+      margin: 0;
+    }
   }
 </style>

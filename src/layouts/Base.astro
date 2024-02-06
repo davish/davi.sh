@@ -25,9 +25,7 @@ const {
 
 <Barebones title={title} description={description} rss={rss} card={card}>
   <Nav path={path} back={back} />
-  <div id="main">
-    <slot />
-  </div>
+  <div id="base"><slot /></div>
   {
     !hideFooter ? (
       <footer>
@@ -37,13 +35,13 @@ const {
   }
 
   <style lang="scss">
-    @import "/src/variables.scss";
-    div#main {
+    @import "src/variables.scss";
+
+    div#base {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      // max-width: 960px;
       padding: 1rem;
       margin: 1rem 2rem;
       @media #{$media-size-phone} {

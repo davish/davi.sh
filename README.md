@@ -8,4 +8,5 @@ This is my website. There are many like it, but this one's mine. I've pulled bit
 - [Josh Comeau's Snippets](https://www.joshwcomeau.com/snippets/)
 - [Simon Willison's TIL site](https://til.simonwillison.net)
 - [Arne Bahlo's personal site](https://arne.me)
-- [Jacob Kaplan-Moss's OpenGraph image design](https://jacobian.org)
+- [Jacob Kaplan-Moss's personal site](https://jacobian.org)
+- [Programming in the 21st Century](https://prog21.dadgum.com)

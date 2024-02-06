@@ -1,0 +1,55 @@
+---
+import { toReadableString } from "src/utils";
+
+type Props = { title: string; href: string; date: Date };
+
+const { title, href, date } = Astro.props;
+---
+
+<li>
+  <a href={href}>
+    <span class="label">{toReadableString(date)}</span>
+    <span class="title">{title}</span>
+  </a>
+</li>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  li {
+    display: flex;
+    justify-content: center;
+    @media print {
+      display: none;
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      width: 100%;
+      padding: 0.1rem;
+      margin-right: 1rem;
+      border-radius: 5px;
+      transition: 0.15s;
+
+      &:hover {
+        background-color: rgba($accent-color, 0.1);
+        text-decoration: none;
+      }
+
+      margin-bottom: 0.5rem;
+    }
+
+    .label {
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .title {
+      font-weight: 600;
+      color: $text-color;
+    }
+  }
+  a:hover {
+    text-decoration: none;
+  }
+</style>
