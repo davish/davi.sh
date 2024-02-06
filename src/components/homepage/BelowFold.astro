@@ -1,0 +1,78 @@
+---
+import Prompt from "src/components/Prompt.astro";
+import Listing from "src/components/homepage/Listing.astro";
+import {
+  getBlogPosts,
+  getSnippets,
+  getUrlForCollectionEntry,
+  getWeeklies,
+} from "src/content/config";
+
+const NUM_POSTS = 5;
+
+const blogs = (await getBlogPosts())
+  .map(({ data: { title, date }, slug }) => ({
+    title,
+    date,
+    href: getUrlForCollectionEntry("blog", slug),
+  }))
+  .slice(0, NUM_POSTS);
+
+const weeklies = (await getWeeklies())
+  .map(({ data: { title, date }, slug }) => ({
+    title,
+    date,
+    href: getUrlForCollectionEntry("weekly", slug),
+  }))
+  .slice(0, NUM_POSTS);
+
+const tils = (await getSnippets())
+  .map(({ data: { title, published, modified }, slug }) => ({
+    title,
+    date: modified || published,
+    href: getUrlForCollectionEntry("snippets", slug),
+  }))
+  .slice(0, NUM_POSTS);
+---
+
+<div class="fold">
+  <div class="prompt">
+    <Prompt path=" ls" />
+  </div>
+  <div class="listing-container">
+    <ul class="listings">
+      <Listing title="blog/" href="/blog" posts={blogs} />
+      <Listing title="weekly/" href="/weekly" posts={weeklies} />
+      <Listing title="til/" href="/til" posts={tils} />
+    </ul>
+  </div>
+</div>
+
+<style lang="scss">
+  @import "src/variables.scss";
+  ul.listings {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+    font-family: monospace;
+  }
+  div.page {
+    width: 100%;
+  }
+
+  div.prompt {
+    @include sans-serif;
+    max-width: 600px;
+    margin: auto;
+  }
+  div.fold {
+    max-width: 1000px;
+    margin: auto;
+  }
+  div.listing-container {
+    max-width: 600px;
+    margin: auto;
+  }
+</style>

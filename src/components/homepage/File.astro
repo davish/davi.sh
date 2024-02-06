@@ -24,7 +24,7 @@ const { title, href, date } = Astro.props;
 
     a {
       display: flex;
-      flex-direction: column;
+      //   flex-direction: column;
       text-decoration: none;
       width: 100%;
       padding: 0.1rem;
@@ -32,8 +32,10 @@ const { title, href, date } = Astro.props;
       border-radius: 5px;
       transition: 0.15s;
 
+      //   background-color: rgba($background-color, 0.05);
+
       &:hover {
-        background-color: rgba($accent-color, 0.1);
+        background-color: rgba($accent-color, 0.2);
         text-decoration: none;
       }
 
@@ -43,6 +45,7 @@ const { title, href, date } = Astro.props;
     .label {
       font-size: 0.8rem;
       color: #999;
+      min-width: 14ch;
     }
     .title {
       font-weight: 600;

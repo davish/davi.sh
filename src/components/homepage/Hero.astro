@@ -1,0 +1,54 @@
+---
+import * as Intro from "src/intro.md";
+---
+
+<section>
+  <div class="container">
+    <h1 class="name">Davis Haupt</h1>
+    <div class="bio">
+      <Intro.Content />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "src/variables.scss";
+
+  section {
+    @include sans-serif;
+
+    background: $accent-color;
+    display: flex;
+    flex-direction: column;
+    border-width: 0 0 12px;
+    border-color: $accent-color-hover;
+    border-style: solid;
+    .container {
+      margin: 5rem auto;
+      @media #{$media-size-phone} {
+        margin: 5rem 1rem;
+      }
+      max-width: 600px;
+      .name {
+        color: white;
+      }
+      .bio {
+        line-height: 1.75rem;
+        font-size: 14pt;
+        margin: auto;
+        color: white;
+        max-width: 100ch;
+        & :global(a) {
+          color: white;
+          text-decoration: underline;
+          @media print {
+            text-decoration: underline;
+          }
+        }
+        & :global(p) {
+          margin: 0;
+        }
+      }
+    }
+  }
+</style>
