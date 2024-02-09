@@ -35,12 +35,12 @@ import Links from "../Links.astro";
   }
   h1 {
     display: inline-block;
-    color: $accent-color;
-    background-color: white;
+    color: white;
+    // background-color: white;
     font-size: 2rem;
-    border-radius: 20px;
-    padding: 1rem;
-    margin-left: -1rem;
+    // border-radius: 20px;
+    // padding: 1rem;
+    // margin-left: -1rem;
   }
   .bio {
     line-height: 1.75rem;
@@ -48,14 +48,15 @@ import Links from "../Links.astro";
     margin: auto;
     color: white;
     max-width: 100ch;
-    & :global(a) {
+
+    :global(a) {
       color: white;
       text-decoration: underline;
       @media print {
         text-decoration: underline;
       }
     }
-    & :global(p) {
+    :global(p) {
       margin: 0;
     }
   }

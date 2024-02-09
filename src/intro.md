@@ -1,1 +1,1 @@
-**Hi there!** I'm Davis. I'm really passionate about programming languages and software systems. I'm a Software Engineer by trade, and also spend some time working on my own open source projects. I write long-form posts on [my blog](/blog) and also curate a [weekly newsletter](/weekly).
+**Hi there!** I work on database systems by day, and in my spare time I tinker with and write about web development, programming languages, and configurable systems.
