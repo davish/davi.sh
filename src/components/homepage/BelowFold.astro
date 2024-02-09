@@ -8,31 +8,27 @@ import {
   getWeeklies,
 } from "src/content/config";
 
-const NUM_POSTS = 5;
+const blogs = (await getBlogPosts()).map(({ data: { title, date }, slug }) => ({
+  title,
+  date,
+  href: getUrlForCollectionEntry("blog", slug),
+}));
 
-const blogs = (await getBlogPosts())
-  .map(({ data: { title, date }, slug }) => ({
-    title,
-    date,
-    href: getUrlForCollectionEntry("blog", slug),
-  }))
-  .slice(0, NUM_POSTS);
-
-const weeklies = (await getWeeklies())
-  .map(({ data: { title, date }, slug }) => ({
+const weeklies = (await getWeeklies()).map(
+  ({ data: { title, date }, slug }) => ({
     title,
     date,
     href: getUrlForCollectionEntry("weekly", slug),
-  }))
-  .slice(0, NUM_POSTS);
+  })
+);
 
-const tils = (await getSnippets())
-  .map(({ data: { title, published, modified }, slug }) => ({
+const tils = (await getSnippets()).map(
+  ({ data: { title, published, modified }, slug }) => ({
     title,
     date: modified || published,
     href: getUrlForCollectionEntry("snippets", slug),
-  }))
-  .slice(0, NUM_POSTS);
+  })
+);
 ---
 
 <section class="fold">
@@ -40,9 +36,20 @@ const tils = (await getSnippets())
     <Prompt path=" ls" />
   </div>
   <ul>
-    <li><Category title="blog/" href="/blog" posts={blogs} /></li>
-    <li><Category title="weekly/" href="/weekly" posts={weeklies} /></li>
-    <li><Category title="til/" href="/til" posts={tils} /></li>
+    <li>
+      <Category title="blog/" href="/blog" posts={blogs.slice(0, 5)} />
+    </li>
+    <li>
+      <Category title="weekly/" href="/weekly" posts={weeklies.slice(0, 1)}>
+        Commentary and curated links from around the internet. Here's the
+        latest:
+      </Category>
+    </li>
+    <li>
+      <Category title="til/" href="/til" posts={tils.slice(0, 3)}>
+        Short, hard-won snippets to help every last DenverCoder9 on the web.
+      </Category>
+    </li>
   </ul>
 </section>
 
@@ -51,6 +58,9 @@ const tils = (await getSnippets())
   section {
     max-width: 1000px;
     margin: auto;
+    @media #{$media-size-phone} {
+      margin: 0 1rem;
+    }
   }
   ul {
     max-width: 600px;
@@ -60,7 +70,6 @@ const tils = (await getSnippets())
     flex-direction: column;
     justify-content: space-around;
     padding: 0;
-    font-family: monospace;
     li {
       flex: 1;
       display: inline;

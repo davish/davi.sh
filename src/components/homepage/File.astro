@@ -1,18 +1,25 @@
 ---
 import { toReadableString } from "src/utils";
 
-type Props = { title: string; href: string; date: Date };
+type Props = { title: string; href: string; date: Date | null };
 
 const { title, href, date } = Astro.props;
 ---
 
 <a href={href}>
-  <span class="label">{toReadableString(date)}</span>
+  <span class="label">{date ? toReadableString(date) : "..."}</span>
   <span class="title">{title}</span>
 </a>
 
 <style lang="scss">
   @import "/src/variables.scss";
+  @mixin hover-green {
+    transition: 0.15s;
+    &:hover {
+      background-color: rgba($accent-color, 0.2);
+      text-decoration: none;
+    }
+  }
   a {
     display: flex;
     text-decoration: none;
@@ -22,21 +29,19 @@ const { title, href, date } = Astro.props;
     border-radius: 5px;
     margin-bottom: 0.5rem;
 
+    @include hover-green;
     .label {
       font-size: 0.8rem;
       color: #999;
-      min-width: 14ch;
+      min-width: 12ch;
+      max-width: 12ch;
+      text-align: right;
+      margin-right: 4ch;
     }
 
     .title {
       font-weight: 600;
       color: $text-color;
-    }
-
-    transition: 0.15s;
-    &:hover {
-      background-color: rgba($accent-color, 0.2);
-      text-decoration: none;
     }
   }
 </style>

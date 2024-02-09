@@ -6,8 +6,9 @@ export interface Props {
   rss?: string | undefined;
   card?: boolean | undefined;
   description?: string | null;
+  themeColor?: string;
 }
-const { title, description, rss, card } = Astro.props;
+const { title, description, rss, card, themeColor } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +20,7 @@ const { title, description, rss, card } = Astro.props;
       rss={rss}
       card={card || false}
     />
+    {themeColor && <meta name="theme-color" content={themeColor} />}
   </head>
   <body>
     <div id="main">

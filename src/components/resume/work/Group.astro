@@ -23,12 +23,12 @@ jobs.sort(
         <strong>{jobs[0].data.company}</strong>
         <span class="location">• {jobs[0].data.location}</span>
         <span class="spacer" />
-        <span class="skills">
-          {skills.map((s) => (
-            <span class="skill">{s}</span>
-          ))}
-        </span>
       </span>
+      <div class="skills">
+        {skills.map((s) => (
+          <span class="skill">{s}</span>
+        ))}
+      </div>
 
       <ul>
         {jobs.map((job) => (
@@ -88,20 +88,20 @@ jobs.sort(
     .location {
       @include dimmed;
     }
-    .skills {
-      margin: 0.15rem 0;
-      display: inline-block;
-      padding-left: 0.2rem;
-      font-size: 0.8em;
-      span.skill {
-        background-color: $background-color-solid;
-        border-radius: 3px;
-        // color: black;
-        padding: 0px 5px;
-        font-size: 0.9em;
-        &:not(:last-child) {
-          margin-right: 0.5rem;
-        }
+  }
+  .skills {
+    margin: 0.15rem 0;
+    display: inline-block;
+    // padding-left: 0.2rem;
+    font-size: 0.9em;
+    span.skill {
+      background-color: $background-color-solid;
+      border-radius: 3px;
+      // color: black;
+      padding: 0px 5px;
+      font-size: 0.9em;
+      &:not(:last-child) {
+        margin-right: 0.5rem;
       }
     }
   }

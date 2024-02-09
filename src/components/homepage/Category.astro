@@ -10,6 +10,9 @@ const { title, href, posts } = Astro.props;
 ---
 
 <h2><a href={href}>{title}</a></h2>
+<p>
+  <slot />
+</p>
 <ul>
   {
     posts.map(({ title, href, date }) => (
@@ -18,19 +21,25 @@ const { title, href, posts } = Astro.props;
       </li>
     ))
   }
+  <li>
+    <File title="See more" href={href} date={null} />
+  </li>
 </ul>
 
 <style lang="scss">
   @import "src/variables.scss";
 
+  h2 {
+    font-family: monospace;
+  }
   ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
+    font-family: monospace;
     padding: 0;
-    li {
-      display: flex;
-      justify-content: center;
-    }
+  }
+  p {
+    font-family: monospace;
   }
 </style>
