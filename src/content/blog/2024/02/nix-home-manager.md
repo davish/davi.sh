@@ -1,5 +1,5 @@
 ---
-title: Managing dotfiles with Nix on macOS
+title: Managing dotfiles on macOS with Nix
 date: 2024-02-08
 tags: [nix, nix-on-mac]
 draft: false
