@@ -194,9 +194,8 @@ You're probably getting tired of typing out or copy-pasting `darwin-rebuild swit
 ~/.config/nix` all the time. Now, let's add a shell alias! Our fingers will thank us.
 
 We could create a `zsh_configuration` file and use `home.file.".zshrc"` to symlink it to
-the right spot. Instead, though, I want to demonstrate how to use some of the built-in
-configuration that `home-manager` provides. Inside our `homeconfig` block, add the
-following:
+the right spot, but I want to demonstrate how to use some of the built-in configuration
+that `home-manager` provides. Add the following inside our `homeconfig` block:
 
 ```nix
 programs.zsh = {
@@ -216,8 +215,8 @@ already have a `.zshrc`, Nix will ask you to move the file so it's not overwritt
 
 # Configuring git
 
-While we're here, let's add another stanza for configuring git with some common
-options. Make sure to put in your name and email address:
+Let's add another stanza for configuring git with some common options while we're
+here. Make sure to put in your name and email address:
 
 ```nix
 programs.git = {
