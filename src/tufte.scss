@@ -1,4 +1,4 @@
-@import "src/variables.scss";
+@import "/src/variables.scss";
 
 /**
 
@@ -37,14 +37,12 @@ body {
 }
 
 @media #{$media-size-desktop} {
-
-  .margin-toggle+.sidenote,
-  .margin-toggle+.marginnote {
+  .margin-toggle + .sidenote,
+  .margin-toggle + .marginnote {
     display: block;
     float: right;
     clear: right;
 
-    
     @media #{$media-size-desktop} {
       // padding-right:2rem;
       --sidenote-padding: 10rem;
@@ -54,10 +52,10 @@ body {
       --sidenote-padding: 2rem;
     }
 
-    --sidenote-width: calc((100vw - 100% - 4rem - var(--sidenote-padding))/2);
+    --sidenote-width: calc((100vw - 100% - 4rem - var(--sidenote-padding)) / 2);
     margin-right: calc(-1 * (1em + var(--sidenote-width)));
     width: var(--sidenote-width);
-    
+
     margin-top: 0.3rem;
     margin-bottom: 0;
     font-size: 0.9rem;
@@ -66,7 +64,7 @@ body {
     position: relative;
 
     code {
-      font-size: .78rem;
+      font-size: 0.78rem;
     }
   }
 
@@ -75,8 +73,6 @@ body {
     cursor: auto;
   }
 }
-
-
 
 .sidenote-number {
   counter-increment: sidenote-counter;
@@ -107,8 +103,6 @@ blockquote .marginnote {
   margin-right: -82%;
   min-width: 59%;
   text-align: left;
-
-
 }
 
 input.margin-toggle {
@@ -135,8 +129,8 @@ label.margin-toggle:not(.sidenote-number) {
     display: none;
   }
 
-  .margin-toggle:checked+.sidenote,
-  .margin-toggle:checked+.marginnote {
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
     display: block;
     float: left;
     left: 1rem;
@@ -154,9 +148,8 @@ label.margin-toggle:not(.sidenote-number) {
 }
 
 @media print {
-
-  .margin-toggle+.sidenote,
-  .margin-toggle+.marginnote {
+  .margin-toggle + .sidenote,
+  .margin-toggle + .marginnote {
     display: block;
     float: left;
     left: 1rem;

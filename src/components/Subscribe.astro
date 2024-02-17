@@ -1,65 +1,65 @@
 <div class="container">
-    <div class="blurb"><slot /></div>
-    <form
-        action="https://buttondown.email/api/emails/embed-subscribe/davish"
-        method="post"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.email/davish', 'popupwindow')"
-        class="embeddable-buttondown-form"
-    >
-        <label for="bd-email">Email address:</label>
-        <input
-            type="email"
-            name="email"
-            id="bd-email"
-            placeholder="you@email.com"
-        />
+  <div class="blurb"><slot /></div>
+  <form
+    action="https://buttondown.email/api/emails/embed-subscribe/davish"
+    method="post"
+    target="popupwindow"
+    onsubmit="window.open('https://buttondown.email/davish', 'popupwindow')"
+    class="embeddable-buttondown-form"
+  >
+    <label for="bd-email">Email address:</label>
+    <input
+      type="email"
+      name="email"
+      id="bd-email"
+      placeholder="you@email.com"
+    />
 
-        <input type="submit" value="Subscribe" />
-        <p>
-            <a href="https://buttondown.email/refer/davish" target="_blank"
-                >Powered by Buttondown.</a
-            >
-        </p>
-    </form>
+    <input type="submit" value="Subscribe" />
+    <p>
+      <a href="https://buttondown.email/refer/davish" target="_blank"
+        >Powered by Buttondown.</a
+      >
+    </p>
+  </form>
 </div>
 
 <style lang="scss">
-    @import "src/variables.scss";
-    div.blurb {
-        margin-bottom: 0.5rem;
+  @import "/src/variables.scss";
+  div.blurb {
+    margin-bottom: 0.5rem;
+  }
+  form {
+    @include sans-serif;
+    @media print {
+      display: none;
     }
-    form {
-        @include sans-serif;
-        @media print {
-            display: none;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        input {
-            border-radius: 8px;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            margin-right: 4px;
-            line-height: 1.5;
-            font-size: 16px;
-        }
-        input[type="email"] {
-            background-color: $background-color;
-        }
-        input[type="submit"] {
-            background: $accent-color;
-            color: white;
-            cursor: pointer;
-            &:hover {
-                background: $accent-color-hover;
-            }
-        }
-        p {
-            font-size: 0.6rem;
-        }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
     }
+    input {
+      border-radius: 8px;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      margin-right: 4px;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+    input[type="email"] {
+      background-color: $background-color;
+    }
+    input[type="submit"] {
+      background: $accent-color;
+      color: white;
+      cursor: pointer;
+      &:hover {
+        background: $accent-color-hover;
+      }
+    }
+    p {
+      font-size: 0.6rem;
+    }
+  }
 </style>
