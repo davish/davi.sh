@@ -23,13 +23,9 @@ const { title, description, rss, card, themeColor } = Astro.props;
     {themeColor && <meta name="theme-color" content={themeColor} />}
   </head>
   <body>
-    <div id="main">
-      <slot />
-    </div>
+    <slot />
     <style lang="scss">
       @import "src/variables.scss";
-      div#main {
-      }
     </style>
     <style lang="scss" is:global>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");

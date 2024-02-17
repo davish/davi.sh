@@ -1,10 +1,33 @@
 ---
 import Barebones from "@layouts/Barebones.astro";
+// import Links from "src/components/Links.astro";
 import BelowFold from "src/components/homepage/BelowFold.astro";
 import Hero from "src/components/homepage/Hero.astro";
 ---
 
 <Barebones title="Davis Haupt" themeColor="#0fa817">
-  <Hero />
-  <BelowFold />
+  <div class="main">
+    <div class="content">
+      <Hero />
+      <BelowFold />
+    </div>
+
+    <footer>
+      <!-- <Links /> -->
+    </footer>
+  </div>
 </Barebones>
+
+<style lang="scss">
+  div.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  div.content {
+    flex: 1;
+  }
+  footer {
+    margin-block: 1rem;
+  }
+</style>
