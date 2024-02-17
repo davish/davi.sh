@@ -14,9 +14,8 @@ Unlike `nix-darwin`, `home-manager` is cross-platform: it works across NixOS, ma
 anywhere else Nix can be installed. It was difficult at first for me to understand how
 `home-manager` and `nix-darwin` should interact. While there is definitely overlap with
 what these two Nix libraries can do, `nix-darwin` is used for managing system-wide
-settings and applications: it can be thought of as bringing lots of the power of NixOS
-directly to the Mac. `home-manager`, on the other hand, is most useful for managing
-user-level configuration and dotfiles.
+settings and applications: it brings the power of NixOS to the Mac. `home-manager` on the
+other hand is most useful for managing user-level configuration and dotfiles.
 
 By the end of this post we'll have installed `home-manager` and used it to set up
 configuration for vim, zsh, and git.
