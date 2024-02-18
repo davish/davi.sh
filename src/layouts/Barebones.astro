@@ -21,11 +21,16 @@ const { title, description, rss, card, themeColor } = Astro.props;
       card={card || false}
     />
     {themeColor && <meta name="theme-color" content={themeColor} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <slot />
     <style lang="scss" is:global>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
       @import "/src/variables.scss";
       a {
         color: $accent-color;
