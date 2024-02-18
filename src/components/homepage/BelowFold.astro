@@ -1,0 +1,85 @@
+---
+import Prompt from "src/components/Prompt.astro";
+import Category from "src/components/homepage/Category.astro";
+import {
+  getBlogPosts,
+  getSnippets,
+  getUrlForCollectionEntry,
+  getWeeklies,
+} from "src/content/config";
+
+const blogs = (await getBlogPosts()).map(({ data: { title, date }, slug }) => ({
+  title,
+  date,
+  href: getUrlForCollectionEntry("blog", slug),
+}));
+
+const weeklies = (await getWeeklies()).map(
+  ({ data: { title, date }, slug }) => ({
+    title,
+    date,
+    href: getUrlForCollectionEntry("weekly", slug),
+  })
+);
+
+const tils = (await getSnippets()).map(
+  ({ data: { title, published, modified }, slug }) => ({
+    title,
+    date: modified || published,
+    href: getUrlForCollectionEntry("snippets", slug),
+  })
+);
+---
+
+<section class="fold">
+  <div class="prompt">
+    <Prompt path=" ls" />
+  </div>
+  <ul>
+    <li>
+      <Category title="blog/" href="/blog" posts={blogs.slice(0, 5)} />
+    </li>
+    <li>
+      <Category title="weekly/" href="/weekly" posts={weeklies.slice(0, 1)}>
+        Commentary and curated links from around the internet. Here's the
+        latest:
+      </Category>
+    </li>
+    <li>
+      <Category title="til/" href="/til" posts={tils.slice(0, 3)}>
+        Short, hard-won snippets to help every last DenverCoder9 on the web.
+      </Category>
+    </li>
+  </ul>
+</section>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  section {
+    max-width: 1000px;
+    margin: auto;
+    @media #{$media-size-phone} {
+      margin: 0 1rem;
+    }
+  }
+  ul {
+    max-width: 600px;
+    margin: auto;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+    li {
+      flex: 1;
+      display: inline;
+      width: 100%;
+    }
+  }
+
+  .prompt {
+    @include sans-serif;
+    max-width: 600px;
+    margin: auto;
+  }
+</style>

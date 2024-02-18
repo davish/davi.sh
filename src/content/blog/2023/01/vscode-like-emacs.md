@@ -3,6 +3,7 @@ title: "Configuring VSCode as a Keyboard-Centric IDE"
 date: 2023-01-24
 draft: false
 tags: ["vscode", "emacs", "texteditors", "configuration"]
+highlight: true
 ---
 
 One of my first posts on this blog in 2020 was about [my experience switching from VSCode to Emacs](https://davi.sh/blog/2020/03/switching-to-emacs/) for all of my text/code editing work. I still agree with all of the benefits to Emacs I wrote about back then, and [my posts on Obsidian](https://davi.sh/blog/2022/01/obsidian-zero/) show my respect for `org-mode` as a format and the ecosystem around it – especially `org-agenda`. However, as you might have noticed when the file extension on my posts switched from `.org` back to `.md`, I've moved on from Emacs for now. But I'm happy with how I've moved my good habits back to VSCode. Spending time on config gave me more confidence in my ability to configure software I use to my liking, and make software work for me rather than make me work for the software.

@@ -1,0 +1,63 @@
+---
+import Meta from "src/components/Meta.astro";
+
+export interface Props {
+  title: string;
+  rss?: string | undefined;
+  card?: boolean | undefined;
+  description?: string | null;
+  themeColor?: string;
+}
+const { title, description, rss, card, themeColor } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Meta
+      title={title}
+      description={description || "Davis Haupt's Website"}
+      rss={rss}
+      card={card || false}
+    />
+    {themeColor && <meta name="theme-color" content={themeColor} />}
+  </head>
+  <body>
+    <slot />
+    <style lang="scss" is:global>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
+      @import "/src/variables.scss";
+      a {
+        color: $accent-color;
+        text-decoration: none;
+        @media print {
+          text-decoration: underline;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      body {
+        @include serif;
+        background-color: #ffffff;
+        // background-color: #f4f0ec;
+        color: $text-color;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        @media print {
+          font-size: 0.8rem;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+      hr {
+        color: rgba(0, 0, 0, 0.2);
+        border-style: solid;
+        margin: 1rem 0;
+      }
+      @import "src/tufte.scss";
+    </style>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+---
+import * as Intro from "src/intro.md";
+import Links from "../Links.astro";
+---
+
+<section>
+  <div class="container">
+    <div class="title">
+      <h1>Davis Haupt</h1>
+      <Links color="white" align="left" />
+    </div>
+
+    <div class="bio">
+      <Intro.Content />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  section {
+    @include sans-serif;
+
+    background: $accent-color;
+    display: flex;
+    flex-direction: column;
+    border-width: 0 0 12px;
+    border-color: $accent-color-hover;
+    border-style: solid;
+  }
+  .container {
+    margin: 1.5rem auto 2rem auto;
+    @media #{$media-size-phone} {
+      margin: 1.5rem 1rem 2rem 1rem;
+    }
+    max-width: 600px;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media #{$media-size-phone} {
+      flex-direction: column;
+
+      align-items: baseline;
+      margin-bottom: 1rem;
+      // margin-bottom: 0;
+      // margin: 0.5rem 0;
+    }
+  }
+  h1 {
+    color: white;
+    font-size: 3rem;
+    margin-block: 0.5rem;
+  }
+  .bio {
+    line-height: 1.75rem;
+    font-size: 14pt;
+    margin: auto;
+    color: white;
+    max-width: 100ch;
+
+    :global(a) {
+      color: white;
+      text-decoration: underline;
+      @media print {
+        text-decoration: underline;
+      }
+    }
+    :global(p) {
+      margin: 0;
+    }
+  }
+</style>

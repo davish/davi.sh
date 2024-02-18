@@ -1,4 +1,12 @@
-<div>
+---
+type Props = {
+  color?: "white";
+  align?: "left" | "center";
+};
+const { color, align = "center" } = Astro.props;
+---
+
+<div class:list={color ? [color, align] : [align]}>
   <a href="https://github.com/davish/">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +73,7 @@
       ></path>
     </svg>
   </a>
-  <a href="https://pinboard.in/u:davish">
+  <!-- <a href="https://pinboard.in/u:davish">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -82,7 +90,7 @@
         d="M17.802 19.448l-6.010 6.151 0.958-5.417-8.177-10.089-4.573 0.245 10.104-10.339v3.938l9.62 8.859 6.021-1.474-6.255 6.646 12.51 14.031z"
       ></path>
     </svg>
-  </a>
+  </a> -->
 
   <a href="/feeds">
     <svg
@@ -110,14 +118,24 @@
     @media print {
       display: none;
     }
+  }
+  div.center {
     text-align: center;
+  }
+  a {
+    margin: 0.25rem;
+    color: $text-color;
+    transition: 0.1s;
+    &:hover {
+      color: $accent-color;
+      text-decoration: none;
+    }
+  }
+  div.white {
     a {
-      margin: 0.25rem;
-      color: $text-color;
-      transition: 0.1s;
+      color: white;
       &:hover {
-        color: $accent-color;
-        text-decoration: none;
+        color: white;
       }
     }
   }

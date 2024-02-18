@@ -1,71 +1,33 @@
 ---
-import Base from "../layouts/Base.astro";
-import Links from "../components/Links.astro";
-import Highlights from "../components/Highlights.astro";
+import Barebones from "@layouts/Barebones.astro";
+// import Links from "src/components/Links.astro";
+import BelowFold from "src/components/homepage/BelowFold.astro";
+import Hero from "src/components/homepage/Hero.astro";
 ---
 
-<Base hideFooter={true} title={"Davis Haupt's Website"} description={""}>
-  <section class="hero">
-    <h1>Davis Haupt</h1>
-    <Links />
-    <hr />
-  </section>
-  <section id="bio">
-    <p>
-      <b>Hi there!</b> I'm Davis. I'm really passionate about programming languages,
-      software systems and elections.
-    </p>
-    <p>
-      I'm a Software Engineer by trade, and also spend some time working on my
-      own open source projects.
-    </p>
-    <p>
-      I write long-form posts on <a href="/blog">my blog</a> 
-      and also curate a <a href="/weekly">weekly newsletter</a>.
-    </p>
-    
-  </section>
-  <!-- <div id="highlights">
-    <Highlights />
-  </div> -->
-</Base>
+<Barebones title="Davis Haupt" themeColor="#0fa817">
+  <div class="main">
+    <div class="content">
+      <Hero />
+      <BelowFold />
+    </div>
+
+    <footer>
+      <!-- <Links /> -->
+    </footer>
+  </div>
+</Barebones>
 
 <style lang="scss">
-  @import "../variables.scss";
-  section {
-    text-align: center;
-    margin: 1rem 2rem;
-    &.hero {
-      font-family: "Inter", sans-serif;
-      text-align: center;
-      min-width: 80%;
-      margin: 0;
-      h1 {
-        font-size: 3rem;
-        font-weight: 400;
-        margin-bottom: 1.3rem;
-      }
-    }
-
-    &#bio {
-      max-width: 50ch;
-      line-height: 1.75rem;
-      font-size: 14pt;
-      text-align: center;
-    }
-  }
-  div#highlights {
-    max-width: 100ch;
-    width: 90%;
-  }
-  div.center {
-    width: 100%;
-    flex-grow: 1;
+  div.main {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    min-height: 100vh;
   }
-  hr {
-    margin-top: 3rem !important;
+  div.content {
+    flex: 1;
+  }
+  footer {
+    margin-block: 1rem;
   }
 </style>

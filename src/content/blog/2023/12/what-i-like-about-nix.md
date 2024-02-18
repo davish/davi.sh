@@ -4,6 +4,7 @@ date: 2023-12-12T12:00:00
 tags:
   - nix
 draft: false
+highlight: true
 ---
 
 I got a new computer recently and decided to take the plunge setting it up with Nix[^1]. [I wrote up a snippet](https://davi.sh/til/nix/nix-macos-setup/) on how I set everything up and you can find my whole configuration [on GitHub](https://github.com/davish/setup). I've only scratched the surface of what Nix can do – In this post I wanted to focus on my subjective impression of Nix so far and why I feel I've been enjoying it.
