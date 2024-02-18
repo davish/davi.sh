@@ -5,7 +5,10 @@ import Links from "../Links.astro";
 
 <section>
   <div class="container">
-    <h1>Davis Haupt <Links color="white" align="left" /></h1>
+    <div class="title">
+      <h1>Davis Haupt</h1>
+      <Links color="white" align="left" />
+    </div>
 
     <div class="bio">
       <Intro.Content />
@@ -27,24 +30,30 @@ import Links from "../Links.astro";
     border-style: solid;
   }
   .container {
-    margin: 1.5rem auto 5rem auto;
+    margin: 1.5rem auto 2rem auto;
     @media #{$media-size-phone} {
-      margin: 0rem 1rem 3rem 1rem;
+      margin: 1.5rem 1rem 2rem 1rem;
     }
     max-width: 600px;
   }
-  h1 {
+  .title {
     display: flex;
     justify-content: space-between;
-    color: white;
-
-    font-size: 3rem;
+    align-items: center;
 
     @media #{$media-size-phone} {
       flex-direction: column;
+
+      align-items: baseline;
+      margin-bottom: 1rem;
       // margin-bottom: 0;
-      margin: 0.5rem 0;
+      // margin: 0.5rem 0;
     }
+  }
+  h1 {
+    color: white;
+    font-size: 3rem;
+    margin-block: 0.5rem;
   }
   .bio {
     line-height: 1.75rem;
