@@ -8,4 +8,4 @@ print: true
 skills: [OCaml]
 ---
 
-Working on data infrastructure and distributed systems.
+Working on database infrastructure and distributed systems.
