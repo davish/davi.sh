@@ -1,6 +1,6 @@
 ---
 title: The Spice Didn't Always Flow
-date: 2024-04-01T12:00
+date: 2024-04-01
 tags: [april-cools, dune, books]
 draft: false
 ---
