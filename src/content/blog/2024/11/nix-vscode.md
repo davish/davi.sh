@@ -48,9 +48,13 @@ will likely blow away your existing VSCode settings. Now would be a good time to
 any existing settings the list of extensions you have installed so you can replicate your
 existing setup from within Nix.
 
-Once you run `switch`, `VSCode` will be installed in `/Users/$USER/Applications/Home
-Manager Apps/` [^1]. If you've previously installed VSCode, go ahead and dump the copy
-inside `/Applications` in the trash.
+VSCode will be installed in `/Users/$USER/Applications/Home Manager Apps/`[^1] once you
+run `switch`. 
+
+If you've previously installed VSCode, go ahead and dump the copy from `/Applications` in
+the trash. [Where we're
+going](https://media1.tenor.com/m/3idC48k28zcAAAAd/roads-where-were-going-we-dont-need-roads.gif),
+we don't need ~roads~ globally installed programs!
 
 [^1]: Notably, this isn't inside the normal `/Applications` folder since `home-manager`
     can only install programs under your home directory. Even stranger, Spotlight can't
@@ -81,8 +85,8 @@ programs.vscode = {
 };
 ```
 
-It almost looks like JSON! And in fact, converting Nix types to JSON is [part of the Nix
-standard
+It almost looks like JSON! And in fact, converting Nix types to and from JSON is [part of
+the Nix standard
 library](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-toJSON).
 
 ## Extensions
@@ -99,12 +103,11 @@ to find out what's available. We'll start off with two extensions and a theme:
 
 * [The Nix language
   plugin](https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix) for syntax
-  highlighting.
+  highlighting
 * [VSCode Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) for vim
   keybindings. Definitely skip this if you don't use vim!
 * [The Dracula
-  theme](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula). Feel
-  free to replace with your preferred theme, this one is just an example.
+  theme](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
 
 ```nix
 programs.vscode {
@@ -214,6 +217,8 @@ programs.zsh = {
 };
 ```
 
+Easy peasy!
+
 ## Playing nice with Spotlight
 
 You might have noticed that the version of VSCode that Nix installs doesn't show up in
@@ -225,7 +230,7 @@ reading, but I've found that that [`mac-app-util`](https://github.com/hraban/mac
 is the easiest way to set this up.
 
 We can add it as another input at the top of our flake, and then modify our flake output
-to load mac-app-util in both nix-darwin and home-manager:
+to load `mac-app-util` in both `nix-darwin` and `home-manager`:
 
 ```nix
 {
@@ -236,7 +241,8 @@ to load mac-app-util in both nix-darwin and home-manager:
     };
 
     # ...
-    
+
+    in
     {
       darwinConfigurations."$HOSTNAME" = nix-darwin.lib.darwinSystem {
         modules = [
@@ -257,12 +263,12 @@ to load mac-app-util in both nix-darwin and home-manager:
 ```
 
 After running `switch`, VSCode should be properly copied to
-`/Users/$USER/Applications/Home Manager Trampolines` and should get picked up the next
+`/Users/$USER/Applications/Home Manager Trampolines` and should be available the next
 time Spotlight refreshes.
 
 ### Stepping Back
 
-We just included someone's third-party nix utility in our flake to do some custom behavior
+We just included someone's third-party Nix utility in our flake to do some custom behavior
 when Nix installs macOS GUI apps. You probably didn't notice that `mac-app-util` is
 written in **Common Lisp**. I've never written Common Lisp, and my guess is you haven't
 either. Even so, with fewer than five lines of code we were able make use of some code that
@@ -273,7 +279,7 @@ amazing.
 ## Conclusion
 
 Our flake is now able to fully configure and manage VSCode, including installing
-extensions and themes. What's exciting is that home-manager has just as deep an
+extensions and themes. What's exciting is that `home-manager` has just as deep an
 integration with many other utilities. If you haven't already definitely go through and
 check out [home-manager's config
 options](https://nix-community.github.io/home-manager/options.xhtml) to find out what you
