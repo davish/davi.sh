@@ -43,10 +43,9 @@ homeconfig = { pkgs, ... }: {
 ```
 
 I'm sure many of you who are following along are using VSCode to edit your `flake.nix`
-file. Before calling `switch`, I should note that installing VSCode through home-manager
-will likely blow away your existing VSCode settings. Now would be a good time to back up
-any existing settings the list of extensions you have installed so you can replicate your
-existing setup from within Nix.
+file. Before calling `switch`, I should note that installing VSCode through `home-manager`
+will likely blow away your existing settings. Now would be a good time to back up any your
+settings and extension list so you can replicate your existing setup from within Nix.
 
 VSCode will be installed in `/Users/$USER/Applications/Home Manager Apps/`[^1] once you
 run `switch`. 
@@ -99,22 +98,17 @@ the marketplace directly.
 
 You can search for the [`vscode-extensions` package set on nixpkgs
 search](https://search.nixos.org/packages?channel=24.05&from=0&size=50&buckets=%7B%22package_attr_set%22%3A%5B%22vscode-extensions%22%5D%2C%22package_license_set%22%3A%5B%5D%2C%22package_maintainers_set%22%3A%5B%5D%2C%22package_platforms%22%3A%5B%5D%7D&sort=relevance&type=packages&query=vscode-extensions)
-to find out what's available. We'll start off with two extensions and a theme:
-
-* [The Nix language
-  plugin](https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix) for syntax
-  highlighting
-* [VSCode Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) for vim
-  keybindings. Definitely skip this if you don't use vim!
-* [The Dracula
-  theme](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
+to find out what's available. We'll start off with an extension (the [Nix
+extension](https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix), obvously)
+and a theme
+([Dracula](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)):
 
 ```nix
 programs.vscode {
     # ...
     
     userSettings = {
-        "editor.formatOnSave" = true;
+        # ...
         "workbench.colorTheme" = "Dracula";
     };
     
@@ -123,7 +117,6 @@ programs.vscode {
     extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         dracula-theme.theme-dracula
-        vscodevim.vim
     ]
 }
 ```
@@ -138,11 +131,11 @@ the `extensions` list.
 Not every extension has been pre-built for Nix. Nixpkgs also exposes a function to
 download and build any extension directly from the VSCode Marketplace.
 
-For our example here, we'll be installing
+We'll be installing
 [`nixpkgs-fmt`](https://marketplace.visualstudio.com/items?itemName=B4dM4n.nixpkgs-fmt),
 which will let us auto-format our Nix code when we save a `.nix` file. The extension also
-requires the binary `nixpkgs-fmt` to be in our `PATH`, so let's add `nixpkgs-fmt` to our
-list of installed packages too:
+requires the binary `nixpkgs-fmt` to be in our `PATH`. We'll add `nixpkgs-fmt` to both the
+VSCode extensions list and the `home-manager` package list:
 
 ```nix
 homeconfig = { pkgs, ... }: {
@@ -226,10 +219,11 @@ Spotlight. Why is that? It's unfortunately pretty simple: All artifacts that Nix
 `home-manager` add to your system are symbolic links, and Spotlight won't index
 symlinks. There's [a very long thread about this on
 GitHub](https://github.com/nix-community/home-manager/issues/1341) if you're interested in
-reading, but I've found that that [`mac-app-util`](https://github.com/hraban/mac-app-util)
-is the easiest way to set this up.
+reading. From the various options discussed there,
+[`mac-app-util`](https://github.com/hraban/mac-app-util) is the easiest way to get this
+working as expected.
 
-We can add it as another input at the top of our flake, and then modify our flake output
+We can add it as another input at the top of our flake and then modify our flake output
 to load `mac-app-util` in both `nix-darwin` and `home-manager`:
 
 ```nix
