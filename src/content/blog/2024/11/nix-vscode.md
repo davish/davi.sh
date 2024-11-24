@@ -1,5 +1,5 @@
 ---
-title: Configuring VSCode with Nix
+title: Configuring VSCode with Nix on macOS
 date: 2024-11-24
 tags: [nix, vscode, nix-on-mac, editors]
 draft: false
@@ -13,14 +13,14 @@ configure VSCode through your Nix flake via `home-manager`, which we set up in [
 - Installing themes and extensions from nixpkgs and directly from the VSCode Marketplace
 - Properly aliasing VSCode and other macOS applications to `/Applications` for Spotlight
 
-Without further ado, let's dive in!
-
 <!--more-->
+
+Without further ado, let's dive in!
 
 ## Installing VSCode
 
-VSCode is not free software. Nix requires you to opt-in before installing nonfree
-software. Add this line to your `nix-darwin` `configuration` module:
+Nix won't install non-free software like VSCode without you opting in. Add this line
+to your `nix-darwin` `configuration` module:
 
 ```nix
 configuration = { pkgs, ... }: {
@@ -32,7 +32,7 @@ configuration = { pkgs, ... }: {
 };
 ```
 
-After that, installing VSCode is basically one line of code in our `home-manager` config:
+After that, installing VSCode is just one line of code in our `home-manager` config:
 
 ```nix
 homeconfig = { pkgs, ... }: {
@@ -42,19 +42,19 @@ homeconfig = { pkgs, ... }: {
 };
 ```
 
-I'm sure many of you are following along with this series using VSCode to edit your
-`flake.nix` file. Before we call `switch`, I should note that installing VSCode through
-home-manager will likely blow away your existing VSCode settings. Now would be a good time
-to back up any existing settings the list of extensions you have installed so you can
-replicate your existing setup from within Nix.
+I'm sure many of you who are following along are using VSCode to edit your `flake.nix`
+file. Before calling `switch`, I should note that installing VSCode through home-manager
+will likely blow away your existing VSCode settings. Now would be a good time to back up
+any existing settings the list of extensions you have installed so you can replicate your
+existing setup from within Nix.
 
 Once you run `switch`, `VSCode` will be installed in `/Users/$USER/Applications/Home
 Manager Apps/` [^1]. If you've previously installed VSCode, go ahead and dump the copy
 inside `/Applications` in the trash.
 
-[^1]: Notably, this isn't inside the normal `/Applications` folder. `home-manager` can
-    only install programs under your home directory. Keep reading till the end to find out
-    how to get applications in the normal, macOS-expected location!
+[^1]: Notably, this isn't inside the normal `/Applications` folder since `home-manager`
+    can only install programs under your home directory. Even stranger, Spotlight can't
+    pick up our alias! We'll come back and fix this at the end of the post.
 
 ## Editor Settings and Keybindings
 
@@ -87,20 +87,19 @@ library](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-toJ
 
 ## Extensions
 
-A huge part of VSCode is the bountiful extension ecosystem. home-manager lets you install
-many extensions from nixpks directly, and gives you a way to install any other ones from
+A huge part of VSCode is the bountiful extension ecosystem. `home-manager` lets you install
+many extensions from nixpkgs directly and also gives you a way to install any other ones from
 the marketplace directly.
 
 ### From nixpkgs
 
-We'll start off with two extensions and a theme. To figure out which extensions and themes
-are available ready-to-go from nixpkgs, you can search for the [`vscode-extensions`
-package set on nixpkgs
-search](https://search.nixos.org/packages?channel=24.05&from=0&size=50&buckets=%7B%22package_attr_set%22%3A%5B%22vscode-extensions%22%5D%2C%22package_license_set%22%3A%5B%5D%2C%22package_maintainers_set%22%3A%5B%5D%2C%22package_platforms%22%3A%5B%5D%7D&sort=relevance&type=packages&query=vscode-extensions).
+You can search for the [`vscode-extensions` package set on nixpkgs
+search](https://search.nixos.org/packages?channel=24.05&from=0&size=50&buckets=%7B%22package_attr_set%22%3A%5B%22vscode-extensions%22%5D%2C%22package_license_set%22%3A%5B%5D%2C%22package_maintainers_set%22%3A%5B%5D%2C%22package_platforms%22%3A%5B%5D%7D&sort=relevance&type=packages&query=vscode-extensions)
+to find out what's available. We'll start off with two extensions and a theme:
 
 * [The Nix language
   plugin](https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix) for syntax
-  highlighting
+  highlighting.
 * [VSCode Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) for vim
   keybindings. Definitely skip this if you don't use vim!
 * [The Dracula
@@ -128,8 +127,8 @@ programs.vscode {
 
 Some extensions require you to reload VSCode after installing. Unlike VSCode's normall
 installation flow, VSCode will not tell you to reload after `switch` is called. In general
-it's good practice to just always restart VSCode after running `switch` where you adjusted
-the `extensions` set.
+it's good practice to just always restart VSCode after running `switch` if you adjusted
+the `extensions` list.
 
 ### From the VSCode Marketplace
 
@@ -139,8 +138,8 @@ download and build any extension directly from the VSCode Marketplace.
 For our example here, we'll be installing
 [`nixpkgs-fmt`](https://marketplace.visualstudio.com/items?itemName=B4dM4n.nixpkgs-fmt),
 which will let us auto-format our Nix code when we save a `.nix` file. The extension also
-requires `nixpkgs-fmt` to be in our `PATH`, so let's add `nixpkgs-fmt` to our list of
-installed packages too:
+requires the binary `nixpkgs-fmt` to be in our `PATH`, so let's add `nixpkgs-fmt` to our
+list of installed packages too:
 
 ```nix
 homeconfig = { pkgs, ... }: {
@@ -174,7 +173,7 @@ whenever you save.
 
 #### Computing extension checksums
 Whoa, where did that hash come from? It's a checksum of one of the extension's metadata
-file. We can download that file from `vsassets.io` and grab its checksum:
+files. We can download that file from `vsassets.io` and grab its checksum:
 
 ```bash
 $ curl https://b4dm4n.gallery.vsassets.io/_apis/public/gallery/publisher/b4dm4n/extension/nixpkgs-fmt/0.0.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage | sha256sum
@@ -191,8 +190,10 @@ shell function to our zsh config:
 
 home.packages = with pkgs; [
     nixpkgs-fmt
-    coreutils-full
+    coreutils-full # for sha256sum
 ];
+
+# ...
 
 programs.zsh = {
     # ...
@@ -216,15 +217,15 @@ programs.zsh = {
 ## Playing nice with Spotlight
 
 You might have noticed that the version of VSCode that Nix installs doesn't show up in
-Spotlight. Why is that? It's unfortunately pretty simple: Every artifact that Nix and
-home-manager add to your system is a symlink, and Spotlight doesn't pick up
-symlinks. There's a very long thread about this [on
+Spotlight. Why is that? It's unfortunately pretty simple: All artifacts that Nix and
+`home-manager` add to your system are symbolic links, and Spotlight won't index
+symlinks. There's [a very long thread about this on
 GitHub](https://github.com/nix-community/home-manager/issues/1341) if you're interested in
-reading, but the tl;dr is that [`max-app-util`](https://github.com/hraban/mac-app-util) is
-the easiest way to set this up.
+reading, but I've found that that [`mac-app-util`](https://github.com/hraban/mac-app-util)
+is the easiest way to set this up.
 
-We can add it as another input at the top of our flake, and then our final darwin
-configuration to load mac-app-util in both nix-darwin and home-manager:
+We can add it as another input at the top of our flake, and then modify our flake output
+to load mac-app-util in both nix-darwin and home-manager:
 
 ```nix
 {
@@ -240,7 +241,7 @@ configuration to load mac-app-util in both nix-darwin and home-manager:
       darwinConfigurations."$HOSTNAME" = nix-darwin.lib.darwinSystem {
         modules = [
           # ...
-          mac-app-util.darwinModules.default # <-- new
+          mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager
           {
             # ...
@@ -255,18 +256,19 @@ configuration to load mac-app-util in both nix-darwin and home-manager:
 }
 ```
 
-After running `switch`, our apps should be properly copied to
+After running `switch`, VSCode should be properly copied to
 `/Users/$USER/Applications/Home Manager Trampolines` and should get picked up the next
 time Spotlight refreshes.
 
 ### Stepping Back
 
 We just included someone's third-party nix utility in our flake to do some custom behavior
-with mac apps. You probably didn't notice that `mac-app-util` *is written in Common
-Lisp*. I've never written Common Lisp, and my guess is you probably haven't either. Even
-so, with just three lines of code we were able make use of some code that someone wrote in
-their favorite niche programming language without needing to figure out how to build or
-run that code. Nix handled it all for us! I, for one, think that's pretty amazing.
+when Nix installs macOS GUI apps. You probably didn't notice that `mac-app-util` is
+written in **Common Lisp**. I've never written Common Lisp, and my guess is you haven't
+either. Even so, with fewer than five lines of code we were able make use of some code that
+someone wrote in their favorite niche programming language without needing to figure out
+how to build or run that code. Nix handled it all for us! I, for one, think that's pretty
+amazing.
 
 ## Conclusion
 
