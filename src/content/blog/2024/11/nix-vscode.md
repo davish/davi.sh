@@ -43,26 +43,27 @@ homeconfig = { pkgs, ... }: {
 ```
 
 I'm sure many of you who are following along are using VSCode to edit your `flake.nix`
-file. Before calling `switch`, I should note that installing VSCode through `home-manager`
-will likely blow away your existing settings. Now would be a good time to back up any your
-settings and extension list so you can replicate your existing setup from within Nix.
+file. I should note that installing VSCode through `home-manager` will likely blow away
+your existing settings when you call `switch`. Now would be a good time to back up your
+existing settings and extension list so you can replicate your setup from within Nix.
 
-VSCode will be installed in `/Users/$USER/Applications/Home Manager Apps/`[^1] once you
-run `switch`. 
+VSCode will be installed in `/Users/$USER/Applications/Home Manager Apps/`[^1] after
+running `switch`. 
+
+[^1]: Notably, this isn't inside the normal `/Applications` folder since `home-manager`
+    can only install programs under your home directory. Even stranger, Spotlight can't
+    pick up our alias! We'll come back and fix this at the end of the post.
 
 If you've previously installed VSCode, go ahead and dump the copy from `/Applications` in
 the trash. [Where we're
 going](https://media1.tenor.com/m/3idC48k28zcAAAAd/roads-where-were-going-we-dont-need-roads.gif),
 we don't need ~roads~ globally installed programs!
 
-[^1]: Notably, this isn't inside the normal `/Applications` folder since `home-manager`
-    can only install programs under your home directory. Even stranger, Spotlight can't
-    pick up our alias! We'll come back and fix this at the end of the post.
+
 
 ## Editor Settings and Keybindings
 
-You can add user settings and keybindings, which normally live in `.vscode/settings.json`
-and `.vscode/keybindings.json` respecively, pretty easily:
+You can add user settings and keybindings pretty easily:
 
 ```nix
 programs.vscode = {
@@ -123,8 +124,8 @@ programs.vscode {
 
 Some extensions require you to reload VSCode after installing. Unlike VSCode's normall
 installation flow, VSCode will not tell you to reload after `switch` is called. In general
-it's good practice to just always restart VSCode after running `switch` if you adjusted
-the `extensions` list.
+I recommend just always restarting VSCode after running `switch` if you adjusted the
+`extensions` list.
 
 ### From the VSCode Marketplace
 
@@ -220,8 +221,8 @@ Spotlight. Why is that? It's unfortunately pretty simple: All artifacts that Nix
 symlinks. There's [a very long thread about this on
 GitHub](https://github.com/nix-community/home-manager/issues/1341) if you're interested in
 reading. From the various options discussed there,
-[`mac-app-util`](https://github.com/hraban/mac-app-util) is the easiest way to get this
-working as expected.
+[`mac-app-util`](https://github.com/hraban/mac-app-util) is the easiest way to get
+Spotlight working as expected.
 
 We can add it as another input at the top of our flake and then modify our flake output
 to load `mac-app-util` in both `nix-darwin` and `home-manager`:
@@ -272,13 +273,12 @@ amazing.
 
 ## Conclusion
 
-Our flake is now able to fully configure and manage VSCode, including installing
-extensions and themes. What's exciting is that `home-manager` has just as deep an
-integration with many other utilities. If you haven't already definitely go through and
-check out [home-manager's config
-options](https://nix-community.github.io/home-manager/options.xhtml) to find out what you
-can do with your favorite program.
+Our Nix config is now able to fully configure and manage VSCode, including installing
+extensions and themes. `home-manager` has just as deep an integration with many other
+utilities. If you haven't already definitely go through and check out [home-manager's
+config options](https://nix-community.github.io/home-manager/options.xhtml) to find out
+what you can do with your favorite program.
 
-You can find the full flake configuration for this installment on GitHub
+You can find the full `flake.nix` for this installment on GitHub
 [here](https://github.com/davish/nix-on-mac/tree/part-3). See you in the next one!
 
