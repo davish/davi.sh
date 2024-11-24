@@ -5,6 +5,7 @@ import type { CollectionEntry } from "astro:content";
 import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import { getSnippets } from "src/content/config";
+import { toMonthYear } from "src/utils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const snippets = await getSnippets();
@@ -19,7 +20,7 @@ export type Props = { entry: CollectionEntry<"snippets"> };
 const {
   entry: {
     slug,
-    data: { title, description },
+    data: { title, description, published, modified },
     render,
   },
 } = Astro.props;
@@ -43,6 +44,7 @@ const { Content } = await render();
     <PostContent>
       <Content />
     </PostContent>
+    <h3 id="date">Last Updated in {toMonthYear(modified || published)}</h3>
   </Article>
 </Base>
 
@@ -67,5 +69,14 @@ const { Content } = await render();
     padding: 0;
     margin: 0;
     margin-bottom: 3rem;
+  }
+
+  #date {
+    @include sans-serif;
+    @include dimmed;
+    padding: 0;
+    margin: 0;
+    padding-top: 2rem;
+    font-size: 0.8rem;
   }
 </style>
