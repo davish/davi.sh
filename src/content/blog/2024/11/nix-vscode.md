@@ -92,8 +92,9 @@ library](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-toJ
 ## Extensions
 
 A huge part of VSCode is the bountiful extension ecosystem. `home-manager` lets you
-install extensions similarly to how it installs packages. The full VSCode marketplace
-isn't present in nixpkgs by default, so we'll need to install an overlay.
+install extensions similarly to how it installs packages. The full [VSCode
+marketplace](https://marketplace.visualstudio.com/vscode) isn't present in nixpkgs by
+default, so we'll need to install an overlay.
 
 Nixpkgs overlays let you override and add new entries to nixpkgs. We can add the
 [`nix-vscode-extensions`](https://github.com/nix-community/nix-vscode-extensions) overlay
@@ -145,7 +146,8 @@ by adding a line to our `nix-darwin` configuration:
   # ...
 ```
 
-Any extension should be accessible from `<author>.<extension name>`. Go wild!
+Any extension should be accessible from `<author>.<extension name>` -- the same as the
+`itemName` property in the extension's URL on the extension marketplace.
 
 
 ## Playing nice with Spotlight
