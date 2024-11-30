@@ -31,14 +31,14 @@ const { Content } = await render();
 <Base
   path={"til/" + slug}
   back="/til"
-  title={`${title}: ${description}`}
-  description={description}
+  title={description}
+  description={`${title}: ${description}`}
   card={true}
 >
   <Article>
     <section>
       <h4>TIL</h4>
-      <h1>{title}</h1>
+      <h1>{description}</h1>
     </section>
 
     <PostContent>

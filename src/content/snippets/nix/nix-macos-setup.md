@@ -1,9 +1,10 @@
 ---
-title: Setting up Nix on macOS
+title: nix-darwin and home-manager
 published: 2023-11-17
 category: Nix
 description: nix-darwin and home-manager
 ---
+
 I recently got a new computer and am spending some time actually digging into Nix for managing dependencies. My main issue the last time I tried using Nix was how tough it was for me to wade through the documentation, so I was determined to try a different path this time. I started off with the very opinionated [Zero to Nix](https://zero-to-nix.com/start/install) tutorial series, which I thought was a great introduction.
 
 After learning about Nix and Flakes, and getting my website building locally with a nix-powered development environment courtesy of the guidance in [Part 6](https://zero-to-nix.com/start/init-flake), the next step was to see what else I could do. I'd heard of two different tools, [`home-manager`](https://github.com/nix-community/home-manager) and [`nix-darwin`](https://github.com/LnL7/nix-darwin). I started off setting up `home-manager`, but I was confused on how I should be installing graphical applications like VS Code, and system utilities like Karabiner Elements. It turned out `nix-darwin` was the answer there.
@@ -15,6 +16,7 @@ Before following these instructions, you should follow the [Zero to Nix](https:/
 I'm going to lay out the basic steps that I followed below while sharing each configuration file.
 
 1. Create a nix-darwin flake file. From the [README](https://github.com/LnL7/nix-darwin/blob/b658dbd85a1c70a15759b470d7b88c0c95f497be/README.md#step-1-creating-flakenix):
+
 ```bash
 mkdir -p ~/.config/nix
 cd ~/.config/nix
@@ -27,7 +29,7 @@ The default flake puts the configuration inline to the flake.nix. I decided to c
 ```nix
 # darwin.nix
 
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
     # List packages installed in system profile. To search by name, run:
@@ -64,7 +66,7 @@ The default flake puts the configuration inline to the flake.nix. I decided to c
 You should remember to change your username and home directory to match.
 
 2. Modify `flake.nix` to work with `home-manager`.
-The example code can be found [in the `home-manager` docs](https://nix-community.github.io/home-manager/index.html#sec-flakes-nix-darwin-module). In case that link breaks, here it is:
+   The example code can be found [in the `home-manager` docs](https://nix-community.github.io/home-manager/index.html#sec-flakes-nix-darwin-module). In case that link breaks, here it is:
 
 ```nix
 # flake.nix
@@ -184,4 +186,3 @@ nix run nix-darwin --experimental-feature nix-command --experimental-feature fla
 ```
 
 You can now run `darwin-rebuild switch --flake ~/.config/nix` to rebuild all your configuration whenever you make a change. Another useful link is the list of [nix-darwin configuration options](https://daiderd.com/nix-darwin/manual/index.html). I believe this is the best place to go for information on what can be configured with `nix-darwin`.
-
