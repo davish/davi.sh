@@ -99,7 +99,7 @@ Nixpkgs overlays let you override and add new entries to nixpkgs. We can add the
 [`nix-vscode-extensions`](https://github.com/nix-community/nix-vscode-extensions) overlay
 by adding a line to our `nix-darwin` configuration:
 
-```
+```nix
 {
   # ...
   inputs = {
