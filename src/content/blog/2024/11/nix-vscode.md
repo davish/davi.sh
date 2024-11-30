@@ -10,7 +10,7 @@ configure VSCode through your Nix flake via `home-manager`, which we set up in [
 2](/blog/2024/02/nix-home-manager/). This includes:
 
 - Custom keybindings and settings
-- Installing themes and extensions from nixpkgs and directly from the VSCode Marketplace
+- Installing themes and extensions from a nixpkgs overlay
 - Properly aliasing VSCode and other macOS applications to `/Applications` for Spotlight
 
 <!--more-->
