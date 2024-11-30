@@ -10,7 +10,7 @@ configure VSCode through your Nix flake via `home-manager`, which we set up in [
 2](/blog/2024/02/nix-home-manager/). This includes:
 
 - Custom keybindings and settings
-- Installing themes and extensions from nixpkgs and directly from the VSCode Marketplace
+- Installing themes and extensions from a nixpkgs overlay
 - Properly aliasing VSCode and other macOS applications to `/Applications` for Spotlight
 
 <!--more-->
@@ -91,127 +91,64 @@ library](https://nixos.org/manual/nix/stable/language/builtins.html#builtins-toJ
 
 ## Extensions
 
-A huge part of VSCode is the bountiful extension ecosystem. `home-manager` lets you install
-many extensions from nixpkgs directly and also gives you a way to install any other ones from
-the marketplace directly.
+A huge part of VSCode is the bountiful extension ecosystem. `home-manager` lets you
+install extensions similarly to how it installs packages. The full [VSCode
+marketplace](https://marketplace.visualstudio.com/vscode) isn't present in nixpkgs by
+default, so we'll need to install an overlay.
 
-### From nixpkgs
-
-You can search for the [`vscode-extensions` package set on nixpkgs
-search](https://search.nixos.org/packages?channel=24.05&from=0&size=50&buckets=%7B%22package_attr_set%22%3A%5B%22vscode-extensions%22%5D%2C%22package_license_set%22%3A%5B%5D%2C%22package_maintainers_set%22%3A%5B%5D%2C%22package_platforms%22%3A%5B%5D%7D&sort=relevance&type=packages&query=vscode-extensions)
-to find out what's available. We'll start off with an extension (the [Nix
-extension](https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix), obvously)
-and a theme
-([Dracula](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)):
+Nixpkgs overlays let you override and add new entries to nixpkgs. We can add the
+[`nix-vscode-extensions`](https://github.com/nix-community/nix-vscode-extensions) overlay
+by adding a line to our `nix-darwin` configuration:
 
 ```nix
-programs.vscode {
+{
+  # ...
+  inputs = {
     # ...
-    
-    userSettings = {
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+  };
+
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nix-darwin
+    , home-manager
+    , mac-app-util
+    , nix-vscode-extensions
+    }:
+    let
+      configuration = { pkgs, ... }: {
         # ...
-        "workbench.colorTheme" = "Dracula";
-    };
-    
-    # ...
-
-    extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        dracula-theme.theme-dracula
-    ]
-}
-```
-
-Some extensions require you to reload VSCode after installing. Unlike VSCode's normall
-installation flow, VSCode will not tell you to reload after `switch` is called. In general
-I recommend just always restarting VSCode after running `switch` if you adjusted the
-`extensions` list.
-
-### From the VSCode Marketplace
-
-Not every extension has been pre-built for Nix. Nixpkgs also exposes a function to
-download and build any extension directly from the VSCode Marketplace.
-
-We'll be installing
-[`nixpkgs-fmt`](https://marketplace.visualstudio.com/items?itemName=B4dM4n.nixpkgs-fmt),
-which will let us auto-format our Nix code when we save a `.nix` file. The extension also
-requires the binary `nixpkgs-fmt` to be in our `PATH`. We'll add `nixpkgs-fmt` to both the
-VSCode extensions list and the `home-manager` package list:
-
-```nix
-homeconfig = { pkgs, ... }: {
-    # ...
-
-    home.packages = with pkgs; [ nixpkgs-fmt ];
-    
-    # ...
-
-    programs.vscode {
+        nixpkgs.overlays = [
+          nix-vscode-extensions.overlays.default
+        ];
         # ...
+      };
 
-        extensions = with pkgs.vscode-extensions; [
-            bbenoist.nix
+      homeconfig = { pkgs, ...}: {
+        # ...
+        programs.vscode {
+          # ...
+
+          userSettings = {
+            # ...
+            "workbench.colorTheme" = "Dracula Theme";
+          };
+
+          # ...
+
+          extensions = with pkgs.vscode-marketplace; [
+            jnoortheen.nix-ide
             dracula-theme.theme-dracula
-            vscodevim.vim
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "nixpkgs-fmt";
-              publisher = "b4dm4n";
-              version = "0.0.1";
-              sha256 = "bf3da4537e81d7190b722d90c0ba65fd204485f49696d203275afb4a8ac772bf";
-            }
-        ]
-    }
-}
+          ]
+        }
+      }
+  # ...
 ```
 
-Run `switch` again, restart VSCode, and your `nix.flake` should format itself nicely
-whenever you save.
+Any extension should be accessible from `<author>.<extension name>` -- the same as the
+`itemName` property in the extension's URL on the extension marketplace.
 
-#### Computing extension checksums
-Whoa, where did that hash come from? It's a checksum of one of the extension's metadata
-files. We can download that file from `vsassets.io` and grab its checksum:
-
-```bash
-$ curl https://b4dm4n.gallery.vsassets.io/_apis/public/gallery/publisher/b4dm4n/extension/nixpkgs-fmt/0.0.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage | sha256sum
-% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  3889  100  3889    0     0  10803      0 --:--:-- --:--:-- --:--:-- 10832
-bf3da4537e81d7190b722d90c0ba65fd204485f49696d203275afb4a8ac772bf  -
-```
-
-It would be pretty gross if you needed to remember this every time. We can add it as a
-shell function to our zsh config:
-
-```nix
-
-home.packages = with pkgs; [
-    nixpkgs-fmt
-    coreutils-full # for sha256sum
-];
-
-# ...
-
-programs.zsh = {
-    # ...
-
-    envExtra = ''
-        function vscode-hash() {
-            if [ "$#" -ne 3 ]; then
-            echo "Error: This function requires exactly 3 arguments"
-            echo "Usage: $0 <PUBLISHER> <NAME> <VERSION>"
-            return 1
-            fi
-            publisher=$1
-            name=$2
-            version=$3
-            url="https://$publisher.gallery.vsassets.io/_apis/public/gallery/publisher/$publisher/extension/$name/$version/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
-            curl $url | sha256sum
-    }'';
-};
-```
-
-Easy peasy!
 
 ## Playing nice with Spotlight
 
