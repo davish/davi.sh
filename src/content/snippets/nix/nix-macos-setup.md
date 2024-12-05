@@ -2,7 +2,7 @@
 title: nix-darwin and home-manager
 published: 2023-11-17
 category: Nix
-description: nix-darwin and home-manager
+description: Setting up Nix on macOS
 ---
 
 I recently got a new computer and am spending some time actually digging into Nix for managing dependencies. My main issue the last time I tried using Nix was how tough it was for me to wade through the documentation, so I was determined to try a different path this time. I started off with the very opinionated [Zero to Nix](https://zero-to-nix.com/start/install) tutorial series, which I thought was a great introduction.
