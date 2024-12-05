@@ -137,18 +137,37 @@ by adding a line to our `nix-darwin` configuration:
 
           # ...
 
-          extensions = with pkgs.vscode-marketplace; [
-            jnoortheen.nix-ide
-            dracula-theme.theme-dracula
-          ]
+          extensions = [
+            pkgs.vscode-marketplace.jnoortheen.nix-ide
+            pkgs.vscode-marketplace.dracula-theme.theme-dracula
+          ];
         }
       }
   # ...
 ```
 
-Any extension should be accessible from `<author>.<extension name>` -- the same as the
-`itemName` property in the extension's URL on the extension marketplace.
+`vscode-marketplace` is one of the properties that the `nix-vscode-extensions` overlay
+added to nixpkgs.  Any VSCode extension in the marketplace should be accessible from
+`pkgs.vscode-marketplace.$AUTHOR.$EXTENSION`, where `$AUTHOR.$EXTENSION` is the same as
+the `itemName` property in the extension's URL on the [extension marketplace
+website](https://marketplace.visualstudio.com/vscode).
 
+### Cleaning up lists of attributes with the `with` clause
+
+Writing `pkgs.vscode-marketplace` in front of every extension will get tedious as as your
+list of extenions gets longer and make the list harder to read. Luckily Nix has a language
+construct to help with this: in front of any expression, you can type `with <attribute
+set>` to bring all attributes within the attribute set into scope. Our `extensions` list
+can look like:
+
+```nix
+extensions = with pkgs.vscode-marketplace; [
+    jnoortheen.nix-ide
+    dracula-theme.theme-dracula
+];
+```
+
+Much cleaner!
 
 ## Playing nice with Spotlight
 
