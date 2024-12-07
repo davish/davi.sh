@@ -126,24 +126,35 @@ label.margin-toggle:not(.sidenote-number) {
 
   .sidenote,
   .marginnote {
+    float: left;
+    left: 1rem;
+    clear: both;
+    width: 95%;
+    position: relative;
+
+    // transform
     display: none;
   }
 
   .margin-toggle:checked + .sidenote,
   .margin-toggle:checked + .marginnote {
-    display: block;
-    float: left;
-    left: 1rem;
-    clear: both;
-    width: 95%;
     margin: 1rem 2.5%;
-    vertical-align: baseline;
-    position: relative;
+    display: block;
   }
 
   label.margin-toggle {
-    color: $accent-color;
     cursor: pointer;
+    margin: 0 0.5rem;
+
+    &::after {
+      top: 0;
+      left: 0;
+      padding: 0.1rem 0.75rem;
+      border-radius: 5px;
+      box-shadow: 0 0 2px 1px $accent-color;
+
+      font-family: Inter, sans-serif;
+    }
   }
 }
 
