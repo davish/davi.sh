@@ -6,6 +6,13 @@
 <style lang="scss" is:global>
   @import "/src/variables.scss";
   #blog-post-content {
+    // If a link has <strong> inside of it, we don't need underlines
+    // to differentiate it.
+    a:has(strong) {
+      color: $accent-color;
+      text-decoration: none;
+    }
+
     line-height: 1.5rem;
     @media print {
       line-height: 1;
@@ -59,6 +66,24 @@
       }
     }
   }
+
+  a:has(code) {
+    border-radius: 5px;
+
+    position: relative;
+    bottom: 1px;
+
+    padding: 1px 6px;
+    margin: 0 2px;
+    background-color: $background-color;
+
+    code {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+
   code {
     font-family:
       Consolas,
