@@ -33,13 +33,15 @@ const { title, description, rss, card, themeColor } = Astro.props;
     <style lang="scss" is:global>
       @import "/src/variables.scss";
       a {
-        color: $accent-color;
-        text-decoration: none;
+        color: $text-color;
+        text-decoration: underline;
+        text-decoration-color: $accent-color;
         @media print {
           text-decoration: underline;
         }
         &:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          background-color: rgba($accent-color, 0.2);
         }
       }
       body {
