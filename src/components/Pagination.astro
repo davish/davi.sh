@@ -80,7 +80,7 @@ if (!didPushLast) {
               <div class="dots">...</div>
             </span>
           </li>
-        ),
+        )
       )}
       {page.url.next && (
         <li class="page-item next">
@@ -135,6 +135,10 @@ if (!didPushLast) {
       }
       a {
         color: $accent-color;
+        text-decoration: none;
+        &:hover {
+          background-color: transparent;
+        }
       }
       span {
         color: gray;
