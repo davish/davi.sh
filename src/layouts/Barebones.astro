@@ -36,11 +36,11 @@ const { title, description, rss, card, themeColor } = Astro.props;
         color: $text-color;
         text-decoration: underline;
         text-decoration-color: $accent-color;
+        padding-top: 0.1rem;
         @media print {
           text-decoration: underline;
         }
         &:hover {
-          padding-top: 0.1rem;
           text-decoration: none;
           background-color: rgba($accent-color, 0.2);
         }
