@@ -6,6 +6,7 @@ import Pagination from "../components/blog/post/Pagination.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import type { CollectionEntry } from "astro:content";
 import Article from "src/components/Article.astro";
+import { getBlogPosts, getUrlForCollectionEntry } from "src/content/config";
 
 type Props = CollectionEntry<"blog">;
 
@@ -29,6 +30,17 @@ const { Content } = await render();
     </PostContent>
     <Tags tags={frontmatter.tags} />
     <hr />
-    <Pagination entry={Astro.props} />
+    <Pagination
+      currentId={Astro.props.id}
+      getEntries={() =>
+        getBlogPosts().then((posts) =>
+          posts.map((p) => ({
+            slug: p.slug,
+            id: p.id,
+            title: p.data.title,
+            url: getUrlForCollectionEntry("blog", p.slug),
+          }))
+        )}
+    />
   </Article>
 </Base>

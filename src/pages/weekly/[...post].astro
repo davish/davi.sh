@@ -1,24 +1,25 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import { getWeeklies } from "src/content/config";
+import { getUrlForCollectionEntry, getWeeklies } from "src/content/config";
 import Base from "@layouts/Base.astro";
 import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import Subscribe from "src/components/Subscribe.astro";
+import Pagination from "src/components/blog/post/Pagination.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const posts = await getWeeklies();
-    return posts.map((entry) => ({
-        params: { post: entry.slug },
-        props: { entry },
-    }));
+  const posts = await getWeeklies();
+  return posts.map((entry) => ({
+    params: { post: entry.slug },
+    props: { entry },
+  }));
 };
 
 type Props = { entry: CollectionEntry<"weekly"> };
 
 const {
-    entry: { data: frontmatter, id, render },
+  entry: { data: frontmatter, id, render },
 } = Astro.props;
 
 const basename = id.split("/").pop() || "";
@@ -27,19 +28,31 @@ const { Content } = await render();
 ---
 
 <Base
-    path={"weekly/" + basename}
-    back="/weekly"
-    title={frontmatter.title}
-    description={`Weeky links for ${frontmatter.date.toLocaleDateString()}`}
-    rss="/newsletter.xml"
-    card={true}
+  path={"weekly/" + basename}
+  back="/weekly"
+  title={frontmatter.title}
+  description={`Weeky links for ${frontmatter.date.toLocaleDateString()}`}
+  rss="/newsletter.xml"
+  card={true}
 >
-    <Article>
-        <PostContent>
-            <Content />
-        </PostContent>
-        <Subscribe>
-            Liked this post? Get future weekly posts in your inbox!
-        </Subscribe>
-    </Article>
+  <Article>
+    <PostContent>
+      <Content />
+    </PostContent>
+    <Subscribe>
+      Liked this post? Get future weekly posts in your inbox!
+    </Subscribe>
+    <Pagination
+      currentId={id}
+      getEntries={() =>
+        getWeeklies().then((posts) =>
+          posts.map((p) => ({
+            slug: p.slug,
+            id: p.id,
+            title: p.data.title,
+            url: getUrlForCollectionEntry("weekly", p.slug),
+          }))
+        )}
+    />
+  </Article>
 </Base>

@@ -1,18 +1,16 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { getBlogPosts, getUrlForCollectionEntry } from "src/content/config";
-
 export interface Props {
-  entry: CollectionEntry<"blog">;
+  currentId: string;
+  getEntries: () => Promise<
+    { slug: string; id: string; title: string; url: string }[]
+  >;
 }
 
-const {
-  entry: { id },
-} = Astro.props;
+const { currentId, getEntries } = Astro.props;
 
-const posts = await getBlogPosts();
+const posts = await getEntries();
 
-const idx = posts.findIndex((p) => p.id === id);
+const idx = posts.findIndex((p) => p.id === currentId);
 const prevPost = idx < posts.length - 1 ? posts[idx + 1] : null;
 const nextPost = idx > 0 ? posts[idx - 1] : null;
 ---
@@ -20,23 +18,17 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
 <div class="pagination">
   {
     prevPost && (
-      <a
-        class="pagination-item"
-        href={getUrlForCollectionEntry("blog", prevPost.slug)}
-      >
+      <a class="pagination-item" href={prevPost.url}>
         <span class="pagination-label">Previous Post</span>
-        <span class="pagination-title">{prevPost.data.title}</span>
+        <span class="pagination-title">{prevPost.title}</span>
       </a>
     )
   }
   {
     nextPost && (
-      <a
-        class="pagination-item"
-        href={getUrlForCollectionEntry("blog", nextPost.slug)}
-      >
+      <a class="pagination-item" href={nextPost.url}>
         <span class="pagination-label">Next Post</span>
-        <span class="pagination-title">{nextPost.data.title}</span>
+        <span class="pagination-title">{nextPost.title}</span>
       </a>
     )
   }
