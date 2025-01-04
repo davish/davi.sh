@@ -60,12 +60,11 @@ you're working on the right things. I've struggled with motivation and energy le
 the past, but this year I've learned that sometimes you just need to kickstart the
 flywheel.
 
-In that vein, the article that's had the greatest impact on me this year is probably [Work hard and take
-everything really
+In that vein, the article that's had the greatest impact on me this year is probably [Work hard and take everything really
 seriously](https://macwright.com/2024/01/28/work-hard-and-take-everything-seriously.html)
 by [Tom MacWright](https://macwright.com/) (featured in [Weekly
-#6](/weekly/2024-02-04/)). It helped me crystallize how I'd been feeling around work and leisure
-time -- how "balance" is more complicated than we often give it credit for.
+#6](/weekly/2024-02-04/)). It helped me crystallize how I'd been feeling around work and 
+leisure time -- how "balance" is more complicated than we often give it credit for.
 
 All of these habits may be self-reinforcing in some ways, but they also require active
 maintenance. My main goal for next year is to do the things that excite me more often.
