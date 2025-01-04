@@ -1,15 +1,15 @@
 ---
-title: 2024 Year in Review
+title: 2024 in review
 date: 2025-01-04
 tags: [meta, year-in-review]
 draft: false
 ---
 
-I wrote most of this post during the strange week in New York between Christmas Eve and
-New Year's Day when enough people have left the city that it makes it quite difficult
-*not* to turn introspective. It's been a pretty big year for me and for this blog, so I
-thought it would be fun to take a look back on the year before moving into the second half
-of the '20s.
+I wrote most of this post during the week between Christmas Eve and New Year's Day when
+enough people in New York have left the city that it makes it quite difficult *not* to
+turn introspective. It's been a pretty big year for me and for this blog, so I thought it
+would be fun to take a look back on the year as we all move into the second half of the
+decade.
 
 ### Blog Posts
 
@@ -34,9 +34,9 @@ express myself, share something interesting, and flex my writing muscles some mo
 
 My blurbs about each link follow a bit more from [Simon
 Willison](https://simonwillison.net) or [John Gruber](https://daringfireball.net)'s link
-blogs than Arne's summaries -- I try to add some analysis and sprinkle in some nuance
-where I can. The original goal was to expand some of these blurbs into full blog posts,
-which I haven't felt the burning desire to do yet, but we'll see how next year goes.
+blogs than Arne's summaries -- I try to add some analysis and sprinkle in nuance where I
+can. The original goal was to expand some of these blurbs into full blog posts. I
+haven't felt the burning desire to do that yet, but we'll see how next year goes.
 
 The newsletter is called Weekly Links, and after a 52 weeks there's... well.. 17
 entries. The first 10 came quickly and easily, but I started falling off with the habit in
@@ -55,8 +55,8 @@ interesting things to write about.
 
 Discovering positive-sum feedback loops has been the real theme of the year for
 me. Whether it's writing each week, running a mile in the morning, or working on
-interesting projects at work, I've discovered first-hand how when you're working on the
-right things, activity begets energy. I've struggled with motivation and energy levels in
+interesting projects at work, I've discovered first-hand how activity begets energy when
+you're working on the right things. I've struggled with motivation and energy levels in
 the past, but this year I've learned that sometimes you just need to kickstart the
 flywheel.
 
