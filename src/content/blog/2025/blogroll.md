@@ -1,6 +1,6 @@
 ---
 title: Blogs I Like
-date: 2025-01-04
+date: 2025-01-12
 tags: [ reviews, now ]
 draft: true
 ---
