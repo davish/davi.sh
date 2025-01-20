@@ -1,7 +1,7 @@
 ---
 title: 2024 in review
 date: 2025-01-04
-tags: [meta, year-in-review]
+tags: [meta, reflection, year-in-review]
 draft: false
 ---
 

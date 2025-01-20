@@ -4,6 +4,7 @@ date: 2020-05-25T12:15:00-04:00
 slug: Labs Looking Back
 tags:
   - upenn
+  - reflection
   - college
   - pennlabs
 ---
