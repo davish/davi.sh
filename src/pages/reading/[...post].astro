@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getUrlForCollectionEntry, getReading } from "src/content/config";
+import Base from "@layouts/Base.astro";
+import Article from "src/components/Article.astro";
+import PostContent from "src/components/blog/post/PostContent.astro";
+import Pagination from "src/components/blog/post/Pagination.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getReading();
+  return posts.map((entry) => ({
+    params: { post: entry.slug },
+    props: { entry },
+  }));
+};
+
+type Props = { entry: CollectionEntry<"reading"> };
+
+const {
+  entry: { data: frontmatter, id, render },
+} = Astro.props;
+
+const basename = id.split("/").pop() || "";
+
+const { Content } = await render();
+---
+
+<Base
+  path={"reading/" + basename}
+  back="/reading"
+  title={frontmatter.title}
+  description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
+  card={true}
+>
+  <Article>
+    <div class="mb-4">
+      <h1>{frontmatter.title}</h1>
+      <p class="text-gray-600">
+        by {frontmatter.author} ({frontmatter.publishYear}) • Rating: {
+          frontmatter.rating
+        }/5
+      </p>
+      <p class="text-sm text-gray-500">
+        Completed on {frontmatter.dateCompleted.toLocaleDateString()}
+      </p>
+    </div>
+    <PostContent>
+      <Content />
+    </PostContent>
+    <Pagination
+      currentId={id}
+      itemLabel="Book"
+      getEntries={() =>
+        getReading().then((posts) =>
+          posts.map((p) => ({
+            slug: p.slug,
+            id: p.id,
+            title: p.data.title,
+            url: getUrlForCollectionEntry("reading", p.slug),
+          }))
+        )}
+    />
+  </Article>
+</Base>

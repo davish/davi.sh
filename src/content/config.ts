@@ -86,6 +86,16 @@ const WeeklyCollection = defineCollection({
   }),
 });
 
+const ReadingCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    dateCompleted: partialDate(),
+    rating: z.number().min(0.5).max(5).step(0.5),
+    author: z.string(),
+    publishYear: z.number().min(1900).max(new Date().getFullYear()),
+  }),
+});
+
 export const collections = {
   work: JobCollection,
   education: DegreeCollection,
@@ -94,6 +104,7 @@ export const collections = {
   snippets: SnippetCollection,
   shorts: ShortCollection,
   weekly: WeeklyCollection,
+  reading: ReadingCollection,
 };
 
 type UrlMap = Partial<{
@@ -106,6 +117,7 @@ const urls: UrlMap = {
   snippets: "/til/",
   shorts: "/µ/",
   weekly: "/weekly/",
+  reading: "/reading/",
 };
 
 export type ShortParam = {
@@ -155,4 +167,13 @@ export async function getWeeklies(
 ) {
   const snippets = await getCollection("weekly", (s) => !pred || pred(s));
   return snippets.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+export async function getReading(
+  pred?: (e: CollectionEntry<"reading">) => boolean
+) {
+  const books = await getCollection("reading", (s) => !pred || pred(s));
+  return books.sort(
+    (a, b) => b.data.dateCompleted.valueOf() - a.data.dateCompleted.valueOf()
+  );
 }

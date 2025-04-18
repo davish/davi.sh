@@ -15,3 +15,4 @@ This is my website. There are many like it, but this one's mine. I've pulled bit
 - Mobile-friendly sidenote toggles from [Nolen Royalty](https://eieio.games)'s personal
   site
 - [Link styling from Drew Breunig](https://www.dbreunig.com)
+- [Tom MacWright's _Reading_ section](https://macwright.com/reading/)

@@ -1,0 +1,33 @@
+---
+interface Props {
+  rating: number;
+}
+
+const { rating } = Astro.props;
+const fullStars = Math.floor(rating);
+const hasHalfStar = rating % 1 !== 0;
+---
+
+<span class="stars">
+  {"★".repeat(fullStars)}{hasHalfStar && <span class="half-star">★</span>}
+</span>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .stars {
+    color: $accent-color;
+    letter-spacing: -0.5px;
+    white-space: nowrap; /* Prevent wrapping which could affect alignment */
+    font-size: 0.8rem;
+  }
+
+  .half-star {
+    display: inline-block; /* Keep it inline */
+    width: 0.5em; /* Occupy half the character width */
+    overflow: hidden; /* Hide the right half */
+    vertical-align: middle; /* Align vertically with the middle of surrounding text */
+    direction: ltr; /* Ensure clipping happens correctly regardless of text direction */
+    padding-bottom: 0.2rem;
+  }
+</style>

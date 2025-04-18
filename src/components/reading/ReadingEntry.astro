@@ -1,0 +1,69 @@
+---
+import {
+  toReadableString,
+  getSummary,
+  hasMore,
+  renderMarkdown,
+} from "../../utils";
+import { getUrlForCollectionEntry } from "src/content/config";
+import type { CollectionEntry } from "astro:content";
+import Stars from "./Stars.astro";
+
+export type Props = {
+  post: CollectionEntry<"reading">;
+};
+
+const {
+  post: {
+    slug,
+    data: { title, dateCompleted, author, rating },
+    body,
+  },
+} = Astro.props;
+
+const url = getUrlForCollectionEntry("reading", slug);
+---
+
+<tr class="book-entry">
+  <td class="title"><a href={url}>{title}</a></td>
+  <td class="author">{author}</td>
+  <td class="date">{toReadableString(dateCompleted)}</td>
+  <td class="rating"><Stars rating={rating} /></td>
+</tr>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .book-entry {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba($accent-color, 0.2);
+    font-family: "Inter", sans-serif;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .title {
+      font-weight: 500;
+      a {
+        color: $text-color;
+        text-decoration: none;
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+
+    .author {
+      color: $text-color;
+    }
+
+    .date {
+      @include dimmed;
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+    }
+  }
+</style>

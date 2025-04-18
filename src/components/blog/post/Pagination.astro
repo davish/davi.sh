@@ -4,9 +4,10 @@ export interface Props {
   getEntries: () => Promise<
     { slug: string; id: string; title: string; url: string }[]
   >;
+  itemLabel?: string;
 }
 
-const { currentId, getEntries } = Astro.props;
+const { currentId, getEntries, itemLabel = "Post" } = Astro.props;
 
 const posts = await getEntries();
 
@@ -19,7 +20,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   {
     prevPost && (
       <a class="pagination-item" href={prevPost.url}>
-        <span class="pagination-label">Previous Post</span>
+        <span class="pagination-label">Previous {itemLabel}</span>
         <span class="pagination-title">{prevPost.title}</span>
       </a>
     )
@@ -27,7 +28,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   {
     nextPost && (
       <a class="pagination-item" href={nextPost.url}>
-        <span class="pagination-label">Next Post</span>
+        <span class="pagination-label">Next {itemLabel}</span>
         <span class="pagination-title">{nextPost.title}</span>
       </a>
     )
