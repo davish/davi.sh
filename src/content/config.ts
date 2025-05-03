@@ -93,6 +93,10 @@ const ReadingCollection = defineCollection({
     rating: z.number().min(0.5).max(5).step(0.5),
     author: z.string(),
     publishYear: z.number().min(1900).max(new Date().getFullYear()),
+    genre: z
+      .union([z.string(), z.array(z.string())])
+      .transform((x) => (Array.isArray(x) ? x : [x]))
+      .default([]),
   }),
 });
 

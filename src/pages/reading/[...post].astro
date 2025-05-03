@@ -6,6 +6,8 @@ import Base from "@layouts/Base.astro";
 import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import Pagination from "src/components/blog/post/Pagination.astro";
+import Stars from "src/components/reading/Stars.astro";
+import { toReadableString } from "src/utils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getReading();
@@ -34,16 +36,24 @@ const { Content } = await render();
   card={true}
 >
   <Article>
-    <div class="mb-4">
-      <h1>{frontmatter.title}</h1>
-      <p class="text-gray-600">
-        by {frontmatter.author} ({frontmatter.publishYear}) • Rating: {
-          frontmatter.rating
-        }/5
-      </p>
-      <p class="text-sm text-gray-500">
-        Completed on {frontmatter.dateCompleted.toLocaleDateString()}
-      </p>
+    <div class="post-header">
+      <div>
+        <h1>
+          {frontmatter.title}
+        </h1>
+        <h2>
+          by {frontmatter.author}
+          <span id="year">({frontmatter.publishYear})</span>
+        </h2>
+      </div>
+      <div class="metadata">
+        <h1 id="rating">
+          <Stars rating={frontmatter.rating} />
+        </h1>
+        <!-- <p id="genre">
+          {frontmatter.genre.map((g) => <span class="tag">#{g}</span>)}
+        </p> -->
+      </div>
     </div>
     <PostContent>
       <Content />
@@ -63,3 +73,39 @@ const { Content } = await render();
     />
   </Article>
 </Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .post-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  #rating {
+    color: $accent-color;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+  h2 {
+    @include dimmed;
+    font-weight: 400;
+    margin-top: 0.2rem;
+    font-size: 1.2rem;
+  }
+
+  .genres {
+    @include dimmed;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.5em;
+    .tag {
+      margin-right: 0.5em;
+    }
+  }
+</style>

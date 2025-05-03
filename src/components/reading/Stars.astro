@@ -9,17 +9,17 @@ const hasHalfStar = rating % 1 !== 0;
 ---
 
 <span class="stars">
-  {"★".repeat(fullStars)}{hasHalfStar && <span class="half-star">★</span>}
+  {"★".repeat(fullStars)}{hasHalfStar && <span class="half">½</span>}
 </span>
 
 <style lang="scss">
   @import "/src/variables.scss";
 
   .stars {
-    color: $accent-color;
+    // color: $accent-color;
     letter-spacing: -0.5px;
     white-space: nowrap; /* Prevent wrapping which could affect alignment */
-    font-size: 0.8rem;
+    font-size: 80%;
   }
 
   .half-star {
