@@ -31,11 +31,10 @@ helping the public understand that a single failed company in a startup program 
 indicate waste or foul play.
 
 The specific DoE program that funded Tesla and Solyndra [made it into the black by
-2015](https://www.reuters.com/article/us-doe-loans/exclusive-controversial-u-s-energy-loan-program-has-wiped-out-losses-idUSKCN0IX0A120141113/),
-but beyond the economics of this one program, the ways in which it supports American
-businesses should be accounted for separately. Tesla very likely wouldn't be where it is
-today without that Stimulus loan, and I think that's worth at least half a dozen
-Solyndras.
+2015](https://archive.is/RpDqC), but beyond the economics of this one program, the ways in
+which it supports American businesses should be accounted for separately. Tesla very
+likely wouldn't be where it is today without that Stimulus loan, and I think that's worth
+at least half a dozen Solyndras.
 
 A specter hanging over the book is that the authors seem to be advocating for something
 that on the surface has the same goals as Elon Musk and Vivek Ramaswamy's Department of

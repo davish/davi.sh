@@ -3,6 +3,7 @@ import Prompt from "src/components/Prompt.astro";
 import Category from "src/components/homepage/Category.astro";
 import {
   getBlogPosts,
+  getReading,
   getSnippets,
   getUrlForCollectionEntry,
   getWeeklies,
@@ -29,6 +30,14 @@ const tils = (await getSnippets()).map(
     href: getUrlForCollectionEntry("snippets", slug),
   })
 );
+
+const reading = (await getReading()).map(
+  ({ data: { title, dateCompleted, author }, slug }) => ({
+    title: `${title} by ${author}`,
+    date: dateCompleted,
+    href: getUrlForCollectionEntry("reading", slug),
+  })
+);
 ---
 
 <section class="fold">
@@ -48,6 +57,11 @@ const tils = (await getSnippets()).map(
     <li>
       <Category title="til/" href="/til" posts={tils.slice(0, 3)}>
         Short, hard-won snippets to help every last DenverCoder9 on the web.
+      </Category>
+    </li>
+    <li>
+      <Category title="reading/" href="/reading" posts={reading.slice(0, 3)}>
+        Short reviews of things I've been reading.
       </Category>
     </li>
   </ul>
