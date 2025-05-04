@@ -18,43 +18,30 @@ const rss = collection === "weekly" ? "/newsletter.xml" : undefined;
 ---
 
 <Base path={path} title={title} description={description} rss={rss}>
-  <section id="intro">
+  <div class="container">
     <slot />
-  </section>
-
-  <section id="list">
-    {page.data.map((p) => <PostEntry post={p} collection={collection} />)}
-    <div class="pagination">
-      <Pagination page={page} base={collection} />
-    </div>
-  </section>
+    <section id="list">
+      {page.data.map((p) => <PostEntry post={p} collection={collection} />)}
+      <div class="pagination">
+        <Pagination page={page} base={collection} />
+      </div>
+    </section>
+  </div>
 </Base>
 
 <style lang="scss">
   @import "/src/variables.scss";
-  #intro,
-  #list {
+
+  div.container {
     width: 95%;
     max-width: 75ch;
-    margin: 1rem 0;
-  }
-  #intro {
-    @media #{$media-size-phone} {
-      margin: 0;
-    }
   }
 
-  h1 {
-    font-family: "Inter", sans-serif;
+  #list {
+    width: 100%;
+    margin: 1rem 0;
   }
-  #intro::after {
-    border-bottom-color: $accent-color;
-    content: "";
-    display: block;
-    width: 5em;
-    border-bottom: 0.125em solid $accent-color;
-    margin-top: 2.5em;
-  }
+
   div.pagination {
     width: 100%;
     display: flex;

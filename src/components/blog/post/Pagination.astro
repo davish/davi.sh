@@ -40,6 +40,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   .pagination {
     display: flex;
     justify-content: center;
+    @include sans-serif;
     @media print {
       display: none;
     }
@@ -53,6 +54,10 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
       border-radius: 5px;
       transition: 0.15s;
 
+      &:last-child:not(:first-child) {
+        text-align: right;
+      }
+
       &:hover {
         background-color: rgba($accent-color, 0.1);
         text-decoration: none;
@@ -60,7 +65,6 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
     }
 
     &-label {
-      font-family: "Inter", sans-serif;
       font-size: 0.8rem;
       margin-bottom: 0.5rem;
       color: #999;
@@ -68,6 +72,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
     &-title {
       font-weight: 600;
       color: $text-color;
+      font-size: 0.95rem;
     }
   }
   a:hover {

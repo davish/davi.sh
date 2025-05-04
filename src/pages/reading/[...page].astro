@@ -5,6 +5,7 @@ import { getReading } from "src/content/config";
 import ReadingEntry from "src/components/reading/ReadingEntry.astro";
 import Pagination from "src/components/Pagination.astro";
 import Base from "@layouts/Base.astro";
+import Intro from "src/components/common/Intro.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getReading();
@@ -21,32 +22,45 @@ const props = Astro.props;
   title="Reading List"
   description="Books I've read and my thoughts on them"
 >
-  <section id="intro"></section>
+  <div class="container">
+    <Intro
+      title="Book Reviews"
+      subtitle="Opinions on books and other long-form content I've read recently."
+    />
 
-  <section id="list">
-    <table class="book-list">
-      {props.page.data.map((post) => <ReadingEntry post={post} />)}
-    </table>
-    <div class="pagination">
-      <Pagination page={props.page} base="reading" />
-    </div>
-  </section>
+    <section id="list">
+      <div class="book-list">
+        {props.page.data.map((post) => <ReadingEntry post={post} />)}
+      </div>
+      <div class="pagination">
+        <Pagination page={props.page} base="reading" />
+      </div>
+    </section>
+  </div>
 </Base>
 
 <style lang="scss">
   @import "/src/variables.scss";
-  table.book-list {
+  div.container {
+    // width: 95%;
+    // max-width: 100ch;
+    display: flex;
+    flex-direction: column;
+  }
+  .book-list {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 10ch 6ch;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    @media #{$media-size-phone} {
+      grid-template-columns: 1fr 1fr 10ch 6ch;
+    }
   }
-  #intro,
-  #list {
-    width: 95%;
-    max-width: 100ch;
-  }
+
   #intro {
     @media #{$media-size-phone} {
       margin: 0;
-      width: 100%;
     }
   }
 

@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import BlogListPage from "@layouts/BlogListPage.astro";
+import Intro from "src/components/common/Intro.astro";
 import { getWeeklies } from "src/content/config";
 import Subscribe from "src/components/Subscribe.astro";
 
@@ -22,9 +23,12 @@ const props = Astro.props;
   title="Weekly Links"
   description="Some interesting links I've found"
 >
-  <h1>Weekly Links</h1>
-  <Subscribe>
-    Curated links and commentary from me, once a week. Sign up to get it in your
-    inbox!
-  </Subscribe>
+  <Intro title="Weekly Links">
+    <Subscribe>
+      <h2>
+        Curated links and commentary from me, once a week. Sign up to get it in
+        your inbox!
+      </h2>
+    </Subscribe>
+  </Intro>
 </BlogListPage>

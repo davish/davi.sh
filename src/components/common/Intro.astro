@@ -1,0 +1,59 @@
+---
+import type { MarkdownInstance } from "astro";
+
+type Props = {
+  title: string;
+  subtitle?: string;
+  accent?: boolean;
+};
+
+const { title, subtitle, accent = true } = Astro.props;
+---
+
+<section id="intro" class={accent ? "accent" : ""}>
+  <h1>{title}</h1>
+  {subtitle && <h2>{subtitle}</h2>}
+  <slot />
+</section>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  #intro {
+    width: 100%;
+    text-align: left;
+
+    @media #{$media-size-phone} {
+      margin: 0;
+    }
+
+    :global(h1),
+    :global(h2) {
+      @include sans-serif;
+      width: 100%;
+    }
+
+    :global(h1) {
+      margin-bottom: 0;
+    }
+
+    :global(h2) {
+      font-weight: 400;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    &.accent::after {
+      border-bottom-color: $accent-color;
+      content: "";
+      display: block;
+      width: 5em;
+      border-bottom: 0.125em solid $accent-color;
+      margin: 2em 0;
+      @media #{$media-size-phone} {
+        margin: 1.5em 0;
+      }
+    }
+  }
+</style>

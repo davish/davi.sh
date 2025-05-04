@@ -1,5 +1,6 @@
 ---
 import Base from "@layouts/Base.astro";
+import Intro from "src/components/common/Intro.astro";
 import SnippetTable from "src/components/snippets/SnippetTable.astro";
 import { getSnippets } from "src/content/config";
 
@@ -13,14 +14,16 @@ const snippets = await getSnippets();
   description={"Short, hard-won snippets to help every last DenverCoder9 on the web."}
 >
   <div>
-    <h1>TILs</h1>
-    <h2>
-      Short, hard-won snippets to help every last <a
-        href="https://xkcd.com/979/"
-      >
-        DenverCoder9
-      </a> on the web.
-    </h2>
+    <Intro title="TILs" accent={false}>
+      <h2>
+        Short, hard-won snippets to help every last <a
+          href="https://xkcd.com/979/"
+        >
+          DenverCoder9
+        </a> on the web.
+      </h2>
+    </Intro>
+
     <SnippetTable entries={snippets} />
   </div>
 </Base>
@@ -30,20 +33,5 @@ const snippets = await getSnippets();
 
   div {
     max-width: 95vw;
-  }
-
-  h1,
-  h2 {
-    @include sans-serif;
-    width: 100%;
-  }
-  h1 {
-    margin-bottom: 0;
-  }
-  h2 {
-    font-weight: 400;
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
   }
 </style>

@@ -54,10 +54,11 @@ const content = await renderMarkdown(body);
 <style lang="scss">
   @import "/src/variables.scss";
   h4 {
+    @include sans-serif;
     font-size: 1.5rem;
+    font-weight: 600;
     margin: 0;
-    margin-bottom: 0.3em;
-    // margin: 0 0 20px;
+    margin-bottom: 0.1rem;
 
     a {
       color: $text-color;

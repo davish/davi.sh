@@ -18,56 +18,32 @@ const {
 const url = getUrlForCollectionEntry("reading", slug);
 ---
 
-<tr class="book-entry">
-  <td class="title"><a href={url}>{title}</a></td>
-  <td class="author">{author}</td>
-  <td class="date">{toMonthYear(dateCompleted)}</td>
-  <td class="rating"><Stars rating={rating} /></td>
-</tr>
+<div class="book-entry">
+  <div class="title"><a href={url}>{title}</a></div>
+  <div class="author">{author}</div>
+  <div class="date">{toMonthYear(dateCompleted)}</div>
+  <div class="rating"><Stars rating={rating} /></div>
+</div>
 
 <style lang="scss">
   @import "/src/variables.scss";
 
   .book-entry {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba($accent-color, 0.2);
+    display: contents;
     font-family: "Inter", sans-serif;
-
-    &:last-child {
-      border-bottom: none;
+    @media #{$media-size-phone} {
+      font-size: 0.9rem;
     }
 
+    .title,
     .author {
-      color: $text-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
-    // .title > a {
-    //   text-decoration: underline;
-    //   text-decoration-color: $text-color;
-    //   padding-top: 0.1rem;
-
-    //   &:hover {
-    //     text-decoration: none;
-    //     // background-color: rgba($text-color, 0.2);
-    //   }
-    // }
 
     .date {
       @include dimmed;
-    }
-    .rating {
-      display: flex;
-      align-items: center;
-      margin: auto;
-    }
-    .genre {
-      @include dimmed;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5em;
-      .tag {
-        margin-right: 0.5em;
-      }
     }
   }
 </style>
