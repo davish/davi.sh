@@ -19,20 +19,39 @@ const url = getUrlForCollectionEntry("reading", slug);
 ---
 
 <div class="book-entry">
-  <div class="title"><a href={url}>{title}</a></div>
-  <div class="author">{author}</div>
-  <div class="date">{toMonthYear(dateCompleted)}</div>
-  <div class="rating"><Stars rating={rating} /></div>
+  <div class="mobile-left">
+    <div class="title"><a href={url}>{title}</a></div>
+    <div class="author">{author}</div>
+  </div>
+  <div class="mobile-right">
+    <div class="date">{toMonthYear(dateCompleted)}</div>
+    <div class="rating"><Stars rating={rating} /></div>
+  </div>
 </div>
 
 <style lang="scss">
   @import "/src/variables.scss";
 
   .book-entry {
+    @include sans-serif;
+
     display: contents;
-    font-family: "Inter", sans-serif;
+    .mobile-left,
+    .mobile-right {
+      display: contents;
+    }
     @media #{$media-size-phone} {
-      font-size: 0.9rem;
+      .mobile-left,
+      .mobile-right {
+        display: flex;
+        gap: 0.25rem;
+      }
+      .mobile-left {
+        flex-direction: column;
+      }
+      .mobile-right {
+        flex-direction: column-reverse;
+      }
     }
 
     .title,

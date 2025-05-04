@@ -13,7 +13,7 @@ const { page } = Astro.props;
 <div class="container">
   <Intro
     title="Book Reviews"
-    subtitle="Opinions on books and other long-form content I've read recently."
+    subtitle="My thoughts on books and other long-form content I've read recently."
   />
 
   <section id="list">
@@ -39,7 +39,7 @@ const { page } = Astro.props;
     gap: 0.5rem;
     padding: 0.75rem 0;
     @media #{$media-size-phone} {
-      grid-template-columns: 1fr 1fr 10ch 6ch;
+      grid-template-columns: 1fr 10ch;
     }
   }
 
