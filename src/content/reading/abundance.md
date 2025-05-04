@@ -4,6 +4,7 @@ author: "Ezra Klein and Derek Thompson"
 publishYear: 2025
 dateCompleted: "2025-04-13"
 rating: 3.5
+genre: politics
 ---
 
 I listen to both Ezra and Derek's podcasts regularly and was pretty familiar with the

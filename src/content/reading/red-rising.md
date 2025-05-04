@@ -4,7 +4,7 @@ author: "Pierce Brown"
 publishYear: 2014
 dateCompleted: "2025-03-02"
 rating: 3.5
-genre: "sci-fi"
+genre: sci-fi
 ---
 
 A fun sci-fi novel that brought together a lot of parts of other series and franchises

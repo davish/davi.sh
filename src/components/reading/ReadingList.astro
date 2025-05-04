@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Page } from "astro";
+import ReadingEntry from "src/components/reading/ReadingEntry.astro";
+import Pagination from "src/components/Pagination.astro";
+import Intro from "src/components/common/Intro.astro";
+
+type Props = { page: Page<CollectionEntry<"reading">> };
+
+const { page } = Astro.props;
+---
+
+<div class="container">
+  <Intro
+    title="Book Reviews"
+    subtitle="Opinions on books and other long-form content I've read recently."
+  />
+
+  <section id="list">
+    <div class="book-list">
+      {page.data.map((post) => <ReadingEntry post={post} />)}
+    </div>
+    <div class="pagination">
+      <Pagination page={page} base="reading" />
+    </div>
+  </section>
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div.container {
+    display: flex;
+    flex-direction: column;
+  }
+  .book-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 10ch 6ch;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    @media #{$media-size-phone} {
+      grid-template-columns: 1fr 1fr 10ch 6ch;
+    }
+  }
+
+  #intro {
+    @media #{$media-size-phone} {
+      margin: 0;
+    }
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+    margin-bottom: 2.5em;
+  }
+  #intro::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid rgba($accent-color, 0.3);
+    margin-top: -1.5em;
+    @media #{$media-size-phone} {
+      margin-top: 0.25rem;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+  }
+
+  div.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>

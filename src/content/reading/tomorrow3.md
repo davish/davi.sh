@@ -4,6 +4,7 @@ author: "Gabrielle Zevin"
 publishYear: 2022
 dateCompleted: "2024-12-20"
 rating: 5
+genre: fiction
 ---
 
 A book about life, love, and video games. I honestly didn't know what I was getting into
