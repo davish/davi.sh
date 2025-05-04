@@ -43,34 +43,6 @@ const { page } = Astro.props;
     }
   }
 
-  #intro {
-    @media #{$media-size-phone} {
-      margin: 0;
-    }
-  }
-
-  h1 {
-    font-family: "Inter", sans-serif;
-    margin-bottom: 2.5em;
-  }
-  #intro::after {
-    border-bottom-color: $accent-color;
-    content: "";
-    display: block;
-    width: 100%;
-    border-bottom: 2px solid rgba($accent-color, 0.3);
-    margin-top: -1.5em;
-    @media #{$media-size-phone} {
-      margin-top: 0.25rem;
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-    }
-  }
-
   div.pagination {
     width: 100%;
     display: flex;
