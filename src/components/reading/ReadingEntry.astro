@@ -40,6 +40,18 @@ const url = getUrlForCollectionEntry("reading", slug);
     .mobile-right {
       display: contents;
     }
+
+    .title,
+    .author {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .date {
+      @include dimmed;
+    }
+
     @media #{$media-size-phone} {
       .mobile-left,
       .mobile-right {
@@ -52,17 +64,10 @@ const url = getUrlForCollectionEntry("reading", slug);
       .mobile-right {
         flex-direction: column-reverse;
       }
-    }
 
-    .title,
-    .author {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .date {
-      @include dimmed;
+      .author {
+        font-size: 0.9rem;
+      }
     }
   }
 </style>
