@@ -15,10 +15,6 @@ type Props = { page: Page<CollectionEntry<"reading">> };
 const props = Astro.props;
 ---
 
-<Base
-  path="reading"
-  title="Reading List"
-  description="Books I've read and my thoughts on them"
->
+<Base path="reading" title="Reading" description="Goodreads at home">
   <ReadingList page={props.page} />
 </Base>

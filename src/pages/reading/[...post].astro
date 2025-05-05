@@ -7,12 +7,12 @@ import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import Pagination from "src/components/blog/post/Pagination.astro";
 import Stars from "src/components/reading/Stars.astro";
-import { toReadableString } from "src/utils";
+import { extractYear } from "src/utils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getReading();
   return posts.map((entry) => ({
-    params: { post: entry.slug },
+    params: { post: `${extractYear(entry.data.dateCompleted)}/${entry.slug}` },
     props: { entry },
   }));
 };
@@ -24,12 +24,13 @@ const {
 } = Astro.props;
 
 const basename = id.split("/").pop() || "";
+const year = extractYear(frontmatter.dateCompleted);
 
 const { Content } = await render();
 ---
 
 <Base
-  path={"reading/" + basename}
+  path={"reading/" + year + "/" + basename}
   back="/reading"
   title={frontmatter.title}
   description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
@@ -67,7 +68,10 @@ const { Content } = await render();
             slug: p.slug,
             id: p.id,
             title: p.data.title,
-            url: getUrlForCollectionEntry("reading", p.slug),
+            url: getUrlForCollectionEntry(
+              "reading",
+              `${extractYear(p.data.dateCompleted)}/${p.slug}`
+            ),
           }))
         )}
     />

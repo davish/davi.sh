@@ -1,7 +1,9 @@
-import { createMarkdownProcessor  } from "@astrojs/markdown-remark";
+import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 
 export async function renderMarkdown(markdown: string): Promise<string> {
-  const markdownResult = await (await createMarkdownProcessor()).render(markdown, {});
+  const markdownResult = await (
+    await createMarkdownProcessor()
+  ).render(markdown, {});
   return markdownResult.code;
 }
 
@@ -69,4 +71,8 @@ export function getSummary(html: string): string {
  */
 export function hasMore(html: string): boolean {
   return getSummary(html).length != html.length;
+}
+
+export function extractYear(date: Date): string {
+  return date.getFullYear().toString();
 }
