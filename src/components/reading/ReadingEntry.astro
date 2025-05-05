@@ -1,5 +1,5 @@
 ---
-import { toMonthYear } from "../../utils";
+import { extractYear, toMonthYear } from "../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
@@ -15,7 +15,8 @@ const {
   },
 } = Astro.props;
 
-const url = getUrlForCollectionEntry("reading", slug);
+const url =
+  extractYear(dateCompleted) + "/" + getUrlForCollectionEntry("reading", slug);
 ---
 
 <div class="book-entry">
