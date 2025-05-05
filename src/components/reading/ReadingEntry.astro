@@ -15,8 +15,10 @@ const {
   },
 } = Astro.props;
 
-const url =
-  extractYear(dateCompleted) + "/" + getUrlForCollectionEntry("reading", slug);
+const url = getUrlForCollectionEntry(
+  "reading",
+  `${extractYear(dateCompleted)}/${slug}`
+);
 ---
 
 <div class="book-entry">
