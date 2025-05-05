@@ -1,5 +1,5 @@
 ---
-import { extractYear, toMonthYear } from "../../utils";
+import { toMonthYear } from "../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
@@ -15,10 +15,7 @@ const {
   },
 } = Astro.props;
 
-const url = getUrlForCollectionEntry(
-  "reading",
-  `${extractYear(dateCompleted)}/${slug}`
-);
+const url = getUrlForCollectionEntry("reading", slug);
 ---
 
 <div class="book-entry">
@@ -46,6 +43,7 @@ const url = getUrlForCollectionEntry(
 
     .title,
     .author {
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -65,6 +63,11 @@ const url = getUrlForCollectionEntry(
       }
       .mobile-right {
         flex-direction: column-reverse;
+      }
+
+      .title,
+      .author {
+        white-space: normal;
       }
 
       .author {
