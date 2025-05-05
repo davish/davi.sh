@@ -14,6 +14,7 @@ const { path, back } = Astro.props;
   </a>
   <ul class="links">
     <li><a href="/til">TIL</a></li>
+    <li><a href="/reading">Reading</a></li>
     <li><a href="/weekly">Weekly</a></li>
     <li><a href="/blog">Blog</a></li>
   </ul>
@@ -29,26 +30,52 @@ const { path, back } = Astro.props;
       display: none;
     }
     @media #{$media-size-phone} {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 1rem;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
   }
   a.prompt {
     text-decoration: none;
     color: $text-color;
+    padding-left: 1rem;
     &:hover {
       text-decoration: none;
       background-color: transparent;
     }
-    padding-left: 1rem;
   }
 
   ul {
     list-style-type: none;
     display: flex;
     align-items: center;
+
+    @media #{$media-size-phone} {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      width: 100%;
+      justify-content: space-between;
+      max-width: 100%;
+      padding: 0 0;
+      margin-bottom: 0;
+    }
     li {
       display: inline;
       padding: 0 1rem;
+      @media #{$media-size-phone} {
+        padding: 0 0.5rem;
+        flex: 0 0 auto;
+        &:first-child {
+          margin-left: 0.5rem;
+        }
+        &:last-child {
+          margin-right: 0.5rem;
+        }
+      }
     }
   }
 

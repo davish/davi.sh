@@ -1,8 +1,12 @@
-import sharp from "sharp";
 import type { APIRoute } from "astro";
 import { previewImage } from "../../../components/og/og_image";
 import { getEntryBySlug } from "astro:content";
-import { getBlogPosts, getSnippets, getWeeklies } from "src/content/config";
+import {
+  getBlogPosts,
+  getReading,
+  getSnippets,
+  getWeeklies,
+} from "src/content/config";
 
 // Thanks to Arne Bahlo for the inspriation!
 // https://arne.me/articles/static-og-images-in-astro
@@ -26,7 +30,14 @@ export async function getStaticPaths() {
       collection: "weekly",
     },
   }));
-  return [...blogPaths, ...tilPaths, ...weeklyPaths];
+  const readingPaths = (await getReading()).map((post) => ({
+    params: {
+      slug: post.slug,
+      collection: "reading",
+    },
+  }));
+
+  return [...blogPaths, ...tilPaths, ...weeklyPaths, ...readingPaths];
 }
 
 export const GET: APIRoute = async function get({ params, request }) {
@@ -35,7 +46,8 @@ export const GET: APIRoute = async function get({ params, request }) {
     (collection === "til" ? "snippets" : collection) as
       | "blog"
       | "snippets"
-      | "weekly",
+      | "weekly"
+      | "reading",
     slug
   );
   if (!post) {
@@ -63,6 +75,12 @@ export const GET: APIRoute = async function get({ params, request }) {
               date: post.data.modified || post.data.published,
               path,
             }
-          : ({} as never)
+          : post.collection === "reading"
+            ? {
+                title: `Reviewing ${post.data.title} by ${post.data.author}`,
+                date: post.data.dateCompleted,
+                path,
+              }
+            : ({} as never)
   );
 };

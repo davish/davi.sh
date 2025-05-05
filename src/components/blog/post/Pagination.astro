@@ -4,9 +4,10 @@ export interface Props {
   getEntries: () => Promise<
     { slug: string; id: string; title: string; url: string }[]
   >;
+  itemLabel?: string;
 }
 
-const { currentId, getEntries } = Astro.props;
+const { currentId, getEntries, itemLabel = "Post" } = Astro.props;
 
 const posts = await getEntries();
 
@@ -19,7 +20,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   {
     prevPost && (
       <a class="pagination-item" href={prevPost.url}>
-        <span class="pagination-label">Previous Post</span>
+        <span class="pagination-label">Previous {itemLabel}</span>
         <span class="pagination-title">{prevPost.title}</span>
       </a>
     )
@@ -27,7 +28,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   {
     nextPost && (
       <a class="pagination-item" href={nextPost.url}>
-        <span class="pagination-label">Next Post</span>
+        <span class="pagination-label">Next {itemLabel}</span>
         <span class="pagination-title">{nextPost.title}</span>
       </a>
     )
@@ -39,6 +40,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   .pagination {
     display: flex;
     justify-content: center;
+    @include sans-serif;
     @media print {
       display: none;
     }
@@ -52,6 +54,10 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
       border-radius: 5px;
       transition: 0.15s;
 
+      &:last-child:not(:first-child) {
+        text-align: right;
+      }
+
       &:hover {
         background-color: rgba($accent-color, 0.1);
         text-decoration: none;
@@ -59,7 +65,6 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
     }
 
     &-label {
-      font-family: "Inter", sans-serif;
       font-size: 0.8rem;
       margin-bottom: 0.5rem;
       color: #999;
@@ -67,6 +72,7 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
     &-title {
       font-weight: 600;
       color: $text-color;
+      font-size: 0.95rem;
     }
   }
   a:hover {

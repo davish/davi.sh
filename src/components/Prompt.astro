@@ -32,6 +32,9 @@ const { path = "" } = Astro.props;
     font-display: auto;
     padding-left: 0rem;
     // font-family: monospace;
+    @media #{$media-size-phone} {
+      margin-top: 0;
+    }
 
     #prefix {
       font-weight: bold;

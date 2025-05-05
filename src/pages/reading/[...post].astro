@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getUrlForCollectionEntry, getReading } from "src/content/config";
+import Base from "@layouts/Base.astro";
+import Article from "src/components/Article.astro";
+import PostContent from "src/components/blog/post/PostContent.astro";
+import Pagination from "src/components/blog/post/Pagination.astro";
+import Stars from "src/components/reading/Stars.astro";
+import { extractYear } from "src/utils";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getReading();
+  return posts.map((entry) => ({
+    params: { post: `${extractYear(entry.data.dateCompleted)}/${entry.slug}` },
+    props: { entry },
+  }));
+};
+
+type Props = { entry: CollectionEntry<"reading"> };
+
+const {
+  entry: { data: frontmatter, id, render },
+} = Astro.props;
+
+const basename = id.split("/").pop() || "";
+const year = extractYear(frontmatter.dateCompleted);
+
+const { Content } = await render();
+---
+
+<Base
+  path={"reading/" + year + "/" + basename}
+  back="/reading"
+  title={frontmatter.title}
+  description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
+  card={true}
+>
+  <Article>
+    <div class="post-header">
+      <div>
+        <h1>
+          {frontmatter.title}
+        </h1>
+        <h2>
+          by {frontmatter.author}
+          <span id="year">({frontmatter.publishYear})</span>
+        </h2>
+      </div>
+      <div class="metadata">
+        <h1 id="rating">
+          <Stars rating={frontmatter.rating} />
+        </h1>
+        <!-- <p id="genre">
+          {frontmatter.genre.map((g) => <span class="tag">#{g}</span>)}
+        </p> -->
+      </div>
+    </div>
+    <PostContent>
+      <Content />
+    </PostContent>
+    <Pagination
+      currentId={id}
+      itemLabel="Book"
+      getEntries={() =>
+        getReading().then((posts) =>
+          posts.map((p) => ({
+            slug: p.slug,
+            id: p.id,
+            title: p.data.title,
+            url: getUrlForCollectionEntry(
+              "reading",
+              `${extractYear(p.data.dateCompleted)}/${p.slug}`
+            ),
+          }))
+        )}
+    />
+  </Article>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .post-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  #rating {
+    color: $accent-color;
+  }
+  h1,
+  h2 {
+    @include sans-serif;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+  h2 {
+    @include dimmed;
+    font-weight: 400;
+    margin-top: 0.2rem;
+    font-size: 1.1rem;
+  }
+
+  .genres {
+    @include dimmed;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.5em;
+    .tag {
+      margin-right: 0.5em;
+    }
+  }
+</style>

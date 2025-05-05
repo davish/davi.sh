@@ -1,0 +1,81 @@
+---
+import { extractYear, toMonthYear } from "../../utils";
+import { getUrlForCollectionEntry } from "src/content/config";
+import type { CollectionEntry } from "astro:content";
+import Stars from "./Stars.astro";
+
+export type Props = {
+  post: CollectionEntry<"reading">;
+};
+
+const {
+  post: {
+    slug,
+    data: { title, dateCompleted, author, rating },
+  },
+} = Astro.props;
+
+const url = getUrlForCollectionEntry(
+  "reading",
+  `${extractYear(dateCompleted)}/${slug}`
+);
+---
+
+<div class="book-entry">
+  <div class="mobile-left">
+    <div class="title"><a href={url}>{title}</a></div>
+    <div class="author">{author}</div>
+  </div>
+  <div class="mobile-right">
+    <div class="date">{toMonthYear(dateCompleted)}</div>
+    <div class="rating"><Stars rating={rating} /></div>
+  </div>
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .book-entry {
+    @include sans-serif;
+
+    display: contents;
+    .mobile-left,
+    .mobile-right {
+      display: contents;
+    }
+
+    .title,
+    .author {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .date {
+      @include dimmed;
+    }
+
+    @media #{$media-size-phone} {
+      .mobile-left,
+      .mobile-right {
+        display: flex;
+        gap: 0.25rem;
+      }
+      .mobile-left {
+        flex-direction: column;
+      }
+      .mobile-right {
+        flex-direction: column-reverse;
+      }
+
+      .title,
+      .author {
+        white-space: normal;
+      }
+
+      .author {
+        font-size: 0.9rem;
+      }
+    }
+  }
+</style>
