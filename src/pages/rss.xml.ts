@@ -2,13 +2,15 @@ import rss from "@astrojs/rss";
 import {
   getBlogPosts,
   getSnippets,
+  getReading,
   getUrlForCollectionEntry,
 } from "src/content/config";
-import { renderMarkdown } from "src/utils";
+import { extractYear, renderMarkdown } from "src/utils";
 
 export const GET = async function get() {
   const posts = await getBlogPosts();
   const snippets = await getSnippets();
+  const reading = await getReading();
   const renderedPosts = await Promise.all(
     posts.map(async (post) => ({
       link: getUrlForCollectionEntry("blog", post.slug),
@@ -25,8 +27,20 @@ export const GET = async function get() {
       description: await renderMarkdown(snippet.body),
     }))
   );
+  const renderedReading = await Promise.all(
+    reading.map(async (entry) => ({
+      link: getUrlForCollectionEntry(
+        "reading",
+        `${extractYear(entry.data.dateCompleted)}/${entry.slug}`
+      ),
+      title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
+      pubDate: entry.data.dateCompleted,
+      description: await renderMarkdown(entry.body),
+    }))
+  );
   const items = renderedPosts
     .concat(renderedSnippets)
+    .concat(renderedReading)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
   const { body } = await rss({
     title: "Davis Haupt's Blog",
