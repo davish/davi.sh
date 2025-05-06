@@ -3,7 +3,7 @@ title: "Red Rising"
 author: "Pierce Brown"
 publishYear: 2014
 dateCompleted: "2025-03-02"
-rating: 3.5
+rating: 4
 genre: sci-fi
 ---
 
@@ -18,7 +18,3 @@ to win felt very reminiscent of Ender's Game. Even so, the book was able to weav
 own themes. I found the narrator's internal struggles interesting to follow along with and
 generally the book was a page turner.
 
-My initial rating after finishing this book was 4/5, but I think that my experience with
-the sequel, Golden Son, brought this down half a point. Golden Son expanded the world but
-leaned even heavier on inspiration from other speculative fiction for some of its
-important plot points.
