@@ -46,3 +46,6 @@ and right. I worry that any effective implementation of Abundance on the nationa
 will be held back by negative associations with the ramifications of this push for
 "effeciency" that the country will be feeling for years go come.
 
+I think Abundance is still worth reading, if only to understand its place in the recent
+discourse, and especially if you’re not particularly familiar with the authors or topic
+areas. The book is more of the beginning of the discussion rather than the final word.
