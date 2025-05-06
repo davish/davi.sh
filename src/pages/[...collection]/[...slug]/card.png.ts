@@ -7,7 +7,6 @@ import {
   getSnippets,
   getWeeklies,
 } from "src/content/config";
-import { extractYear } from "src/utils";
 
 // Thanks to Arne Bahlo for the inspriation!
 // https://arne.me/articles/static-og-images-in-astro
@@ -33,7 +32,7 @@ export async function getStaticPaths() {
   }));
   const readingPaths = (await getReading()).map((post) => ({
     params: {
-      slug: extractYear(post.data.dateCompleted) + "/" + post.slug,
+      slug: post.slug,
       collection: "reading",
     },
   }));

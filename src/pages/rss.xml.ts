@@ -5,7 +5,7 @@ import {
   getReading,
   getUrlForCollectionEntry,
 } from "src/content/config";
-import { extractYear, renderMarkdown } from "src/utils";
+import { renderMarkdown } from "src/utils";
 
 export const GET = async function get() {
   const posts = await getBlogPosts();
@@ -29,10 +29,7 @@ export const GET = async function get() {
   );
   const renderedReading = await Promise.all(
     reading.map(async (entry) => ({
-      link: getUrlForCollectionEntry(
-        "reading",
-        `${extractYear(entry.data.dateCompleted)}/${entry.slug}`
-      ),
+      link: getUrlForCollectionEntry("reading", entry.slug),
       title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
       pubDate: entry.data.dateCompleted,
       description: await renderMarkdown(entry.body),

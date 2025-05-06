@@ -72,7 +72,3 @@ export function getSummary(html: string): string {
 export function hasMore(html: string): boolean {
   return getSummary(html).length != html.length;
 }
-
-export function extractYear(date: Date): string {
-  return date.getFullYear().toString();
-}

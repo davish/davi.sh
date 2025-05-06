@@ -7,12 +7,11 @@ import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import Pagination from "src/components/blog/post/Pagination.astro";
 import Stars from "src/components/reading/Stars.astro";
-import { extractYear } from "src/utils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getReading();
   return posts.map((entry) => ({
-    params: { post: `${extractYear(entry.data.dateCompleted)}/${entry.slug}` },
+    params: { post: entry.slug },
     props: { entry },
   }));
 };
@@ -20,17 +19,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Props = { entry: CollectionEntry<"reading"> };
 
 const {
-  entry: { data: frontmatter, id, render },
+  entry,
+  entry: { data: frontmatter, render },
 } = Astro.props;
-
-const basename = id.split("/").pop() || "";
-const year = extractYear(frontmatter.dateCompleted);
 
 const { Content } = await render();
 ---
 
 <Base
-  path={"reading/" + year + "/" + basename}
+  path={"reading/" + entry.slug}
   back="/reading"
   title={frontmatter.title}
   description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
@@ -60,7 +57,7 @@ const { Content } = await render();
       <Content />
     </PostContent>
     <Pagination
-      currentId={id}
+      currentId={entry.id}
       itemLabel="Book"
       getEntries={() =>
         getReading().then((posts) =>
@@ -68,10 +65,7 @@ const { Content } = await render();
             slug: p.slug,
             id: p.id,
             title: p.data.title,
-            url: getUrlForCollectionEntry(
-              "reading",
-              `${extractYear(p.data.dateCompleted)}/${p.slug}`
-            ),
+            url: getUrlForCollectionEntry("reading", p.slug),
           }))
         )}
     />
