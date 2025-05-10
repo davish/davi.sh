@@ -1,9 +1,10 @@
 ---
 import Base from "@layouts/Base.astro";
 import type { GetStaticPaths } from "astro";
-import { CollectionEntry, getCollection } from "astro:content";
-import { splitShortSlug, makePathForShortPost } from "src/content/config";
-import Post from "src/components/shorts/Post.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { splitShortSlug } from "src/content/config";
+import ShortPost from "src/components/shorts/Post.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const shorts = (await getCollection("shorts")).sort(
@@ -31,7 +32,7 @@ const {
 >
   <div class="spacer"></div>
   <div class="main">
-    <Post content={Astro.props.entry} />
+    <ShortPost content={Astro.props.entry} />
   </div>
   <div class="spacer"></div>
 </Base>
