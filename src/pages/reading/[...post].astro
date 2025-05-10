@@ -23,11 +23,12 @@ const {
   entry: { data: frontmatter, render },
 } = Astro.props;
 
+const basename = entry.id.split("/").pop() || "";
 const { Content } = await render();
 ---
 
 <Base
-  path={"reading/" + entry.slug}
+  path={"reading/" + basename}
   back="/reading"
   title={frontmatter.title}
   description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
