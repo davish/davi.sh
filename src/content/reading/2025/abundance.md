@@ -7,7 +7,7 @@ rating: 3.5
 genre: politics
 ---
 
-I listen to both Ezra and Derek's podcasts regularly and was pretty familiar with the
+I listen to both Ezra's and Derek's podcasts regularly and was pretty familiar with the
 outline of "Abundance" the concept from Klein mulling over his thoughts over the past four
 years on the Ezra Klein Show. I'm broadly sympathetic to the aims of the book but I felt
 like _Abundance_ fell short of crafting the most convincing argument for "a liberalism
