@@ -1,6 +1,6 @@
 ---
 title: "A Fisherman of the Inland Sea"
-author: "Ursula K Le Guin"
+author: "Ursula K. Le Guin"
 publishYear: 1994
 dateCompleted: "2025-05-25"
 rating: 4
