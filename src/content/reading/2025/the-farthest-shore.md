@@ -9,7 +9,7 @@ genre: fantasy
 
 Compared to the first two books in _Earthsea_ I was not as excited about _The Farthest
 Shore_. Some of the scenes felt -- for lack of a better word -- a bit trippy, which made
-the narrative found it a bit harder to follow.
+the narrative a bit harder to follow.
 
 Although I do understand that _Earthsea_ is marketed for a late-teen audience, I may be
 getting a bit tired of the coming-of-age tropes. "The Farthest Shore" still continues to
