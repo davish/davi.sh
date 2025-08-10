@@ -13,5 +13,4 @@ the narrative a bit harder to follow.
 
 Although I do understand that _Earthsea_ is marketed for a late-teen audience, I may be
 getting a bit tired of the coming-of-age tropes. "The Farthest Shore" still continues to
-fill out the world of _Earthsea_ and I'll say that the worldbuilding continues to be
-top-notch.
+fill out the world of _Earthsea_ in an interesting and satisfying way.
