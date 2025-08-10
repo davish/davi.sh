@@ -12,7 +12,7 @@ Wizard of Earthsea_. Le Guin puts a lot of effort into fleshing out the world of
 but unlike other fantasy worlds, she’s doing it through the eyes of her characters rather
 than through exposition or lore dumps.
 
-Ged, the protagonist of [book one](wizard-of-earthsea.md), and Arha, the protagonist of
+Ged, the protagonist of [book one](../wizard-of-earthsea.md), and Arha, the protagonist of
 this book, grew up in completely different circumstances. They see the same world and same
 events through their own differing and often conflicting perspectives. While it may sound
 disorienting, the overall world feels even more coherent and real for it.
