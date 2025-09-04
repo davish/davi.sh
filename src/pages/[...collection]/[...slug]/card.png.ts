@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { previewImage } from "../../../components/og/og_image";
-import { getEntryBySlug } from "astro:content";
+import { getEntry } from "astro:content";
 import {
   getBlogPosts,
   getReading,
@@ -45,7 +45,7 @@ export const GET: APIRoute = async function get({ params, request }) {
   if (collection === "reading") {
     slug = slug.split("/").pop() || "";
   }
-  const post = await getEntryBySlug(
+  const post = await getEntry(
     (collection === "til" ? "snippets" : collection) as
       | "blog"
       | "snippets"

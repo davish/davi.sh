@@ -1,9 +1,18 @@
 import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 
+// Create a singleton markdown processor to avoid multiple Shiki instances
+let markdownProcessor: Awaited<ReturnType<typeof createMarkdownProcessor>> | null = null;
+
+async function getMarkdownProcessor() {
+  if (!markdownProcessor) {
+    markdownProcessor = await createMarkdownProcessor();
+  }
+  return markdownProcessor;
+}
+
 export async function renderMarkdown(markdown: string): Promise<string> {
-  const markdownResult = await (
-    await createMarkdownProcessor()
-  ).render(markdown, {});
+  const processor = await getMarkdownProcessor();
+  const markdownResult = await processor.render(markdown, {});
   return markdownResult.code;
 }
 
