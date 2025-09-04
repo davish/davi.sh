@@ -66,7 +66,7 @@ CMD poetry run daphne -b 0.0.0.0 -p 8080 <project>.asgi:application
 
 It's also important to also add a [`.dockerignore` file](https://docs.docker.com/engine/reference/builder/#dockerignore-file), especially if you're storing your site in a Git repository.
 
-```ignore
+```text
 .git/
 __pycache__/
 
