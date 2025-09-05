@@ -1,10 +1,9 @@
-import { defineMarkdocConfig } from "@astrojs/markdoc/config";
-import Slide from "./src/components/slides/Slide.astro";
+import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
 
 export default defineMarkdocConfig({
   tags: {
     slide: {
-      render: Slide,
+      render: component("./src/components/slides/Slide.astro"),
       attributes: {
         type: { type: String },
         title: { type: String },

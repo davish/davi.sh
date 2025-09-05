@@ -150,10 +150,6 @@ export const splitShortSlug = (slug: string): ShortParam => {
 export const makePathForShortPost = (slug: string): string => {
   const { year, month, day, post } = splitShortSlug(slug);
   return `${year}/${month}/${day}/${post}`;
-||||||| parent of 11bc373 (more updates)
-=======
-  slides: "/slides/",
->>>>>>> 11bc373 (more updates)
 };
 
 export const getUrlForCollectionEntry = (t: keyof typeof urls, slug: string) =>
