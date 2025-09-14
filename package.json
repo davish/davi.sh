@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdoc": "^0.15.5",
     "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@tufte-markdown/remark-sidenotes": "^1.0.0",
