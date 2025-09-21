@@ -1,34 +1,36 @@
 ---
 title: Thinking About Thinking With LLMs
-date: 2025-09-05
+date: 2025-09-21
 tags: [ ai, llm, recurse-center, airplane-articles ]
 draft: false
 ---
 
 After reading [Developing our position on
-AI](https://www.recurse.com/blog/191-developing-our-position-on-ai) from the
-[Recurse](https://www.recurse.com/), my corresponding entry in my [weekly
+AI](https://www.recurse.com/blog/191-developing-our-position-on-ai) from the [Recurse
+Center](https://www.recurse.com/) the corresponding entry in my [weekly
 newsletter](/weekly) grew long enough I've decided to break it out into a full blog
-post. Above and beyond its findings it charts a path for a more civil and considered mode
-of discussion that we should all strive for on the Internet and in our own lives.
+post. Above and beyond its specific findings, I think it charts a path for a more civil
+and considered mode of discussion that we should all strive for on the Internet and in our
+own lives.
 
-I've long been fascinated by the Recurse Center. Throughout my career I've been
-consistently impressed with its alums I've crossed paths with, so I'm not particularly
+I've long been fascinated bythe Recurse Center. Throughout my career I've been
+consistently impressed with alums I've crossed paths with, so I'm not particularly
 surprised that probably the most balanced and thoughtful take on AI and software
 engineering that I've read so far has come out of Recurse.
 
 ## Discourse on the Internet
 
 I think the article presents a great way to deal with contentious issues within
-organizations and writing about those issues publicly. First, listen to everyone. Then,
-acknowledge disagreement and emphasize nuance while still outlining common ground.
+organizations and how to write about those issues publicly. First, listen to
+everyone. Then, acknowledge disagreement and emphasize nuance making an effort to common
+ground.
 
 The goal doesn't need to be having The Correct Take at every moment. People have different
 life experiences which often leads them to different top-line beliefs. But beyond those
-headlines, where reasonable people have opinions as wide as "we'll all be unemployed by
-2028" to "LLMs are slurping up all our fresh water", there is a surprising amount of
-common ground. In the case of this article, most people agreed that _using LLMs to learn
-new things_ needs to be done with some caution.
+headlines, where reasonable people state anything from "we'll all be unemployed by 2028"
+to "LLMs are slurping up all our fresh water", there is a surprising amount of common
+ground. In the case of this article, most people agreed that _using LLMs to learn new
+things_ needs to be done with some caution.
 
 ## Step-Functions in Abstractions
 
@@ -39,9 +41,9 @@ This paragraph from the post really resonated with me:
 > copy-pasting from it does little to help you learn. While you can get a lot farther
 > mindlessly using LLMs than Stack Overflow, the same principle holds true.
 
-The comparison to StackOverflow is one that I've seen pop up again and again in the
-conversation around LLMs. The one-two punch of Google search and StackOverflow caused a
-similar magnitude shift in our profession twenty years ago.
+The comparison to StackOverflow is one that I've seen pop up again and again in
+discussions around LLMs. While LLMs can feel revolutionary, it's not the first time we've
+seen a step change in software development tooling.
 
 Google made the skill of searching and skimming manuals for reference materials almost
 obsolete. O'Reilly still exists, but reference books are a much smaller part of an
@@ -52,13 +54,11 @@ documentation](https://nick.groenen.me/posts/the-4-types-of-technical-documentat
 certainly existed before the advent of search engines, but shorter-form content thrives in
 search engines and recommendation algorithms.
     
-StackOverflow made it possible to find code snippets to accomplish almost any common task
-without much upfront thinking. This was almost always considered to be an unfortunate
-shortcut. StackOverflow filled a niche, but it didn't obviate the need for a deep
-understanding.
-
-Going back even further, I'm sure folks were similarly wary to move towards higher-level
-languages that abstracted away assembly.
+StackOverflow made it possible to find code snippets to accomplish many common tasks
+without much upfront thinking. Most consider copy/pasting StackOverflow answers to be an
+unfortunate shortcut. StackOverflow filled a niche, but it didn't obviate the need for a
+deep understanding. Going back even further, I'm sure some were similarly wary to move
+towards higher-level languages that abstracted away machine-specific assembly.
 
 Much of software engineering is ultimately about automating "white collar" work previously
 done by humans, whether that work is coordinating airline logistics, processing payroll,
