@@ -21,7 +21,7 @@ engineering that I've read so far has come out of Recurse.
 
 I think the article presents a great way to deal with contentious issues within
 organizations and how to write about those issues publicly. First, listen to
-everyone. Then, acknowledge disagreementa and emphasize nuance to make an effort to find
+everyone. Then, acknowledge disagreements and emphasize nuance to make an effort to find
 common ground.
 
 The goal doesn't need to be having The Correct Take at every moment. People have different
