@@ -11,16 +11,26 @@ export type Props = {
 const {
   post: {
     slug,
+    body,
     data: { title, dateCompleted, author, rating },
   },
 } = Astro.props;
 
-const url = getUrlForCollectionEntry("reading", slug);
+const hasContent = body && body.trim().length > 0;
+const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
 ---
 
 <div class="book-entry">
   <div class="mobile-left">
-    <div class="title"><a href={url}>{title}</a></div>
+    <div class="title">
+      {
+        hasContent ? (
+          <a href={url}>{title}</a>
+        ) : (
+          <span class="no-review">{title}</span>
+        )
+      }
+    </div>
     <div class="author">{author}</div>
   </div>
   <div class="mobile-right">
@@ -50,6 +60,10 @@ const url = getUrlForCollectionEntry("reading", slug);
 
     .date {
       @include dimmed;
+    }
+
+    .no-review {
+      text-decoration: underline;
     }
 
     @media #{$media-size-phone} {

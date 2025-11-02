@@ -10,10 +10,15 @@ import Stars from "src/components/reading/Stars.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getReading();
-  return posts.map((entry) => ({
-    params: { post: entry.slug },
-    props: { entry },
-  }));
+  const paths = posts
+    .filter((entry) => {
+      return entry.body && entry.body.trim().length > 0;
+    })
+    .map((entry) => ({
+      params: { post: entry.slug },
+      props: { entry },
+    }));
+  return paths;
 };
 
 type Props = { entry: CollectionEntry<"reading"> };

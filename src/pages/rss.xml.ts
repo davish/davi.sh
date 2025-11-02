@@ -28,12 +28,16 @@ export const GET = async function get() {
     }))
   );
   const renderedReading = await Promise.all(
-    reading.map(async (entry) => ({
-      link: getUrlForCollectionEntry("reading", entry.slug),
-      title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
-      pubDate: entry.data.dateCompleted,
-      description: await renderMarkdown(entry.body),
-    }))
+    reading
+      .filter((entry) => {
+        return entry.body && entry.body.trim().length > 0;
+      })
+      .map(async (entry) => ({
+        link: getUrlForCollectionEntry("reading", entry.slug),
+        title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
+        pubDate: entry.data.dateCompleted,
+        description: await renderMarkdown(entry.body),
+      }))
   );
   const items = renderedPosts
     .concat(renderedSnippets)
