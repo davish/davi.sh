@@ -1,0 +1,38 @@
+---
+export type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<div class="slide-title">
+  <h2>{title}</h2>
+</div>
+<div class="slide-content">
+  <slot />
+</div>
+
+<style lang="scss">
+  .slide-title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    background-color: #142231;
+    color: white;
+
+    h2 {
+      font-size: 20px;
+      margin-left: 1rem;
+    }
+  }
+
+  .slide-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 0.5rem;
+  }
+</style>

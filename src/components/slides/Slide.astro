@@ -1,0 +1,122 @@
+---
+import Default from "./Default.astro";
+import Title from "./Title.astro";
+import Point from "./Point.astro";
+import Top from "./Top.astro";
+
+export type Props = {
+  title: string;
+  type: "title" | undefined;
+};
+
+const props = Astro.props;
+const { type } = Astro.props;
+---
+
+<div class="slide">
+  {
+    type === "title" ? (
+      <Title {...props}>
+        <slot />
+      </Title>
+    ) : type === "point" ? (
+      <Point {...props}>
+        <slot />
+      </Point>
+    ) : type === "top" ? (
+      <Top {...props}>
+        <slot />
+      </Top>
+    ) : (
+      <Default {...props}>
+        <slot />{" "}
+      </Default>
+    )
+  }
+</div>
+
+<script>
+  const resizeSlides = () => {
+    if (document.querySelector("div.present")) {
+      return;
+    }
+    const container = document.querySelector(
+      ".slide-container"
+    ) as HTMLDivElement;
+
+    const slides = document.querySelectorAll(
+      ".slide"
+    ) as NodeListOf<HTMLDivElement>; // get all slides
+
+    const scaleSlides = (scale: number) =>
+      slides.forEach((slide) => {
+        slide.style.scale = scale + "";
+        const compensatedMargin =
+          (slide.getBoundingClientRect().height - 270) / 2;
+        const margin = `calc(${compensatedMargin}px + 1rem)`;
+        slide.style.marginTop = margin;
+        slide.style.marginBottom = margin;
+        if (slide?.nextElementSibling?.classList.contains("slide")) {
+          slide.style.marginBottom = margin;
+          slide.style.marginBottom = `calc(${compensatedMargin * 2}px + 1rem)`;
+        }
+      });
+
+    scaleSlides(1);
+    const parentWidth = container.offsetWidth; // get the width of the container
+    scaleSlides(parentWidth / 480);
+  };
+
+  resizeSlides();
+  addEventListener("resize", resizeSlides);
+</script>
+
+<style lang="scss">
+  .slide {
+    height: 270px;
+    width: 480px;
+    border: 1px #999 solid;
+    margin: auto;
+
+    font-family: "Inter";
+
+    display: flex;
+  }
+</style>
+
+<style lang="scss" is:global>
+  .slide {
+    &-content {
+      img {
+        max-width: 95%;
+        max-height: 200px;
+        margin: auto;
+      }
+
+      p:has(> img) {
+        text-align: center;
+      }
+
+      h3 {
+        margin-block-start: 0.5rem;
+        margin-block-end: 0;
+      }
+      p {
+        margin: 0;
+      }
+      ul,
+      ol {
+        padding-left: 15px;
+      }
+    }
+  }
+  .present .slide {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    border: none;
+  }
+</style>
