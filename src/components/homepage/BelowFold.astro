@@ -31,13 +31,15 @@ const tils = (await getSnippets()).map(
   })
 );
 
-const reading = (await getReading()).map(
-  ({ data: { title, dateCompleted, author }, slug }) => ({
-    title: `${title} by ${author}`,
-    date: dateCompleted,
-    href: getUrlForCollectionEntry("reading", slug),
-  })
-);
+const reading = (
+  await getReading(
+    (entry) => (entry.body && entry.body.trim().length > 0) || false
+  )
+).map(({ data: { title, dateCompleted, author }, slug }) => ({
+  title: `${title} by ${author}`,
+  date: dateCompleted,
+  href: getUrlForCollectionEntry("reading", slug),
+}));
 ---
 
 <section class="fold">
