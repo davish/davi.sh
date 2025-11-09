@@ -1,7 +1,9 @@
 import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 
 // Create a singleton markdown processor to avoid multiple Shiki instances
-let markdownProcessor: Awaited<ReturnType<typeof createMarkdownProcessor>> | null = null;
+let markdownProcessor: Awaited<
+  ReturnType<typeof createMarkdownProcessor>
+> | null = null;
 
 async function getMarkdownProcessor() {
   if (!markdownProcessor) {
@@ -80,4 +82,16 @@ export function getSummary(html: string): string {
  */
 export function hasMore(html: string): boolean {
   return getSummary(html).length != html.length;
+}
+
+/**
+ * Converts an author name to a URL-friendly slug.
+ * @param author Author name string.
+ * @returns URL-friendly slug.
+ */
+export function authorToSlug(author: string): string {
+  return author
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }

@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getReading } from "src/content/config";
+import { authorToSlug } from "src/utils";
+import Base from "@layouts/Base.astro";
+import ReadingList from "src/components/reading/ReadingList.astro";
+import Intro from "src/components/common/Intro.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allBooks = await getReading();
+
+  // Group books by author
+  const authorMap = new Map<string, CollectionEntry<"reading">[]>();
+  for (const book of allBooks) {
+    const author = book.data.author;
+    if (!authorMap.has(author)) {
+      authorMap.set(author, []);
+    }
+    authorMap.get(author)!.push(book);
+  }
+
+  // Filter to only authors with more than one book
+  const authorsWithMultipleBooks = Array.from(authorMap.entries()).filter(
+    ([_, books]) => books.length > 1
+  );
+
+  // Create paths for each author
+  return authorsWithMultipleBooks.map(([authorName, books]) => ({
+    params: { author: authorToSlug(authorName) },
+    props: { authorName, books },
+  }));
+};
+
+type Props = {
+  authorName: string;
+  books: CollectionEntry<"reading">[];
+};
+
+const { authorName, books } = Astro.props;
+---
+
+<Base
+  path={`reading/author/${authorToSlug(authorName)}`}
+  title={`${authorName}`}
+  description={`Books I've read by ${authorName}`}
+  back="/reading"
+>
+  <div class="container">
+    <Intro title="Book Reviews" subtitle=`For ${authorName}` />
+
+    <section id="list">
+      <ReadingList books={books} showAuthorColumn={false} />
+    </section>
+  </div>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div.container {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

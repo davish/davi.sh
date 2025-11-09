@@ -1,48 +1,54 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import type { Page } from "astro";
 import ReadingEntry from "src/components/reading/ReadingEntry.astro";
-import Pagination from "src/components/Pagination.astro";
-import Intro from "src/components/common/Intro.astro";
 
-type Props = { page: Page<CollectionEntry<"reading">> };
+type Props = {
+  books: CollectionEntry<"reading">[];
+  showAuthorColumn?: boolean;
+  authorsWithMultipleBooks?: Set<string>;
+};
 
-const { page } = Astro.props;
+const {
+  books,
+  showAuthorColumn = true,
+  authorsWithMultipleBooks,
+} = Astro.props;
 ---
 
-<div class="container">
-  <Intro title="Book Reviews" subtitle="Goodreads at home" />
-
-  <section id="list">
-    <div class="book-list">
-      {page.data.map((post) => <ReadingEntry post={post} />)}
-    </div>
-    <div class="pagination">
-      <Pagination page={page} base="reading" />
-    </div>
-  </section>
+<div class={`book-list ${showAuthorColumn ? "with-author" : "no-author"}`}>
+  {
+    books.map((post) => (
+      <ReadingEntry
+        post={post}
+        showAuthorColumn={showAuthorColumn}
+        showAuthorLink={
+          authorsWithMultipleBooks?.has(post.data.author) || false
+        }
+      />
+    ))
+  }
 </div>
 
 <style lang="scss">
   @import "/src/variables.scss";
-  div.container {
-    display: flex;
-    flex-direction: column;
-  }
   .book-list {
     width: 100%;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 10ch 6ch;
     gap: 0.5rem;
     padding: 0.75rem 0;
+  }
+
+  .with-author {
+    grid-template-columns: 1.5fr 1fr 10ch 6ch;
     @media #{$media-size-phone} {
       grid-template-columns: 1fr 10ch;
     }
   }
 
-  div.pagination {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .no-author {
+    grid-template-columns: 1.5fr 10ch 6ch;
+    @media #{$media-size-phone} {
+      grid-template-columns: 1fr 10ch;
+    }
   }
 </style>

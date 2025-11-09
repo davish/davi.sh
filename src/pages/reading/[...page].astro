@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { getReading } from "src/content/config";
 import Base from "@layouts/Base.astro";
-import ReadingList from "src/components/reading/ReadingList.astro";
+import ReadingListPage from "src/components/reading/ReadingListPage.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getReading();
@@ -16,5 +16,5 @@ const props = Astro.props;
 ---
 
 <Base path="reading" title="Reading" description="Goodreads at home">
-  <ReadingList page={props.page} />
+  <ReadingListPage page={props.page} />
 </Base>
