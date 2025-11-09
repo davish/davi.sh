@@ -1,5 +1,5 @@
 ---
-import { toMonthYear } from "../../utils";
+import { toMonthYear, toReadableString } from "../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
@@ -34,7 +34,9 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
     <div class="author">{author}</div>
   </div>
   <div class="mobile-right">
-    <div class="date">{toMonthYear(dateCompleted)}</div>
+    <div class="date" title={toReadableString(dateCompleted)}>
+      {toMonthYear(dateCompleted)}
+    </div>
     <div class="rating"><Stars rating={rating} /></div>
   </div>
 </div>
