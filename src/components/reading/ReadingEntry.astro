@@ -1,11 +1,13 @@
 ---
-import { toMonthYear, toReadableString } from "../../utils";
+import { toMonthYear, toReadableString, authorToSlug } from "../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
 
 export type Props = {
   post: CollectionEntry<"reading">;
+  showAuthorColumn?: boolean;
+  showAuthorLink?: boolean;
 };
 
 const {
@@ -14,10 +16,16 @@ const {
     body,
     data: { title, dateCompleted, author, rating },
   },
+  showAuthorColumn = true,
+  showAuthorLink = false,
 } = Astro.props;
 
 const hasContent = body && body.trim().length > 0;
 const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
+const authorUrl =
+  showAuthorColumn && showAuthorLink
+    ? `/reading/author/${authorToSlug(author)}`
+    : null;
 ---
 
 <div class="book-entry">
@@ -31,7 +39,19 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
         )
       }
     </div>
-    <div class="author">{author}</div>
+    {
+      showAuthorColumn ? (
+        <div class="author">
+          {authorUrl ? (
+            <a href={authorUrl} class="author-link">
+              {author}
+            </a>
+          ) : (
+            author
+          )}
+        </div>
+      ) : null
+    }
   </div>
   <div class="mobile-right">
     <div class="date" title={toReadableString(dateCompleted)}>
@@ -60,6 +80,10 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
       text-overflow: ellipsis;
     }
 
+    .author a {
+      text-decoration-color: $text-color;
+    }
+
     .date {
       @include dimmed;
     }
@@ -76,6 +100,7 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
       }
       .mobile-left {
         flex-direction: column;
+        justify-content: space-around;
       }
       .mobile-right {
         flex-direction: column-reverse;
