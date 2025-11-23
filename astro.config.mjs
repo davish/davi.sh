@@ -5,6 +5,9 @@ import react from "@astrojs/react"
 // https://astro.build/config
 export default defineConfig({
   site: "https://davi.sh/",
+  redirects: {
+    "/blog/2025/09/thinking-with-llms": "/blog/2025/10/thinking-with-llms"
+  },
   markdown: {
     remarkPlugins: [remarkSidenotes],
     shikiConfig: {
