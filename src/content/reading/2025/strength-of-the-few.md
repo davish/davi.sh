@@ -3,7 +3,7 @@ title: "The Strength of the Few"
 author: "James Islington"
 publishYear: 2025
 dateCompleted: 2025-11-19
-rating: 3
+rating: 3.5
 genre: fantasy
 ---
 
