@@ -12,7 +12,6 @@ This is my website. There are many like it, but this one's mine. I've pulled bit
 - [Arne Bahlo's personal site](https://arne.me)
 - [Jacob Kaplan-Moss's personal site](https://jacobian.org)
 - [Programming in the 21st Century](https://prog21.dadgum.com)
-- Mobile-friendly sidenote toggles from [Nolen Royalty](https://eieio.games)'s personal
-  site
-- [Link styling from Drew Breunig](https://www.dbreunig.com)
+- Mobile-friendly sidenote toggles from [Nolen Royalty](https://eieio.games)
+- Link styling from [Drew Breunig](https://www.dbreunig.com)
 - [Tom MacWright's _Reading_ section](https://macwright.com/reading/)
