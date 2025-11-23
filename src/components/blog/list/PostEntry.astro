@@ -114,12 +114,17 @@ const content = await renderMarkdown(body);
 <style lang="scss" is:global>
   @import "/src/variables.scss";
   section.summary-content {
+    // Don't show footnote references in the summary content
+    sup:has(a[data-footnote-ref]) {
+      display: none;
+    }
     p {
       line-height: 1.5rem;
     }
     li {
       line-height: 1.5rem;
     }
+
     code {
       font-family:
         Consolas,
