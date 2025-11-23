@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { getUrlForCollectionEntry, getReading } from "src/content/config";
+import { authorToSlug } from "src/utils";
 import Base from "@layouts/Base.astro";
 import Article from "src/components/Article.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
@@ -30,6 +31,16 @@ const {
 
 const basename = entry.id.split("/").pop() || "";
 const { Content } = await render();
+
+// Check if author has multiple books (author page exists)
+const allBooks = await getReading();
+const authorBookCount = allBooks.filter(
+  (book) => book.data.author === frontmatter.author
+).length;
+const hasAuthorPage = authorBookCount > 1;
+const authorUrl = hasAuthorPage
+  ? `/reading/author/${authorToSlug(frontmatter.author)}`
+  : null;
 ---
 
 <Base
@@ -46,7 +57,14 @@ const { Content } = await render();
           {frontmatter.title}
         </h1>
         <h2>
-          by {frontmatter.author}
+          by
+          {
+            hasAuthorPage ? (
+              <a href={authorUrl}>{frontmatter.author}</a>
+            ) : (
+              frontmatter.author
+            )
+          }
           <span id="year">({frontmatter.publishYear})</span>
         </h2>
       </div>
