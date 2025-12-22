@@ -3,6 +3,7 @@ import { toMonthYear, toReadableString, authorToSlug } from "../../utils";
 import { getUrlForCollectionEntry } from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
+import BookshelfIcon from "./BookshelfIcon.astro";
 
 export type Props = {
   post: CollectionEntry<"reading">;
@@ -42,13 +43,16 @@ const authorUrl =
     {
       showAuthorColumn ? (
         <div class="author">
+          <span class="author-name">{author}</span>
           {authorUrl ? (
-            <a href={authorUrl} class="author-link">
-              {author}
+            <a
+              href={authorUrl}
+              class="author-link"
+              aria-label={`View all books by ${author}`}
+            >
+              <BookshelfIcon />
             </a>
-          ) : (
-            author
-          )}
+          ) : null}
         </div>
       ) : null
     }
@@ -80,8 +84,36 @@ const authorUrl =
       text-overflow: ellipsis;
     }
 
-    .author a {
-      text-decoration-color: $text-color;
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .author-name {
+      // Ensure author name is not clickable
+    }
+
+    .author-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: $accent-color;
+      opacity: 0.7;
+      transition:
+        opacity 0.2s,
+        color 0.2s;
+      border-radius: 5px;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+        color: $text-color;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none;
+      }
     }
 
     .date {
