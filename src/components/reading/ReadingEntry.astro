@@ -7,7 +7,6 @@ import BookshelfIcon from "./BookshelfIcon.astro";
 
 export type Props = {
   post: CollectionEntry<"reading">;
-  showAuthorColumn?: boolean;
   showAuthorLink?: boolean;
 };
 
@@ -17,16 +16,14 @@ const {
     body,
     data: { title, dateCompleted, author, rating },
   },
-  showAuthorColumn = true,
   showAuthorLink = false,
 } = Astro.props;
 
 const hasContent = body && body.trim().length > 0;
 const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
-const authorUrl =
-  showAuthorColumn && showAuthorLink
-    ? `/reading/author/${authorToSlug(author)}`
-    : null;
+const authorUrl = showAuthorLink
+  ? `/reading/author/${authorToSlug(author)}`
+  : null;
 ---
 
 <div class="book-entry">
@@ -40,22 +37,21 @@ const authorUrl =
         )
       }
     </div>
-    {
-      showAuthorColumn ? (
-        <div class="author">
-          <span class="author-name">{author}</span>
-          {authorUrl ? (
-            <a
-              href={authorUrl}
-              class="author-link"
-              aria-label={`View all books by ${author}`}
-            >
-              <BookshelfIcon />
-            </a>
-          ) : null}
-        </div>
-      ) : null
-    }
+    <div class="author">
+      <span class="author-name">{author}</span>
+      {
+        authorUrl ? (
+          <a
+            href={authorUrl}
+            class="author-link"
+            aria-label={`See all reviews for books by ${author}`}
+            title={`See all reviews for books by ${author}`}
+          >
+            <BookshelfIcon />
+          </a>
+        ) : null
+      }
+    </div>
   </div>
   <div class="mobile-right">
     <div class="date" title={toReadableString(dateCompleted)}>

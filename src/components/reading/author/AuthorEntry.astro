@@ -1,0 +1,84 @@
+---
+import { toMonthYear, toReadableString } from "../../../utils";
+import { getUrlForCollectionEntry } from "src/content/config";
+import type { CollectionEntry } from "astro:content";
+import Stars from "../Stars.astro";
+
+export type Props = {
+  post: CollectionEntry<"reading">;
+};
+
+const {
+  post: {
+    slug,
+    body,
+    data: { title, dateCompleted, rating },
+  },
+} = Astro.props;
+
+const hasContent = body && body.trim().length > 0;
+const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
+---
+
+<div class="book-entry">
+  <div class="title">
+    {
+      hasContent ? (
+        <a href={url}>{title}</a>
+      ) : (
+        <span class="no-review">{title}</span>
+      )
+    }
+  </div>
+  <div class="meta">
+    <div class="rating"><Stars rating={rating} /></div>
+    <div class="date" title={toReadableString(dateCompleted)}>
+      {toMonthYear(dateCompleted)}
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+
+  .book-entry {
+    @include sans-serif;
+
+    display: contents;
+
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .meta {
+      display: contents;
+    }
+
+    .date {
+      @include dimmed;
+    }
+
+    .no-review {
+      font-style: italic;
+    }
+
+    @media #{$media-size-phone} {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .title {
+        white-space: normal;
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+    }
+  }
+</style>

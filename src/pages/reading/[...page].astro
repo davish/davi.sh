@@ -3,7 +3,9 @@ import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { getReading } from "src/content/config";
 import Base from "@layouts/Base.astro";
-import ReadingListPage from "src/components/reading/ReadingListPage.astro";
+import ReadingList from "src/components/reading/ReadingList.astro";
+import Pagination from "src/components/Pagination.astro";
+import Intro from "src/components/common/Intro.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getReading();
@@ -12,9 +14,48 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
 type Props = { page: Page<CollectionEntry<"reading">> };
 
-const props = Astro.props;
+const { page } = Astro.props;
+
+// Get all books to determine which authors have multiple books
+const allBooks = await getReading();
+const authorCounts = new Map<string, number>();
+for (const book of allBooks) {
+  const author = book.data.author;
+  authorCounts.set(author, (authorCounts.get(author) || 0) + 1);
+}
+const authorsWithMultipleBooks = new Set(
+  Array.from(authorCounts.entries())
+    .filter(([_, count]) => count > 1)
+    .map(([author]) => author)
+);
 ---
 
 <Base path="reading" title="Reading" description="Goodreads at home">
-  <ReadingListPage page={props.page} />
+  <div class="container">
+    <Intro title="Book Reviews" subtitle="Goodreads at home" />
+
+    <section id="list">
+      <ReadingList
+        books={page.data}
+        authorsWithMultipleBooks={authorsWithMultipleBooks}
+      />
+      <div class="pagination">
+        <Pagination page={page} base="reading" />
+      </div>
+    </section>
+  </div>
 </Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div.container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>

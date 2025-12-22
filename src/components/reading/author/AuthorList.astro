@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+import AuthorEntry from "./AuthorEntry.astro";
+
+type Props = {
+  books: CollectionEntry<"reading">[];
+};
+
+const { books } = Astro.props;
+---
+
+<div class="book-list">
+  {books.map((post) => <AuthorEntry post={post} />)}
+</div>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  .book-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 10ch minmax(9ch, auto);
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+
+    @media #{$media-size-phone} {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

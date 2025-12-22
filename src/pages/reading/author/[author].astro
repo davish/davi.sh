@@ -4,7 +4,7 @@ import type { GetStaticPaths } from "astro";
 import { getReading } from "src/content/config";
 import { authorToSlug } from "src/utils";
 import Base from "@layouts/Base.astro";
-import ReadingList from "src/components/reading/ReadingList.astro";
+import AuthorList from "src/components/reading/author/AuthorList.astro";
 import Intro from "src/components/common/Intro.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -47,10 +47,10 @@ const { authorName, books } = Astro.props;
   back="/reading"
 >
   <div class="container">
-    <Intro title="Book Reviews" subtitle=`For ${authorName}` />
+    <Intro title="Book Reviews" subtitle={`For ${authorName}`} />
 
     <section id="list">
-      <ReadingList books={books} showAuthorColumn={false} />
+      <AuthorList books={books} />
     </section>
   </div>
 </Base>

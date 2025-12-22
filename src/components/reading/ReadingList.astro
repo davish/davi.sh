@@ -4,23 +4,17 @@ import ReadingEntry from "src/components/reading/ReadingEntry.astro";
 
 type Props = {
   books: CollectionEntry<"reading">[];
-  showAuthorColumn?: boolean;
   authorsWithMultipleBooks?: Set<string>;
 };
 
-const {
-  books,
-  showAuthorColumn = true,
-  authorsWithMultipleBooks,
-} = Astro.props;
+const { books, authorsWithMultipleBooks } = Astro.props;
 ---
 
-<div class={`book-list ${showAuthorColumn ? "with-author" : "no-author"}`}>
+<div class="book-list">
   {
     books.map((post) => (
       <ReadingEntry
         post={post}
-        showAuthorColumn={showAuthorColumn}
         showAuthorLink={
           authorsWithMultipleBooks?.has(post.data.author) || false
         }
@@ -34,19 +28,10 @@ const {
   .book-list {
     width: 100%;
     display: grid;
+    grid-template-columns: 1.5fr 1fr 10ch 6ch;
     gap: 0.5rem;
     padding: 0.75rem 0;
-  }
 
-  .with-author {
-    grid-template-columns: 1.5fr 1fr 10ch 6ch;
-    @media #{$media-size-phone} {
-      grid-template-columns: 1fr 10ch;
-    }
-  }
-
-  .no-author {
-    grid-template-columns: 1.5fr 10ch 6ch;
     @media #{$media-size-phone} {
       grid-template-columns: 1fr 10ch;
     }
