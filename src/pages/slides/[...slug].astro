@@ -1,0 +1,201 @@
+---
+import Base from "@layouts/Base.astro";
+import type { GetStaticPaths } from "astro";
+import { CollectionEntry, getCollection } from "astro:content";
+import { getUrlForCollectionEntry } from "src/content/config";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slides = await getCollection("slides");
+  return slides.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+export type Props = { entry: CollectionEntry<"slides"> };
+const {
+  entry: {
+    slug,
+    data: { title },
+    render,
+  },
+} = Astro.props;
+
+const url = getUrlForCollectionEntry("slides", slug);
+const { Content } = await render();
+---
+
+<Base title={title} path={`slides/${slug}`} description={title}>
+  <div class="slide-container">
+    <div class="heading">
+      <h1><a href="url">{title}</a></h1>
+      <div>
+        <button onclick="present(0);">Click here</button> to enter presenter mode.
+      </div>
+    </div>
+    <Content />
+  </div>
+</Base>
+
+<style lang="scss">
+  @import "/src/variables.scss";
+  div.slide-container {
+    max-width: 80ch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.heading::after {
+    border-bottom-color: $accent-color;
+    content: "";
+    display: block;
+    width: 5em;
+    border-bottom: 0.125em solid $accent-color;
+    margin-top: 2em;
+  }
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  h1 {
+    font-size: 2.1rem;
+    margin: 0;
+    margin-bottom: 0.3em;
+    // margin: 0 0 20px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+</style>
+
+<style lang="scss" is:global>
+  body:has(> .present) {
+    background-color: black;
+  }
+  .present > .slide {
+    background-color: white;
+  }
+</style>
+
+<script>
+  const presentationState: {
+    slideIndex: number;
+    speakerNotesWindow: Window | null;
+  } = {
+    slideIndex: -1,
+    speakerNotesWindow: null,
+  };
+
+  // @ts-ignore
+  window.presentationState = presentationState;
+  const slides = document.querySelectorAll(
+    ".slide"
+  ) as NodeListOf<HTMLDivElement>;
+  const hide = (elt: HTMLElement | null) => {
+    if (elt) {
+      elt.style.display = "none";
+    }
+  };
+  const show = (elt: HTMLElement | null) => {
+    if (elt) {
+      elt.style.display = "";
+    }
+  };
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space" || e.code === "ArrowRight") {
+      present(presentationState.slideIndex + 1);
+    } else if (e.code === "ArrowLeft") {
+      if (presentationState.slideIndex === 0) {
+        return;
+      }
+      present(presentationState.slideIndex - 1);
+    } else if (e.code === "Escape") {
+      present(-1);
+    }
+  };
+  function present(index: number | undefined) {
+    if (index === undefined) {
+      index = presentationState.slideIndex;
+    }
+
+    document.querySelectorAll("div.present").forEach((d) => d.remove());
+
+    if (index < 0) {
+      show(document.querySelector("nav"));
+      show(document.querySelector("#main"));
+      show(document.querySelector("footer"));
+      window.removeEventListener("keydown", handleKeyDown);
+      presentationState.speakerNotesWindow?.close();
+      document.querySelector("div.present")?.remove();
+      presentationState.slideIndex = -1;
+      presentationState.speakerNotesWindow = null;
+      return;
+    }
+    if (presentationState.slideIndex < 0) {
+      hide(document.querySelector("nav"));
+      hide(document.querySelector("#main"));
+      hide(document.querySelector("footer"));
+      window.addEventListener("keydown", handleKeyDown);
+      presentationState.speakerNotesWindow = window.open(
+        undefined,
+        "Slide",
+        "popup"
+      );
+      presentationState.speakerNotesWindow?.addEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    }
+    presentationState.slideIndex = index;
+
+    const presentDiv = document.createElement("div");
+
+    presentDiv.className = "present";
+    const slide = slides[index];
+
+    if (slide) {
+      const text = [];
+      let current = slide.nextElementSibling;
+      while (current && current.tagName !== "DIV") {
+        text.push(current);
+        current = current.nextElementSibling;
+      }
+      if (presentationState.speakerNotesWindow) {
+        presentationState.speakerNotesWindow.document.body.innerHTML = "";
+      }
+      text.forEach((t) => {
+        presentationState.speakerNotesWindow?.document.body.appendChild(
+          t.cloneNode(true)
+        );
+      });
+      const slideToAdd = slide.cloneNode(true) as HTMLDivElement;
+      // @ts-ignore
+      slideToAdd.style = {};
+
+      const parentWidth = window.document.body.offsetWidth;
+      console.log(parentWidth);
+      slideToAdd.style.scale = `${parentWidth / 480}`;
+      presentDiv.appendChild(slideToAdd);
+    }
+    document.body.appendChild(presentDiv);
+  }
+  window.addEventListener("resize", () => {
+    const presentSlide = document.querySelector(
+      ".present .slide"
+    ) as HTMLDivElement;
+
+    if (!presentSlide) {
+      return;
+    }
+    const parentWidth = window.document.body.offsetWidth;
+    presentSlide.style.scale = `${parentWidth / 480}`;
+  });
+  // @ts-ignore
+  window.present = present;
+</script>
