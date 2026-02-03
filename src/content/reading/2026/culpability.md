@@ -8,54 +8,58 @@ genre: novel
 ---
 
 Who's at fault in a fatal accident involving a self-driving car? _Culpability_
-investigates the abstract morality of the trolley problem while exploring the
-emotional fallout of the family at the center of the story.
+investigates the abstract morality of the trolley problem while exploring the emotional
+fallout of the family who were the lucky survivors.
 
-_Culpability_ stays firmly rooted in the experience of the narrator Noah, a successful but
+The book is firmly rooted in the experience of the narrator Noah, a successful but
 run-of-the-mill lawyer at a Maryland law firm, his brilliant wife Lorelei, a digital
 ethicist at the top of her field, and their three teenage children. It's a well-written,
 entertaining book about parenthood and coming of age that has almost as much to say about
 21st-century privelege and the American Dream as it does about ethical algorithms and
-artificial intelligence. 
+artificial intelligence.
 
-In short -- it was a great read, I thoroughly enjoyed it. You should pick it up!
+In short: it was a great read, I thoroughly enjoyed it. You should pick it up!
 
-In my own media bubble I hear a lot about continuous self improvement, and three-letter
-acronyms like Artificial Superintelligence (ASI) and Universal Basic Income (UBI); forces
-that to might move nations. But Holsinger reminds us that we ought to give the same
-attention to how the systems we're enmeshing into our lives today will affect ourselves
-and our relationships to the people we care about most.
+In my own media bubble I hear a lot about three-letter acronyms like Artificial
+Superintelligence (ASI) and Universal Basic Income (UBI); forces that might move
+nations. But Holsinger reminds us that we ought to give the same attention -- if not more
+-- to how the systems we're integrating into our lives today will affect ourselves and our
+relationships to the people we care about most.
 
-Digital systems by design (and definition) are predicated on one and zero, absolute of
-truth and falsehood. On top of these simple rules, the emergent behavior of modern
-distributed systems can be so uninterpretable to most human understanding that the best
-our moral frameworks and legal systems can do is just throw up their hands and shrug their
+Digital systems by design (and definition) are predicated on one and zero: absolute truth
+and absolute falsehood. The emergent behavior of modern distributed systems on top of
+these simple rules can be so uninterpretable to most human understanding that the best our
+moral frameworks and legal systems can do is just throw up their hands and shrug their
 metaphorical shoulders.
 
 During the COVID vaccine rollout, a hospital system put blame on an algorithm for a
 blatantly unfair apportionment of vaccine resources that benefitted tenured medical
-faculty over residents on the front lines. LLMs and diffusion models are trained to mimic
-artists and authors and synthesize new works can be argued to fit in the bucket of fair
-use in our legal system while still _feeling_ wrong to many of us. Our system is built
-upon the assumption that mortal, moral humans are the progenitors and beneficiaries of
-intellectual property. The system had already started breaking down with The Walt Disney
-Company's hand on the scales, and generative AI makes its limitations even more apparent.
+faculty over the residents on the front lines. LLMs and diffusion models are trained to
+mimic artists and authors and synthesize new works. This can be argued to fit in the
+bucket of fair use in our legal system while still _feeling wrong_ to many of us. Our
+system is built upon the assumption that mortal, moral humans are the progenitors and
+beneficiaries of intellectual property. Those assumptions had already started breaking
+down with The Walt Disney Company's hand on the scales, and generative AI makes its
+limitations even more apparent.
 
-_Culpability_ also dives in to the limits of our legal system, espeically as it intersects
-with power and privelege. Noah is a lawyer, as is his sister-in-law, and the story is set
-in front of the backdrop of the police investigation of the car crash. Law itself is a
-field that has tried to force human experience into discrete judgement for virtually all
-of recorded history. Machine code has voltage differentials giving way to ones and zeroes;
-neural networks have probabalistic predictions transformed into decisive output. The legal
-system has judges and juries which give way to innocent and guilty verdicts.
+_Culpability_ also touches on the limits of our legal system, espeically how it intersects
+with power and privelege. Noah is a lawyer and the story's backdrop is the the police
+investigation of the car crash. Law itself is a field that has tried to coerce human
+experience into discrete judgement for virtually all of recorded history. Machine code has
+voltage differentials giving way to ones and zeroes; neural networks have probabalistic
+predictions flattened into deterministic output. The legal system has judges and juries
+which give way to innocent and guilty verdicts.
 
-I'm reminded of a piece of art I saw at The Whitney in 2019. A 3D random walk generated by
-CAD software and cast into concrete which broke in half upon installation. Algorithms
-follow defined rules that are encoded within them. But there's a reason we call AI
-algorithms "models" -- they are based on our own incomplete and imperfect assumptions
-about how the things we create will behave when they encounter the world that we inhabit.
+I'm reminded of a piece of art I saw at The Whitney in 2019. 3D random walks were
+generated by CAD software and cast into concrete. One of the pieces broke in half upon
+installation, where it stood for the length of the exhibition. Random walks have the
+simplest of rules, can create beautiful shapes, but they don't know about
+gravity. Algorithms follow defined rules that are encoded within them. All digital systems
+are based on our own incomplete and imperfect assumptions about how the things we create
+will behave when they encounter the world that we inhabit. Even when deep learning
+systems start to pick out their own patterns in their training data, they're learning from
+the biases and imperfections of what we choose to include and what we choose to omit.
 
-
-
-
+People die in a car crash where a self-driving car is involved. Who's at fault? We get
+closer and closer to an answer throughout the story, but never quite reach it.
 
