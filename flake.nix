@@ -28,6 +28,7 @@
           # Pinned packages available in the environment
           packages = with pkgs; [
             nodejs_20
+            pnpm
             netlify-cli
             nixpkgs-fmt
           ];
