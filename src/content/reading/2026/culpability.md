@@ -9,38 +9,48 @@ genre: novel
 
 Who's at fault in a fatal accident involving a self-driving car? _Culpability_
 investigates the abstract morality of the trolley problem while exploring the emotional
-fallout of the family who were the lucky survivors.
+fallout among the family who were the lucky survivors.
 
 The book is firmly rooted in the experience of the narrator Noah, a successful but
 run-of-the-mill lawyer at a Maryland law firm, his brilliant wife Lorelei, a digital
-ethicist at the top of her field, and their three teenage children. It's a well-written,
-entertaining book about parenthood and coming of age that has almost as much to say about
-21st-century privelege and the American Dream as it does about ethical algorithms and
-artificial intelligence.
+ethicist at the top of her field, and their three teenage children. It's an engaging book
+about parenthood and coming of age that has almost as much to say about 21st-century
+privelege and the American Dream as it does about ethical algorithms and artificial
+intelligence.
 
-In short: it was a great read, I thoroughly enjoyed it. You should pick it up!
+I don't think I've really read anything that spends as much time on the everyday
+considerations and dynamics of marriage or fatherhood. I thoroughly enjoyed these parts of
+the book and it'll change how I look for new novels going forward.
+
+To sum up the review: it was a great read, I thoroughly enjoyed every chapter. You should
+pick it up!  The book was 350 Kindle pages and I was able to finish it in a few sessions
+over the course of two days. Surprising given its length, it truly contained multitudes,
+touching on so many different themes. I've originally rated this a 4.5/5 but might bump it
+up to a 5/5 if it stays stuck in my head over the next few days. There's a lot to chew
+over and think about.
 
 In my own media bubble I hear a lot about three-letter acronyms like Artificial
-Superintelligence (ASI) and Universal Basic Income (UBI); forces that might move
-nations. But Holsinger reminds us that we ought to give the same attention -- if not more
--- to how the systems we're integrating into our lives today will affect ourselves and our
-relationships to the people we care about most.
+Superintelligence (ASI) and Universal Basic Income (UBI); forces that some argue will move
+nations in the coming decades. But Holsinger reminds us that we ought to give the same
+attention -- if not more -- to how the systems we're integrating into our lives _today_
+will affect us and our relationships to the people we care about most.
 
-Digital systems by design (and definition) are predicated on one and zero: absolute truth
-and absolute falsehood. The emergent behavior of modern distributed systems on top of
-these simple rules can be so uninterpretable to most human understanding that the best our
-moral frameworks and legal systems can do is just throw up their hands and shrug their
-metaphorical shoulders.
+Digital systems by design and definition are predicated on one and zero; absolute truth
+and absolute falsehood. Even still, the emergent behavior of modern distributed systems on
+top of these simple rules can be so uninterpretable to most human understanding that the
+best our existing moral frameworks and legal systems can do is just throw up their
+metaphorical hands and shrug their anthropormorphized shoulders.
 
 During the COVID vaccine rollout, a hospital system put blame on an algorithm for a
 blatantly unfair apportionment of vaccine resources that benefitted tenured medical
-faculty over the residents on the front lines. LLMs and diffusion models are trained to
-mimic artists and authors and synthesize new works. This can be argued to fit in the
-bucket of fair use in our legal system while still _feeling wrong_ to many of us. Our
-system is built upon the assumption that mortal, moral humans are the progenitors and
-beneficiaries of intellectual property. Those assumptions had already started breaking
-down with The Walt Disney Company's hand on the scales, and generative AI makes its
-limitations even more apparent.
+faculty over resident physicians on the front lines. LLMs and diffusion models are trained
+to mimic authors and artists. This can be argued to fit in the bucket of fair use in our
+legal system while still _feeling wrong_ to many of us. Our system is built upon the
+assumption that mortal, moral humans are the progenitors and beneficiaries of intellectual
+property. That hasn't been true for a while -- see how The Walt Disney Company has put
+their hand on the scales. Generative AI models that take millions of dollars to train but
+then can be scaled out and deployed widely make the limitations of that assumption even
+more apparent.
 
 _Culpability_ also touches on the limits of our legal system, espeically how it intersects
 with power and privelege. Noah is a lawyer and the story's backdrop is the the police
@@ -61,5 +71,6 @@ systems start to pick out their own patterns in their training data, they're lea
 the biases and imperfections of what we choose to include and what we choose to omit.
 
 People die in a car crash where a self-driving car is involved. Who's at fault? We get
-closer and closer to an answer throughout the story, but never quite reach it.
+closer and closer to an answer throughout the story, but never quite reach it. Can there
+be a singular answer? Do we need there to be one?
 
