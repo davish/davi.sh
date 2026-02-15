@@ -2,21 +2,21 @@
 title: Ideas for an Agent-Oriented Programming Language
 date: 2026-02-03
 tags: [ ai, llm, markov, airplane-articles ]
-draft: false
+draft: true
 ---
 
 Software development is changing. Tool calling, inference scaling and RL with Verifiable
 Rewards have combined over the past year to enable agent harnesses like Claude Code which
-can reliably navigate, modify iterate in large codebases.
+can reliably navigate, modify and contribute to large codebases.
 
-LLMs scale surprising well with the amount of training data you throw at them. But
-building tools that work alongside the characteristics of LLMs rather than LLMs needing to
-learn how to work with the tools is an interesting direction to think about. It doesn't
-seem apparent to me that JavaScript/TypeScript or Python are on the Pareto frontier of
-programming languages for agentic coding.
+LLMs scale amazingly well with the amount of training data you throw at them. But I've
+been thinking about how to build tools that work alongside the characteristics of LLMs
+rather than language models needing to learn how to work with the tools in training. It
+doesn't seem apparent to me that JavaScript/TypeScript or Python are on the Pareto
+frontier of programming languages for agentic coding.
 
-I have a hunch that given a programming environment built around the strengths and
-limitations of autoregressive LLMs can lead to cheaper and higher-quality agent-powered
+I have a hunch that a programming environment built around the strengths and limitations
+of autoregressive LLMs can lead to cheaper and higher-quality agent-powered
 development. How could we prove out that hypothesis? One would first need to design a
 language that aligns with how LLMs "think". What would such a language look like? In this
 post I put forward some ideas for a language called Markov that I think would fit the
@@ -26,12 +26,12 @@ bill.
 
 ## Humans should be able to read and edit Markov code
 
-First and foremost, Markov will still be human readable and editable.  Agents excel
-at generating boilerplate and integrating one system against the API of another, but the
-core business logic of any system is where the most attention to detail always needs to
-be. Programmers can get by today without ever digging into TCP packet captures or assembly
-code, but some still find a good reason to. I wrote a few months ago in [Thinking about
-Thinking with LLMs](../../2025/10/thinking-with-llms):
+First and foremost, Markov will still be human readable and edit-able.  Agents excel at
+generating boilerplate, but the core business logic of any system is where the most
+attention to detail will always needs to be. Most programmers can get by today without
+ever digging into TCP packet captures or assembly code, but some still find a good reason
+to. I wrote a few months ago in [Thinking about Thinking with
+LLMs](../../2025/10/thinking-with-llms):
 
 > [T]he _best_ programmers aren't the ones that make the widest use of the highest
 > abstractions. That'll continue to be those who dig down and understand what's happening
@@ -39,11 +39,12 @@ Thinking with LLMs](../../2025/10/thinking-with-llms):
 > that programmers have at their disposal.
 
 Transparency into the source code is as much ideological as it is practical. Over the next
-few years agents may start independently building systems end-to-end. In that world,
-interpretability of AI-generated systems becomes as important interpretability into the
-models themselves. We may not have transparency today into the reasons an LLM might make a
-decisions it does,[^1] but we should discourage models from developing incomprehensible
-"neuralese" and build up tools which allow for human insight to continue to play a role.
+few years agents will likely start independently building systems end-to-end. In that
+world, interpretability of AI-generated systems becomes as important interpretability into
+the models themselves. We may not have transparency today into the reasons an LLM might
+make a decisions it does,[^1] but we should discourage models from developing
+incomprehensible "neuralese" and keep developing tools which allow for human insight to
+continue to play a role.
 
 [^1]: This fact keeps me up at night. My writing in this article might seem more
     accelerationist than my usual tone. I'm not _sure_ that this future is coming, but I
@@ -55,20 +56,21 @@ decisions it does,[^1] but we should discourage models from developing incompreh
 Agents thrive on feedback. It helps them stay on the assigned task without falling down
 unproductive rabbit holes. Unit tests are important here, but static analysis will always
 faster and less error-prone than running code. Markov will have strong, static types and
-exhaustive pattern matching to encourage **making illegal states unrepresentable**.
+exhaustive pattern matching to encourage [**making illegal states
+unrepresentable**](https://web.archive.org/web/20260205183806/https://functional-architecture.org/make_illegal_states_unrepresentable/).
 
 Rust's reliance on sum types and compiler-enforced exhaustiveness checks in pattern
 matching enables fearless refactoring and extension of existing code. A human can spend a
 few minutes adding a variant to an existing type after thinking hard (or planning with an
 LLM) about the best way to represent some new functionality. The agent can then propagate
 that change outward through the codebase, completing now-inexhaustive pattern matches and
-following boilerplate patterns it finds. 
+following boilerplate patterns it encounters. 
 
 Markov should lean into this pattern: a human (or very smart LLM) makes the decisions
 about core data structures and interfaces, and an agent will propagate that change
 throughout the rest of the codebase. Today this second step needs to be carried out by a
-frontier model but in in the future a smaller, cheaper model can probably do this job
-sufficiently well.
+frontier model but in in the future a smaller/cheaper/faster model can probably do this
+job sufficiently well.
 
 This is a pattern that has been extremely effective in my own work with coding agents
 since Claude 4.5 was released. Focus on core types and abstractions and let the agent
@@ -101,7 +103,7 @@ DSLs like PyTorch and Triton. Edoardo address this towards the end, too but asse
 > much lower; in fact, I would even dare to say that you might want to prefer flexible
 > syntax, so that you will be able to optimize for token cost.
 
-I think Edoardo presents a bit of a strawman. Writing a lexer, parser and interpreter might be
+I think Edoardo presents a bit of a straw man. Writing a lexer, parser and interpreter might be
 cheaper with LLMs, but _maintaining_ that stack is still a nonzero amount of effort that
 relying on a host language with good DSL support can obviate.
 
@@ -110,7 +112,7 @@ relying on a host language with good DSL support can obviate.
 Compiler errors are human-readable. There's short explanations with error codes and links
 to external documentation to stay within a small terminal window, and often some ASCII art
 drawing an arrow to the specific problematic row and column within a file. LLMs can only
-interpret these errors since StackOverflow and other sites are present in the training set
+interpret these errors since Stack Overflow and other sites are present in the training set
 and the aggressive post-training with verifiable rewards that conditions them to
 understand these errors. 
 
@@ -133,8 +135,8 @@ JSON, even though the models have been trained on heaps and heaps of JSON.
 "The Return of Language Oriented Programming" touches on token-optimization, too. LLMs
 trained on a general corpus of English use fewer tokens to represent common words than
 they do to represent shorter abbreviations that human authors often use for the sake of
-writeability -- think Rust's `fn` to mark functions. I firmly belive that code should be
-optimized for readability over writability, and it's pretty cool that if Markov was
+write-ability -- think Rust's `fn` to mark functions. I firmly believe that code should be
+optimized for readability over write-ability, and it's pretty cool that if Markov was
 designed to be simple for LLMs to write efficiently would also probably be more readable
 for humans than one designed for humans to write efficiently. This nicely feeds back into
 our first goal.
@@ -146,7 +148,7 @@ scopes will probably be preferable to Python's indentation-based scoping.
 
 ## Interoperability is a non-goal
 
-Most popular new languages of the past decade have all piggybacked on existing software
+Most popular new languages of the past decade have all piggy-backed on existing software
 ecosystems: Swift on Objective-C; Kotlin on Java; TypeScript on JavaScript.[^6] Allowing
 programmers to gradually migrate over their existing codebases and rely on existing
 trusted dependencies has been the characteristic behind each of those languages' rises.

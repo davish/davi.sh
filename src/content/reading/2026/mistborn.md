@@ -38,8 +38,8 @@ talk about an operation of this importance or risk.
 > Maybe this won't work -- maybe after a couple months of being besieged, we'll just end
 > up giving away the city anyway.
 
-"Being besiged" just really grated on me here. I could think of twenty ways to phrase this
+"Being besieged" just really grated on me here. I could think of twenty ways to phrase this
 that sound more natural, starting with "maybe after a couple months under siege".
 
-These examples might seem like nitpicking, but I picked up at least one of these every
+These examples might seem like nit picking, but I picked up at least one of these every
 chapter or two during _Mistborn_, and it really did affect my immersion in the world.
