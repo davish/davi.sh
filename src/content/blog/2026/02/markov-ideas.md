@@ -1,6 +1,6 @@
 ---
 title: Ideas for an Agent-Oriented Programming Language
-date: 2026-02-03
+date: 2026-02-15
 tags: [ ai, llm, markov, airplane-articles ]
 draft: true
 ---
