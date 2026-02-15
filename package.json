@@ -11,23 +11,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
-    "@astrojs/rss": "^4.0.12",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/rss": "^4.0.15",
     "@tufte-markdown/remark-sidenotes": "^1.0.0",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "astro": "^5.13.5",
-    "astro-icon": "^0.8.1",
-    "prettier": "^3.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "astro": "^5.17.2",
+    "astro-icon": "^1.1.5",
+    "prettier": "^3.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "reading-time": "^1.5.0",
-    "satori": "^0.10.13",
-    "sharp": "^0.33.2",
-    "tone": "^14.7.77"
+    "satori": "^0.10.14",
+    "sharp": "^0.33.5",
+    "tone": "^14.9.17"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "sass": "^1.54.9"
+    "@types/node": "^20.19.33",
+    "sass": "^1.97.3"
   }
 }
