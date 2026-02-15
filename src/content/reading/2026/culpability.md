@@ -28,11 +28,11 @@ nations in the coming decades. Holsinger reminds us that we ought to give the sa
 attention -- if not more -- to how the systems we're integrating into our lives _today_
 will affect us and our relationships with the people we care about most.
 
-Digital systems by design and definition are predicated on ones and zeros: absolute truth
-and absolute falsehood. Even still, the emergent behavior of modern distributed systems on
-top of these simple rules can be so uninterpretable to most human understanding that the
-best our existing moral frameworks and legal systems can do is just throw up their
-metaphorical hands and shrug their anthropormorphized shoulders.
+Digital systems by definition are predicated on ones and zeros: absolute truth and absolute
+falsehood. Even still, the emergent behavior of modern distributed systems on top of these
+simple rules can be so uninterpretable to most human understanding that the best our
+existing moral frameworks and legal systems can do is just throw up their metaphorical
+hands and shrug their anthropormorphized shoulders.
 
 During the COVID vaccine rollout, a hospital system [put blame on an
 algorithm](https://web.archive.org/web/20260101232819/https://www.technologyreview.com/2020/12/21/1015303/stanford-vaccine-algorithm/)
@@ -40,18 +40,19 @@ for a blatantly unfair apportionment of vaccine resources that benefited tenured
 faculty over resident physicians on the front lines. LLMs and diffusion models are trained
 to mimic authors and artists. This can be argued to fit in the bucket of copyright fair
 use in our legal system while still _feeling_ wrong to many of us. Our system is built
-upon the assumption that mortal, moral humans are the progenitor and beneficiaries of
+upon the assumption that mortal, moral humans are the progenitors and beneficiaries of
 intellectual property. That hasn't been true for a while (the Walt Disney Company
 [famously put their finger on the
-scale](https://web.archive.org/web/20260212104405/https://web.law.duke.edu/cspd/mickey/),
-but Generative AI models that take millions of dollars to train but then can be scaled out
-and deployed widely make the limitations of that assumption even more apparent.
+scale](https://web.archive.org/web/20260212104405/https://web.law.duke.edu/cspd/mickey/)),
+however Generative AI models that take millions of dollars to train but then can be scaled
+out and deployed widely make the limitations of that assumption even more apparent.
 
 _Culpability_ also touches on the limits of our legal system, especially how it intersects
 with power and privelege. Noah is a lawyer and the story's backdrop is the the police
 investigation of the car crash. Law itself is a field that has attempted to coerce human
-experience into discrete judgment for virtually all of recorded history. Machine code has
-voltage differentials giving way to ones and zeroes; neural networks have probabilistic
+experience into discrete judgment for virtually [all of recorded
+history](https://en.wikipedia.org/wiki/Code_of_Hammurabi). Machine code has voltage
+differentials giving way to ones and zeroes; neural networks have probabilistic
 predictions [flattened](https://en.wikipedia.org/wiki/Sigmoid_function) into deterministic
 output. The legal system has judges and juries which dispense innocent and guilty
 verdicts.
