@@ -21,7 +21,7 @@ const { title, subtitle, accent = true } = Astro.props;
     width: 100%;
     text-align: left;
 
-    @media (max-width: 684px) {
+    @media (--phone) {
       margin: 0;
     }
   }
@@ -46,7 +46,7 @@ const { title, subtitle, accent = true } = Astro.props;
     width: 5em;
     border-bottom: 0.125em solid var(--accent-color);
     margin: 2em 0;
-    @media (max-width: 684px) {
+    @media (--phone) {
       margin: 1.5em 0;
     }
   }

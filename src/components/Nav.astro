@@ -28,7 +28,7 @@ const { path, back } = Astro.props;
       display: none;
     }
     justify-content: space-between;
-    @media (max-width: 684px) {
+    @media (--phone) {
       font-size: 0.85rem;
       flex-direction: column-reverse;
       align-items: flex-start;
@@ -53,7 +53,7 @@ const { path, back } = Astro.props;
     display: flex;
     align-items: center;
 
-    @media (max-width: 684px) {
+    @media (--phone) {
       flex-wrap: wrap;
       gap: 0.5rem;
       width: 100%;
@@ -65,7 +65,7 @@ const { path, back } = Astro.props;
     li {
       display: inline;
       padding: 0 1rem;
-      @media (max-width: 684px) {
+      @media (--phone) {
         padding: 0 0.5rem;
         flex: 0 0 auto;
         &:first-child {

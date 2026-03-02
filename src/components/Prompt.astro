@@ -30,7 +30,7 @@ const { path = "" } = Astro.props;
     font-weight: bold;
     font-display: auto;
     padding-left: 0rem;
-    @media (max-width: 684px) {
+    @media (--phone) {
       margin-top: 0;
     }
 
@@ -44,7 +44,7 @@ const { path = "" } = Astro.props;
     #text {
       font-size: 1.125rem;
 
-      @media (max-width: 684px) {
+      @media (--phone) {
         font-size: 0.9rem;
       }
 
@@ -66,7 +66,7 @@ const { path = "" } = Astro.props;
       position: relative;
       top: 1px;
 
-      @media (max-width: 684px) {
+      @media (--phone) {
         height: 0.9rem;
         top: 2px;
       }
