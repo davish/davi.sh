@@ -11,15 +11,7 @@ const { title, href, date } = Astro.props;
   <span class="title">{title}</span>
 </a>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-  @mixin hover-green {
-    transition: 0.15s;
-    &:hover {
-      background-color: rgba($accent-color, 0.2);
-      text-decoration: none;
-    }
-  }
+<style>
   a {
     display: flex;
     text-decoration: none;
@@ -29,7 +21,11 @@ const { title, href, date } = Astro.props;
     border-radius: 5px;
     margin-bottom: 0.5rem;
 
-    @include hover-green;
+    transition: 0.15s;
+    &:hover {
+      background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
+      text-decoration: none;
+    }
     .label {
       font-size: 0.8rem;
       color: #999;
@@ -41,7 +37,7 @@ const { title, href, date } = Astro.props;
 
     .title {
       font-weight: 600;
-      color: $text-color;
+      color: var(--text-color);
     }
   }
 </style>

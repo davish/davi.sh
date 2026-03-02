@@ -23,11 +23,9 @@ const { Content } = await render();
   <Content />
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   .details {
-    @include dimmed;
+    opacity: 0.6;
     @media print {
       display: inline-block;
     }
@@ -37,8 +35,7 @@ const { Content } = await render();
   }
 </style>
 
-<style lang="scss" is:global>
-  @import "/src/variables.scss";
+<style is:global>
   .resume-job-content {
     p {
       margin: 0;

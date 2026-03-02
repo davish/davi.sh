@@ -23,8 +23,7 @@ const { books, authorsWithMultipleBooks } = Astro.props;
   }
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   .book-list {
     width: 100%;
     display: grid;
@@ -32,7 +31,7 @@ const { books, authorsWithMultipleBooks } = Astro.props;
     gap: 0.5rem;
     padding: 0.75rem 0;
 
-    @media #{$media-size-phone} {
+    @media (max-width: 684px) {
       grid-template-columns: 1fr 10ch;
     }
   }

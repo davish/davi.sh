@@ -41,8 +41,7 @@ jobs.sort(
   ) : null
 }
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   li.group {
     list-style: none;
     margin-bottom: 0.5rem;
@@ -56,48 +55,27 @@ jobs.sort(
       margin-bottom: 0.5em;
     }
     list-style: none;
-
-    // TODO: linkedin-style timelines
-    // list-style: disc;
-    // margin-left: 1rem;
-    // position: relative;
-    // &:before {
-    //   content: "";
-    //   position: absolute;
-    //   left: -10.5px; /* adjust manually */
-    //   top: 17px;
-    //   border-left: 2px solid grey;
-    //   height: 95%;
-    //   width: 1px;
-    // }
-    // &:last-child:before {
-    //   border-left: 0;
-    // }
   }
   .info {
     font-size: 1.2em;
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-    // TODO: This is weird. try and figure it out
     width: 100%;
 
     .spacer {
       flex: 1;
     }
     .location {
-      @include dimmed;
+      opacity: 0.6;
     }
   }
   .skills {
     margin: 0.15rem 0;
     display: inline-block;
-    // padding-left: 0.2rem;
-    // font-size: 0.9em;
     span.skill {
-      background-color: $background-color-solid;
+      background-color: var(--background-color-solid);
       border-radius: 3px;
-      // color: black;
       padding: 0px 5px;
       &:not(:last-child) {
         margin-right: 0.5rem;

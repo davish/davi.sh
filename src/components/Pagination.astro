@@ -98,20 +98,19 @@ if (!didPushLast) {
   )
 }
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   ul.pagination {
     display: flex;
     list-style: none;
     padding: 0;
-    font-family: Inter, sans-serif;
+    font-family: var(--font-sans-serif);
 
     li {
       flex: 1;
 
       border-width: 1px;
       border-right-width: 0;
-      border-color: $accent-color;
+      border-color: var(--accent-color);
       border-style: solid;
 
       &:first-child {
@@ -134,7 +133,7 @@ if (!didPushLast) {
         display: inline-block;
       }
       a {
-        color: $accent-color;
+        color: var(--accent-color);
         text-decoration: none;
         &:hover {
           background-color: transparent;
@@ -152,37 +151,35 @@ if (!didPushLast) {
           }
           color: white;
         }
-        background-color: $accent-color;
+        background-color: var(--accent-color);
       }
     }
   }
   .pagination {
     display: flex;
     justify-content: center;
+  }
+  .pagination-item {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: 0.15s;
 
-    &-item {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 5px;
-      transition: 0.15s;
-
-      &:hover {
-        background-color: rgba($accent-color, 0.1);
-      }
+    &:hover {
+      background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
     }
-
-    &-label {
-      font-family: "Inter", sans-serif;
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
-      color: #999;
-    }
-    &-title {
-      font-weight: 600;
-      color: $text-color;
-    }
+  }
+  .pagination-label {
+    font-family: var(--font-sans-serif);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: #999;
+  }
+  .pagination-title {
+    font-weight: 600;
+    color: var(--text-color);
   }
 </style>

@@ -16,20 +16,18 @@ const { title, subtitle, accent = true } = Astro.props;
   <slot />
 </section>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   #intro {
     width: 100%;
     text-align: left;
 
-    @media #{$media-size-phone} {
+    @media (max-width: 684px) {
       margin: 0;
     }
 
     :global(h1),
     :global(h2) {
-      @include sans-serif;
+      font-family: var(--font-sans-serif);
       width: 100%;
     }
 
@@ -45,13 +43,13 @@ const { title, subtitle, accent = true } = Astro.props;
     }
 
     &.accent::after {
-      border-bottom-color: $accent-color;
+      border-bottom-color: var(--accent-color);
       content: "";
       display: block;
       width: 5em;
-      border-bottom: 0.125em solid $accent-color;
+      border-bottom: 0.125em solid var(--accent-color);
       margin: 2em 0;
-      @media #{$media-size-phone} {
+      @media (max-width: 684px) {
         margin: 1.5em 0;
       }
     }

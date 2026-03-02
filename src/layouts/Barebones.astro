@@ -1,5 +1,6 @@
 ---
 import Meta from "src/components/Meta.astro";
+import "src/variables.css";
 
 export interface Props {
   title: string;
@@ -30,26 +31,25 @@ const { title, description, rss, card, themeColor } = Astro.props;
   </head>
   <body>
     <slot />
-    <style lang="scss" is:global>
-      @import "/src/variables.scss";
+    <style is:global>
+      @import "src/tufte.css";
       a {
-        color: $text-color;
+        color: var(--text-color);
         text-decoration: underline;
-        text-decoration-color: $accent-color;
+        text-decoration-color: var(--accent-color);
         padding-top: 0.1rem;
         @media print {
           text-decoration: underline;
         }
         &:hover {
           text-decoration: none;
-          background-color: rgba($accent-color, 0.2);
+          background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
         }
       }
       body {
-        @include serif;
+        font-family: var(--font-serif);
         background-color: #ffffff;
-        // background-color: #f4f0ec;
-        color: $text-color;
+        color: var(--text-color);
         display: flex;
         flex-direction: column;
         min-height: 100vh;
@@ -65,7 +65,6 @@ const { title, description, rss, card, themeColor } = Astro.props;
         border-style: solid;
         margin: 1rem 0;
       }
-      @import "src/tufte.scss";
     </style>
   </body>
 </html>

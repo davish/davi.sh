@@ -48,16 +48,15 @@ const { Content } = await render();
   </Article>
 </Base>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   section {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   h4 {
-    @include sans-serif;
-    color: $accent-color;
+    font-family: var(--font-sans-serif);
+    color: var(--accent-color);
     font-weight: 400;
     padding: 0;
     margin: 0;
@@ -65,15 +64,15 @@ const { Content } = await render();
     margin-bottom: 0.5rem;
   }
   h1 {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     padding: 0;
     margin: 0;
     margin-bottom: 3rem;
   }
 
   #date {
-    @include sans-serif;
-    @include dimmed;
+    font-family: var(--font-sans-serif);
+    opacity: 0.6;
     padding: 0;
     margin: 0;
     padding-top: 2rem;

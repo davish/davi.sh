@@ -35,45 +35,42 @@ const nextPost = idx > 0 ? posts[idx - 1] : null;
   }
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   .pagination {
     display: flex;
     justify-content: center;
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     @media print {
       display: none;
     }
+  }
+  .pagination-item {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: 0.15s;
 
-    &-item {
-      display: flex;
-      flex-direction: column;
+    &:last-child:not(:first-child) {
+      text-align: right;
+    }
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
       text-decoration: none;
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 5px;
-      transition: 0.15s;
-
-      &:last-child:not(:first-child) {
-        text-align: right;
-      }
-
-      &:hover {
-        background-color: rgba($accent-color, 0.1);
-        text-decoration: none;
-      }
     }
-
-    &-label {
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
-      color: #999;
-    }
-    &-title {
-      font-weight: 600;
-      color: $text-color;
-      font-size: 0.95rem;
-    }
+  }
+  .pagination-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: #999;
+  }
+  .pagination-title {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
   }
   a:hover {
     text-decoration: none;

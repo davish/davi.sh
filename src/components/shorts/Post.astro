@@ -53,13 +53,11 @@ const { Content } = await render();
   </div>
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   .card {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     border-width: 1px;
-    border-color: $background-color-solid;
+    border-color: var(--background-color-solid);
     border-style: solid;
     border-radius: 5px;
     padding: 0.75rem;
@@ -69,7 +67,7 @@ const { Content } = await render();
 
     transition: 0.15s;
     &:hover {
-      background-color: $background-color;
+      background-color: var(--background-color);
     }
   }
 
@@ -83,18 +81,18 @@ const { Content } = await render();
         font-weight: 800;
       }
       .date {
-        @include dimmed;
+        opacity: 0.6;
       }
     }
   }
 
   [astro-icon] {
     width: 40px;
-    color: $util-color;
+    color: var(--util-color);
   }
 </style>
 
-<style lang="scss" is:global>
+<style is:global>
   .short-content p {
     margin-block-start: 0.5rem;
   }

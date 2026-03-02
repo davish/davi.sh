@@ -34,9 +34,7 @@ const {
     ) : null
   }
 
-  <style lang="scss">
-    @import "/src/variables.scss";
-
+  <style>
     div#base {
       flex-grow: 1;
       display: flex;
@@ -44,7 +42,7 @@ const {
       align-items: center;
       padding: 1rem;
       margin: 1rem 2rem;
-      @media #{$media-size-phone} {
+      @media (max-width: 684px) {
         margin: 0;
         align-items: center;
       }

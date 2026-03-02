@@ -34,20 +34,19 @@ const { entries } = Astro.props;
   </tbody>
 </table>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   table {
     max-width: 120ch;
     width: 100%;
     border-collapse: collapse;
   }
   table thead tr th {
-    border-bottom: 3px solid $util-color;
+    border-bottom: 3px solid var(--util-color);
   }
   th {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     text-align: left;
-    color: $util-color;
+    color: var(--util-color);
     font-size: 0.85rem;
     text-transform: uppercase;
     padding: 14px;
@@ -56,7 +55,7 @@ const { entries } = Astro.props;
   tbody tr {
     transition: 0.15s;
     &:hover {
-      background-color: rgba($accent-color, 0.1);
+      background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
     }
     &:first-child {
       td {
@@ -69,7 +68,7 @@ const { entries } = Astro.props;
       }
     }
     td {
-      @include sans-serif;
+      font-family: var(--font-sans-serif);
       font-size: 0.95rem;
       padding: 14px;
       &:first-child {
@@ -82,7 +81,7 @@ const { entries } = Astro.props;
       }
     }
   }
-  @media #{$media-size-phone} {
+  @media (max-width: 684px) {
     .description {
       display: none;
     }

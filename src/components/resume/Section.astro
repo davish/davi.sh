@@ -12,10 +12,10 @@ const { name } = Astro.props;
   <div><slot /></div>
 </div>
 
-<style lang="scss">
+<style>
   h2 {
     margin-block-end: 0;
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans-serif);
     @media print {
       margin-block-start: 0.5em;
     }

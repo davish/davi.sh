@@ -24,13 +24,12 @@
   </form>
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   div.blurb {
     margin-bottom: 0.5rem;
   }
   form {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     @media print {
       display: none;
     }
@@ -48,14 +47,14 @@
       font-size: 16px;
     }
     input[type="email"] {
-      background-color: $background-color;
+      background-color: var(--background-color);
     }
     input[type="submit"] {
-      background: $accent-color;
+      background: var(--accent-color);
       color: white;
       cursor: pointer;
       &:hover {
-        background: $accent-color-hover;
+        background: var(--accent-color-hover);
       }
     }
     p {

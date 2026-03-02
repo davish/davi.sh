@@ -15,26 +15,25 @@ const url = getUrlForCollectionEntry("blog", slug);
   <Info {...Astro.props} />
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   div::after {
-    border-bottom-color: $accent-color;
+    border-bottom-color: var(--accent-color);
     content: "";
     display: block;
     width: 5em;
-    border-bottom: 0.125em solid $accent-color;
+    border-bottom: 0.125em solid var(--accent-color);
     margin: 1.5rem 0;
   }
 
   h1 {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     font-weight: 600;
     font-size: 2.1rem;
     margin: 0;
     margin-bottom: 0.3em;
 
     a {
-      color: $text-color;
+      color: var(--text-color);
       text-decoration: none;
       &:hover {
         text-decoration: none;

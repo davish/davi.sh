@@ -38,11 +38,9 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
   </div>
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   .book-entry {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
 
     display: contents;
 
@@ -57,14 +55,14 @@ const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
     }
 
     .date {
-      @include dimmed;
+      opacity: 0.6;
     }
 
     .no-review {
       font-style: italic;
     }
 
-    @media #{$media-size-phone} {
+    @media (max-width: 684px) {
       display: flex;
       flex-direction: column;
       gap: 0.25rem;

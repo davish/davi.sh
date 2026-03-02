@@ -15,10 +15,9 @@ const degrees = (await getCollection("education"))
   {degrees.map((d) => <Degree entry={d} />)}
 </div>
 
-<style lang="scss">
+<style>
   div {
-    @import "/src/variables.scss";
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     font-size: 0.8em;
     @media print {
       width: 100%;

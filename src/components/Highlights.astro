@@ -15,14 +15,12 @@ const secondCol = highlights.slice(numHighlights / 2);
   <HighlightList highlights={firstCol} />
   <HighlightList highlights={secondCol} />
 </div>
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   div {
     display: flex;
     min-width: 40%;
-    // max-width: 80%;
     justify-content: space-around;
-    @media #{$media-size-phone} {
+    @media (max-width: 684px) {
       flex-direction: column;
     }
   }

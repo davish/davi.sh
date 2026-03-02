@@ -27,7 +27,6 @@
     "tone": "^14.9.17"
   },
   "devDependencies": {
-    "@types/node": "^20.19.33",
-    "sass": "^1.97.3"
+    "@types/node": "^20.19.33"
   }
 }

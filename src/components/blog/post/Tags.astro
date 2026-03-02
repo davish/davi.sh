@@ -30,16 +30,15 @@ const { tags } = Astro.props;
     ))
   }
 </span>
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   .tags {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans-serif);
     display: flex;
     justify-content: flex-start;
     font-size: 0.8rem;
     line-height: normal;
     margin-top: 1rem;
-    @include dimmed;
+    opacity: 0.6;
 
     p {
       margin: 0.8em 0;

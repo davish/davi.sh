@@ -13,15 +13,14 @@ const { highlights } = Astro.props;
   {highlights.map((p) => <Highlight post={p} />)}
 </ul>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   ul {
     padding-top: 0;
     display: flex;
     flex-direction: column;
     list-style: none;
     width: 50%;
-    @media #{$media-size-phone} {
+    @media (max-width: 684px) {
       padding-inline-start: 0;
       padding-top: 0;
       width: 100%;
