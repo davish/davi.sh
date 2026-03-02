@@ -54,9 +54,6 @@ importers:
       '@types/node':
         specifier: ^20.19.33
         version: 20.19.33
-      sass:
-        specifier: ^1.97.3
-        version: 1.97.3
 
 packages:
 
@@ -3607,6 +3604,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+    optional: true
 
   chokidar@5.0.0:
     dependencies:
@@ -4053,7 +4051,8 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  immutable@5.1.4: {}
+  immutable@5.1.4:
+    optional: true
 
   import-meta-resolve@4.2.0: {}
 
@@ -4658,7 +4657,8 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  readdirp@4.1.2: {}
+  readdirp@4.1.2:
+    optional: true
 
   readdirp@5.0.0: {}
 
@@ -4807,6 +4807,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.6
+    optional: true
 
   satori@0.10.14:
     dependencies:
