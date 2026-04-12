@@ -71,8 +71,7 @@ const authorUrl = showAuthorLink
       display: contents;
     }
 
-    .title,
-    .author {
+    .title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -82,6 +81,13 @@ const authorUrl = showAuthorLink
       display: flex;
       align-items: center;
       gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .author-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .author-link {
@@ -130,7 +136,7 @@ const authorUrl = showAuthorLink
       }
 
       .title,
-      .author {
+      .author-name {
         white-space: normal;
       }
 
