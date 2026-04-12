@@ -20,10 +20,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Props = { entry: CollectionEntry<"weekly"> };
 
 const {
-  entry: { data: frontmatter, id },
+  entry: { data: frontmatter, id, filePath },
 } = Astro.props;
 
-const basename = id.split("/").pop() || "";
+const ext = filePath ? "." + filePath.split(".").pop() : "";
+const basename = (id.split("/").pop() || "") + ext;
 
 const { Content } = await render(Astro.props.entry);
 ---

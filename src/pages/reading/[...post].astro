@@ -30,7 +30,8 @@ const {
   entry: { data: frontmatter },
 } = Astro.props;
 
-const basename = entry.id.split("/").pop() || "";
+const ext = entry.filePath ? "." + entry.filePath.split(".").pop() : "";
+const basename = (entry.id.split("/").pop() || "") + ext;
 const { Content } = await render(entry);
 
 // Check if author has multiple books (author page exists)

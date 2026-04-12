@@ -11,8 +11,9 @@ import { getBlogPosts, getUrlForCollectionEntry } from "src/content/config";
 
 type Props = CollectionEntry<"blog">;
 
-const { data: frontmatter, id } = Astro.props;
-const basename = id.split("/").pop() || "";
+const { data: frontmatter, id, filePath } = Astro.props;
+const ext = filePath ? "." + filePath.split(".").pop() : "";
+const basename = (id.split("/").pop() || "") + ext;
 
 const { Content } = await render(Astro.props);
 ---
