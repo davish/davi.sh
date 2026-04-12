@@ -14,25 +14,25 @@ import {
 export async function getStaticPaths() {
   const blogPaths = (await getBlogPosts()).map((post) => ({
     params: {
-      slug: post.slug,
+      slug: post.id,
       collection: "blog",
     },
   }));
   const tilPaths = (await getSnippets()).map((post) => ({
     params: {
-      slug: post.slug,
+      slug: post.id,
       collection: "til",
     },
   }));
   const weeklyPaths = (await getWeeklies()).map((post) => ({
     params: {
-      slug: post.slug,
+      slug: post.id,
       collection: "weekly",
     },
   }));
   const readingPaths = (await getReading()).map((post) => ({
     params: {
-      slug: post.slug,
+      slug: post.id,
       collection: "reading",
     },
   }));
@@ -41,18 +41,13 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async function get({ params, request }) {
-  let { slug = "", collection } = params;
-  if (collection === "reading") {
-    slug = slug.split("/").pop() || "";
-  }
-  const post = await getEntry(
-    (collection === "til" ? "snippets" : collection) as
-      | "blog"
-      | "snippets"
-      | "weekly"
-      | "reading",
-    slug
-  );
+  const { slug = "", collection } = params;
+  const collectionName = (collection === "til" ? "snippets" : collection) as
+    | "blog"
+    | "snippets"
+    | "weekly"
+    | "reading";
+  const post = await getEntry(collectionName, slug);
   if (!post) {
     return new Response(null, { status: 404 });
   }

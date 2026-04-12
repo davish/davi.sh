@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import { toReadableString } from "src/utils";
 import Icon from "astro-icon";
 import {
@@ -12,8 +13,7 @@ type Props = { content: CollectionEntry<"shorts"> };
 const {
   content: {
     data: { title, url, via, date },
-    render,
-    slug,
+    id,
   },
 } = Astro.props;
 
@@ -25,12 +25,12 @@ const [pack, name] = (() => {
   return ["tabler", "link"];
 })();
 
-const { Content } = await render();
+const { Content } = await render(Astro.props.content);
 ---
 
 <div class="card">
   <div class="icon">
-    <a href={getUrlForCollectionEntry("shorts", makePathForShortPost(slug))}
+    <a href={getUrlForCollectionEntry("shorts", makePathForShortPost(id))}
       ><Icon pack={pack} name={name} /></a
     >
   </div>

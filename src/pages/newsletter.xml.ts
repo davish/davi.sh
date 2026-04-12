@@ -7,7 +7,7 @@ export const GET = async function get() {
   const weeklies = await getWeeklies();
   const renderedWeeklies = await Promise.all(
     weeklies.map(async (weekly) => ({
-      link: getUrlForCollectionEntry("weekly", weekly.slug),
+      link: getUrlForCollectionEntry("weekly", weekly.id),
       title: weekly.data.title,
       pubDate: weekly.data.date,
       description: await renderMarkdown(weekly.body),

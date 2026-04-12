@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { getUrlForCollectionEntry, getReading } from "src/content/config";
@@ -16,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       return entry.body && entry.body.trim().length > 0;
     })
     .map((entry) => ({
-      params: { post: entry.slug },
+      params: { post: entry.id },
       props: { entry },
     }));
   return paths;
@@ -26,11 +27,11 @@ type Props = { entry: CollectionEntry<"reading"> };
 
 const {
   entry,
-  entry: { data: frontmatter, render },
+  entry: { data: frontmatter },
 } = Astro.props;
 
 const basename = entry.id.split("/").pop() || "";
-const { Content } = await render();
+const { Content } = await render(entry);
 
 // Check if author has multiple books (author page exists)
 const allBooks = await getReading();
@@ -88,10 +89,9 @@ const authorUrl = hasAuthorPage
           (entry) => (entry.body && entry.body.trim().length > 0) || false
         ).then((posts) =>
           posts.map((p) => ({
-            slug: p.slug,
             id: p.id,
             title: p.data.title,
-            url: getUrlForCollectionEntry("reading", p.slug),
+            url: getUrlForCollectionEntry("reading", p.id),
           }))
         )}
     />

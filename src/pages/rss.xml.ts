@@ -13,7 +13,7 @@ export const GET = async function get() {
   const reading = await getReading();
   const renderedPosts = await Promise.all(
     posts.map(async (post) => ({
-      link: getUrlForCollectionEntry("blog", post.slug),
+      link: getUrlForCollectionEntry("blog", post.id),
       title: post.data.title,
       pubDate: post.data.date,
       description: await renderMarkdown(post.body),
@@ -21,7 +21,7 @@ export const GET = async function get() {
   );
   const renderedSnippets = await Promise.all(
     snippets.map(async (snippet) => ({
-      link: getUrlForCollectionEntry("snippets", snippet.slug),
+      link: getUrlForCollectionEntry("snippets", snippet.id),
       title: `[TIL] ${snippet.data.title}: ${snippet.data.description}`,
       pubDate: snippet.data.published,
       description: await renderMarkdown(snippet.body),
@@ -33,7 +33,7 @@ export const GET = async function get() {
         return entry.body && entry.body.trim().length > 0;
       })
       .map(async (entry) => ({
-        link: getUrlForCollectionEntry("reading", entry.slug),
+        link: getUrlForCollectionEntry("reading", entry.id),
         title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
         pubDate: entry.data.dateCompleted,
         description: await renderMarkdown(entry.body),

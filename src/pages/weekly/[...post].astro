@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { getUrlForCollectionEntry, getWeeklies } from "src/content/config";
 import Base from "@layouts/Base.astro";
@@ -11,7 +12,7 @@ import Pagination from "src/components/blog/post/Pagination.astro";
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getWeeklies();
   return posts.map((entry) => ({
-    params: { post: entry.slug },
+    params: { post: entry.id },
     props: { entry },
   }));
 };
@@ -19,12 +20,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Props = { entry: CollectionEntry<"weekly"> };
 
 const {
-  entry: { data: frontmatter, id, render },
+  entry: { data: frontmatter, id },
 } = Astro.props;
 
 const basename = id.split("/").pop() || "";
 
-const { Content } = await render();
+const { Content } = await render(Astro.props.entry);
 ---
 
 <Base
@@ -47,10 +48,9 @@ const { Content } = await render();
       getEntries={() =>
         getWeeklies().then((posts) =>
           posts.map((p) => ({
-            slug: p.slug,
             id: p.id,
             title: p.data.title,
-            url: getUrlForCollectionEntry("weekly", p.slug),
+            url: getUrlForCollectionEntry("weekly", p.id),
           }))
         )}
     />

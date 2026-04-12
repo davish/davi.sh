@@ -2,12 +2,12 @@
 import Base from "./Base.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import HighlightList from "src/components/HighlightList.astro";
-import { CollectionEntry, getCollection } from "astro:content";
+import { CollectionEntry, getCollection, render } from "astro:content";
 import Article from "src/components/Article.astro";
 
 type Props = CollectionEntry<"projects">;
 
-const { data: frontmatter, id, render } = Astro.props;
+const { data: frontmatter, id } = Astro.props;
 
 const tags = frontmatter.tags || [];
 const posts = (
@@ -17,7 +17,7 @@ const posts = (
   )
 ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const { Content } = await render();
+const { Content } = await render(Astro.props);
 ---
 
 <Base

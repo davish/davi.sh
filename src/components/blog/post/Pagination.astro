@@ -2,7 +2,7 @@
 export interface Props {
   currentId: string;
   getEntries: () => Promise<
-    { slug: string; id: string; title: string; url: string }[]
+    { id: string; title: string; url: string }[]
   >;
   itemLabel?: string;
 }

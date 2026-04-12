@@ -9,7 +9,7 @@ import { getUrlForCollectionEntry } from "src/content/config";
 
 export type Props = {
   post: {
-    slug: string;
+    id: string;
     body: string;
     data: { title: string; date: Date };
   };
@@ -18,14 +18,14 @@ export type Props = {
 
 const {
   post: {
-    slug,
+    id,
     data: { title, date },
     body,
   },
   collection,
 } = Astro.props;
 
-const url = getUrlForCollectionEntry(collection, slug);
+const url = getUrlForCollectionEntry(collection, id);
 
 const content = await renderMarkdown(body);
 ---
