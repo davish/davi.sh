@@ -35,8 +35,7 @@ const posts = (
   </section>
 </Base>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   #intro,
   #list {
     width: 95%;
@@ -45,14 +44,14 @@ const posts = (
   }
 
   h1 {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans-serif);
   }
   #intro::after {
-    border-bottom-color: $accent-color;
+    border-bottom-color: var(--accent-color);
     content: "";
     display: block;
     width: 5em;
-    border-bottom: 0.125em solid $accent-color;
+    border-bottom: 0.125em solid var(--accent-color);
     margin-top: 2.5em;
   }
 </style>

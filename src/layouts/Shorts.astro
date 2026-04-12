@@ -25,15 +25,14 @@ const { page } = Astro.props;
   </section>
 </Base>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   #intro {
     h1 {
-      @include serif;
+      font-family: var(--font-serif);
       margin-bottom: 0;
     }
     h2 {
-      @include sans-serif;
+      font-family: var(--font-sans-serif);
       font-weight: 400;
       font-size: 1.2rem;
       margin-top: 0.5rem;

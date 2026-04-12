@@ -39,15 +39,14 @@ const articleTime = Math.round(readingTime(html).minutes);
   </div>
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   #info {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans-serif);
     display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
     line-height: normal;
-    @include dimmed;
+    opacity: var(--dimmed-opacity);
 
     p {
       margin: 0.8em 0;

@@ -3,13 +3,12 @@
 </div>
 <!-- We need global styles here so that the css will
      apply to the generated markdown content inside the slot. -->
-<style lang="scss" is:global>
-  @import "/src/variables.scss";
+<style is:global>
   #blog-post-content {
-    // If a link has <strong> inside of it, we don't need underlines
-    // to differentiate it.
+    /* If a link has <strong> inside of it, we don't need underlines
+       to differentiate it. */
     a:has(strong) {
-      color: $accent-color;
+      color: var(--accent-color);
       text-decoration: none;
     }
     h1,
@@ -18,7 +17,7 @@
     h4,
     h5,
     h6 {
-      @include sans-serif;
+      font-family: var(--font-sans-serif);
       font-weight: 500;
     }
     line-height: 1.5rem;
@@ -51,7 +50,7 @@
     }
 
     img + em {
-      @include dimmed;
+      opacity: var(--dimmed-opacity);
       display: block;
       text-align: center;
       font-style: normal;
@@ -62,12 +61,12 @@
       vertical-align: top;
     }
     blockquote {
-      @include sans-serif;
+      font-family: var(--font-sans-serif);
       font-style: italic;
       padding: 0.25rem 0.5rem;
       margin: 0;
-      border-left: 4px solid $accent-color;
-      background: $background-color;
+      border-left: 4px solid var(--accent-color);
+      background: var(--background-color);
       p {
         font-size: 0.9rem;
         line-height: 1.2;
@@ -88,7 +87,7 @@
       monospace;
     font-display: auto;
     font-feature-settings: normal;
-    background: $background-color;
+    background: var(--background-color);
     padding: 1px 6px;
     margin: 0 2px;
     border-radius: 5px;
@@ -102,7 +101,7 @@
     line-height: 1.25;
     overflow: auto;
 
-    @media #{$media-size-phone} {
+    @media (--phone) {
       white-space: pre-wrap;
       word-wrap: break-word;
     }

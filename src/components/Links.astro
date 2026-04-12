@@ -112,8 +112,7 @@ const { color, align = "center" } = Astro.props;
   </a>
 </div>
 
-<style lang="scss">
-  @import "../variables.scss";
+<style>
   div {
     @media print {
       display: none;
@@ -124,11 +123,11 @@ const { color, align = "center" } = Astro.props;
   }
   a {
     margin: 0.25rem;
-    color: $text-color;
+    color: var(--text-color);
     transition: 0.1s;
     text-decoration: none;
     &:hover {
-      color: $accent-color;
+      color: var(--accent-color);
       text-decoration: none;
       background-color: transparent;
     }

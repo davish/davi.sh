@@ -61,11 +61,9 @@ const authorUrl = showAuthorLink
   </div>
 </div>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   .book-entry {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
 
     display: contents;
     .mobile-left,
@@ -86,15 +84,11 @@ const authorUrl = showAuthorLink
       gap: 0.25rem;
     }
 
-    .author-name {
-      // Ensure author name is not clickable
-    }
-
     .author-link {
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      color: $accent-color;
+      color: var(--accent-color);
       opacity: 0.7;
       transition:
         opacity 0.2s,
@@ -104,7 +98,7 @@ const authorUrl = showAuthorLink
       &:hover,
       &:focus {
         opacity: 1;
-        color: $text-color;
+        color: var(--text-color);
       }
 
       &:focus:not(:focus-visible) {
@@ -113,14 +107,14 @@ const authorUrl = showAuthorLink
     }
 
     .date {
-      @include dimmed;
+      opacity: var(--dimmed-opacity);
     }
 
     .no-review {
       font-style: italic;
     }
 
-    @media #{$media-size-phone} {
+    @media (--phone) {
       .mobile-left,
       .mobile-right {
         display: flex;

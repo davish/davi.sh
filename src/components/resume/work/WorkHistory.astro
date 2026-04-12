@@ -37,10 +37,9 @@ groups.sort(
   {groups.map(([place, jobs]) => <Group title={place} jobs={jobs} />)}
 </ul>
 
-<style lang="scss">
+<style>
   ul {
-    @import "/src/variables.scss";
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     font-size: 0.8em;
     padding-inline-start: 0;
     @media print {

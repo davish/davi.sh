@@ -22,8 +22,7 @@ const { path = "" } = Astro.props;
   </span>
 </ul>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   ul {
     display: flex;
     align-items: center;
@@ -31,8 +30,7 @@ const { path = "" } = Astro.props;
     font-weight: bold;
     font-display: auto;
     padding-left: 0rem;
-    // font-family: monospace;
-    @media #{$media-size-phone} {
+    @media (--phone) {
       margin-top: 0;
     }
 
@@ -46,12 +44,12 @@ const { path = "" } = Astro.props;
     #text {
       font-size: 1.125rem;
 
-      @media #{$media-size-phone} {
+      @media (--phone) {
         font-size: 0.9rem;
       }
 
       .mu {
-        @include serif;
+        font-family: var(--font-serif);
       }
     }
 
@@ -59,7 +57,7 @@ const { path = "" } = Astro.props;
       display: inline-block;
       width: 10px;
       height: 1rem;
-      background: $accent-color;
+      background: var(--accent-color);
       margin-left: 5px;
       border-radius: 1px;
       animation: prompt 1s infinite;
@@ -68,7 +66,7 @@ const { path = "" } = Astro.props;
       position: relative;
       top: 1px;
 
-      @media #{$media-size-phone} {
+      @media (--phone) {
         height: 0.9rem;
         top: 2px;
       }

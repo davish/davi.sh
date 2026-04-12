@@ -16,22 +16,20 @@ import Links from "../Links.astro";
   </div>
 </section>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   section {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
 
-    background: $accent-color;
+    background: var(--accent-color);
     display: flex;
     flex-direction: column;
     border-width: 0 0 12px;
-    border-color: $accent-color-hover;
+    border-color: var(--accent-color-hover);
     border-style: solid;
   }
   .container {
     margin: 1.5rem auto 2rem auto;
-    @media #{$media-size-phone} {
+    @media (--phone) {
       margin: 0.5rem 1rem 2rem 1rem;
     }
     max-width: 600px;
@@ -41,13 +39,11 @@ import Links from "../Links.astro";
     justify-content: space-between;
     align-items: center;
 
-    @media #{$media-size-phone} {
+    @media (--phone) {
       flex-direction: column;
 
       align-items: baseline;
       margin-bottom: 1rem;
-      // margin-bottom: 0;
-      // margin: 0.5rem 0;
     }
   }
   h1 {
@@ -61,16 +57,15 @@ import Links from "../Links.astro";
     margin: auto;
     color: white;
     max-width: 100ch;
-
-    :global(a) {
-      color: white;
+  }
+  .bio :global(a) {
+    color: white;
+    text-decoration: underline;
+    @media print {
       text-decoration: underline;
-      @media print {
-        text-decoration: underline;
-      }
     }
-    :global(p) {
-      margin: 0;
-    }
+  }
+  .bio :global(p) {
+    margin: 0;
   }
 </style>

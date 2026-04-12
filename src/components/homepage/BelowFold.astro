@@ -69,12 +69,11 @@ const reading = (
   </ul>
 </section>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   section {
     max-width: 1000px;
     margin: auto;
-    @media #{$media-size-phone} {
+    @media (--phone) {
       margin: 0 1rem;
     }
   }
@@ -94,7 +93,7 @@ const reading = (
   }
 
   .prompt {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     max-width: 600px;
     margin: auto;
     margin-top: 1rem;

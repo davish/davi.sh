@@ -98,9 +98,7 @@ const authorUrl = hasAuthorPage
   </Article>
 </Base>
 
-<style lang="scss">
-  @import "/src/variables.scss";
-
+<style>
   .post-header {
     margin-bottom: 1rem;
     display: flex;
@@ -109,25 +107,25 @@ const authorUrl = hasAuthorPage
   }
 
   #rating {
-    color: $accent-color;
+    color: var(--accent-color);
   }
   h1,
   h2 {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
   }
 
   h1 {
     margin-bottom: 0;
   }
   h2 {
-    @include dimmed;
+    opacity: var(--dimmed-opacity);
     font-weight: 400;
     margin-top: 0.2rem;
     font-size: 1.1rem;
   }
 
   .genres {
-    @include dimmed;
+    opacity: var(--dimmed-opacity);
     display: flex;
     flex-wrap: wrap;
     gap: 0.5em;

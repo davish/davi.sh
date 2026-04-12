@@ -51,17 +51,16 @@ const content = await renderMarkdown(body);
   }
 </article>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   h4 {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
     margin-bottom: 0.1rem;
 
     a {
-      color: $text-color;
+      color: var(--text-color);
       text-decoration: none;
       &:hover {
         text-decoration: none;
@@ -75,12 +74,12 @@ const content = await renderMarkdown(body);
   }
 
   .info {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans-serif);
     display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
     line-height: normal;
-    @include dimmed;
+    opacity: var(--dimmed-opacity);
 
     p {
       margin: 0.8em 0;
@@ -111,10 +110,9 @@ const content = await renderMarkdown(body);
   }
 </style>
 
-<style lang="scss" is:global>
-  @import "/src/variables.scss";
+<style is:global>
   section.summary-content {
-    // Don't show footnote references in the summary content
+    /* Don't show footnote references in the summary content */
     sup:has(a[data-footnote-ref]) {
       display: none;
     }
@@ -134,7 +132,7 @@ const content = await renderMarkdown(body);
         monospace;
       font-display: auto;
       font-feature-settings: normal;
-      background: $background-color;
+      background: var(--background-color);
       padding: 1px 6px;
       margin: 0 2px;
       border-radius: 5px;

@@ -23,8 +23,7 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
   </div>
 </Base>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   #resume {
     max-width: 120ch;
     @media print {
@@ -36,12 +35,10 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
     flex-direction: row;
     justify-content: space-between;
     @media print {
-      // TODO: toggle this depending on how much content
-      // is on the printed resume.
       flex-direction: column-reverse;
     }
 
-    @media #{$media-size-phone} {
+    @media (--phone) {
       @media screen {
         flex-direction: column;
         flex-direction: column-reverse;
@@ -59,7 +56,7 @@ import ProjectList from "src/components/resume/projects/ProjectList.astro";
     }
   }
 </style>
-<style is:global lang="scss">
+<style is:global>
   @media print {
     #resume {
       a {

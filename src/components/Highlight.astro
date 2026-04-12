@@ -14,8 +14,7 @@ const { post } = Astro.props;
   </a>
 </li>
 
-<style lang="scss">
-  @import "/src/variables.scss";
+<style>
   li {
     a {
       display: flex;
@@ -30,19 +29,19 @@ const { post } = Astro.props;
       transition: 0.15s;
 
       &:hover {
-        background-color: rgba($accent-color, 0.1);
+        background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
         text-decoration: none;
       }
 
       div {
-        font-family: "Inter", sans-serif;
+        font-family: var(--font-sans-serif);
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
         color: #999;
       }
       span {
         font-weight: 600;
-        color: $text-color;
+        color: var(--text-color);
       }
     }
   }

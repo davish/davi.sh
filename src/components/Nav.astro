@@ -20,16 +20,15 @@ const { path, back } = Astro.props;
   </ul>
 </nav>
 
-<style lang="scss">
-  @import "../variables.scss";
+<style>
   nav {
-    @include sans-serif;
+    font-family: var(--font-sans-serif);
     display: flex;
-    justify-content: space-between;
     @media print {
       display: none;
     }
-    @media #{$media-size-phone} {
+    justify-content: space-between;
+    @media (--phone) {
       font-size: 0.85rem;
       flex-direction: column-reverse;
       align-items: flex-start;
@@ -41,7 +40,7 @@ const { path, back } = Astro.props;
   }
   a.prompt {
     text-decoration: none;
-    color: $text-color;
+    color: var(--text-color);
     padding-left: 1rem;
     &:hover {
       text-decoration: none;
@@ -54,7 +53,7 @@ const { path, back } = Astro.props;
     display: flex;
     align-items: center;
 
-    @media #{$media-size-phone} {
+    @media (--phone) {
       flex-wrap: wrap;
       gap: 0.5rem;
       width: 100%;
@@ -66,7 +65,7 @@ const { path, back } = Astro.props;
     li {
       display: inline;
       padding: 0 1rem;
-      @media #{$media-size-phone} {
+      @media (--phone) {
         padding: 0 0.5rem;
         flex: 0 0 auto;
         &:first-child {
@@ -82,7 +81,7 @@ const { path, back } = Astro.props;
   ul.links > li > a {
     text-decoration: none;
     position: relative;
-    color: $accent-color;
+    color: var(--accent-color);
     font-weight: 400;
 
     &:hover {
@@ -97,7 +96,7 @@ const { path, back } = Astro.props;
       height: 2px;
       bottom: -0.25rem;
       left: 0;
-      background-color: $accent-color;
+      background-color: var(--accent-color);
       visibility: hidden;
       transition: all 0.2s ease-in-out;
     }
