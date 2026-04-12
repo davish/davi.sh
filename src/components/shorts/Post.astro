@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import { toReadableString } from "src/utils";
-import { Icon } from "astro-icon/components";
+import Icon from "astro-icon";
 import {
   getUrlForCollectionEntry,
   makePathForShortPost,
@@ -25,13 +25,16 @@ const [pack, name] = (() => {
   return ["tabler", "link"];
 })();
 
+// astro-icon v0.x accepts pack/name props but v1.x types don't reflect this
+const iconProps = { pack, name } as Record<string, string>;
+
 const { Content } = await render(Astro.props.content);
 ---
 
 <div class="card">
   <div class="icon">
     <a href={getUrlForCollectionEntry("shorts", makePathForShortPost(id))}
-      ><Icon name={`${pack}:${name}`} /></a
+      ><Icon {...iconProps} /></a
     >
   </div>
   <div class="body">
