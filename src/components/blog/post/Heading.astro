@@ -5,9 +5,9 @@ import Info from "./Info.astro";
 
 type Props = CollectionEntry<"blog">;
 
-const { data: frontmatter, slug } = Astro.props;
+const { data: frontmatter, id } = Astro.props;
 
-const url = getUrlForCollectionEntry("blog", slug);
+const url = getUrlForCollectionEntry("blog", id);
 ---
 
 <div>

@@ -19,10 +19,10 @@ const { entries } = Astro.props;
   <tbody>
     {
       entries.map(
-        ({ slug, data: { title, description, published, modified, category } }) => (
+        ({ id, data: { title, description, published, modified, category } }) => (
           <tr>
             <td>
-              <a href={getUrlForCollectionEntry("snippets", slug)}>{title}</a>
+              <a href={getUrlForCollectionEntry("snippets", id)}>{title}</a>
             </td>
             <td class="description">{description}</td>
             <td>{category}</td>
