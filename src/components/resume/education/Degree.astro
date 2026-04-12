@@ -12,7 +12,7 @@ const {
   },
 } = Astro.props;
 
-const content = renderMarkdown(body);
+const content = renderMarkdown(body ?? "");
 
 const gradDate = new Date(graduation);
 ---

@@ -16,7 +16,7 @@ export const GET = async function get() {
       link: getUrlForCollectionEntry("blog", post.id),
       title: post.data.title,
       pubDate: post.data.date,
-      description: await renderMarkdown(post.body),
+      description: await renderMarkdown(post.body ?? ""),
     }))
   );
   const renderedSnippets = await Promise.all(
@@ -24,7 +24,7 @@ export const GET = async function get() {
       link: getUrlForCollectionEntry("snippets", snippet.id),
       title: `[TIL] ${snippet.data.title}: ${snippet.data.description}`,
       pubDate: snippet.data.published,
-      description: await renderMarkdown(snippet.body),
+      description: await renderMarkdown(snippet.body ?? ""),
     }))
   );
   const renderedReading = await Promise.all(
@@ -36,7 +36,7 @@ export const GET = async function get() {
         link: getUrlForCollectionEntry("reading", entry.id),
         title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
         pubDate: entry.data.dateCompleted,
-        description: await renderMarkdown(entry.body),
+        description: await renderMarkdown(entry.body!),
       }))
   );
   const items = renderedPosts

@@ -153,7 +153,7 @@ export const makeOpenGraphImage = async (props: ImageProps) =>
 export const previewImage = async (props: ImageProps) => {
   const svg = await makeOpenGraphImage(props);
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       "Content-Type": "image/png",
     },

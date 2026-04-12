@@ -10,7 +10,7 @@ import { getUrlForCollectionEntry } from "src/content/config";
 export type Props = {
   post: {
     id: string;
-    body: string;
+    body?: string;
     data: { title: string; date: Date };
   };
   collection: "blog" | "weekly";
@@ -27,7 +27,7 @@ const {
 
 const url = getUrlForCollectionEntry(collection, id);
 
-const content = await renderMarkdown(body);
+const content = await renderMarkdown(body ?? "");
 ---
 
 <article>

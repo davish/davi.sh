@@ -10,7 +10,7 @@ export const GET = async function get() {
       link: getUrlForCollectionEntry("weekly", weekly.id),
       title: weekly.data.title,
       pubDate: weekly.data.date,
-      description: await renderMarkdown(weekly.body),
+      description: await renderMarkdown(weekly.body ?? ""),
     }))
   );
   const items = renderedWeeklies.sort(

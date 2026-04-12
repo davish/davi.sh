@@ -2,7 +2,8 @@
 import Base from "./Base.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import HighlightList from "src/components/HighlightList.astro";
-import { CollectionEntry, getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Article from "src/components/Article.astro";
 
 type Props = CollectionEntry<"projects">;
