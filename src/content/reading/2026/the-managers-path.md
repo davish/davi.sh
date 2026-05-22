@@ -15,7 +15,7 @@ career. It was somewhat helpful framing tool, but I didn't think much of it unti
 it up again for completion's sake in 2026.
 
 Reading through to the end made it clear that **the real value and insight comes from
-reading ahead of your career**. It might not seem relevant to learn about what a director
+reading ahead of your own career**. It might not seem relevant to learn about what a director
 or VP needs to do when you're a line manager, but it's important to skate to where the
 puck is going. You might pick up some insights into your own boss's job along the way that
 helps you manage up, too.
