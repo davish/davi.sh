@@ -23,6 +23,11 @@ sharing power and influence that might have changed the course of history. Did p
 those moments make the right decision? It doesn't seem like those who compromised ended up
 any better, and Crabapple's postscript meditates more on the "why" of it all.
 
+I was struck by how much Crabapple's depictions of the chaos, cooperation and conflict
+between revolutionary groups under authoritarianism and later fascism reminded me of
+similar depictions in Kim Stanley Robinson's sci-fi _Mars_ trilogy that was published from
+1992 to 1996.
+
 Among many other firsts, this book was my first more rigorous introduction to the history
 of World War II. Those chapters of the book left me extremely emotional, but I'm glad to
 have read them.
