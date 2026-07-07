@@ -3,7 +3,7 @@ title: "The Great Alone"
 author: "Kristin Hannah"
 publishYear: 2018
 dateCompleted: "2026-03-17"
-rating: 4.5
+rating: 5
 genre: novel
 ---
 
