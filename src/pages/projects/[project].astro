@@ -1,13 +1,14 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
-import Project from "@layouts/Project.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import ProjectLayout from "@layouts/Project.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects", (p) => !p.data.draft);
-  return projects.map((p) => ({ params: { project: p.slug }, props: p }));
+  return projects.map((p) => ({ params: { project: p.id }, props: p }));
 }
 
 export type Props = CollectionEntry<"projects">;
 ---
 
-<Project {...Astro.props} />
+<ProjectLayout {...Astro.props} />

@@ -11,7 +11,7 @@ const { data: frontmatter, body } = Astro.props;
 // compiledContent to get just the words for the reading time.
 const codeRegex = /<pre\b[^<]*(?:(?!<\/pre>)<[^<]*)*<\/pre>/gi;
 const tagRegex = /(<([^>]+)>)/gi;
-const content = await renderMarkdown(body);
+const content = await renderMarkdown(body ?? "");
 const html = content.replaceAll(codeRegex, "").replaceAll(tagRegex, "");
 const articleTime = Math.round(readingTime(html).minutes);
 ---

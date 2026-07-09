@@ -9,25 +9,25 @@ import {
   getWeeklies,
 } from "src/content/config";
 
-const blogs = (await getBlogPosts()).map(({ data: { title, date }, slug }) => ({
+const blogs = (await getBlogPosts()).map(({ data: { title, date }, id }) => ({
   title,
   date,
-  href: getUrlForCollectionEntry("blog", slug),
+  href: getUrlForCollectionEntry("blog", id),
 }));
 
 const weeklies = (await getWeeklies()).map(
-  ({ data: { title, date }, slug }) => ({
+  ({ data: { title, date }, id }) => ({
     title,
     date,
-    href: getUrlForCollectionEntry("weekly", slug),
+    href: getUrlForCollectionEntry("weekly", id),
   })
 );
 
 const tils = (await getSnippets()).map(
-  ({ data: { title, published, modified }, slug }) => ({
+  ({ data: { title, published, modified }, id }) => ({
     title,
     date: modified || published,
-    href: getUrlForCollectionEntry("snippets", slug),
+    href: getUrlForCollectionEntry("snippets", id),
   })
 );
 
@@ -35,10 +35,10 @@ const reading = (
   await getReading(
     (entry) => (entry.body && entry.body.trim().length > 0) || false
   )
-).map(({ data: { title, dateCompleted, author }, slug }) => ({
+).map(({ data: { title, dateCompleted, author }, id }) => ({
   title: `${title} by ${author}`,
   date: dateCompleted,
-  href: getUrlForCollectionEntry("reading", slug),
+  href: getUrlForCollectionEntry("reading", id),
 }));
 ---
 
