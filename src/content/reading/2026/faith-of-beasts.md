@@ -7,7 +7,7 @@ rating: 3.5
 genre: sci-fi
 ---
 
-_The Captive's War_ is no _Expanse_, but I'm enjoying this new series James S.A. Corey all
+_The Captive's War_ is no _Expanse_, but I'm enjoying this new series by James S.A. Corey all
 the same. Maybe it's because I'm reading these books as they're published rather than
 binging the first few installments back-to-back, but the characters at the center don't
 feel nearly as fleshed out as the crew of the _Rocinante_.
