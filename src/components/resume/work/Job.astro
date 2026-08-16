@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import { toDuration, toMonthYear } from "src/utils";
 
 export interface Props {
@@ -8,11 +9,10 @@ export interface Props {
 
 const {
   job: {
-    render,
     data: { start, end, skills, title, print },
   },
 } = Astro.props;
-const { Content } = await render();
+const { Content } = await render(Astro.props.job);
 ---
 
 <span class="title">{title}</span>

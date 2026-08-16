@@ -9,13 +9,13 @@ export type Props = {
 const {
   entry: {
     data: { name, description },
-    slug,
+    id,
   },
 } = Astro.props;
 ---
 
 <div>
-  <a href={getUrlForCollectionEntry("projects", slug)}>{name}</a> – {
+  <a href={getUrlForCollectionEntry("projects", id)}>{name}</a> – {
     description
   }
 </div>

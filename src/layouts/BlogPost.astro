@@ -5,15 +5,17 @@ import Tags from "../components/blog/post/Tags.astro";
 import Pagination from "../components/blog/post/Pagination.astro";
 import PostContent from "src/components/blog/post/PostContent.astro";
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import Article from "src/components/Article.astro";
 import { getBlogPosts, getUrlForCollectionEntry } from "src/content/config";
 
 type Props = CollectionEntry<"blog">;
 
-const { data: frontmatter, id, slug, render } = Astro.props;
-const basename = id.split("/").pop() || "";
+const { data: frontmatter, id, filePath } = Astro.props;
+const ext = filePath ? "." + filePath.split(".").pop() : "";
+const basename = (id.split("/").pop() || "") + ext;
 
-const { Content } = await render();
+const { Content } = await render(Astro.props);
 ---
 
 <Base
@@ -35,10 +37,9 @@ const { Content } = await render();
       getEntries={() =>
         getBlogPosts().then((posts) =>
           posts.map((p) => ({
-            slug: p.slug,
             id: p.id,
             title: p.data.title,
-            url: getUrlForCollectionEntry("blog", p.slug),
+            url: getUrlForCollectionEntry("blog", p.id),
           }))
         )}
     />

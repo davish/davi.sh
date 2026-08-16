@@ -10,14 +10,14 @@ export type Props = {
 
 const {
   post: {
-    slug,
+    id,
     body,
     data: { title, dateCompleted, rating },
   },
 } = Astro.props;
 
 const hasContent = body && body.trim().length > 0;
-const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
+const url = hasContent ? getUrlForCollectionEntry("reading", id) : null;
 ---
 
 <div class="book-entry">

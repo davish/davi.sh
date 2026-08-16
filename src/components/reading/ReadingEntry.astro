@@ -12,7 +12,7 @@ export type Props = {
 
 const {
   post: {
-    slug,
+    id,
     body,
     data: { title, dateCompleted, author, rating },
   },
@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const hasContent = body && body.trim().length > 0;
-const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
+const url = hasContent ? getUrlForCollectionEntry("reading", id) : null;
 const authorUrl = showAuthorLink
   ? `/reading/author/${authorToSlug(author)}`
   : null;
