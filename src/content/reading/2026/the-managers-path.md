@@ -3,7 +3,7 @@ title: "The Manager's Path"
 author: "Camille Fournier"
 publishYear: 2017
 dateCompleted: "2026-04-17"
-rating: 4.5
+rating: 4
 genre: management
 ---
 
@@ -27,6 +27,6 @@ north star just a bit more.
 
 This book meets my normal criteria for 5 stars -- I'm pretty confident I'll be thinking
 about it actively in the future. But considering I read it for work rather than pleasure,
-I'm knocking it down half a star. I didn't _enjoy_ it the same way I would [a
+I'm knocking it down a star. I didn't _enjoy_ it the same way I would [a
 novel](https://davi.sh/reading/2024/tomorrow3/) or [a
 memoir](https://davi.sh/reading/2025/zen-motorcycle/).

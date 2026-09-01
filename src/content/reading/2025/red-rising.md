@@ -3,7 +3,7 @@ title: "Red Rising"
 author: "Pierce Brown"
 publishYear: 2014
 dateCompleted: "2025-03-02"
-rating: 3.5
+rating: 3
 genre: sci-fi
 ---
 

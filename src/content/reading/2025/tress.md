@@ -3,7 +3,7 @@ title: "Tress of the Emerald Sea"
 author: "Brandon Sanderson"
 publishYear: 2023
 dateCompleted: 2025-05-12
-rating: 2
+rating: 1.5
 genre: fantasy
 ---
 

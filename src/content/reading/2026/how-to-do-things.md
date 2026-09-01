@@ -3,7 +3,7 @@ title: "How To Do Things"
 author: "David Cain"
 publishYear: 2021
 dateCompleted: "2026-04-12"
-rating: 4
+rating: 3.5
 genre: productivity
 ---
 

@@ -3,7 +3,7 @@ title: "Mistborn: The Final Empire"
 author: "Brandon Sanderson"
 publishYear: 2005
 dateCompleted: "2026-01-31"
-rating: 2.5
+rating: 2
 genre: fantasy
 ---
 

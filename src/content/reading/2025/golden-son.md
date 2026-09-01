@@ -3,7 +3,7 @@ title: "Golden Son"
 author: "Pierce Brown"
 publishYear: 2015
 dateCompleted: "2025-03-16"
-rating: 3
+rating: 2.5
 genre: sci-fi
 ---
 

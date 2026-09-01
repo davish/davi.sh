@@ -3,7 +3,7 @@ title: A Tree Grows in Brooklyn
 author: Betty Smith
 publishYear: 1943
 dateCompleted: 2025-12-20
-rating: 4.5
+rating: 4
 genre: novel
 ---
 _A Tree Grows in Brooklyn_ is a quintessential coming of age story. Not just for Francie -- the protagonist who we follow from the age of 10 through her going off to college -- but also for New York itself, which we see change through industrialization along with the characters.

@@ -3,7 +3,7 @@ title: "You Dreamed of Empires"
 author: "Álvaro Enrigue"
 publishYear: 2024
 dateCompleted: 2025-07-14
-rating: 2
+rating: 1
 genre: historical-fiction
 ---
 

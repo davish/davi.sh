@@ -3,7 +3,7 @@ title: "The Telling"
 author: "Ursula K. Le Guin"
 publishYear: 1971
 dateCompleted: 2025-08-15
-rating: 3.5
+rating: 3
 genre: sci-fi
 ---
 

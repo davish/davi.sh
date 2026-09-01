@@ -3,7 +3,7 @@ title: "A Fisherman of the Inland Sea"
 author: "Ursula K. Le Guin"
 publishYear: 1994
 dateCompleted: "2025-05-25"
-rating: 3.5
+rating: 2.5
 genre: sci-fi
 ---
 
