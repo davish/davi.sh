@@ -1,28 +1,32 @@
 ---
 import { toMonthYear, toReadableString, authorToSlug } from "../../utils";
-import { getUrlForCollectionEntry } from "src/content/config";
+import {
+  getReadingParentName,
+  getUrlForCollectionEntry,
+} from "src/content/config";
 import type { CollectionEntry } from "astro:content";
 import Stars from "./Stars.astro";
 import BookshelfIcon from "./BookshelfIcon.astro";
 
 export type Props = {
   post: CollectionEntry<"reading">;
-  showAuthorLink?: boolean;
+  showParentLink?: boolean;
 };
 
 const {
   post: {
     slug,
     body,
-    data: { title, dateCompleted, author, rating },
+    data: { title, dateCompleted, parent, rating },
   },
-  showAuthorLink = false,
+  showParentLink = false,
 } = Astro.props;
 
 const hasContent = body && body.trim().length > 0;
 const url = hasContent ? getUrlForCollectionEntry("reading", slug) : null;
-const authorUrl = showAuthorLink
-  ? `/reading/author/${authorToSlug(author)}`
+const attribution = getReadingParentName(parent);
+const parentUrl = showParentLink
+  ? `/reading/author/${authorToSlug(attribution)}`
   : null;
 ---
 
@@ -37,15 +41,15 @@ const authorUrl = showAuthorLink
         )
       }
     </div>
-    <div class="author">
-      <span class="author-name">{author}</span>
+    <div class="parent">
+      <span class="parent-name">{attribution}</span>
       {
-        authorUrl ? (
+        parentUrl ? (
           <a
-            href={authorUrl}
-            class="author-link"
-            aria-label={`See all reviews for books by ${author}`}
-            title={`See all reviews for books by ${author}`}
+            href={parentUrl}
+            class="parent-link"
+            aria-label={`See all reviews for ${attribution}`}
+            title={`See all reviews for ${attribution}`}
           >
             <BookshelfIcon />
           </a>
@@ -77,20 +81,20 @@ const authorUrl = showAuthorLink
       text-overflow: ellipsis;
     }
 
-    .author {
+    .parent {
       display: flex;
       align-items: center;
       gap: 0.25rem;
       min-width: 0;
     }
 
-    .author-name {
+    .parent-name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .author-link {
+    .parent-link {
       display: inline-flex;
       align-items: center;
       text-decoration: none;
@@ -136,11 +140,11 @@ const authorUrl = showAuthorLink
       }
 
       .title,
-      .author-name {
+      .parent-name {
         white-space: normal;
       }
 
-      .author {
+      .parent {
         font-size: 0.9rem;
       }
     }

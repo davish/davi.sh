@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import { getReading } from "src/content/config";
+import { getReading, getReadingParentName } from "src/content/config";
 import { authorToSlug } from "src/utils";
 import Base from "@layouts/Base.astro";
 import AuthorList from "src/components/reading/author/AuthorList.astro";
@@ -10,44 +10,44 @@ import Intro from "src/components/common/Intro.astro";
 export const getStaticPaths: GetStaticPaths = async () => {
   const allBooks = await getReading();
 
-  // Group books by author
-  const authorMap = new Map<string, CollectionEntry<"reading">[]>();
+  // Group books by author, falling back to collection when there is no author
+  const parentMap = new Map<string, CollectionEntry<"reading">[]>();
   for (const book of allBooks) {
-    const author = book.data.author;
-    if (!authorMap.has(author)) {
-      authorMap.set(author, []);
+    const parent = getReadingParentName(book.data.parent);
+    if (!parentMap.has(parent)) {
+      parentMap.set(parent, []);
     }
-    authorMap.get(author)!.push(book);
+    parentMap.get(parent)!.push(book);
   }
 
-  // Filter to only authors with more than one book
-  const authorsWithMultipleBooks = Array.from(authorMap.entries()).filter(
+  // Filter to only parents with more than one book
+  const parentsWithMultipleBooks = Array.from(parentMap.entries()).filter(
     ([_, books]) => books.length > 1
   );
 
-  // Create paths for each author
-  return authorsWithMultipleBooks.map(([authorName, books]) => ({
-    params: { author: authorToSlug(authorName) },
-    props: { authorName, books },
+  // Create paths for each author or collection
+  return parentsWithMultipleBooks.map(([parentName, books]) => ({
+    params: { author: authorToSlug(parentName) },
+    props: { parentName, books },
   }));
 };
 
 type Props = {
-  authorName: string;
+  parentName: string;
   books: CollectionEntry<"reading">[];
 };
 
-const { authorName, books } = Astro.props;
+const { parentName, books } = Astro.props;
 ---
 
 <Base
-  path={`reading/author/${authorToSlug(authorName)}`}
-  title={`${authorName}`}
-  description={`Books I've read by ${authorName}`}
+  path={`reading/author/${authorToSlug(parentName)}`}
+  title={`${parentName}`}
+  description={`Books I've read: ${parentName}`}
   back="/reading"
 >
   <div class="container">
-    <Intro title="Book Reviews" subtitle={`For ${authorName}`} />
+    <Intro title="Book Reviews" subtitle={`For ${parentName}`} />
 
     <section id="list">
       <AuthorList books={books} />

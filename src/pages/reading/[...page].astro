@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
-import { getReading } from "src/content/config";
+import { getReading, getReadingParentName } from "src/content/config";
 import Base from "@layouts/Base.astro";
 import ReadingList from "src/components/reading/ReadingList.astro";
 import Pagination from "src/components/Pagination.astro";
@@ -16,17 +16,17 @@ type Props = { page: Page<CollectionEntry<"reading">> };
 
 const { page } = Astro.props;
 
-// Get all books to determine which authors have multiple books
+// Get all books to determine which authors or collections have multiple books
 const allBooks = await getReading();
-const authorCounts = new Map<string, number>();
+const parentCounts = new Map<string, number>();
 for (const book of allBooks) {
-  const author = book.data.author;
-  authorCounts.set(author, (authorCounts.get(author) || 0) + 1);
+  const parent = getReadingParentName(book.data.parent);
+  parentCounts.set(parent, (parentCounts.get(parent) || 0) + 1);
 }
-const authorsWithMultipleBooks = new Set(
-  Array.from(authorCounts.entries())
+const parentsWithMultipleBooks = new Set(
+  Array.from(parentCounts.entries())
     .filter(([_, count]) => count > 1)
-    .map(([author]) => author)
+    .map(([parent]) => parent)
 );
 ---
 
@@ -37,7 +37,7 @@ const authorsWithMultipleBooks = new Set(
     <section id="list">
       <ReadingList
         books={page.data}
-        authorsWithMultipleBooks={authorsWithMultipleBooks}
+        parentsWithMultipleBooks={parentsWithMultipleBooks}
       />
       <div class="pagination">
         <Pagination page={page} base="reading" />

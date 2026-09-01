@@ -1,13 +1,14 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getReadingParentName } from "src/content/config";
 import ReadingEntry from "src/components/reading/ReadingEntry.astro";
 
 type Props = {
   books: CollectionEntry<"reading">[];
-  authorsWithMultipleBooks?: Set<string>;
+  parentsWithMultipleBooks?: Set<string>;
 };
 
-const { books, authorsWithMultipleBooks } = Astro.props;
+const { books, parentsWithMultipleBooks } = Astro.props;
 ---
 
 <div class="book-list">
@@ -15,8 +16,10 @@ const { books, authorsWithMultipleBooks } = Astro.props;
     books.map((post) => (
       <ReadingEntry
         post={post}
-        showAuthorLink={
-          authorsWithMultipleBooks?.has(post.data.author) || false
+        showParentLink={
+          parentsWithMultipleBooks?.has(
+            getReadingParentName(post.data.parent)
+          ) || false
         }
       />
     ))

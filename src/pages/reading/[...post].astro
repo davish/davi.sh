@@ -1,7 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import { getUrlForCollectionEntry, getReading } from "src/content/config";
+import {
+  getUrlForCollectionEntry,
+  getReading,
+  getReadingParentName,
+} from "src/content/config";
 import { authorToSlug } from "src/utils";
 import Base from "@layouts/Base.astro";
 import Article from "src/components/Article.astro";
@@ -32,22 +36,27 @@ const {
 const basename = entry.id.split("/").pop() || "";
 const { Content } = await render();
 
-// Check if author has multiple books (author page exists)
+// Check if the author or collection has multiple books (parent page exists)
 const allBooks = await getReading();
-const authorBookCount = allBooks.filter(
-  (book) => book.data.author === frontmatter.author
+const parent = frontmatter.parent;
+const attribution = getReadingParentName(parent);
+const parentBookCount = allBooks.filter(
+  (book) => getReadingParentName(book.data.parent) === attribution
 ).length;
-const hasAuthorPage = authorBookCount > 1;
-const authorUrl = hasAuthorPage
-  ? `/reading/author/${authorToSlug(frontmatter.author)}`
-  : null;
+const parentUrl =
+  parentBookCount > 1
+    ? `/reading/author/${authorToSlug(attribution)}`
+    : null;
+const attributionPrefix = parent.type === "collection" ? "" : "by ";
+const publishYear =
+  frontmatter.publishYear === "Unknown" ? null : frontmatter.publishYear;
 ---
 
 <Base
   path={"reading/" + basename}
   back="/reading"
   title={frontmatter.title}
-  description={`${frontmatter.title} by ${frontmatter.author} (${frontmatter.publishYear})`}
+  description={`${frontmatter.title} ${attributionPrefix}${attribution}${publishYear === null ? "" : ` (${publishYear})`}`}
   card={true}
 >
   <Article>
@@ -57,15 +66,15 @@ const authorUrl = hasAuthorPage
           {frontmatter.title}
         </h1>
         <h2>
-          by
+          {attributionPrefix}
           {
-            hasAuthorPage ? (
-              <a href={authorUrl}>{frontmatter.author}</a>
+            parentUrl ? (
+              <a href={parentUrl}>{attribution}</a>
             ) : (
-              frontmatter.author
+              attribution
             )
           }
-          <span id="year">({frontmatter.publishYear})</span>
+          {publishYear !== null && <span id="year">({publishYear})</span>}
         </h2>
       </div>
       <div class="metadata">

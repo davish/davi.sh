@@ -3,6 +3,7 @@ import {
   getBlogPosts,
   getSnippets,
   getReading,
+  getReadingParentAttribution,
   getUrlForCollectionEntry,
 } from "src/content/config";
 import { renderMarkdown } from "src/utils";
@@ -34,7 +35,7 @@ export const GET = async function get() {
       })
       .map(async (entry) => ({
         link: getUrlForCollectionEntry("reading", entry.slug),
-        title: `Reviewing ${entry.data.title} by ${entry.data.author}`,
+        title: `Reviewing ${entry.data.title} ${getReadingParentAttribution(entry.data.parent)}`,
         pubDate: entry.data.dateCompleted,
         description: await renderMarkdown(entry.body),
       }))

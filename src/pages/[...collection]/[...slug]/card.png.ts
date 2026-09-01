@@ -4,6 +4,7 @@ import { getEntry } from "astro:content";
 import {
   getBlogPosts,
   getReading,
+  getReadingParentAttribution,
   getSnippets,
   getWeeklies,
 } from "src/content/config";
@@ -80,7 +81,7 @@ export const GET: APIRoute = async function get({ params, request }) {
             }
           : post.collection === "reading"
             ? {
-                title: `Reviewing ${post.data.title} by ${post.data.author}`,
+                title: `Reviewing ${post.data.title} ${getReadingParentAttribution(post.data.parent)}`,
                 date: post.data.dateCompleted,
                 path,
               }

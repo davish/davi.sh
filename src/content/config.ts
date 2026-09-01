@@ -86,18 +86,60 @@ const WeeklyCollection = defineCollection({
   }),
 });
 
+export type ReadingParent =
+  | { type: "author"; value: string }
+  | { type: "collection"; value: string }
+  | {
+      type: "authorAndCollection";
+      value: [author: string, collection: string];
+    };
+
+export const getReadingParentName = (parent: ReadingParent): string =>
+  parent.type === "authorAndCollection" ? parent.value[0] : parent.value;
+
+export const getReadingParentAttribution = (parent: ReadingParent): string =>
+  parent.type === "collection"
+    ? parent.value
+    : `by ${getReadingParentName(parent)}`;
+
 const ReadingCollection = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    dateCompleted: partialDate(),
-    rating: z.number().min(0.5).max(5).step(0.5),
-    author: z.string(),
-    publishYear: z.number().min(1900).max(new Date().getFullYear()),
-    genre: z
-      .union([z.string(), z.array(z.string())])
-      .transform((x) => (Array.isArray(x) ? x : [x]))
-      .default([]),
-  }),
+  schema: z
+    .object({
+      title: z.string(),
+      dateCompleted: partialDate(),
+      rating: z.number().min(0.5).max(5).step(0.5),
+      author: z.string().min(1).optional(),
+      collection: z.string().min(1).optional(),
+      publishYear: z.union([
+        z.number().min(1900).max(new Date().getFullYear()),
+        z.literal("Unknown"),
+      ]),
+      genre: z
+        .union([z.string(), z.array(z.string())])
+        .transform((x) => (Array.isArray(x) ? x : [x]))
+        .default([]),
+    })
+    .refine(({ author, collection }) => Boolean(author || collection), {
+      message: "A reading entry must have an author or collection",
+    })
+    .transform(({ author, collection, ...entry }) => {
+      let parent: ReadingParent;
+
+      if (author && collection) {
+        parent = {
+          type: "authorAndCollection",
+          value: [author, collection],
+        };
+      } else if (author) {
+        parent = { type: "author", value: author };
+      } else if (collection) {
+        parent = { type: "collection", value: collection };
+      } else {
+        throw new Error("A reading entry must have an author or collection");
+      }
+
+      return { ...entry, parent };
+    }),
 });
 
 export const collections = {
