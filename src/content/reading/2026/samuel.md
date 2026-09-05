@@ -7,12 +7,12 @@ rating: 4.5
 genre: religion
 ---
 
-I've been picking up the Hebrew Bible in between novels over the past year. Most of the
-books so far have been very dry. With the exception of Genesis and the first half of
-Exodus, much more of the Books of Moses are spent enumerating procedures and regulations
-around animal sacrifice and the eventual Temple in Jerusalem than I would have thought
-going in. Joshua is also a pretty dry account of Israelite conquest without much
-narrative. So I was pretty surprised when the book of Samuel sucked me in.
+I've been reading the Hebrew Bible in between novels over the past year. Most of the books
+so far have been very dry. With the exception of Genesis and the first half of Exodus,
+much more of the Books of Moses are spent enumerating procedures and regulations around
+animal sacrifice and the eventual Temple in Jerusalem than I would have thought going
+in. Joshua is also a pretty dry account of Israelite conquest without much narrative. So I
+was pretty surprised when the book of Samuel sucked me in.
 
 Samuel covers the emergence of the United Monarchy of Israel and Judah under Saul and its
 climax under David. Most everyone in the West is familiar with the story of David and
