@@ -4,6 +4,7 @@ import Category from "src/components/homepage/Category.astro";
 import {
   getBlogPosts,
   getReading,
+  getReadingParentAttribution,
   getSnippets,
   getUrlForCollectionEntry,
   getWeeklies,
@@ -35,8 +36,8 @@ const reading = (
   await getReading(
     (entry) => (entry.body && entry.body.trim().length > 0) || false
   )
-).map(({ data: { title, dateCompleted, author }, slug }) => ({
-  title: `${title} by ${author}`,
+).map(({ data: { title, dateCompleted, parent }, slug }) => ({
+  title: `${title} ${getReadingParentAttribution(parent)}`,
   date: dateCompleted,
   href: getUrlForCollectionEntry("reading", slug),
 }));
