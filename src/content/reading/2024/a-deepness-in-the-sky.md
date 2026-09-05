@@ -15,14 +15,14 @@ The way that the alien storyline is "translated" into English is a very compelli
 storytelling device. The human storyline paints a vivid picture of a far-future
 spacefaring civilization that still feels grounded by the limitations of
 technology. Spaceflight takes decades in ramjet ships, with crews rotating in and out of
-cryosleep. I loved the ways that cryosleep affected the political and dynamics among the
-humans.
+cryosleep. I loved the ways that cryosleep affected the political and social dynamics
+among the humans.
 
 The Qeng Ho trading civilization is post-Cold War neoliberalism taken to its limit. _A
 Deepness in the Sky_ was written in the late 90s and the Qeng Ho are cast as the heroes of
-the story, but Vinge still manages to describe and portray the downfalls and limits of the
-unending quest for efficiency that felt precient when reading after the supply chain
-disruptions of the 2020 pandemic.
+the story, but Vinge still manages to portray the downfalls and limits of the unending
+quest for efficiency that felt precient when reading after the supply chain disruptions of
+the 2020 pandemic.
 
 Vinge was a Computer Science professor as his day job. One of the most interesting ideas
 he puts forward in the book is that of the programmer-archaeologist. Thousands of years
