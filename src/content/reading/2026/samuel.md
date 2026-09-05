@@ -25,6 +25,6 @@ Rings_. The rise and fall of the Numenorean kingdoms of Arnor and Gondor corresp
 closely to Israel and Judah. Aragorn directly mirrors David in a dozen different ways.
 
 I don't think I'd recommend the _whole_ Bible to everyone. But if you're interested in an
-engaging story that's influenced, either directly or indirectly, most every fantasy author
-of the past century, pick Samuel up.
+engaging story that's influenced most every fantasy author of the past century -- either
+directly or indirectly -- pick Samuel up.
 
