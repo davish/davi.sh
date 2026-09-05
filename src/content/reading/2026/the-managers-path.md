@@ -24,9 +24,3 @@ I'd recommend this book to anyone working close to tech even a little interested
 management. One section towards the end of the book that I especially enjoyed was
 disambiguating VP of Engineering from CTO -- it helped calibrate my own personal career
 north star just a bit more.
-
-This book meets my normal criteria for 5 stars -- I'm pretty confident I'll be thinking
-about it actively in the future. But considering I read it for work rather than pleasure,
-I'm knocking it down a star. I didn't _enjoy_ it the same way I would [a
-novel](https://davi.sh/reading/2024/tomorrow3/) or [a
-memoir](https://davi.sh/reading/2025/zen-motorcycle/).
