@@ -3,7 +3,7 @@ title: "The Caves of Steel"
 author: "Isaac Asimov"
 publishYear: 1953
 dateCompleted: "2026-07-01"
-rating: 3
+rating: 2.5
 genre: sci-fi
 ---
 
