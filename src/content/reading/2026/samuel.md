@@ -19,10 +19,10 @@ climax under David. Most everyone in the West is familiar with the story of Davi
 Goliath, but the rest of Samuel continues to be compelling and engaging. There's enough
 political intrigue and action to fit right in with _A Song of Ice and Fire_.
 
-I knew Tolkein drew from his religious background in his writing, but I hadn't appreciated
+I knew Tolkein drew inspiration from his religious background, but I hadn't appreciated
 how liberally Tolkein had borrowed from this part of the Bible for _The Lord of the
-Rings_. The Numenorean kingdoms of Arnor and Gondor correspond closely to Israel and
-Judah. Aragorn directly mirrors David in a dozen different ways.
+Rings_. The rise and fall of the Numenorean kingdoms of Arnor and Gondor correspond
+closely to Israel and Judah. Aragorn directly mirrors David in a dozen different ways.
 
 I don't think I'd recommend the _whole_ Bible to everyone. But if you're interested in an
 engaging story that's influenced, either directly or indirectly, most every fantasy author
