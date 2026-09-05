@@ -37,7 +37,10 @@ const reading = (
     (entry) => (entry.body && entry.body.trim().length > 0) || false
   )
 ).map(({ data: { title, dateCompleted, parent }, slug }) => ({
-  title: `${title} ${getReadingParentAttribution(parent)}`,
+  title:
+    parent.type === "collection"
+      ? title
+      : `${title} ${getReadingParentAttribution(parent)}`,
   date: dateCompleted,
   href: getUrlForCollectionEntry("reading", slug),
 }));
